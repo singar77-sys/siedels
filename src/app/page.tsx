@@ -30,16 +30,16 @@ const services = [
 ];
 
 const hours = [
-  { day: 'Monday', time: '8 AM – 8 PM' },
-  { day: 'Tuesday', time: '8 AM – 6 PM' },
-  { day: 'Wednesday', time: '8 AM – 6 PM' },
-  { day: 'Thursday', time: '8 AM – 8 PM' },
-  { day: 'Friday', time: '8 AM – 6 PM' },
-  { day: 'Saturday', time: '8 AM – 3 PM' },
+  { day: 'Monday', time: '8 AM â 8 PM' },
+  { day: 'Tuesday', time: '8 AM â 6 PM' },
+  { day: 'Wednesday', time: '8 AM â 6 PM' },
+  { day: 'Thursday', time: '8 AM â 8 PM' },
+  { day: 'Friday', time: '8 AM â 6 PM' },
+  { day: 'Saturday', time: '8 AM â 3 PM' },
   { day: 'Sunday', time: 'Closed' },
 ];
 
-/* ── Fade-in on scroll hook ──────────────────────── */
+/* ââ Fade-in on scroll hook ââââââââââââââââââââââââ */
 function useFadeIn() {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -75,7 +75,133 @@ function FadeIn({ children, className = '', delay = 0 }: { children: React.React
   );
 }
 
-/* ── Main Page ──────────────────────────────────── */
+/* ââ Animated Jim SVG âââââââââââââââââââââââââââââââ */
+function AnimatedJim({ className = '' }: { className?: string }) {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const [eyePupilPositions, setEyePupilPositions] = useState({ left: { x: 145, y: 177 }, right: { x: 255, y: 177 } });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    if (!svgRef.current) return;
+    const svg = svgRef.current;
+    const rect = svg.getBoundingClientRect();
+    const scaleX = rect.width / 400;
+    const scaleY = rect.height / 650;
+    const leftEyeX = rect.left + 145 * scaleX;
+    const leftEyeY = rect.top + 177 * scaleY;
+    const rightEyeX = rect.left + 255 * scaleX;
+    const rightEyeY = rect.top + 177 * scaleY;
+    const calculatePupilOffset = (eyeCenterX: number, eyeCenterY: number, mouseX: number, mouseY: number) => {
+      const angle = Math.atan2(mouseY - eyeCenterY, mouseX - eyeCenterX);
+      const maxDistance = 6;
+      return { x: Math.cos(angle) * maxDistance, y: Math.sin(angle) * maxDistance };
+    };
+    const leftOffset = calculatePupilOffset(leftEyeX, leftEyeY, mousePosition.x, mousePosition.y);
+    const rightOffset = calculatePupilOffset(rightEyeX, rightEyeY, mousePosition.x, mousePosition.y);
+    setEyePupilPositions({
+      left: { x: 145 + leftOffset.x, y: 177 + leftOffset.y },
+      right: { x: 255 + rightOffset.x, y: 177 + rightOffset.y },
+    });
+  }, [mousePosition]);
+
+  const jimStyles = `
+    @keyframes breathe { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-3px); } }
+    @keyframes buzz { 0%, 100% { transform: translateX(0px) translateY(0px); } 25% { transform: translateX(-1px) translateY(-1px); } 50% { transform: translateX(1px) translateY(1px); } 75% { transform: translateX(-1px) translateY(1px); } }
+    .jim-container { display: inline-block; position: relative; }
+    .jim-svg { display: block; width: 100%; height: auto; max-width: 450px; filter: drop-shadow(0 4px 20px rgba(0,0,0,0.1)); transition: filter 0.3s ease; }
+    .jim-svg.hovered { filter: drop-shadow(0 0 20px rgba(232,85,15,0.25)) drop-shadow(0 4px 20px rgba(0,0,0,0.15)); }
+    .jim-torso { animation: breathe 3s ease-in-out infinite; transform-origin: center 300px; }
+    .jim-clippers { animation: ${isHovered ? 'buzz 0.15s ease-in-out infinite' : 'none'}; transform-origin: 360px 280px; }
+  `;
+
+  return (
+    <>
+      <style>{jimStyles}</style>
+      <div className={`jim-container ${className}`} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+        <svg ref={svgRef} viewBox="0 0 400 650" width="400" height="650" className={`jim-svg ${isHovered ? 'hovered' : ''}`} xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="skinTone" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style={{ stopColor: '#D4A574', stopOpacity: 1 }} />
+              <stop offset="100%" style={{ stopColor: '#C99560', stopOpacity: 1 }} />
+            </linearGradient>
+            <linearGradient id="shirtGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style={{ stopColor: '#2C2825', stopOpacity: 1 }} />
+              <stop offset="100%" style={{ stopColor: '#1a1815', stopOpacity: 1 }} />
+            </linearGradient>
+            <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="2" stdDeviation="3" floodOpacity="0.3" />
+            </filter>
+          </defs>
+          <rect x="160" y="280" width="80" height="40" fill="url(#skinTone)" filter="url(#shadow)" />
+          <g className="jim-torso">
+            <path d="M 120 320 Q 100 350 100 420 L 100 620 Q 100 640 120 640 L 280 640 Q 300 640 300 620 L 300 420 Q 300 350 280 320 Z" fill="url(#shirtGradient)" filter="url(#shadow)" />
+            <path d="M 160 320 L 140 350 M 240 320 L 260 350" stroke="#1a1815" strokeWidth="2" fill="none" />
+            <text x="200" y="380" fontSize="14" fontWeight="bold" textAnchor="middle" fill="#E8550F" fontFamily="Arial, sans-serif">{"SIEDEL'S"}</text>
+            <text x="200" y="400" fontSize="12" textAnchor="middle" fill="#E8550F" fontFamily="Arial, sans-serif">BARBERSHOP</text>
+            <g>
+              <ellipse cx="110" cy="360" rx="35" ry="70" fill="url(#skinTone)" filter="url(#shadow)" />
+              <path d="M 90 380 Q 85 390 90 400 M 100 375 Q 95 390 105 405 M 110 380 Q 105 395 115 410" stroke="#4A4541" strokeWidth="1.5" fill="none" opacity="0.6" />
+            </g>
+            <g>
+              <ellipse cx="290" cy="360" rx="35" ry="70" fill="url(#skinTone)" filter="url(#shadow)" />
+              <path d="M 310 380 Q 315 390 310 400 M 300 375 Q 305 390 295 405 M 290 380 Q 295 395 285 410" stroke="#4A4541" strokeWidth="1.5" fill="none" opacity="0.6" />
+            </g>
+          </g>
+          <g>
+            <circle cx="200" cy="180" r="95" fill="url(#skinTone)" filter="url(#shadow)" />
+            <path d="M 110 140 Q 105 100 200 80 Q 295 100 290 140 Q 285 110 200 95 Q 115 110 110 140 Z" fill="#2C2825" filter="url(#shadow)" />
+            <path d="M 130 105 Q 140 95 160 93 M 200 85 Q 220 86 240 95 M 260 110 Q 275 115 280 130" stroke="#888888" strokeWidth="3" fill="none" opacity="0.5" />
+            <path d="M 140 220 Q 130 240 135 260 Q 140 275 165 285 Q 200 290 235 285 Q 260 275 265 260 Q 270 240 260 220" fill="#888888" filter="url(#shadow)" />
+            <path d="M 145 240 Q 140 255 145 270 Q 160 280 200 283 Q 240 280 255 270 Q 260 255 255 240" fill="#666666" opacity="0.4" />
+            <ellipse cx="165" cy="265" rx="15" ry="8" fill="#AAAAAA" opacity="0.3" />
+            <ellipse cx="235" cy="265" rx="15" ry="8" fill="#AAAAAA" opacity="0.3" />
+            <rect x="120" y="160" width="50" height="35" fill="none" stroke="#4A4541" strokeWidth="3" rx="3" />
+            <rect x="230" y="160" width="50" height="35" fill="none" stroke="#4A4541" strokeWidth="3" rx="3" />
+            <line x1="170" y1="175" x2="230" y2="175" stroke="#4A4541" strokeWidth="2.5" />
+            <rect x="120" y="160" width="50" height="35" fill="#F5F0EB" opacity="0.15" rx="3" />
+            <rect x="230" y="160" width="50" height="35" fill="#F5F0EB" opacity="0.15" rx="3" />
+            <circle cx="145" cy="177" r="10" fill="white" />
+            <circle cx="255" cy="177" r="10" fill="white" />
+            <circle cx={eyePupilPositions.left.x} cy={eyePupilPositions.left.y} r="5" fill="#2C2825" />
+            <circle cx={eyePupilPositions.left.x + 1.5} cy={eyePupilPositions.left.y - 1.5} r="2" fill="white" />
+            <circle cx={eyePupilPositions.right.x} cy={eyePupilPositions.right.y} r="5" fill="#2C2825" />
+            <circle cx={eyePupilPositions.right.x + 1.5} cy={eyePupilPositions.right.y - 1.5} r="2" fill="white" />
+            <path d="M 200 185 L 195 215 L 200 218 L 205 215 Z" fill="#C99560" opacity="0.7" />
+            <path d="M 170 240 Q 200 255 230 240" stroke="#C99560" strokeWidth="2" fill="none" strokeLinecap="round" />
+            <path d="M 125 145 Q 145 138 165 142" stroke="#2C2825" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+            <path d="M 235 142 Q 255 138 275 145" stroke="#2C2825" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+          </g>
+          <g className="jim-clippers" style={{ transformOrigin: '360px 280px' }}>
+            <rect x="320" y="240" width="30" height="80" fill="#4A4541" rx="8" filter="url(#shadow)" />
+            <line x1="325" y1="255" x2="345" y2="255" stroke="#2C2825" strokeWidth="1" opacity="0.5" />
+            <line x1="325" y1="275" x2="345" y2="275" stroke="#2C2825" strokeWidth="1" opacity="0.5" />
+            <line x1="325" y1="295" x2="345" y2="295" stroke="#2C2825" strokeWidth="1" opacity="0.5" />
+            <rect x="315" y="230" width="40" height="18" fill="#E8550F" rx="4" filter="url(#shadow)" />
+            <rect x="318" y="226" width="4" height="8" fill="#888888" />
+            <rect x="325" y="226" width="4" height="8" fill="#888888" />
+            <rect x="332" y="226" width="4" height="8" fill="#888888" />
+            <rect x="339" y="226" width="4" height="8" fill="#888888" />
+            <rect x="346" y="226" width="4" height="8" fill="#888888" />
+            <ellipse cx="335" cy="235" rx="18" ry="8" fill="#4A4541" filter="url(#shadow)" />
+            <rect x="318" y="237" width="34" height="2" fill="#E8550F" opacity="0.7" />
+            <path d="M 350 310 Q 360 330 350 350" stroke="#2C2825" strokeWidth="2" fill="none" opacity="0.5" />
+          </g>
+        </svg>
+      </div>
+    </>
+  );
+}
+
+/* ââ Main Page ââââââââââââââââââââââââââââââââââââ */
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -89,7 +215,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#F5F0EB] text-[#2C2825]">
 
-      {/* ── Navigation ──────────────────────────── */}
+      {/* ââ Navigation ââââââââââââââââââââââââââââ */}
       <nav className={`fixed top-0 z-50 w-full transition-all duration-500 ${
         scrolled
           ? 'bg-[#F5F0EB]/95 backdrop-blur-md shadow-[0_1px_0_rgba(181,169,154,0.3)]'
@@ -148,9 +274,9 @@ export default function Home() {
       </nav>
 
       <main>
-        {/* ── Hero ──────────────────────────────── */}
+        {/* ââ Hero ââââââââââââââââââââââââââââââââ */}
         <section id="home" className="relative min-h-screen flex items-center texture-grain overflow-hidden">
-          {/* Background image */}
+          {/* Background image â shop exterior */}
           <div className="absolute inset-0">
             <img
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIydmIe31LO7CxNm-BAPI0Ch5cWvGWnPmNk5mRgsK7oy3otv7kP-snMe-8EMSc1Nk_OZ02PvfdNCjbM_k5aHLua1iA7W-xkMtUq9CGIGMNoRXXjnpmhRxX88Mr76j1-_9RzQ484h0RjtIddVtXrOoXsCkdCdTAzFpwKCVvHxJt_jKPt6L6my6FGHbWvjJcZmf36c9jwzhbZw1gkVu-bVM9onJR0HaKpbvBWgv1KleFqLljpZcV2N600CM8ZKE2ad61IH7PtawAqCw-"
@@ -160,49 +286,58 @@ export default function Home() {
           </div>
 
           <div className="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-20 md:pt-0 md:pb-0">
-            <div className="max-w-3xl">
-              <FadeIn>
-                <p className="font-label uppercase text-sm font-semibold text-[#6B7C5E] tracking-[0.15em] mb-6">
-                  Medina, Ohio &mdash; Est. on Court Street
-                </p>
-              </FadeIn>
-              <FadeIn delay={0.1}>
-                <h1 className="font-headline text-5xl sm:text-6xl md:text-8xl lg:text-[7rem] font-bold leading-[0.92] tracking-tight mb-8">
-                  Your<br />
-                  neighborhood<br />
-                  <span className="text-[#E8550F] italic">barber shop.</span>
-                </h1>
-              </FadeIn>
-              <FadeIn delay={0.2}>
-                <p className="font-body text-lg md:text-xl text-[#4A4541] max-w-xl leading-relaxed mb-10">
-                  Walk-ins welcome. Cleveland sports on the TV.
-                  Good conversation in the chair. That&apos;s the whole pitch.
-                </p>
-              </FadeIn>
-              <FadeIn delay={0.3}>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <a
-                    href="#visit"
-                    className="inline-flex items-center justify-center gap-2 bg-[#2C2825] text-[#F5F0EB] font-body font-semibold px-8 py-4 rounded-full hover:bg-[#E8550F] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
-                  >
-                    Come See Us
-                    <span className="material-symbols-outlined text-xl">arrow_forward</span>
-                  </a>
-                  <a
-                    href="tel:3309520777"
-                    className="inline-flex items-center justify-center gap-2 border-2 border-[#2C2825] text-[#2C2825] font-body font-semibold px-8 py-4 rounded-full hover:bg-[#2C2825] hover:text-[#F5F0EB] transition-all duration-300"
-                  >
-                    Call for Appointment
-                  </a>
-                </div>
+            <div className="flex flex-col md:flex-row items-center md:items-end gap-8 md:gap-12">
+              {/* Left: Copy */}
+              <div className="flex-1 max-w-3xl">
+                <FadeIn>
+                  <p className="font-label uppercase text-sm font-semibold text-[#6B7C5E] tracking-[0.15em] mb-6">
+                    Medina, Ohio &mdash; Est. on Court Street
+                  </p>
+                </FadeIn>
+                <FadeIn delay={0.1}>
+                  <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl lg:text-[6rem] font-bold leading-[0.92] tracking-tight mb-8">
+                    Your<br />
+                    neighborhood<br />
+                    <span className="text-[#E8550F] italic">barber shop.</span>
+                  </h1>
+                </FadeIn>
+                <FadeIn delay={0.2}>
+                  <p className="font-body text-lg md:text-xl text-[#4A4541] max-w-xl leading-relaxed mb-10">
+                    Walk-ins welcome. Cleveland sports on the TV.
+                    Good conversation in the chair. That&apos;s the whole pitch.
+                  </p>
+                </FadeIn>
+                <FadeIn delay={0.3}>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <a
+                      href="#visit"
+                      className="inline-flex items-center justify-center gap-2 bg-[#2C2825] text-[#F5F0EB] font-body font-semibold px-8 py-4 rounded-full hover:bg-[#E8550F] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                    >
+                      Come See Us
+                      <span className="material-symbols-outlined text-xl">arrow_forward</span>
+                    </a>
+                    <a
+                      href="tel:3309520777"
+                      className="inline-flex items-center justify-center gap-2 border-2 border-[#2C2825] text-[#2C2825] font-body font-semibold px-8 py-4 rounded-full hover:bg-[#2C2825] hover:text-[#F5F0EB] transition-all duration-300"
+                    >
+                      Call for Appointment
+                    </a>
+                  </div>
+                </FadeIn>
+              </div>
+
+              {/* Right: Animated Jim */}
+              <FadeIn delay={0.4} className="hidden md:block flex-shrink-0">
+                <AnimatedJim className="w-[340px] lg:w-[400px] xl:w-[440px]" />
               </FadeIn>
             </div>
           </div>
 
+          {/* Bottom edge detail â warm divider */}
           <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#B5A99A] to-transparent" />
         </section>
 
-        {/* ── About / Vibe ─────────────────────── */}
+        {/* ââ About / Vibe âââââââââââââââââââââââ */}
         <section className="py-20 md:py-28 bg-[#EDE7E0] texture-grain">
           <div className="max-w-6xl mx-auto px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
@@ -220,7 +355,7 @@ export default function Home() {
                       actually know your name.
                     </p>
                     <p>
-                      We&apos;ve been on Court Street in Medina for years — same chairs, same crew,
+                      We&apos;ve been on Court Street in Medina for years â same chairs, same crew,
                       same commitment to getting the cut right. No pretense. No bottle service.
                       Just skilled hands and honest conversation.
                     </p>
@@ -249,7 +384,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── Team ─────────────────────────────── */}
+        {/* ââ Team âââââââââââââââââââââââââââââââ */}
         <section id="team" className="py-20 md:py-28 bg-[#F5F0EB]">
           <div className="max-w-6xl mx-auto px-6">
             <FadeIn>
@@ -281,7 +416,7 @@ export default function Home() {
             {/* Extended crew */}
             <FadeIn delay={0.3}>
               <div className="mt-10 pt-8 border-t border-[#D1C9BE]">
-                <p className="font-body text-sm text-[#B5A99A] mb-2">Also on the team —</p>
+                <p className="font-body text-sm text-[#B5A99A] mb-2">Also on the team â</p>
                 <p className="font-headline text-lg md:text-xl text-[#4A4541]">
                   Chris Hodge &nbsp;&middot;&nbsp; Billy Rodriguez &nbsp;&middot;&nbsp; Sam Sickle
                 </p>
@@ -290,7 +425,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── Services ─────────────────────────── */}
+        {/* ââ Services âââââââââââââââââââââââââââ */}
         <section id="services" className="py-20 md:py-28 bg-[#2C2825] text-[#F5F0EB] texture-grain">
           <div className="max-w-6xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20">
@@ -330,7 +465,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── The Shop ─────────────────────────── */}
+        {/* ââ The Shop âââââââââââââââââââââââââââ */}
         <section id="the-shop" className="py-20 md:py-28 bg-[#F5F0EB]">
           <div className="max-w-6xl mx-auto px-6">
             <FadeIn>
@@ -376,7 +511,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── Visit / Contact ──────────────────── */}
+        {/* ââ Visit / Contact ââââââââââââââââââââ */}
         <section id="visit" className="py-20 md:py-28 bg-[#3D322B] text-[#F5F0EB] texture-grain">
           <div className="max-w-6xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -444,7 +579,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── Footer ───────────────────────────── */}
+        {/* ââ Footer âââââââââââââââââââââââââââââ */}
         <footer className="bg-[#2C2825] text-[#B5A99A] py-10">
           <div className="max-w-6xl mx-auto px-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
