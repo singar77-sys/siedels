@@ -330,10 +330,10 @@ export default function Home() {
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
           <a href="#home" className="flex flex-col leading-none group">
-            <span className="font-brand text-3xl md:text-4xl text-[#403E3B] uppercase" style={{ lineHeight: 1, letterSpacing: '-0.02em' }}>Siedel&apos;s</span>
-            <span className="font-brand text-[13px] md:text-sm text-[#8C8279] uppercase tracking-[0.12em]" style={{ fontWeight: 800, lineHeight: 1.2 }}>Barbershop</span>
-            <span className="block h-px w-full mt-1 mb-0.5" style={{ background: 'var(--accent)', opacity: 0.4 }} />
-            <span className="font-mono text-[8px] text-[#8C8279] tracking-[0.22em] uppercase">Stay Sharp</span>
+            <span className="font-brand text-4xl md:text-5xl text-[#403E3B] uppercase" style={{ lineHeight: 1, letterSpacing: '-0.02em' }}>Siedel&apos;s</span>
+            <span className="font-brand text-xl md:text-2xl text-[#403E3B] uppercase" style={{ fontWeight: 900, lineHeight: 1, letterSpacing: '-0.01em' }}>Barbershop</span>
+            <span className="block h-[2px] w-full mt-1.5 mb-1" style={{ background: 'var(--accent)' }} />
+            <span className="font-mono text-[9px] text-[#8C8279] tracking-[0.25em] uppercase">Stay Sharp</span>
           </a>
           <div className="hidden md:flex items-center gap-8">
             {['Team', 'Services', 'The Shop', 'Visit'].map((label) => (
@@ -790,10 +790,10 @@ export default function Home() {
                   <AnimatedJim className="w-[48px]" />
                 </div>
                 <div className="text-center md:text-left">
-                  <p className="font-brand text-3xl text-[#F2F2F2] uppercase" style={{ lineHeight: 1, letterSpacing: '-0.02em' }}>Siedel&apos;s</p>
-                  <p className="font-brand text-[13px] text-[#8C8279] uppercase tracking-[0.12em]" style={{ fontWeight: 800, lineHeight: 1.2 }}>Barbershop</p>
-                  <span className="block h-px w-full mt-1 mb-0.5" style={{ background: 'var(--accent)', opacity: 0.35 }} />
-                  <p className="font-mono text-[8px] text-[#8C8279] tracking-[0.22em] uppercase">Stay Sharp</p>
+                  <p className="font-brand text-4xl text-[#F2F2F2] uppercase" style={{ lineHeight: 1, letterSpacing: '-0.02em' }}>Siedel&apos;s</p>
+                  <p className="font-brand text-xl text-[#F2F2F2] uppercase" style={{ fontWeight: 900, lineHeight: 1, letterSpacing: '-0.01em' }}>Barbershop</p>
+                  <span className="block h-[2px] w-full mt-1.5 mb-1" style={{ background: 'var(--accent)' }} />
+                  <p className="font-mono text-[9px] text-[#8C8279] tracking-[0.25em] uppercase">Stay Sharp</p>
                   <p className="font-body text-sm">982 N Court Street, Medina, OH 44256</p>
                 </div>
               </div>
