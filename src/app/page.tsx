@@ -59,7 +59,7 @@ function GameDayBanner({ theme, onDismiss }: { theme: SportsTheme; onDismiss: ()
   return (
     <div
       className="w-full py-2.5 px-4 flex items-center justify-center gap-3 text-sm font-body relative"
-      style={{ background: theme.bannerBg, color: '#F2F2F2' }}
+      style={{ background: theme.bannerBg, color: '#D9D0C1' }}
     >
       <span className="material-symbols-outlined text-base" style={{ color: theme.bannerAccent }}>{theme.icon}</span>
       <span className="font-semibold" style={{ color: theme.bannerAccent }}>Go {theme.shortName}!</span>
@@ -192,8 +192,8 @@ function AnimatedJim({ className = '' }: { className?: string }) {
               <stop offset="100%" style={{ stopColor: '#C99560', stopOpacity: 1 }} />
             </linearGradient>
             <linearGradient id="shirtGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style={{ stopColor: '#403E3B', stopOpacity: 1 }} />
-              <stop offset="100%" style={{ stopColor: '#1C1A18', stopOpacity: 1 }} />
+              <stop offset="0%" style={{ stopColor: '#302B25', stopOpacity: 1 }} />
+              <stop offset="100%" style={{ stopColor: '#1A1410', stopOpacity: 1 }} />
             </linearGradient>
             <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
               <feDropShadow dx="0" dy="2" stdDeviation="3" floodOpacity="0.3" />
@@ -202,56 +202,56 @@ function AnimatedJim({ className = '' }: { className?: string }) {
           <rect x="160" y="280" width="80" height="40" fill="url(#skinTone)" filter="url(#shadow)" />
           <g className="jim-torso">
             <path d="M 120 320 Q 100 350 100 420 L 100 620 Q 100 640 120 640 L 280 640 Q 300 640 300 620 L 300 420 Q 300 350 280 320 Z" fill="url(#shirtGradient)" filter="url(#shadow)" />
-            <path d="M 160 320 L 140 350 M 240 320 L 260 350" stroke="#1C1A18" strokeWidth="2" fill="none" />
+            <path d="M 160 320 L 140 350 M 240 320 L 260 350" stroke="#1A1410" strokeWidth="2" fill="none" />
             <text x="200" y="380" fontSize="14" fontWeight="bold" textAnchor="middle" fill="var(--accent)" fontFamily="Arial, sans-serif">{"SIEDEL'S"}</text>
             <text x="200" y="400" fontSize="12" textAnchor="middle" fill="var(--accent)" fontFamily="Arial, sans-serif">BARBERSHOP</text>
             <g>
               <ellipse cx="110" cy="360" rx="35" ry="70" fill="url(#skinTone)" filter="url(#shadow)" />
-              <path d="M 90 380 Q 85 390 90 400 M 100 375 Q 95 390 105 405 M 110 380 Q 105 395 115 410" stroke="#5C5955" strokeWidth="1.5" fill="none" opacity="0.6" />
+              <path d="M 90 380 Q 85 390 90 400 M 100 375 Q 95 390 105 405 M 110 380 Q 105 395 115 410" stroke="#6E6458" strokeWidth="1.5" fill="none" opacity="0.6" />
             </g>
             <g>
               <ellipse cx="290" cy="360" rx="35" ry="70" fill="url(#skinTone)" filter="url(#shadow)" />
-              <path d="M 310 380 Q 315 390 310 400 M 300 375 Q 305 390 295 405 M 290 380 Q 295 395 285 410" stroke="#5C5955" strokeWidth="1.5" fill="none" opacity="0.6" />
+              <path d="M 310 380 Q 315 390 310 400 M 300 375 Q 305 390 295 405 M 290 380 Q 295 395 285 410" stroke="#6E6458" strokeWidth="1.5" fill="none" opacity="0.6" />
             </g>
           </g>
           <g>
             <circle cx="200" cy="180" r="95" fill="url(#skinTone)" filter="url(#shadow)" />
-            <path d="M 110 140 Q 105 100 200 80 Q 295 100 290 140 Q 285 110 200 95 Q 115 110 110 140 Z" fill="#403E3B" filter="url(#shadow)" />
+            <path d="M 110 140 Q 105 100 200 80 Q 295 100 290 140 Q 285 110 200 95 Q 115 110 110 140 Z" fill="#302B25" filter="url(#shadow)" />
             <path d="M 130 105 Q 140 95 160 93 M 200 85 Q 220 86 240 95 M 260 110 Q 275 115 280 130" stroke="#888888" strokeWidth="3" fill="none" opacity="0.5" />
             <path d="M 140 220 Q 130 240 135 260 Q 140 275 165 285 Q 200 290 235 285 Q 260 275 265 260 Q 270 240 260 220" fill="#888888" filter="url(#shadow)" />
             <path d="M 145 240 Q 140 255 145 270 Q 160 280 200 283 Q 240 280 255 270 Q 260 255 255 240" fill="#666666" opacity="0.4" />
             <ellipse cx="165" cy="265" rx="15" ry="8" fill="#AAAAAA" opacity="0.3" />
             <ellipse cx="235" cy="265" rx="15" ry="8" fill="#AAAAAA" opacity="0.3" />
-            <rect x="120" y="160" width="50" height="35" fill="none" stroke="#5C5955" strokeWidth="3" rx="3" />
-            <rect x="230" y="160" width="50" height="35" fill="none" stroke="#5C5955" strokeWidth="3" rx="3" />
-            <line x1="170" y1="175" x2="230" y2="175" stroke="#5C5955" strokeWidth="2.5" />
-            <rect x="120" y="160" width="50" height="35" fill="#F2F2F2" opacity="0.15" rx="3" />
-            <rect x="230" y="160" width="50" height="35" fill="#F2F2F2" opacity="0.15" rx="3" />
+            <rect x="120" y="160" width="50" height="35" fill="none" stroke="#6E6458" strokeWidth="3" rx="3" />
+            <rect x="230" y="160" width="50" height="35" fill="none" stroke="#6E6458" strokeWidth="3" rx="3" />
+            <line x1="170" y1="175" x2="230" y2="175" stroke="#6E6458" strokeWidth="2.5" />
+            <rect x="120" y="160" width="50" height="35" fill="#D9D0C1" opacity="0.15" rx="3" />
+            <rect x="230" y="160" width="50" height="35" fill="#D9D0C1" opacity="0.15" rx="3" />
             <circle cx="145" cy="177" r="10" fill="white" />
             <circle cx="255" cy="177" r="10" fill="white" />
-            <circle cx={eyePupilPositions.left.x} cy={eyePupilPositions.left.y} r="5" fill="#403E3B" />
+            <circle cx={eyePupilPositions.left.x} cy={eyePupilPositions.left.y} r="5" fill="#302B25" />
             <circle cx={eyePupilPositions.left.x + 1.5} cy={eyePupilPositions.left.y - 1.5} r="2" fill="white" />
-            <circle cx={eyePupilPositions.right.x} cy={eyePupilPositions.right.y} r="5" fill="#403E3B" />
+            <circle cx={eyePupilPositions.right.x} cy={eyePupilPositions.right.y} r="5" fill="#302B25" />
             <circle cx={eyePupilPositions.right.x + 1.5} cy={eyePupilPositions.right.y - 1.5} r="2" fill="white" />
             <path d="M 200 185 L 195 215 L 200 218 L 205 215 Z" fill="#C99560" opacity="0.7" />
             <path d="M 170 240 Q 200 255 230 240" stroke="#C99560" strokeWidth="2" fill="none" strokeLinecap="round" />
-            <path d="M 125 145 Q 145 138 165 142" stroke="#403E3B" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-            <path d="M 235 142 Q 255 138 275 145" stroke="#403E3B" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+            <path d="M 125 145 Q 145 138 165 142" stroke="#302B25" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+            <path d="M 235 142 Q 255 138 275 145" stroke="#302B25" strokeWidth="2.5" fill="none" strokeLinecap="round" />
           </g>
           <g className="jim-clippers" style={{ transformOrigin: '360px 280px' }}>
-            <rect x="320" y="240" width="30" height="80" fill="#5C5955" rx="8" filter="url(#shadow)" />
-            <line x1="325" y1="255" x2="345" y2="255" stroke="#403E3B" strokeWidth="1" opacity="0.5" />
-            <line x1="325" y1="275" x2="345" y2="275" stroke="#403E3B" strokeWidth="1" opacity="0.5" />
-            <line x1="325" y1="295" x2="345" y2="295" stroke="#403E3B" strokeWidth="1" opacity="0.5" />
+            <rect x="320" y="240" width="30" height="80" fill="#6E6458" rx="8" filter="url(#shadow)" />
+            <line x1="325" y1="255" x2="345" y2="255" stroke="#302B25" strokeWidth="1" opacity="0.5" />
+            <line x1="325" y1="275" x2="345" y2="275" stroke="#302B25" strokeWidth="1" opacity="0.5" />
+            <line x1="325" y1="295" x2="345" y2="295" stroke="#302B25" strokeWidth="1" opacity="0.5" />
             <rect x="315" y="230" width="40" height="18" fill="var(--accent)" rx="4" filter="url(#shadow)" />
             <rect x="318" y="226" width="4" height="8" fill="#888888" />
             <rect x="325" y="226" width="4" height="8" fill="#888888" />
             <rect x="332" y="226" width="4" height="8" fill="#888888" />
             <rect x="339" y="226" width="4" height="8" fill="#888888" />
             <rect x="346" y="226" width="4" height="8" fill="#888888" />
-            <ellipse cx="335" cy="235" rx="18" ry="8" fill="#5C5955" filter="url(#shadow)" />
+            <ellipse cx="335" cy="235" rx="18" ry="8" fill="#6E6458" filter="url(#shadow)" />
             <rect x="318" y="237" width="34" height="2" fill="var(--accent)" opacity="0.7" />
-            <path d="M 350 310 Q 360 330 350 350" stroke="#403E3B" strokeWidth="2" fill="none" opacity="0.5" />
+            <path d="M 350 310 Q 360 330 350 350" stroke="#302B25" strokeWidth="2" fill="none" opacity="0.5" />
           </g>
         </svg>
       </div>
@@ -261,9 +261,9 @@ function AnimatedJim({ className = '' }: { className?: string }) {
 
 /* ── Barber Pole Divider ─────────────────────────── */
 function BarberPoleDivider({ inverted = false }: { inverted?: boolean }) {
-  const bg = inverted ? '#403E3B' : '#E8E5E2';
+  const bg = inverted ? '#302B25' : '#C5BBA8';
   const stripe1 = 'var(--accent)';
-  const stripe2 = '#F2F2F2';
+  const stripe2 = '#D9D0C1';
   return (
     <div className="w-full overflow-hidden" style={{ height: '24px', background: bg }}>
       <svg width="100%" height="24" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -298,10 +298,11 @@ export default function Home() {
 
   // Pick the right color variant: sports theme overrides plain dark/light mode
   const activeVariant = sportsMode ? (darkMode ? sportsMode.dark : sportsMode.light) : null;
-  const rootBg      = activeVariant?.bg      ?? (darkMode ? '#0D0D0D' : '#F2F2F2');
-  const rootText    = activeVariant?.text     ?? (darkMode ? '#F2F2F2' : '#403E3B');
-  const rootAccent  = activeVariant?.accent   ?? '#E8550F';
-  const rootAccentH = activeVariant?.accentHover ?? '#FF3C00';
+  const rootBg      = activeVariant?.bg      ?? (darkMode ? '#0A0A0A' : '#D9D0C1');
+  const rootText    = activeVariant?.text     ?? (darkMode ? '#FFFFFF'  : '#302B25');
+  // Dark mode: cream accent on black. Light mode: stone-dark accent on linen.
+  const rootAccent  = activeVariant?.accent   ?? (darkMode ? '#D9D0C1' : '#6E6458');
+  const rootAccentH = activeVariant?.accentHover ?? (darkMode ? '#FFFFFF'  : '#302B25');
 
   return (
     <div
@@ -322,40 +323,40 @@ export default function Home() {
       <nav className={`fixed top-0 z-50 w-full transition-all duration-500 ${
         scrolled
           ? darkMode
-            ? 'bg-[#0D0D0D]/95 backdrop-blur-md shadow-[0_1px_0_rgba(255,255,255,0.05)]'
-            : 'bg-[#F2F2F2]/95 backdrop-blur-md shadow-[0_1px_0_rgba(191,187,184,0.3)]'
+            ? 'bg-[#0A0A0A]/95 backdrop-blur-md shadow-[0_1px_0_rgba(255,255,255,0.08)]'
+            : 'bg-[#D9D0C1]/95 backdrop-blur-md shadow-[0_1px_0_rgba(172,166,144,0.3)]'
           : 'bg-transparent'
       }`}
       style={{ top: sportsMode && !bannerDismissed ? '40px' : '0' }}
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
           <a href="#home" className="flex flex-col leading-none group">
-            <span className="font-brand text-4xl md:text-5xl text-[#403E3B] uppercase" style={{ lineHeight: 1, letterSpacing: '-0.02em' }}>Siedel&apos;s</span>
-            <span className="font-brand text-xl md:text-2xl text-[#403E3B] uppercase" style={{ fontWeight: 900, lineHeight: 1, letterSpacing: '-0.01em' }}>Barbershop</span>
+            <span className="font-brand text-4xl md:text-5xl text-[#302B25] uppercase" style={{ lineHeight: 1, letterSpacing: '-0.02em' }}>Siedel&apos;s</span>
+            <span className="font-brand text-xl md:text-2xl text-[#302B25] uppercase" style={{ fontWeight: 900, lineHeight: 1, letterSpacing: '-0.01em' }}>Barbershop</span>
             <span className="block h-[2px] w-full mt-1.5 mb-1" style={{ background: 'var(--accent)' }} />
-            <span className="font-mono text-[9px] text-[#8C8279] tracking-[0.25em] uppercase">Stay Sharp</span>
+            <span className="font-mono text-[9px] text-[#ACA690] tracking-[0.25em] uppercase">Stay Sharp</span>
           </a>
           <div className="hidden md:flex items-center gap-8">
             {['Team', 'Services', 'The Shop', 'Visit'].map((label) => (
               <a
                 key={label}
                 href={`#${label.toLowerCase().replace(/\s/g, '-')}`}
-                className="font-body text-sm font-medium text-[#5C5955] hover:text-[var(--accent)] transition-colors duration-300"
+                className="font-body text-sm font-medium text-[#6E6458] hover:text-[var(--accent)] transition-colors duration-300"
               >
                 {label}
               </a>
             ))}
           </div>
           {shopStatus && (
-            <span className={`hidden md:inline-flex items-center font-label text-xs tracking-[0.12em] uppercase ${shopStatus.open ? 'text-[#6B7C5E]' : 'text-[#8C8279]'}`}>
-              <span className={`inline-block w-1.5 h-1.5 rounded-full mr-2 ${shopStatus.open ? 'bg-[#6B7C5E]' : 'bg-[#8C8279]'}`} />
+            <span className={`hidden md:inline-flex items-center font-label text-xs tracking-[0.12em] uppercase ${shopStatus.open ? 'text-[#6B7C5E]' : 'text-[#ACA690]'}`}>
+              <span className={`inline-block w-1.5 h-1.5 rounded-full mr-2 ${shopStatus.open ? 'bg-[#6B7C5E]' : 'bg-[#ACA690]'}`} />
               {shopStatus.label}
             </span>
           )}
           {/* Dark mode toggle */}
           <button
             onClick={() => setDarkMode((d) => !d)}
-            className="hidden md:inline-flex items-center justify-center w-9 h-9 rounded-md text-[#8C8279] hover:text-[#403E3B] transition-colors duration-300"
+            className="hidden md:inline-flex items-center justify-center w-9 h-9 rounded-md text-[#ACA690] hover:text-[#302B25] transition-colors duration-300"
             aria-label="Toggle dark mode"
             title={darkMode ? 'Light mode' : 'Dark mode'}
           >
@@ -363,34 +364,34 @@ export default function Home() {
           </button>
           <a
             href="tel:3309520777"
-            className="hidden md:inline-flex items-center gap-2 bg-[#403E3B] text-[#F2F2F2] font-body font-medium text-sm px-5 py-2.5 rounded-md hover:bg-[var(--accent)] transition-colors duration-300"
+            className="hidden md:inline-flex items-center gap-2 bg-[#302B25] text-[#D9D0C1] font-body font-medium text-sm px-5 py-2.5 rounded-md hover:bg-[var(--accent)] transition-colors duration-300"
           >
             <span className="material-symbols-outlined text-base">call</span>
             (330) 952-0777
           </a>
           <button
             onClick={() => setMobileMenuOpen((o) => !o)}
-            className="md:hidden text-[#403E3B] p-1"
+            className="md:hidden text-[#302B25] p-1"
             aria-label="Toggle menu"
           >
             <span className="material-symbols-outlined text-3xl">{mobileMenuOpen ? 'close' : 'menu'}</span>
           </button>
         </div>
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[#F2F2F2] border-t border-[#BFBBB8]">
+          <div className="md:hidden bg-[#D9D0C1] border-t border-[#ACA690]">
             {['Team', 'Services', 'The Shop', 'Visit'].map((label) => (
               <a
                 key={label}
                 href={`#${label.toLowerCase().replace(/\s/g, '-')}`}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-6 py-4 text-[#403E3B] font-body border-b border-[#E8E5E2] hover:bg-[#E8E5E2] transition-colors"
+                className="block px-6 py-4 text-[#302B25] font-body border-b border-[#C5BBA8] hover:bg-[#C5BBA8] transition-colors"
               >
                 {label}
               </a>
             ))}
             <a
               href="tel:3309520777"
-              className="block px-6 py-4 font-body font-semibold text-[var(--accent)] border-b border-[#E8E5E2]"
+              className="block px-6 py-4 font-body font-semibold text-[var(--accent)] border-b border-[#C5BBA8]"
             >
               Call (330) 952-0777
             </a>
@@ -398,7 +399,7 @@ export default function Home() {
               href="https://app.squareup.com/appointments/buyer/widget/xcru7izyf4zhv6/LFCOT5CC7MY0S"
               target="_blank"
               rel="noopener noreferrer"
-              className="block px-6 py-4 font-body font-semibold text-[#403E3B]"
+              className="block px-6 py-4 font-body font-semibold text-[#302B25]"
             >
               Book Online
             </a>
@@ -418,7 +419,7 @@ export default function Home() {
               className="w-full h-full object-cover object-center"
               aria-hidden="true"
             />
-            <div className="absolute inset-0 bg-[#F2F2F2]/75" />
+            <div className="absolute inset-0 bg-[#D9D0C1]/75" />
           </div>
 
           <div className="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-20 md:pt-0 md:pb-0">
@@ -426,7 +427,7 @@ export default function Home() {
               {/* Left: Copy */}
               <div className="flex-1 max-w-3xl">
                 <FadeIn>
-                  <p className="font-label uppercase text-sm font-semibold text-[#8C8279] tracking-[0.15em] mb-4">
+                  <p className="font-label uppercase text-sm font-semibold text-[#ACA690] tracking-[0.15em] mb-4">
                     Walk-ins Welcome · Medina, Ohio
                   </p>
                 </FadeIn>
@@ -438,10 +439,10 @@ export default function Home() {
                   </h1>
                 </FadeIn>
                 <FadeIn delay={0.2}>
-                  <p className="font-body text-lg md:text-xl text-[#5C5955] max-w-xl leading-relaxed mb-4">
+                  <p className="font-body text-lg md:text-xl text-[#6E6458] max-w-xl leading-relaxed mb-4">
                     Cleveland sports on the TV. Good conversation in the chair.
                   </p>
-                  <p className="font-label text-sm text-[#8C8279] tracking-[0.1em] mb-10">
+                  <p className="font-label text-sm text-[#ACA690] tracking-[0.1em] mb-10">
                     982 N Court Street. We&apos;ve been here.
                   </p>
                 </FadeIn>
@@ -458,21 +459,21 @@ export default function Home() {
                       href="https://app.squareup.com/appointments/buyer/widget/xcru7izyf4zhv6/LFCOT5CC7MY0S"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 bg-[#403E3B] text-[#F2F2F2] font-body font-semibold px-8 py-4 rounded-md hover:bg-[#1C1A18] transition-all duration-300"
+                      className="inline-flex items-center justify-center gap-2 bg-[#302B25] text-[#D9D0C1] font-body font-semibold px-8 py-4 rounded-md hover:bg-[#1A1410] transition-all duration-300"
                     >
                       <span className="material-symbols-outlined text-xl">calendar_month</span>
                       Book Online
                     </a>
                     <a
                       href="#visit"
-                      className="inline-flex items-center justify-center gap-2 border-2 border-[#403E3B] text-[#403E3B] font-body font-semibold px-8 py-4 rounded-md hover:bg-[#403E3B] hover:text-[#F2F2F2] transition-all duration-300"
+                      className="inline-flex items-center justify-center gap-2 border-2 border-[#302B25] text-[#302B25] font-body font-semibold px-8 py-4 rounded-md hover:bg-[#302B25] hover:text-[#D9D0C1] transition-all duration-300"
                     >
                       Find Us
                     </a>
                   </div>
                   <div className="flex items-center gap-2 mt-5">
                     <span className="text-[var(--accent)] text-sm tracking-wider">★★★★★</span>
-                    <span className="font-mono text-xs text-[#5C5955]">4.8 · Google</span>
+                    <span className="font-mono text-xs text-[#6E6458]">4.8 · Google</span>
                   </div>
                 </FadeIn>
               </div>
@@ -485,23 +486,23 @@ export default function Home() {
           </div>
 
           {/* Bottom edge detail — warm divider */}
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#8C8279] to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#ACA690] to-transparent" />
         </section>
 
         <BarberPoleDivider />
 
         {/* ── About / Vibe ─────────────────────── */}
-        <section className="py-20 md:py-28 bg-[#E8E5E2] texture-grain">
+        <section className="py-20 md:py-28 bg-[#C5BBA8] texture-grain">
           <div className="max-w-6xl mx-auto px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
               <FadeIn>
                 <div>
-                  <p className="font-label uppercase text-xs font-semibold text-[#8C8279] tracking-[0.2em] mb-4">About the Shop</p>
+                  <p className="font-label uppercase text-xs font-semibold text-[#ACA690] tracking-[0.2em] mb-4">About the Shop</p>
                   <h2 className="font-headline text-4xl md:text-5xl font-bold leading-tight tracking-tight mb-6">
                     Not fancy.<br />
                     <span className="italic text-[var(--accent)]">Just right.</span>
                   </h2>
-                  <div className="space-y-4 text-[#5C5955] font-body text-base md:text-lg leading-relaxed">
+                  <div className="space-y-4 text-[#6E6458] font-body text-base md:text-lg leading-relaxed">
                     <p>
                       Siedel&apos;s is a real barbershop. The kind where the Browns game is on,
                       there&apos;s a pile of Sports Illustrated on the table, and the barbers
@@ -513,29 +514,29 @@ export default function Home() {
                       Just skilled hands and honest conversation.
                     </p>
                   </div>
-                  <div className="mt-8 pt-8 border-t border-[#BFBBB8] flex items-baseline gap-8">
+                  <div className="mt-8 pt-8 border-t border-[#ACA690] flex items-baseline gap-8">
                     <div>
-                      <span className="font-headline text-6xl font-bold text-[#403E3B] leading-none">11</span>
-                      <p className="font-label uppercase text-xs text-[#8C8279] tracking-[0.15em] mt-1">Barbers on Staff</p>
+                      <span className="font-headline text-6xl font-bold text-[#302B25] leading-none">11</span>
+                      <p className="font-label uppercase text-xs text-[#ACA690] tracking-[0.15em] mt-1">Barbers on Staff</p>
                     </div>
-                    <div className="w-px self-stretch bg-[#BFBBB8]" />
+                    <div className="w-px self-stretch bg-[#ACA690]" />
                     <div>
-                      <span className="font-headline text-6xl font-bold text-[#403E3B] leading-none">#1</span>
-                      <p className="font-label uppercase text-xs text-[#8C8279] tracking-[0.15em] mt-1">Court Street</p>
+                      <span className="font-headline text-6xl font-bold text-[#302B25] leading-none">#1</span>
+                      <p className="font-label uppercase text-xs text-[#ACA690] tracking-[0.15em] mt-1">Court Street</p>
                     </div>
                   </div>
                 </div>
               </FadeIn>
               <FadeIn delay={0.15}>
                 <div className="grid grid-cols-2 gap-2 md:-mr-6">
-                  <div className="aspect-[2/3] rounded-xl overflow-hidden bg-[#BFBBB8]">
+                  <div className="aspect-[2/3] rounded-xl overflow-hidden bg-[#ACA690]">
                     <img
                       src="/images/detail-tools-01.webp"
                       alt="Barber tools at Siedel's"
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                     />
                   </div>
-                  <div className="aspect-[2/3] rounded-xl overflow-hidden bg-[#BFBBB8] mt-12">
+                  <div className="aspect-[2/3] rounded-xl overflow-hidden bg-[#ACA690] mt-12">
                     <img
                       src="/images/interior-stations-01.webp"
                       alt="Inside Siedel's Barbershop"
@@ -551,11 +552,11 @@ export default function Home() {
         <BarberPoleDivider />
 
         {/* ── Team ─────────────────────────────── */}
-        <section id="team" className="py-20 md:py-28 bg-[#F2F2F2]">
+        <section id="team" className="py-20 md:py-28 bg-[#D9D0C1]">
           <div className="max-w-6xl mx-auto px-6">
             <FadeIn>
               <div className="mb-14">
-                <p className="font-label uppercase text-xs font-semibold text-[#8C8279] tracking-[0.2em] mb-3">The Crew</p>
+                <p className="font-label uppercase text-xs font-semibold text-[#ACA690] tracking-[0.2em] mb-3">The Crew</p>
                 <h2 className="font-headline text-4xl md:text-6xl font-bold tracking-tight">
                   Good people with<br />
                   <span className="italic text-[var(--accent)]">sharp skills.</span>
@@ -566,7 +567,7 @@ export default function Home() {
               {team.map((member, idx) => (
                 <FadeIn key={idx} delay={idx * 0.06}>
                   <div className="group cursor-default">
-                    <div className="aspect-[3/4] rounded-xl overflow-hidden bg-[#E8E5E2] mb-3 relative">
+                    <div className="aspect-[3/4] rounded-xl overflow-hidden bg-[#C5BBA8] mb-3 relative">
                       {member.image ? (
                         <img
                           src={member.image}
@@ -574,13 +575,13 @@ export default function Home() {
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-[#1C1A18]">
+                        <div className="w-full h-full flex items-center justify-center bg-[#1A1410]">
                           <span className="font-headline text-5xl md:text-6xl font-bold text-[var(--accent)]/80">
                             {member.name.split(' ').map(n => n[0]).join('')}
                           </span>
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-[#403E3B]/75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end pb-5 px-3 gap-2">
+                      <div className="absolute inset-0 bg-[#302B25]/75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end pb-5 px-3 gap-2">
                         <p className="font-headline text-base font-semibold text-white tracking-tight translate-y-3 group-hover:translate-y-0 transition-transform duration-300">{member.name}</p>
                         <p className="font-body text-xs text-[var(--accent)] translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-75">{member.title}</p>
                         <a
@@ -595,20 +596,20 @@ export default function Home() {
                       </div>
                     </div>
                     <h3 className="font-headline text-lg font-semibold tracking-tight">{member.name}</h3>
-                    <p className="font-body text-sm text-[#8C8279]">{member.title}</p>
+                    <p className="font-body text-sm text-[#ACA690]">{member.title}</p>
                   </div>
                 </FadeIn>
               ))}
               {/* CTA card to fill the grid */}
               <FadeIn delay={team.length * 0.06}>
                 <a href="tel:3309520777" className="group cursor-pointer block">
-                  <div className="aspect-[3/4] rounded-xl overflow-hidden bg-[#403E3B] mb-3 flex flex-col items-center justify-center text-center px-4 group-hover:bg-[var(--accent)] transition-colors duration-500">
+                  <div className="aspect-[3/4] rounded-xl overflow-hidden bg-[#302B25] mb-3 flex flex-col items-center justify-center text-center px-4 group-hover:bg-[var(--accent)] transition-colors duration-500">
                     <span className="material-symbols-outlined text-5xl text-[var(--accent)] group-hover:text-white mb-4 transition-colors duration-500">content_cut</span>
-                    <p className="font-headline text-xl md:text-2xl font-bold text-[#F2F2F2] leading-tight mb-2">Your chair<br /><span className="italic">is waiting.</span></p>
-                    <p className="font-body text-sm text-[#8C8279] group-hover:text-white/80 transition-colors duration-500">(330) 952-0777</p>
+                    <p className="font-headline text-xl md:text-2xl font-bold text-[#D9D0C1] leading-tight mb-2">Your chair<br /><span className="italic">is waiting.</span></p>
+                    <p className="font-body text-sm text-[#ACA690] group-hover:text-white/80 transition-colors duration-500">(330) 952-0777</p>
                   </div>
                   <h3 className="font-headline text-lg font-semibold tracking-tight text-[var(--accent)]">Book Now</h3>
-                  <p className="font-body text-sm text-[#8C8279]">Walk-ins welcome</p>
+                  <p className="font-body text-sm text-[#ACA690]">Walk-ins welcome</p>
                 </a>
               </FadeIn>
             </div>
@@ -618,17 +619,17 @@ export default function Home() {
         <BarberPoleDivider inverted />
 
         {/* ── Services ─────────────────────────── */}
-        <section id="services" className="py-20 md:py-28 bg-[#403E3B] text-[#F2F2F2] texture-grain">
+        <section id="services" className="py-20 md:py-28 bg-[#302B25] text-[#D9D0C1] texture-grain">
           <div className="max-w-6xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20">
               <div className="lg:col-span-2">
                 <FadeIn>
-                  <p className="font-label uppercase text-xs font-semibold text-[#8C8279] tracking-[0.2em] mb-3">What We Do</p>
+                  <p className="font-label uppercase text-xs font-semibold text-[#ACA690] tracking-[0.2em] mb-3">What We Do</p>
                   <h2 className="font-headline text-4xl md:text-6xl font-bold tracking-tight mb-6">
                     Services<br />
                     <span className="italic text-[var(--accent)]">&amp; prices.</span>
                   </h2>
-                  <p className="font-body text-[#8C8279] text-base leading-relaxed mb-8">
+                  <p className="font-body text-[#ACA690] text-base leading-relaxed mb-8">
                     Straight-up pricing. No surprises.
                     Walk-ins welcome or call ahead to reserve your spot.
                   </p>
@@ -646,14 +647,14 @@ export default function Home() {
                   {services.map((service, idx) => (
                     <FadeIn key={idx} delay={idx * 0.03}>
                       <div className="flex justify-between items-baseline py-4 border-b border-white/10 group hover:border-[var(--accent)]/30 transition-colors duration-300">
-                        <span className="font-body text-base md:text-lg text-[#E8E5E2] group-hover:text-white transition-colors">{service.name}</span>
+                        <span className="font-body text-base md:text-lg text-[#C5BBA8] group-hover:text-white transition-colors">{service.name}</span>
                         <span className="font-mono text-xl md:text-2xl text-[var(--accent)]">{service.price}</span>
                       </div>
                     </FadeIn>
                   ))}
                 </div>
                 <div className="pt-8 mt-2 border-t border-white/10 flex items-center gap-3">
-                  <span className="font-body text-[#8C8279] text-sm">Ready?</span>
+                  <span className="font-body text-[#ACA690] text-sm">Ready?</span>
                   <a href="tel:3309520777" className="font-mono text-[var(--accent)] hover:text-[var(--accent-hover)] transition-colors text-base">
                     (330) 952-0777
                   </a>
@@ -666,15 +667,15 @@ export default function Home() {
         <BarberPoleDivider />
 
         {/* ── The Shop ─────────────────────────── */}
-        <section id="the-shop" className="py-20 md:py-28 bg-[#F2F2F2]">
+        <section id="the-shop" className="py-20 md:py-28 bg-[#D9D0C1]">
           <div className="max-w-6xl mx-auto px-6">
             <FadeIn>
               <div className="text-center mb-14">
-                <p className="font-label uppercase text-xs font-semibold text-[#8C8279] tracking-[0.2em] mb-3">Come Hang Out</p>
+                <p className="font-label uppercase text-xs font-semibold text-[#ACA690] tracking-[0.2em] mb-3">Come Hang Out</p>
                 <h2 className="font-headline text-4xl md:text-6xl font-bold tracking-tight mb-4">
                   The shop <span className="italic text-[var(--accent)]">feels like home.</span>
                 </h2>
-                <p className="font-body text-[#5C5955] text-base md:text-lg max-w-2xl mx-auto">
+                <p className="font-body text-[#6E6458] text-base md:text-lg max-w-2xl mx-auto">
                   Cleveland memorabilia on the walls. A comfortable waiting area where
                   you actually want to sit. The game&apos;s always on.
                 </p>
@@ -700,10 +701,10 @@ export default function Home() {
                 },
               ].map((card, idx) => (
                 <FadeIn key={idx} delay={idx * 0.1}>
-                  <div className="bg-[#E8E5E2] rounded-2xl p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-500">
+                  <div className="bg-[#C5BBA8] rounded-2xl p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-500">
                     <span className="material-symbols-outlined text-4xl text-[var(--accent)] mb-4 block">{card.icon}</span>
                     <h3 className="font-headline text-xl font-bold mb-2">{card.title}</h3>
-                    <p className="font-body text-[#5C5955] text-sm leading-relaxed">{card.text}</p>
+                    <p className="font-body text-[#6E6458] text-sm leading-relaxed">{card.text}</p>
                   </div>
                 </FadeIn>
               ))}
@@ -714,12 +715,12 @@ export default function Home() {
         <BarberPoleDivider inverted />
 
         {/* ── Visit / Contact ──────────────────── */}
-        <section id="visit" className="py-20 md:py-28 bg-[#1C1A18] text-[#F2F2F2] texture-grain">
+        <section id="visit" className="py-20 md:py-28 bg-[#1A1410] text-[#D9D0C1] texture-grain">
           <div className="max-w-6xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
               <FadeIn>
                 <div>
-                  <p className="font-label uppercase text-xs font-semibold text-[#8C8279] tracking-[0.2em] mb-3">Stop By</p>
+                  <p className="font-label uppercase text-xs font-semibold text-[#ACA690] tracking-[0.2em] mb-3">Stop By</p>
                   <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-8">
                     Find us on<br />
                     <span className="italic text-[var(--accent)]">Court Street.</span>
@@ -727,11 +728,11 @@ export default function Home() {
 
                   <div className="space-y-6">
                     <div>
-                      <h3 className="font-body text-sm font-semibold text-[#8C8279] uppercase tracking-wider mb-2">Address</h3>
+                      <h3 className="font-body text-sm font-semibold text-[#ACA690] uppercase tracking-wider mb-2">Address</h3>
                       <p className="font-mono text-sm leading-relaxed">982 N Court Street<br />Medina, Ohio 44256</p>
                     </div>
                     <div>
-                      <h3 className="font-body text-sm font-semibold text-[#8C8279] uppercase tracking-wider mb-2">Phone</h3>
+                      <h3 className="font-body text-sm font-semibold text-[#ACA690] uppercase tracking-wider mb-2">Phone</h3>
                       <a href="tel:3309520777" className="font-mono text-base text-[var(--accent)] hover:text-[var(--accent-hover)] transition-colors">(330) 952-0777</a>
                     </div>
                     <div className="pt-4">
@@ -751,11 +752,11 @@ export default function Home() {
 
               <FadeIn delay={0.15}>
                 <div>
-                  <h3 className="font-body text-sm font-semibold text-[#8C8279] uppercase tracking-wider mb-6">Hours</h3>
+                  <h3 className="font-body text-sm font-semibold text-[#ACA690] uppercase tracking-wider mb-6">Hours</h3>
                   <div className="space-y-0">
                     {hours.map((h, idx) => (
                       <div key={idx} className={`flex justify-between py-3 border-b border-white/10 ${
-                        h.day === 'Sunday' ? 'text-[#8C8279]' : ''
+                        h.day === 'Sunday' ? 'text-[#ACA690]' : ''
                       }`}>
                         <span className="font-body">{h.day}</span>
                         <span className="font-mono text-sm">{h.time}</span>
@@ -769,7 +770,7 @@ export default function Home() {
                       <span className="material-symbols-outlined text-2xl text-[var(--accent)] mt-0.5">sports_football</span>
                       <div>
                         <p className="font-headline text-base font-semibold mb-1">Game day? We&apos;re here.</p>
-                        <p className="font-body text-sm text-[#8C8279]">
+                        <p className="font-body text-sm text-[#ACA690]">
                           Get cleaned up before kickoff. The shop runs on Cleveland time.
                         </p>
                       </div>
@@ -782,7 +783,7 @@ export default function Home() {
         </section>
 
         {/* ── Footer ───────────────────────────── */}
-        <footer className="bg-[#403E3B] text-[#8C8279] py-10">
+        <footer className="bg-[#302B25] text-[#ACA690] py-10">
           <div className="max-w-6xl mx-auto px-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <div className="flex items-center gap-4">
@@ -790,10 +791,10 @@ export default function Home() {
                   <AnimatedJim className="w-[48px]" />
                 </div>
                 <div className="text-center md:text-left">
-                  <p className="font-brand text-4xl text-[#F2F2F2] uppercase" style={{ lineHeight: 1, letterSpacing: '-0.02em' }}>Siedel&apos;s</p>
-                  <p className="font-brand text-xl text-[#F2F2F2] uppercase" style={{ fontWeight: 900, lineHeight: 1, letterSpacing: '-0.01em' }}>Barbershop</p>
+                  <p className="font-brand text-4xl text-[#D9D0C1] uppercase" style={{ lineHeight: 1, letterSpacing: '-0.02em' }}>Siedel&apos;s</p>
+                  <p className="font-brand text-xl text-[#D9D0C1] uppercase" style={{ fontWeight: 900, lineHeight: 1, letterSpacing: '-0.01em' }}>Barbershop</p>
                   <span className="block h-[2px] w-full mt-1.5 mb-1" style={{ background: 'var(--accent)' }} />
-                  <p className="font-mono text-[9px] text-[#8C8279] tracking-[0.25em] uppercase">Stay Sharp</p>
+                  <p className="font-mono text-[9px] text-[#ACA690] tracking-[0.25em] uppercase">Stay Sharp</p>
                   <p className="font-body text-sm">982 N Court Street, Medina, OH 44256</p>
                 </div>
               </div>

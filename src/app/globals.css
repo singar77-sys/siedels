@@ -1,42 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,800;0,900;1,800;1,900&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
-/* ── Floor palette (extracted from shop floor photo) ── */
+/* ── Shop palette (from interior photo) ──────────────── */
 :root {
-  --floor-light:   #F2F2F2;
-  --floor-off:     #E8E5E2;
-  --floor-mid:     #BFBBB8;
-  --floor-stone:   #8C8279;
-  --floor-dark:    #403E3B;
-  --floor-darker:  #272523;
-  --floor-darkest: #0D0D0D;
-  --accent:        #E8550F;
-  --accent-hover:  #FF3C00;
-  --sage:          #6B7C5E;
-  /* aliases */
-  --cream:         var(--floor-light);
-  --cream-dark:    var(--floor-off);
-  --charcoal:      var(--floor-dark);
-  --charcoal-light:#5C5955;
-  --walnut:        var(--floor-darker);
-  --taupe:         var(--floor-stone);
-  --taupe-light:   var(--floor-mid);
-  --burnt-orange:  var(--accent);
-  --browns-orange: var(--accent-hover);
-  --sage-light:    #8A9B7D;
-  --warm-white:    #FDFBF8;
+  --linen:      #D9D0C1;   /* lightest — main light bg         */
+  --stone-mid:  #ACA690;   /* medium — muted text, borders     */
+  --stone-dk:   #6E6458;   /* dark stone — accent, highlights  */
+  --slate:      #58595B;   /* cool dark gray                   */
+  --espresso:   #302B25;   /* darkest — dark sections, text    */
+
+  /* Derived surfaces */
+  --linen-alt:  #C5BBA8;   /* slightly darker linen — alt sections */
+  --espresso-dk:#1A1410;   /* near-black warm                  */
+
+  /* Accent system — no orange */
+  --accent:       #6E6458;
+  --accent-hover: #302B25;
+
+  /* Semantic aliases */
+  --cream:        var(--linen);
+  --charcoal:     var(--espresso);
+  --taupe:        var(--stone-mid);
 }
 
-/* ── Base ──────────────────────────────────────────── */
+/* ── Base ──────────────────────────────────────────────── */
 body {
-  background: var(--floor-light);
-  color: var(--floor-dark);
+  background: var(--linen);
+  color: var(--espresso);
   font-family: 'Barlow', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Display / Headlines — Barlow Condensed 800–900 */
+/* Display / Headlines */
 .font-headline,
 .font-brand {
   font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
@@ -44,25 +40,25 @@ body {
   letter-spacing: -0.01em;
 }
 
-/* Body / UI — Barlow 400/500 (same DNA, clean at small sizes) */
+/* Body / UI */
 .font-body {
   font-family: 'Barlow', Arial, sans-serif;
 }
 
-/* Labels / nav items */
+/* Labels */
 .font-label {
   font-family: 'Barlow', Arial, sans-serif;
   font-weight: 500;
   letter-spacing: 0.08em;
 }
 
-/* Accent / Data / Fine print — IBM Plex Mono 400 */
-/* Use for: prices, hours, addresses, phone numbers, tabular info */
+/* Data / Tabular */
 .font-mono {
   font-family: 'IBM Plex Mono', 'Courier New', monospace;
   font-weight: 400;
 }
 
+/* Material Symbols — owned explicitly, no CDN class reliance */
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined', sans-serif;
   font-style: normal;
@@ -81,16 +77,16 @@ body {
 }
 
 ::selection {
-  background: var(--accent);
-  color: #ffffff;
+  background: var(--espresso);
+  color: var(--linen);
 }
 
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--floor-light); }
-::-webkit-scrollbar-thumb { background: var(--floor-stone); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--floor-dark); }
+::-webkit-scrollbar-track { background: var(--linen); }
+::-webkit-scrollbar-thumb { background: var(--stone-mid); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--stone-dk); }
 
-/* Subtle texture overlay */
+/* Texture overlay */
 .texture-grain { position: relative; }
 .texture-grain::after {
   content: '';
@@ -104,7 +100,7 @@ body {
 
 .warm-divider {
   height: 1px;
-  background: linear-gradient(to right, transparent, var(--floor-mid), transparent);
+  background: linear-gradient(to right, transparent, var(--stone-mid), transparent);
 }
 
 html { scroll-behavior: smooth; }
