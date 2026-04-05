@@ -329,13 +329,8 @@ export default function Home() {
       }`}
       style={{ top: sportsMode && !bannerDismissed ? '40px' : '0' }}
       >
-        <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-          <a href="#home" className="flex flex-col leading-none group">
-            <span className="font-brand text-4xl md:text-5xl text-[#302B25] uppercase" style={{ lineHeight: 1, letterSpacing: '-0.02em' }}>Siedel&apos;s</span>
-            <span className="font-brand text-xl md:text-2xl text-[#302B25] uppercase" style={{ fontWeight: 900, lineHeight: 1, letterSpacing: '-0.01em' }}>Barbershop</span>
-            <span className="block h-[2px] w-full mt-1.5 mb-1" style={{ background: 'var(--accent)' }} />
-            <span className="font-mono text-[9px] text-[#ACA690] tracking-[0.25em] uppercase">Stay Sharp</span>
-          </a>
+        <div className="max-w-6xl mx-auto grid grid-cols-3 items-center px-6 py-4">
+          {/* Left — nav links */}
           <div className="hidden md:flex items-center gap-8">
             {['Team', 'Services', 'The Shop', 'Visit'].map((label) => (
               <a
@@ -347,35 +342,48 @@ export default function Home() {
               </a>
             ))}
           </div>
-          {shopStatus && (
-            <span className={`hidden md:inline-flex items-center font-label text-xs tracking-[0.12em] uppercase ${shopStatus.open ? 'text-[#6B7C5E]' : 'text-[#ACA690]'}`}>
-              <span className={`inline-block w-1.5 h-1.5 rounded-full mr-2 ${shopStatus.open ? 'bg-[#6B7C5E]' : 'bg-[#ACA690]'}`} />
-              {shopStatus.label}
-            </span>
-          )}
-          {/* Dark mode toggle */}
-          <button
-            onClick={() => setDarkMode((d) => !d)}
-            className="hidden md:inline-flex items-center justify-center w-9 h-9 rounded-md text-[#ACA690] hover:text-[#302B25] transition-colors duration-300"
-            aria-label="Toggle dark mode"
-            title={darkMode ? 'Light mode' : 'Dark mode'}
-          >
-            <span className="material-symbols-outlined text-xl">{darkMode ? 'light_mode' : 'dark_mode'}</span>
-          </button>
-          <a
-            href="tel:3309520777"
-            className="hidden md:inline-flex items-center gap-2 bg-[#302B25] text-[#D9D0C1] font-body font-medium text-sm px-5 py-2.5 rounded-md hover:bg-[var(--accent)] transition-colors duration-300"
-          >
-            <span className="material-symbols-outlined text-base">call</span>
-            (330) 952-0777
-          </a>
-          <button
-            onClick={() => setMobileMenuOpen((o) => !o)}
-            className="md:hidden text-[#302B25] p-1"
-            aria-label="Toggle menu"
-          >
-            <span className="material-symbols-outlined text-3xl">{mobileMenuOpen ? 'close' : 'menu'}</span>
-          </button>
+          {/* Mobile — left spacer */}
+          <div className="md:hidden" />
+          {/* Center — wordmark */}
+          <div className="flex justify-center">
+            <a href="#home" className="flex flex-col items-center leading-none group">
+              <span className="font-brand text-4xl md:text-5xl text-[#302B25] uppercase" style={{ lineHeight: 1, letterSpacing: '-0.02em' }}>Siedel&apos;s</span>
+              <span className="font-brand text-xl md:text-2xl text-[#302B25] uppercase" style={{ fontWeight: 900, lineHeight: 1, letterSpacing: '-0.01em' }}>Barbershop</span>
+              <span className="block h-[2px] w-full mt-1.5 mb-1" style={{ background: 'var(--accent)' }} />
+              <span className="font-mono text-[9px] text-[#ACA690] tracking-[0.25em] uppercase">Stay Sharp</span>
+            </a>
+          </div>
+          {/* Right — status + dark mode + call + mobile menu */}
+          <div className="flex items-center justify-end gap-3">
+            {shopStatus && (
+              <span className={`hidden md:inline-flex items-center font-label text-xs tracking-[0.12em] uppercase ${shopStatus.open ? 'text-[#6B7C5E]' : 'text-[#ACA690]'}`}>
+                <span className={`inline-block w-1.5 h-1.5 rounded-full mr-2 ${shopStatus.open ? 'bg-[#6B7C5E]' : 'bg-[#ACA690]'}`} />
+                {shopStatus.label}
+              </span>
+            )}
+            <button
+              onClick={() => setDarkMode((d) => !d)}
+              className="hidden md:inline-flex items-center justify-center w-9 h-9 rounded-md text-[#ACA690] hover:text-[#302B25] transition-colors duration-300"
+              aria-label="Toggle dark mode"
+              title={darkMode ? 'Light mode' : 'Dark mode'}
+            >
+              <span className="material-symbols-outlined text-xl">{darkMode ? 'light_mode' : 'dark_mode'}</span>
+            </button>
+            <a
+              href="tel:3309520777"
+              className="hidden md:inline-flex items-center gap-2 bg-[#302B25] text-[#D9D0C1] font-body font-medium text-sm px-5 py-2.5 rounded-md hover:bg-[var(--accent)] transition-colors duration-300"
+            >
+              <span className="material-symbols-outlined text-base">call</span>
+              (330) 952-0777
+            </a>
+            <button
+              onClick={() => setMobileMenuOpen((o) => !o)}
+              className="md:hidden text-[#302B25] p-1"
+              aria-label="Toggle menu"
+            >
+              <span className="material-symbols-outlined text-3xl">{mobileMenuOpen ? 'close' : 'menu'}</span>
+            </button>
+          </div>
         </div>
         {mobileMenuOpen && (
           <div className="md:hidden bg-[#D9D0C1] border-t border-[#ACA690]">
@@ -435,7 +443,7 @@ export default function Home() {
                   <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl lg:text-[6rem] font-bold leading-[0.92] tracking-tight mb-8">
                     Your<br />
                     neighborhood<br />
-                    <span className="text-[var(--accent)] italic">barbershop.</span>
+                    <span className="text-[var(--accent)]">barbershop.</span>
                   </h1>
                 </FadeIn>
                 <FadeIn delay={0.2}>
@@ -500,7 +508,7 @@ export default function Home() {
                   <p className="font-label uppercase text-xs font-semibold text-[#ACA690] tracking-[0.2em] mb-4">About the Shop</p>
                   <h2 className="font-headline text-4xl md:text-5xl font-bold leading-tight tracking-tight mb-6">
                     Not fancy.<br />
-                    <span className="italic text-[var(--accent)]">Just right.</span>
+                    <span className="text-[var(--accent)]">Just right.</span>
                   </h2>
                   <div className="space-y-4 text-[#6E6458] font-body text-base md:text-lg leading-relaxed">
                     <p>
@@ -559,7 +567,7 @@ export default function Home() {
                 <p className="font-label uppercase text-xs font-semibold text-[#ACA690] tracking-[0.2em] mb-3">The Crew</p>
                 <h2 className="font-headline text-4xl md:text-6xl font-bold tracking-tight">
                   Good people with<br />
-                  <span className="italic text-[var(--accent)]">sharp skills.</span>
+                  <span className="text-[var(--accent)]">sharp skills.</span>
                 </h2>
               </div>
             </FadeIn>
@@ -605,7 +613,7 @@ export default function Home() {
                 <a href="tel:3309520777" className="group cursor-pointer block">
                   <div className="aspect-[3/4] rounded-xl overflow-hidden bg-[#302B25] mb-3 flex flex-col items-center justify-center text-center px-4 group-hover:bg-[var(--accent)] transition-colors duration-500">
                     <span className="material-symbols-outlined text-5xl text-[var(--accent)] group-hover:text-white mb-4 transition-colors duration-500">content_cut</span>
-                    <p className="font-headline text-xl md:text-2xl font-bold text-[#D9D0C1] leading-tight mb-2">Your chair<br /><span className="italic">is waiting.</span></p>
+                    <p className="font-headline text-xl md:text-2xl font-bold text-[#D9D0C1] leading-tight mb-2">Your chair<br />is waiting.</p>
                     <p className="font-body text-sm text-[#ACA690] group-hover:text-white/80 transition-colors duration-500">(330) 952-0777</p>
                   </div>
                   <h3 className="font-headline text-lg font-semibold tracking-tight text-[var(--accent)]">Book Now</h3>
@@ -627,7 +635,7 @@ export default function Home() {
                   <p className="font-label uppercase text-xs font-semibold text-[#ACA690] tracking-[0.2em] mb-3">What We Do</p>
                   <h2 className="font-headline text-4xl md:text-6xl font-bold tracking-tight mb-6">
                     Services<br />
-                    <span className="italic text-[var(--accent)]">&amp; prices.</span>
+                    <span className="text-[var(--accent)]">&amp; prices.</span>
                   </h2>
                   <p className="font-body text-[#ACA690] text-base leading-relaxed mb-8">
                     Straight-up pricing. No surprises.
@@ -673,7 +681,7 @@ export default function Home() {
               <div className="text-center mb-14">
                 <p className="font-label uppercase text-xs font-semibold text-[#ACA690] tracking-[0.2em] mb-3">Come Hang Out</p>
                 <h2 className="font-headline text-4xl md:text-6xl font-bold tracking-tight mb-4">
-                  The shop <span className="italic text-[var(--accent)]">feels like home.</span>
+                  The shop <span className="text-[var(--accent)]">feels like home.</span>
                 </h2>
                 <p className="font-body text-[#6E6458] text-base md:text-lg max-w-2xl mx-auto">
                   Cleveland memorabilia on the walls. A comfortable waiting area where
@@ -723,7 +731,7 @@ export default function Home() {
                   <p className="font-label uppercase text-xs font-semibold text-[#ACA690] tracking-[0.2em] mb-3">Stop By</p>
                   <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-8">
                     Find us on<br />
-                    <span className="italic text-[var(--accent)]">Court Street.</span>
+                    <span className="text-[var(--accent)]">Court Street.</span>
                   </h2>
 
                   <div className="space-y-6">
