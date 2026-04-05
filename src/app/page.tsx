@@ -279,22 +279,14 @@ export default function Home() {
       <main>
         {/* ── Hero ──────────────────────────────── */}
         <section id="home" className="relative min-h-screen flex items-center texture-grain overflow-hidden">
-          {/* Background image — shop exterior */}
-          <div className="absolute inset-0">
-            <img
-              src="/images/interior-stations-01.webp"
-              alt="Inside Siedel's Barbershop"
-              className="w-full h-full object-cover opacity-15"
-            />
-          </div>
 
           <div className="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-20 md:pt-0 md:pb-0">
             <div className="flex flex-col md:flex-row items-center md:items-end gap-8 md:gap-12">
               {/* Left: Copy */}
               <div className="flex-1 max-w-3xl">
                 <FadeIn>
-                  <p className="font-label uppercase text-sm font-semibold text-[#6B7C5E] tracking-[0.15em] mb-6">
-                    Medina, Ohio &mdash; Est. on Court Street
+                  <p className="font-label uppercase text-sm font-semibold text-[#B5A99A] tracking-[0.15em] mb-4">
+                    Walk-ins Welcome · Medina, Ohio
                   </p>
                 </FadeIn>
                 <FadeIn delay={0.1}>
@@ -313,18 +305,22 @@ export default function Home() {
                 <FadeIn delay={0.3}>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <a
-                      href="#visit"
-                      className="inline-flex items-center justify-center gap-2 bg-[#2C2825] text-[#F5F0EB] font-body font-semibold px-8 py-4 rounded-full hover:bg-[#E8550F] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                      href="tel:3309520777"
+                      className="inline-flex items-center justify-center gap-2 bg-[#E8550F] text-white font-body font-semibold px-8 py-4 rounded-full hover:bg-[#FF3C00] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
                     >
-                      Come See Us
-                      <span className="material-symbols-outlined text-xl">arrow_forward</span>
+                      <span className="material-symbols-outlined text-xl">call</span>
+                      Call (330) 952-0777
                     </a>
                     <a
-                      href="tel:3309520777"
+                      href="#visit"
                       className="inline-flex items-center justify-center gap-2 border-2 border-[#2C2825] text-[#2C2825] font-body font-semibold px-8 py-4 rounded-full hover:bg-[#2C2825] hover:text-[#F5F0EB] transition-all duration-300"
                     >
-                      Call for Appointment
+                      Find Us
                     </a>
+                  </div>
+                  <div className="flex items-center gap-2 mt-5">
+                    <span className="text-[#E8550F] text-sm tracking-wider">★★★★★</span>
+                    <span className="font-body text-sm text-[#4A4541]">4.8 · Rated on Google</span>
                   </div>
                 </FadeIn>
               </div>
@@ -346,7 +342,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
               <FadeIn>
                 <div>
-                  <p className="font-label uppercase text-xs font-semibold text-[#6B7C5E] tracking-[0.2em] mb-4">About the Shop</p>
+                  <p className="font-label uppercase text-xs font-semibold text-[#B5A99A] tracking-[0.2em] mb-4">About the Shop</p>
                   <h2 className="font-headline text-4xl md:text-5xl font-bold leading-tight tracking-tight mb-6">
                     Not fancy.<br />
                     <span className="italic text-[#E8550F]">Just right.</span>
@@ -363,21 +359,32 @@ export default function Home() {
                       Just skilled hands and honest conversation.
                     </p>
                   </div>
+                  <div className="mt-8 pt-8 border-t border-[#C5BAB0] flex items-baseline gap-8">
+                    <div>
+                      <span className="font-headline text-6xl font-bold text-[#2C2825] leading-none">11</span>
+                      <p className="font-label uppercase text-xs text-[#B5A99A] tracking-[0.15em] mt-1">Barbers on Staff</p>
+                    </div>
+                    <div className="w-px self-stretch bg-[#C5BAB0]" />
+                    <div>
+                      <span className="font-headline text-6xl font-bold text-[#2C2825] leading-none">#1</span>
+                      <p className="font-label uppercase text-xs text-[#B5A99A] tracking-[0.15em] mt-1">Court Street</p>
+                    </div>
+                  </div>
                 </div>
               </FadeIn>
               <FadeIn delay={0.15}>
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-[#D1C9BE]">
+                <div className="grid grid-cols-2 gap-2 md:-mr-6">
+                  <div className="aspect-[2/3] rounded-xl overflow-hidden bg-[#D1C9BE]">
                     <img
                       src="/images/detail-tools-01.webp"
                       alt="Barber tools at Siedel's"
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                     />
                   </div>
-                  <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-[#D1C9BE] mt-8">
+                  <div className="aspect-[2/3] rounded-xl overflow-hidden bg-[#D1C9BE] mt-12">
                     <img
-                      src="/images/jim-lamarca.webp"
-                      alt="Jim LaMarca at work"
+                      src="/images/interior-stations-01.webp"
+                      alt="Inside Siedel's Barbershop"
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                     />
                   </div>
@@ -392,7 +399,7 @@ export default function Home() {
           <div className="max-w-6xl mx-auto px-6">
             <FadeIn>
               <div className="mb-14">
-                <p className="font-label uppercase text-xs font-semibold text-[#6B7C5E] tracking-[0.2em] mb-3">The Crew</p>
+                <p className="font-label uppercase text-xs font-semibold text-[#B5A99A] tracking-[0.2em] mb-3">The Crew</p>
                 <h2 className="font-headline text-4xl md:text-6xl font-bold tracking-tight">
                   Good people with<br />
                   <span className="italic text-[#E8550F]">sharp skills.</span>
@@ -403,12 +410,12 @@ export default function Home() {
               {team.map((member, idx) => (
                 <FadeIn key={idx} delay={idx * 0.06}>
                   <div className="group cursor-default">
-                    <div className="aspect-[3/4] rounded-xl overflow-hidden bg-[#EDE7E0] mb-3">
+                    <div className="aspect-[3/4] rounded-xl overflow-hidden bg-[#EDE7E0] mb-3 relative">
                       {member.image ? (
                         <img
                           src={member.image}
                           alt={member.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center bg-[#3D322B]">
@@ -417,9 +424,13 @@ export default function Home() {
                           </span>
                         </div>
                       )}
+                      <div className="absolute inset-0 bg-[#2C2825]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end pb-5 px-3">
+                        <p className="font-headline text-base font-semibold text-white tracking-tight translate-y-3 group-hover:translate-y-0 transition-transform duration-300">{member.name}</p>
+                        <p className="font-body text-xs text-[#E8550F] translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-75">{member.title}</p>
+                      </div>
                     </div>
                     <h3 className="font-headline text-lg font-semibold tracking-tight">{member.name}</h3>
-                    <p className="font-body text-sm text-[#6B7C5E]">{member.title}</p>
+                    <p className="font-body text-sm text-[#B5A99A]">{member.title}</p>
                   </div>
                 </FadeIn>
               ))}
@@ -432,7 +443,7 @@ export default function Home() {
                     <p className="font-body text-sm text-[#B5A99A] group-hover:text-white/80 transition-colors duration-500">(330) 952-0777</p>
                   </div>
                   <h3 className="font-headline text-lg font-semibold tracking-tight text-[#E8550F]">Book Now</h3>
-                  <p className="font-body text-sm text-[#6B7C5E]">Walk-ins welcome</p>
+                  <p className="font-body text-sm text-[#B5A99A]">Walk-ins welcome</p>
                 </a>
               </FadeIn>
             </div>
@@ -445,7 +456,7 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20">
               <div className="lg:col-span-2">
                 <FadeIn>
-                  <p className="font-label uppercase text-xs font-semibold text-[#6B7C5E] tracking-[0.2em] mb-3">What We Do</p>
+                  <p className="font-label uppercase text-xs font-semibold text-[#B5A99A] tracking-[0.2em] mb-3">What We Do</p>
                   <h2 className="font-headline text-4xl md:text-6xl font-bold tracking-tight mb-6">
                     Services<br />
                     <span className="italic text-[#E8550F]">&amp; prices.</span>
@@ -469,10 +480,16 @@ export default function Home() {
                     <FadeIn key={idx} delay={idx * 0.03}>
                       <div className="flex justify-between items-baseline py-4 border-b border-white/10 group hover:border-[#E8550F]/30 transition-colors duration-300">
                         <span className="font-body text-base md:text-lg text-[#EDE7E0] group-hover:text-white transition-colors">{service.name}</span>
-                        <span className="font-headline text-lg md:text-xl font-semibold text-[#E8550F]">{service.price}</span>
+                        <span className="font-headline text-2xl md:text-3xl font-bold text-[#E8550F]">{service.price}</span>
                       </div>
                     </FadeIn>
                   ))}
+                </div>
+                <div className="pt-8 mt-2 border-t border-white/10 flex items-center gap-3">
+                  <span className="font-body text-[#B5A99A] text-sm">Ready?</span>
+                  <a href="tel:3309520777" className="font-body text-[#E8550F] hover:text-[#FF3C00] transition-colors font-semibold text-lg">
+                    (330) 952-0777
+                  </a>
                 </div>
               </div>
             </div>
@@ -484,7 +501,7 @@ export default function Home() {
           <div className="max-w-6xl mx-auto px-6">
             <FadeIn>
               <div className="text-center mb-14">
-                <p className="font-label uppercase text-xs font-semibold text-[#6B7C5E] tracking-[0.2em] mb-3">Come Hang Out</p>
+                <p className="font-label uppercase text-xs font-semibold text-[#B5A99A] tracking-[0.2em] mb-3">Come Hang Out</p>
                 <h2 className="font-headline text-4xl md:text-6xl font-bold tracking-tight mb-4">
                   The shop <span className="italic text-[#E8550F]">feels like home.</span>
                 </h2>
@@ -531,7 +548,7 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
               <FadeIn>
                 <div>
-                  <p className="font-label uppercase text-xs font-semibold text-[#6B7C5E] tracking-[0.2em] mb-3">Stop By</p>
+                  <p className="font-label uppercase text-xs font-semibold text-[#B5A99A] tracking-[0.2em] mb-3">Stop By</p>
                   <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-8">
                     Find us on<br />
                     <span className="italic text-[#E8550F]">Court Street.</span>
