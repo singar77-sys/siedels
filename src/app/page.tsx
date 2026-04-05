@@ -42,6 +42,28 @@ const hours = [
   { day: 'Sunday', time: 'Closed' },
 ];
 
+
+/* ── Shop open/closed status ─────────────────────── */
+function useShopStatus() {
+  const [status, setStatus] = useState<{ open: boolean; label: string } | null>(null);
+  useEffect(() => {
+    const closingHours: Record<number, number | null> = {
+      1: 20, 2: 18, 3: 18, 4: 20, 5: 18, 6: 15, 0: null,
+    };
+    const now = new Date();
+    const day = now.getDay();
+    const hour = now.getHours() + now.getMinutes() / 60;
+    const closes = closingHours[day];
+    if (closes === null || hour < 8 || hour >= closes) {
+      setStatus({ open: false, label: 'Closed today' });
+    } else {
+      const closeStr = closes === 20 ? '8 PM' : closes === 18 ? '6 PM' : '3 PM';
+      setStatus({ open: true, label: `Open · Until ${closeStr}` });
+    }
+  }, []);
+  return status;
+}
+
 /* ── Fade-in on scroll hook ──────────────────────── */
 function useFadeIn() {
   const ref = useRef<HTMLDivElement>(null);
@@ -204,10 +226,33 @@ function AnimatedJim({ className = '' }: { className?: string }) {
   );
 }
 
+/* ── Barber Pole Divider ─────────────────────────── */
+function BarberPoleDivider({ inverted = false }: { inverted?: boolean }) {
+  const bg = inverted ? '#2C2825' : '#EDE7E0';
+  const stripe1 = '#E8550F';
+  const stripe2 = inverted ? '#F5F0EB' : '#F5F0EB';
+  return (
+    <div className="w-full overflow-hidden" style={{ height: '24px', background: bg }}>
+      <svg width="100%" height="24" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id={`pole${inverted ? 'inv' : ''}`} x="0" y="0" width="40" height="24" patternUnits="userSpaceOnUse">
+            <rect width="40" height="24" fill={bg} />
+            <polygon points="0,0 14,0 0,24" fill={stripe1} opacity="0.25" />
+            <polygon points="20,0 34,0 20,24" fill={stripe1} opacity="0.25" />
+            <polygon points="7,0 14,0 0,24 0,10" fill={stripe2} opacity="0.08" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="24" fill={`url(#pole${inverted ? 'inv' : ''})`} />
+      </svg>
+    </div>
+  );
+}
+
 /* ── Main Page ──────────────────────────────────── */
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const shopStatus = useShopStatus();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -239,9 +284,15 @@ export default function Home() {
               </a>
             ))}
           </div>
+          {shopStatus && (
+            <span className={`hidden md:inline-flex items-center font-label text-xs tracking-[0.12em] uppercase ${shopStatus.open ? 'text-[#6B7C5E]' : 'text-[#B5A99A]'}`}>
+              <span className={`inline-block w-1.5 h-1.5 rounded-full mr-2 ${shopStatus.open ? 'bg-[#6B7C5E]' : 'bg-[#B5A99A]'}`} />
+              {shopStatus.label}
+            </span>
+          )}
           <a
             href="tel:3309520777"
-            className="hidden md:inline-flex items-center gap-2 bg-[#2C2825] text-[#F5F0EB] font-body font-medium text-sm px-5 py-2.5 rounded-full hover:bg-[#E8550F] transition-colors duration-300"
+            className="hidden md:inline-flex items-center gap-2 bg-[#2C2825] text-[#F5F0EB] font-body font-medium text-sm px-5 py-2.5 rounded-md hover:bg-[#E8550F] transition-colors duration-300"
           >
             <span className="material-symbols-outlined text-base">call</span>
             (330) 952-0777
@@ -297,23 +348,25 @@ export default function Home() {
                   </h1>
                 </FadeIn>
                 <FadeIn delay={0.2}>
-                  <p className="font-body text-lg md:text-xl text-[#4A4541] max-w-xl leading-relaxed mb-10">
-                    Walk-ins welcome. Cleveland sports on the TV.
-                    Good conversation in the chair. That&apos;s the whole pitch.
+                  <p className="font-body text-lg md:text-xl text-[#4A4541] max-w-xl leading-relaxed mb-4">
+                    Cleveland sports on the TV. Good conversation in the chair.
+                  </p>
+                  <p className="font-label text-sm text-[#B5A99A] tracking-[0.1em] mb-10">
+                    982 N Court Street. We&apos;ve been here.
                   </p>
                 </FadeIn>
                 <FadeIn delay={0.3}>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <a
                       href="tel:3309520777"
-                      className="inline-flex items-center justify-center gap-2 bg-[#E8550F] text-white font-body font-semibold px-8 py-4 rounded-full hover:bg-[#FF3C00] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                      className="inline-flex items-center justify-center gap-2 bg-[#E8550F] text-white font-body font-semibold px-8 py-4 rounded-md hover:bg-[#FF3C00] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
                     >
                       <span className="material-symbols-outlined text-xl">call</span>
                       Call (330) 952-0777
                     </a>
                     <a
                       href="#visit"
-                      className="inline-flex items-center justify-center gap-2 border-2 border-[#2C2825] text-[#2C2825] font-body font-semibold px-8 py-4 rounded-full hover:bg-[#2C2825] hover:text-[#F5F0EB] transition-all duration-300"
+                      className="inline-flex items-center justify-center gap-2 border-2 border-[#2C2825] text-[#2C2825] font-body font-semibold px-8 py-4 rounded-md hover:bg-[#2C2825] hover:text-[#F5F0EB] transition-all duration-300"
                     >
                       Find Us
                     </a>
@@ -335,6 +388,8 @@ export default function Home() {
           {/* Bottom edge detail — warm divider */}
           <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#B5A99A] to-transparent" />
         </section>
+
+        <BarberPoleDivider />
 
         {/* ── About / Vibe ─────────────────────── */}
         <section className="py-20 md:py-28 bg-[#EDE7E0] texture-grain">
@@ -394,6 +449,8 @@ export default function Home() {
           </div>
         </section>
 
+        <BarberPoleDivider />
+
         {/* ── Team ─────────────────────────────── */}
         <section id="team" className="py-20 md:py-28 bg-[#F5F0EB]">
           <div className="max-w-6xl mx-auto px-6">
@@ -450,6 +507,8 @@ export default function Home() {
           </div>
         </section>
 
+        <BarberPoleDivider inverted />
+
         {/* ── Services ─────────────────────────── */}
         <section id="services" className="py-20 md:py-28 bg-[#2C2825] text-[#F5F0EB] texture-grain">
           <div className="max-w-6xl mx-auto px-6">
@@ -467,7 +526,7 @@ export default function Home() {
                   </p>
                   <a
                     href="tel:3309520777"
-                    className="inline-flex items-center gap-2 bg-[#E8550F] text-white font-body font-semibold px-6 py-3 rounded-full hover:bg-[#FF3C00] transition-colors duration-300"
+                    className="inline-flex items-center gap-2 bg-[#E8550F] text-white font-body font-semibold px-6 py-3 rounded-md hover:bg-[#FF3C00] transition-colors duration-300"
                   >
                     <span className="material-symbols-outlined text-lg">call</span>
                     Book by Phone
@@ -568,7 +627,7 @@ export default function Home() {
                         href="https://maps.google.com/?q=982+N+Court+Street+Medina+OH+44256"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-[#E8550F] text-white font-body font-semibold px-6 py-3 rounded-full hover:bg-[#FF3C00] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                        className="inline-flex items-center gap-2 bg-[#E8550F] text-white font-body font-semibold px-6 py-3 rounded-md hover:bg-[#FF3C00] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
                       >
                         <span className="material-symbols-outlined text-lg">directions</span>
                         Get Directions
@@ -614,9 +673,14 @@ export default function Home() {
         <footer className="bg-[#2C2825] text-[#B5A99A] py-10">
           <div className="max-w-6xl mx-auto px-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <div className="text-center md:text-left">
-                <p className="font-headline text-lg text-[#F5F0EB] font-semibold mb-1">Siedel&apos;s Barbershop</p>
-                <p className="font-body text-sm">982 N Court Street, Medina, OH 44256</p>
+              <div className="flex items-center gap-4">
+                <div className="opacity-40 flex-shrink-0 hidden md:block">
+                  <AnimatedJim className="w-[48px]" />
+                </div>
+                <div className="text-center md:text-left">
+                  <p className="font-headline text-lg text-[#F5F0EB] font-semibold mb-1">Siedel&apos;s Barbershop</p>
+                  <p className="font-body text-sm">982 N Court Street, Medina, OH 44256</p>
+                </div>
               </div>
               <div className="text-center md:text-right">
                 <a href="tel:3309520777" className="font-body text-sm text-[#E8550F] hover:text-[#FF3C00] transition-colors">(330) 952-0777</a>
