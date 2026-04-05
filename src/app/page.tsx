@@ -320,8 +320,9 @@ export default function Home() {
       style={{ top: sportsMode && !bannerDismissed ? '40px' : '0' }}
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-          <a href="#home" className="font-headline text-xl md:text-2xl font-bold text-[#403E3B] tracking-tight">
-            Siedel&apos;s
+          <a href="#home" className="flex flex-col leading-none">
+            <span className="font-brand text-2xl md:text-3xl text-[#403E3B] uppercase tracking-tight" style={{ lineHeight: 1 }}>Siedel&apos;s</span>
+            <span className="font-mono text-[10px] text-[#8C8279] tracking-[0.18em] uppercase mt-0.5">Stay Sharp</span>
           </a>
           <div className="hidden md:flex items-center gap-8">
             {['Team', 'Services', 'The Shop', 'Visit'].map((label) => (
@@ -767,7 +768,8 @@ export default function Home() {
                   <AnimatedJim className="w-[48px]" />
                 </div>
                 <div className="text-center md:text-left">
-                  <p className="font-headline text-lg text-[#F2F2F2] font-semibold mb-1">Siedel&apos;s Barbershop</p>
+                  <p className="font-brand text-2xl text-[#F2F2F2] uppercase tracking-tight" style={{ lineHeight: 1 }}>Siedel&apos;s</p>
+                  <p className="font-mono text-[10px] text-[#8C8279] tracking-[0.18em] uppercase mt-1">Stay Sharp</p>
                   <p className="font-body text-sm">982 N Court Street, Medina, OH 44256</p>
                 </div>
               </div>
