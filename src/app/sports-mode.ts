@@ -1,54 +1,105 @@
 export type TeamKey = 'guardians' | 'cavaliers' | 'browns';
 
+export interface SportsVariant {
+  bg: string;
+  text: string;
+  accent: string;
+  accentHover: string;
+}
+
 export interface SportsTheme {
   team: TeamKey;
   name: string;
   shortName: string;
-  accent: string;
-  accentHover: string;
-  dark: string;
-  bg: string;
   tagline: string;
   hashtag: string;
   icon: string;
+  /** Always-dark strip used for the game day banner */
+  bannerBg: string;
+  bannerAccent: string;
+  /** Light mode colorway */
+  light: SportsVariant;
+  /** Dark mode colorway */
+  dark: SportsVariant;
 }
 
 export const SPORTS_THEMES: Record<TeamKey, SportsTheme> = {
-  guardians: {
-    team: 'guardians',
-    name: 'Cleveland Guardians',
-    shortName: 'Guardians',
-    accent: '#E50022',
-    accentHover: '#C2001D',
-    dark: '#00385D',
-    bg: '#EEF3F7',
-    tagline: 'Home game at Progressive Field today.',
-    hashtag: '#ForTheLand',
-    icon: 'sports_baseball',
-  },
+
+  // ── Cleveland Cavaliers ──────────────────────────────────────────────────
+  // Exact palette: #6F2633 wine · #FFB81C gold · #041E42 navy · #000000 black
   cavaliers: {
     team: 'cavaliers',
     name: 'Cleveland Cavaliers',
     shortName: 'Cavs',
-    accent: '#FFB915',
-    accentHover: '#E6A610',
-    dark: '#6F212F',
-    bg: '#FDF8EE',
     tagline: 'Home game at Rocket Mortgage FieldHouse tonight.',
     hashtag: '#LetEmKnow',
     icon: 'sports_basketball',
+    bannerBg: '#000000',
+    bannerAccent: '#FFB81C',
+    dark: {
+      // Black + wine backgrounds, gold + navy accents, white text
+      bg: '#000000',
+      text: '#FFFFFF',
+      accent: '#FFB81C',
+      accentHover: '#E6A619',
+    },
+    light: {
+      // White + gold backgrounds, wine + black accents, navy text
+      bg: '#FFFFFF',
+      text: '#041E42',
+      accent: '#6F2633',
+      accentHover: '#5A1F2A',
+    },
   },
+
+  // ── Cleveland Guardians ──────────────────────────────────────────────────
+  // Palette: #00385D navy · #E50022 red · #FFFFFF white
+  guardians: {
+    team: 'guardians',
+    name: 'Cleveland Guardians',
+    shortName: 'Guardians',
+    tagline: 'Home game at Progressive Field today.',
+    hashtag: '#ForTheLand',
+    icon: 'sports_baseball',
+    bannerBg: '#00385D',
+    bannerAccent: '#E50022',
+    dark: {
+      bg: '#001829',
+      text: '#FFFFFF',
+      accent: '#E50022',
+      accentHover: '#C2001D',
+    },
+    light: {
+      bg: '#EEF3F8',
+      text: '#00385D',
+      accent: '#E50022',
+      accentHover: '#C2001D',
+    },
+  },
+
+  // ── Cleveland Browns ─────────────────────────────────────────────────────
+  // Palette: #311D00 brown · #FF3C00 orange · #FFFFFF white
   browns: {
     team: 'browns',
     name: 'Cleveland Browns',
     shortName: 'Browns',
-    accent: '#FF3C00',
-    accentHover: '#E63500',
-    dark: '#311D00',
-    bg: '#FDF5EE',
     tagline: 'Home game at Huntington Bank Field today.',
     hashtag: '#DawgPound',
     icon: 'sports_football',
+    bannerBg: '#311D00',
+    bannerAccent: '#FF3C00',
+    dark: {
+      bg: '#1A0E00',
+      text: '#FFFFFF',
+      accent: '#FF3C00',
+      accentHover: '#E63500',
+    },
+    light: {
+      bg: '#FDF5EE',
+      text: '#311D00',
+      accent: '#FF3C00',
+      accentHover: '#E63500',
+    },
   },
 };
 
@@ -98,7 +149,6 @@ const BROWNS_2025: string[] = [
  * Priority on overlap: Browns > Cavaliers > Guardians.
  */
 export function getSportsModeForDate(date: Date): SportsTheme | null {
-  // Use local date string (YYYY-MM-DD) to match schedule entries
   const y = date.getFullYear();
   const m = String(date.getMonth() + 1).padStart(2, '0');
   const d = String(date.getDate()).padStart(2, '0');

@@ -59,10 +59,10 @@ function GameDayBanner({ theme, onDismiss }: { theme: SportsTheme; onDismiss: ()
   return (
     <div
       className="w-full py-2.5 px-4 flex items-center justify-center gap-3 text-sm font-body relative"
-      style={{ background: theme.dark, color: '#F2F2F2' }}
+      style={{ background: theme.bannerBg, color: '#F2F2F2' }}
     >
-      <span className="material-symbols-outlined text-base" style={{ color: theme.accent }}>{theme.icon}</span>
-      <span className="font-semibold" style={{ color: theme.accent }}>Go {theme.shortName}!</span>
+      <span className="material-symbols-outlined text-base" style={{ color: theme.bannerAccent }}>{theme.icon}</span>
+      <span className="font-semibold" style={{ color: theme.bannerAccent }}>Go {theme.shortName}!</span>
       <span className="text-white/80">{theme.tagline}</span>
       <span className="font-label text-xs tracking-widest opacity-60 hidden sm:inline">{theme.hashtag}</span>
       <button
@@ -296,12 +296,21 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Pick the right color variant: sports theme overrides plain dark/light mode
+  const activeVariant = sportsMode ? (darkMode ? sportsMode.dark : sportsMode.light) : null;
+  const rootBg      = activeVariant?.bg      ?? (darkMode ? '#0D0D0D' : '#F2F2F2');
+  const rootText    = activeVariant?.text     ?? (darkMode ? '#F2F2F2' : '#403E3B');
+  const rootAccent  = activeVariant?.accent   ?? '#E8550F';
+  const rootAccentH = activeVariant?.accentHover ?? '#FF3C00';
+
   return (
     <div
-      className={`min-h-screen transition-colors duration-700 ${darkMode ? 'bg-[#0D0D0D] text-[#F2F2F2]' : 'bg-[#F2F2F2] text-[#403E3B]'}`}
+      className="min-h-screen transition-colors duration-700"
       style={{
-        '--accent': sportsMode?.accent ?? '#E8550F',
-        '--accent-hover': sportsMode?.accentHover ?? '#FF3C00',
+        backgroundColor: rootBg,
+        color: rootText,
+        '--accent': rootAccent,
+        '--accent-hover': rootAccentH,
       } as React.CSSProperties}
     >
       {/* ── Cleveland Sports Mode Banner ──── */}
