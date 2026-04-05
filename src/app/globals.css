@@ -64,6 +64,7 @@ body {
   background: var(--charcoal-light);
 }
 
+/* Subtle texture overlay for warmth */
 .texture-grain {
   position: relative;
 }
@@ -77,11 +78,13 @@ body {
   z-index: 1;
 }
 
+/* Warm divider styling */
 .warm-divider {
   height: 1px;
   background: linear-gradient(to right, transparent, var(--taupe-light), transparent);
 }
 
+/* Smooth scroll */
 html {
   scroll-behavior: smooth;
 }
