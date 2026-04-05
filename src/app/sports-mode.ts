@@ -1,3 +1,6 @@
+// ── Master switch — set to true to re-enable ──────────────────────────────
+const SPORTS_MODE_ENABLED = false;
+
 export type TeamKey = 'guardians' | 'cavaliers' | 'browns';
 
 export interface SportsVariant {
@@ -154,6 +157,7 @@ export function getSportsModeForDate(date: Date): SportsTheme | null {
   const d = String(date.getDate()).padStart(2, '0');
   const dateStr = `${y}-${m}-${d}`;
 
+  if (!SPORTS_MODE_ENABLED) return null;
   if (BROWNS_2025.includes(dateStr)) return SPORTS_THEMES.browns;
   if (CAVALIERS_2025_26.includes(dateStr)) return SPORTS_THEMES.cavaliers;
   if (GUARDIANS_2026.includes(dateStr)) return SPORTS_THEMES.guardians;
