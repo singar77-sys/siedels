@@ -1,18 +1,22 @@
 "use client";
 import { useState, useEffect, useRef } from 'react';
 
+const SQUARE_BASE = 'https://app.squareup.com/appointments/buyer/widget';
+const LOCATION = 'LFCOT5CC7MY0S';
+const sq = (id: string) => `${SQUARE_BASE}/${id}/${LOCATION}`;
+
 const team = [
-  { name: 'Jim LaMarca', title: 'Master Barber', image: '/images/jim-lamarca.webp' },
-  { name: 'Pierre Wright', title: 'Master Barber', image: '/images/pierre-wright.webp' },
-  { name: 'Matt Hayes', title: 'Master Barber', image: '/images/matt-hayes.webp' },
-  { name: 'Ticia Husak', title: 'Master Stylist', image: '/images/ticia-husak.webp' },
-  { name: 'Krista Foecking', title: 'Stylist', image: '/images/krista-foecking.webp' },
-  { name: 'Patrick Muranko', title: 'Barber', image: '/images/patrick-muranko.webp' },
-  { name: 'Will Dillon', title: 'Barber', image: '/images/will-dillon.webp' },
-  { name: 'Shannon Hadick', title: 'Master Barber', image: '' }, // TODO: need local photo
-  { name: 'Chris Hodge', title: 'Barber', image: '/images/chris-hodge.webp' },
-  { name: 'Billy Rodriguez', title: 'Barber', image: '/images/billy-rodriguez.webp' },
-  { name: 'Sam Sickle', title: 'Barber', image: '' }, // TODO: need photo
+  { name: 'Jim LaMarca', title: 'Master Barber', image: '/images/jim-lamarca.webp', booking: sq('wx9txuouu9ti8w') },
+  { name: 'Pierre Wright', title: 'Master Barber', image: '/images/pierre-wright.webp', booking: sq('mbwa7epvxqp3ya') },
+  { name: 'Matt Hayes', title: 'Master Barber', image: '/images/matt-hayes.webp', booking: sq('ub0ju8v1q1926j') },
+  { name: 'Ticia Husak', title: 'Master Stylist', image: '/images/ticia-husak.webp', booking: sq('xa1g2bceso9izn') },
+  { name: 'Krista Foecking', title: 'Stylist', image: '/images/krista-foecking.webp', booking: sq('h3ib29fkvqykvx') },
+  { name: 'Patrick Muranko', title: 'Barber', image: '/images/patrick-muranko.webp', booking: sq('x9bbe05slxw75e') },
+  { name: 'Will Dillon', title: 'Barber', image: '/images/will-dillon.webp', booking: sq('licxdz52l4jryx') },
+  { name: 'Shannon Hadick', title: 'Master Barber', image: '', booking: sq('0lh9o00vt6or3u') },
+  { name: 'Chris Hodge', title: 'Barber', image: '/images/chris-hodge.webp', booking: sq('taz4mvu6g9k73n') },
+  { name: 'Billy Rodriguez', title: 'Barber', image: '/images/billy-rodriguez.webp', booking: sq('e957m1qmqqdevp') },
+  { name: 'Sam Sickle', title: 'Barber', image: '', booking: sq('qj4tfubyvaebvj') },
 ];
 
 const services = [
@@ -498,9 +502,18 @@ export default function Home() {
                           </span>
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-[#2C2825]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end pb-5 px-3">
+                      <div className="absolute inset-0 bg-[#2C2825]/75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end pb-5 px-3 gap-2">
                         <p className="font-headline text-base font-semibold text-white tracking-tight translate-y-3 group-hover:translate-y-0 transition-transform duration-300">{member.name}</p>
                         <p className="font-body text-xs text-[#E8550F] translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-75">{member.title}</p>
+                        <a
+                          href={member.booking}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="mt-1 font-body text-xs font-semibold bg-[#E8550F] text-white px-4 py-1.5 rounded-sm hover:bg-[#FF3C00] transition-colors duration-200 translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-100"
+                        >
+                          Book with {member.name.split(' ')[0]}
+                        </a>
                       </div>
                     </div>
                     <h3 className="font-headline text-lg font-semibold tracking-tight">{member.name}</h3>
