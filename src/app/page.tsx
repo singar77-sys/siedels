@@ -320,9 +320,11 @@ export default function Home() {
       style={{ top: sportsMode && !bannerDismissed ? '40px' : '0' }}
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-          <a href="#home" className="flex flex-col leading-none">
-            <span className="font-brand text-2xl md:text-3xl text-[#403E3B] uppercase tracking-tight" style={{ lineHeight: 1 }}>Siedel&apos;s</span>
-            <span className="font-mono text-[10px] text-[#8C8279] tracking-[0.18em] uppercase mt-0.5">Stay Sharp</span>
+          <a href="#home" className="flex flex-col leading-none group">
+            <span className="font-brand text-3xl md:text-4xl text-[#403E3B] uppercase" style={{ lineHeight: 1, letterSpacing: '-0.02em' }}>Siedel&apos;s</span>
+            <span className="font-brand text-[13px] md:text-sm text-[#8C8279] uppercase tracking-[0.12em]" style={{ fontWeight: 800, lineHeight: 1.2 }}>Barbershop</span>
+            <span className="block h-px w-full mt-1 mb-0.5" style={{ background: 'var(--accent)', opacity: 0.4 }} />
+            <span className="font-mono text-[8px] text-[#8C8279] tracking-[0.22em] uppercase">Stay Sharp</span>
           </a>
           <div className="hidden md:flex items-center gap-8">
             {['Team', 'Services', 'The Shop', 'Visit'].map((label) => (
@@ -450,7 +452,7 @@ export default function Home() {
                   </div>
                   <div className="flex items-center gap-2 mt-5">
                     <span className="text-[var(--accent)] text-sm tracking-wider">★★★★★</span>
-                    <span className="font-body text-sm text-[#5C5955]">4.8 · Rated on Google</span>
+                    <span className="font-mono text-xs text-[#5C5955]">4.8 · Google</span>
                   </div>
                 </FadeIn>
               </div>
@@ -625,14 +627,14 @@ export default function Home() {
                     <FadeIn key={idx} delay={idx * 0.03}>
                       <div className="flex justify-between items-baseline py-4 border-b border-white/10 group hover:border-[var(--accent)]/30 transition-colors duration-300">
                         <span className="font-body text-base md:text-lg text-[#E8E5E2] group-hover:text-white transition-colors">{service.name}</span>
-                        <span className="font-headline text-2xl md:text-3xl font-bold text-[var(--accent)]">{service.price}</span>
+                        <span className="font-mono text-xl md:text-2xl text-[var(--accent)]">{service.price}</span>
                       </div>
                     </FadeIn>
                   ))}
                 </div>
                 <div className="pt-8 mt-2 border-t border-white/10 flex items-center gap-3">
                   <span className="font-body text-[#8C8279] text-sm">Ready?</span>
-                  <a href="tel:3309520777" className="font-body text-[var(--accent)] hover:text-[var(--accent-hover)] transition-colors font-semibold text-lg">
+                  <a href="tel:3309520777" className="font-mono text-[var(--accent)] hover:text-[var(--accent-hover)] transition-colors text-base">
                     (330) 952-0777
                   </a>
                 </div>
@@ -706,11 +708,11 @@ export default function Home() {
                   <div className="space-y-6">
                     <div>
                       <h3 className="font-body text-sm font-semibold text-[#8C8279] uppercase tracking-wider mb-2">Address</h3>
-                      <p className="font-body text-lg">982 N Court Street<br />Medina, Ohio 44256</p>
+                      <p className="font-mono text-sm leading-relaxed">982 N Court Street<br />Medina, Ohio 44256</p>
                     </div>
                     <div>
                       <h3 className="font-body text-sm font-semibold text-[#8C8279] uppercase tracking-wider mb-2">Phone</h3>
-                      <a href="tel:3309520777" className="font-body text-lg text-[var(--accent)] hover:text-[var(--accent-hover)] transition-colors">(330) 952-0777</a>
+                      <a href="tel:3309520777" className="font-mono text-base text-[var(--accent)] hover:text-[var(--accent-hover)] transition-colors">(330) 952-0777</a>
                     </div>
                     <div className="pt-4">
                       <a
@@ -736,7 +738,7 @@ export default function Home() {
                         h.day === 'Sunday' ? 'text-[#8C8279]' : ''
                       }`}>
                         <span className="font-body">{h.day}</span>
-                        <span className="font-body font-medium">{h.time}</span>
+                        <span className="font-mono text-sm">{h.time}</span>
                       </div>
                     ))}
                   </div>
@@ -768,8 +770,10 @@ export default function Home() {
                   <AnimatedJim className="w-[48px]" />
                 </div>
                 <div className="text-center md:text-left">
-                  <p className="font-brand text-2xl text-[#F2F2F2] uppercase tracking-tight" style={{ lineHeight: 1 }}>Siedel&apos;s</p>
-                  <p className="font-mono text-[10px] text-[#8C8279] tracking-[0.18em] uppercase mt-1">Stay Sharp</p>
+                  <p className="font-brand text-3xl text-[#F2F2F2] uppercase" style={{ lineHeight: 1, letterSpacing: '-0.02em' }}>Siedel&apos;s</p>
+                  <p className="font-brand text-[13px] text-[#8C8279] uppercase tracking-[0.12em]" style={{ fontWeight: 800, lineHeight: 1.2 }}>Barbershop</p>
+                  <span className="block h-px w-full mt-1 mb-0.5" style={{ background: 'var(--accent)', opacity: 0.35 }} />
+                  <p className="font-mono text-[8px] text-[#8C8279] tracking-[0.22em] uppercase">Stay Sharp</p>
                   <p className="font-body text-sm">982 N Court Street, Medina, OH 44256</p>
                 </div>
               </div>
