@@ -20,18 +20,16 @@ const team = [
 ];
 
 const services = [
-  { name: 'Haircuts', price: '$24' },
-  { name: 'Razor / Foil Fade', price: '$30' },
-  { name: 'Haircut + Beard Trim', price: '$34' },
-  { name: 'Haircut + Face Shave', price: '$55' },
-  { name: 'Haircut Reservation', price: '$32' },
-  { name: 'Beard Trim', price: '$21' },
-  { name: 'Full Service Shaves', price: '$36' },
-  { name: 'Razor Line-ups', price: '$20' },
-  { name: 'Head Shave', price: '$32' },
-  { name: 'Haircut + Beard Trim Reservation', price: '$42' },
-  { name: "Women's Cut / Rough Dry", price: '$25+' },
-  { name: 'Eyebrow / Lip / Chin', price: '$15+' },
+  { name: 'Haircut', price: '$32' },
+  { name: 'Razor / Foil Fade', price: '$38' },
+  { name: 'Haircut + Beard Trim', price: '$42' },
+  { name: 'Full Service Shave', price: '$44' },
+  { name: 'Head Shave', price: '$40' },
+  { name: 'Beard Trim', price: '$29' },
+  { name: 'Shoulder Length Cut + Rough Dry', price: '$38' },
+  { name: 'Duo Haircut', price: '$64' },
+  { name: 'Trio Haircut', price: '$96' },
+  { name: 'Eyebrow / Lip / Chin', price: '$23' },
   { name: 'Shampoo', price: '$5' },
   { name: 'Shampoo + Style', price: '$25+' },
 ];
