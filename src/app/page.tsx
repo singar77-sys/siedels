@@ -319,9 +319,17 @@ export default function Home() {
             ))}
             <a
               href="tel:3309520777"
-              className="block px-6 py-4 font-body font-semibold text-[#E8550F]"
+              className="block px-6 py-4 font-body font-semibold text-[#E8550F] border-b border-[#EDE7E0]"
             >
               Call (330) 952-0777
+            </a>
+            <a
+              href="https://app.squareup.com/appointments/buyer/widget/xcru7izyf4zhv6/LFCOT5CC7MY0S"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block px-6 py-4 font-body font-semibold text-[#2C2825]"
+            >
+              Book Online
             </a>
           </div>
         )}
@@ -356,13 +364,22 @@ export default function Home() {
                   </p>
                 </FadeIn>
                 <FadeIn delay={0.3}>
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col sm:flex-row flex-wrap gap-4">
                     <a
                       href="tel:3309520777"
                       className="inline-flex items-center justify-center gap-2 bg-[#E8550F] text-white font-body font-semibold px-8 py-4 rounded-md hover:bg-[#FF3C00] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
                     >
                       <span className="material-symbols-outlined text-xl">call</span>
                       Call (330) 952-0777
+                    </a>
+                    <a
+                      href="https://app.squareup.com/appointments/buyer/widget/xcru7izyf4zhv6/LFCOT5CC7MY0S"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 bg-[#2C2825] text-[#F5F0EB] font-body font-semibold px-8 py-4 rounded-md hover:bg-[#3D322B] transition-all duration-300"
+                    >
+                      <span className="material-symbols-outlined text-xl">calendar_month</span>
+                      Book Online
                     </a>
                     <a
                       href="#visit"

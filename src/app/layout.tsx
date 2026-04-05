@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -19,7 +20,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-[#F5F0EB] text-[#2C2825]">{children}</body>
+      <body className="bg-[#F5F0EB] text-[#2C2825]">
+        {children}
+        <Script
+          src="https://app.squareup.com/appointments/buyer/widget/xcru7izyf4zhv6/LFCOT5CC7MY0S.js"
+          strategy="lazyOnload"
+        />
+      </body>
     </html>
   );
 }
