@@ -2,24 +2,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 @import "tailwindcss";
 
+/* ── Floor palette (extracted from shop floor photo) ── */
 :root {
-  --cream: #F5F0EB;
-  --cream-dark: #EDE7E0;
-  --charcoal: #2C2825;
-  --charcoal-light: #4A4541;
-  --walnut: #3D322B;
-  --taupe: #B5A99A;
-  --taupe-light: #D1C9BE;
-  --sage: #6B7C5E;
-  --sage-light: #8A9B7D;
-  --burnt-orange: #E8550F;
-  --browns-orange: #FF3C00;
-  --warm-white: #FDFBF8;
+  --floor-light:   #F2F2F2;
+  --floor-off:     #E8E5E2;
+  --floor-mid:     #BFBBB8;
+  --floor-stone:   #8C8279;
+  --floor-dark:    #403E3B;
+  --floor-darker:  #272523;
+  --floor-darkest: #0D0D0D;
+  --accent:        #E8550F;
+  --accent-hover:  #FF3C00;
+  --sage:          #6B7C5E;
+  /* aliases */
+  --cream:         var(--floor-light);
+  --cream-dark:    var(--floor-off);
+  --charcoal:      var(--floor-dark);
+  --charcoal-light:#5C5955;
+  --walnut:        var(--floor-darker);
+  --taupe:         var(--floor-stone);
+  --taupe-light:   var(--floor-mid);
+  --burnt-orange:  var(--accent);
+  --browns-orange: var(--accent-hover);
+  --sage-light:    #8A9B7D;
+  --warm-white:    #FDFBF8;
 }
 
+/* ── Base ──────────────────────────────────────────── */
 body {
-  background: var(--cream);
-  color: var(--charcoal);
+  background: var(--floor-light);
+  color: var(--floor-dark);
   font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -43,31 +55,17 @@ body {
 }
 
 ::selection {
-  background: var(--burnt-orange);
+  background: var(--accent);
   color: #ffffff;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--floor-light); }
+::-webkit-scrollbar-thumb { background: var(--floor-stone); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--floor-dark); }
 
-::-webkit-scrollbar-track {
-  background: var(--cream);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--taupe);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--charcoal-light);
-}
-
-/* Subtle texture overlay for warmth */
-.texture-grain {
-  position: relative;
-}
+/* Subtle texture overlay */
+.texture-grain { position: relative; }
 .texture-grain::after {
   content: '';
   position: absolute;
@@ -78,13 +76,9 @@ body {
   z-index: 1;
 }
 
-/* Warm divider styling */
 .warm-divider {
   height: 1px;
-  background: linear-gradient(to right, transparent, var(--taupe-light), transparent);
+  background: linear-gradient(to right, transparent, var(--floor-mid), transparent);
 }
 
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
