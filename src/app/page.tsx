@@ -401,6 +401,17 @@ export default function Home() {
         {/* ── Hero ──────────────────────────────── */}
         <section id="home" className="relative min-h-screen flex items-center texture-grain overflow-hidden">
 
+          {/* Background image + darkening overlay */}
+          <div className="absolute inset-0 z-0">
+            <img
+              src="/images/hero.webp"
+              alt=""
+              className="w-full h-full object-cover object-center"
+              aria-hidden="true"
+            />
+            <div className="absolute inset-0 bg-[#F2F2F2]/75" />
+          </div>
+
           <div className="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-20 md:pt-0 md:pb-0">
             <div className="flex flex-col md:flex-row items-center md:items-end gap-8 md:gap-12">
               {/* Left: Copy */}
