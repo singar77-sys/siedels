@@ -259,25 +259,124 @@ function AnimatedJim({ className = '' }: { className?: string }) {
   );
 }
 
-/* ── Barber Pole Divider ─────────────────────────── */
-function BarberPoleDivider({ inverted = false }: { inverted?: boolean }) {
-  const bg = inverted ? '#302B25' : '#C5BBA8';
-  const stripe1 = 'var(--accent)';
-  const stripe2 = '#D9D0C1';
+/* ── Sacred Barber Pole ──────────────────────────── */
+function SacredBarberPole({ className = '' }: { className?: string }) {
+  const CX = 200, AMP = 34, Y_TOP = 90, Y_BOT = 410, TURNS = 4;
+
+  const helix = (phase: number): string =>
+    Array.from({ length: 160 }, (_, i) => {
+      const t = i / 159;
+      const y = Y_TOP + t * (Y_BOT - Y_TOP);
+      const x = CX + AMP * Math.sin(2 * Math.PI * TURNS * t + phase);
+      return `${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`;
+    }).join('');
+
+  const fR = 78;
+  const sixAngles = [0, 1, 2, 3, 4, 5].map(i => i * Math.PI / 3);
+
+  const flowerCenters: [number, number][] = [
+    [200, 250],
+    ...sixAngles.map(a => [200 + fR * Math.cos(a), 250 + fR * Math.sin(a)] as [number, number]),
+  ];
+  const outerCenters: [number, number][] = [0.5, 1.5, 2.5, 3.5, 4.5, 5.5].map(i => {
+    const a = i * Math.PI / 3;
+    return [200 + fR * Math.sqrt(3) * Math.cos(a), 250 + fR * Math.sqrt(3) * Math.sin(a)] as [number, number];
+  });
+  const perimNodes: [number, number][] = sixAngles.map(
+    a => [200 + 150 * Math.cos(a), 250 + 150 * Math.sin(a)] as [number, number]
+  );
+
+  const pathA  = helix(Math.PI / 2);
+  const pathB  = helix(-Math.PI / 2);
+  const pathA2 = helix(Math.PI / 2 + 0.28);
+  const pathB2 = helix(-Math.PI / 2 - 0.28);
+
   return (
-    <div className="w-full overflow-hidden" style={{ height: '24px', background: bg }}>
-      <svg width="100%" height="24" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id={`pole${inverted ? 'inv' : ''}`} x="0" y="0" width="40" height="24" patternUnits="userSpaceOnUse">
-            <rect width="40" height="24" fill={bg} />
-            <polygon points="0,0 14,0 0,24" fill={stripe1} opacity="0.25" />
-            <polygon points="20,0 34,0 20,24" fill={stripe1} opacity="0.25" />
-            <polygon points="7,0 14,0 0,24 0,10" fill={stripe2} opacity="0.08" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="24" fill={`url(#pole${inverted ? 'inv' : ''})`} />
-      </svg>
-    </div>
+    <svg viewBox="0 0 400 500" className={className} xmlns="http://www.w3.org/2000/svg">
+      <style>{`
+        @keyframes sbpUp   { from { stroke-dashoffset: 40; } to { stroke-dashoffset: 0; } }
+        @keyframes sbpDown { from { stroke-dashoffset: 0;  } to { stroke-dashoffset: 40; } }
+        @keyframes sbpBeat { 0%,100% { opacity:1; } 50% { opacity:0.45; } }
+        .sbp-a  { stroke-dasharray:22 18; animation:sbpUp   5s linear infinite; }
+        .sbp-b  { stroke-dasharray:22 18; animation:sbpDown 5s linear infinite; }
+        .sbp-a2 { stroke-dasharray:8 32;  animation:sbpUp   5s linear infinite; }
+        .sbp-b2 { stroke-dasharray:8 32;  animation:sbpDown 5s linear infinite; }
+        .sbp-ct { animation:sbpBeat 3s ease-in-out infinite; }
+      `}</style>
+
+      {/* Outer bounding circle */}
+      <circle cx="200" cy="250" r="183" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 4" opacity="0.5" />
+
+      {/* Orbital rings */}
+      <circle cx="200" cy="250" r="148" fill="none" stroke="currentColor" strokeWidth="0.4" strokeDasharray="2 5" opacity="0.3" />
+      <circle cx="200" cy="250" r="100" fill="none" stroke="currentColor" strokeWidth="0.4" strokeDasharray="2 5" opacity="0.22" />
+
+      {/* Flower of Life */}
+      <g fill="none" stroke="currentColor" strokeWidth="0.4" strokeDasharray="2 5" opacity="0.18">
+        {flowerCenters.map(([x, y], i) => <circle key={`f${i}`} cx={x} cy={y} r={fR} />)}
+        {outerCenters.map(([x, y], i)  => <circle key={`o${i}`} cx={x} cy={y} r={fR} />)}
+      </g>
+
+      {/* Construction lines */}
+      <g stroke="currentColor" strokeWidth="0.35" strokeDasharray="2 5" opacity="0.16" fill="none">
+        <line x1="17"  y1="250" x2="383" y2="250" />
+        <line x1="200" y1="17"  x2="200" y2="483" />
+        <line x1="17"  y1="90"  x2="383" y2="90"  />
+        <line x1="17"  y1="410" x2="383" y2="410" />
+        <line x1="17"  y1="170" x2="383" y2="170" />
+        <line x1="17"  y1="330" x2="383" y2="330" />
+        <line x1="44"  y1="67"  x2="356" y2="433" />
+        <line x1="356" y1="67"  x2="44"  y2="433" />
+        {[30, 150, 210, 330].map((deg, i) => {
+          const a = deg * Math.PI / 180;
+          return <line key={i} x1="200" y1="250" x2={200 + 190 * Math.cos(a)} y2={250 + 190 * Math.sin(a)} />;
+        })}
+      </g>
+
+      {/* Vesica piscis */}
+      <g fill="none" stroke="currentColor" strokeWidth="0.7" opacity="0.38">
+        <ellipse cx="200" cy="250" rx="30" ry="55" />
+        <path d={`M 200 ${250 - 55} A 55 55 0 0 1 200 ${250 + 55} A 55 55 0 0 1 200 ${250 - 55} Z`} />
+      </g>
+
+      {/* Central axis */}
+      <line x1="200" y1="46" x2="200" y2="454" stroke="currentColor" strokeWidth="0.8" opacity="0.4" />
+
+      {/* Pole cap arcs */}
+      <g stroke="currentColor" strokeWidth="0.7" opacity="0.38" fill="none">
+        <line x1="165" y1="90"  x2="235" y2="90"  />
+        <path d="M 165 90 Q 200 78 235 90" />
+        <path d="M 165 90 Q 200 102 235 90" />
+        <line x1="165" y1="410" x2="235" y2="410" />
+        <path d="M 165 410 Q 200 422 235 410" />
+        <path d="M 165 410 Q 200 398 235 410" />
+      </g>
+
+      {/* Animated helix */}
+      <g fill="none">
+        <path d={pathA}  stroke="currentColor" strokeWidth="1.8" opacity="0.85" className="sbp-a"  />
+        <path d={pathB}  stroke="currentColor" strokeWidth="1.8" opacity="0.85" className="sbp-b"  />
+        <path d={pathA2} stroke="currentColor" strokeWidth="0.6" opacity="0.3"  className="sbp-a2" />
+        <path d={pathB2} stroke="currentColor" strokeWidth="0.6" opacity="0.3"  className="sbp-b2" />
+      </g>
+
+      {/* Triangles */}
+      <g fill="none" stroke="currentColor" strokeWidth="0.9" opacity="0.55">
+        <polygon points="200,46 181,82 219,82" />
+        <polygon points="200,454 181,418 219,418" />
+      </g>
+
+      {/* Perimeter nodes */}
+      {perimNodes.map(([x, y], i) => <circle key={i} cx={x} cy={y} r="2.2" fill="currentColor" opacity="0.55" />)}
+      {([
+        [200, 90], [200, 410], [200, 170], [200, 330],
+      ] as [number, number][]).map(([x, y], i) => (
+        <circle key={i} cx={x} cy={y} r="1.6" fill="currentColor" opacity="0.45" />
+      ))}
+      <circle cx="200" cy="46"  r="2.5" fill="currentColor" opacity="0.8" />
+      <circle cx="200" cy="454" r="2.5" fill="currentColor" opacity="0.8" />
+      <circle cx="200" cy="250" r="3.5" fill="currentColor" className="sbp-ct" />
+    </svg>
   );
 }
 
@@ -336,7 +435,7 @@ export default function Home() {
               <a
                 key={label}
                 href={`#${label.toLowerCase().replace(/\s/g, '-')}`}
-                className="font-body text-sm font-medium text-[#6E6458] hover:text-[var(--accent)] transition-colors duration-300"
+                className={`font-body text-sm font-medium transition-colors duration-300 hover:text-[var(--accent)] ${darkMode ? 'text-[#ACA690]' : 'text-[#6E6458]'}`}
               >
                 {label}
               </a>
@@ -347,8 +446,8 @@ export default function Home() {
           {/* Center — wordmark */}
           <div className="flex justify-center">
             <a href="#home" className="flex flex-col items-center leading-none group">
-              <span className="font-brand text-4xl md:text-5xl text-[#302B25] uppercase" style={{ lineHeight: 1, letterSpacing: '-0.02em' }}>Siedel&apos;s</span>
-              <span className="font-brand text-xl md:text-2xl text-[#302B25] uppercase" style={{ fontWeight: 900, lineHeight: 1, letterSpacing: '-0.01em' }}>Barbershop</span>
+              <span className="font-brand text-4xl md:text-5xl uppercase" style={{ lineHeight: 1, letterSpacing: '-0.02em', color: rootText }}>Siedel&apos;s</span>
+              <span className="font-brand text-xl md:text-2xl uppercase" style={{ fontWeight: 900, lineHeight: 1, letterSpacing: '-0.01em', color: rootText }}>Barbershop</span>
               <span className="block h-[2px] w-full mt-1.5 mb-1" style={{ background: 'var(--accent)' }} />
               <span className="font-mono text-[9px] text-[#ACA690] tracking-[0.25em] uppercase">Stay Sharp</span>
             </a>
@@ -363,7 +462,7 @@ export default function Home() {
             )}
             <button
               onClick={() => setDarkMode((d) => !d)}
-              className="hidden md:inline-flex items-center justify-center w-9 h-9 rounded-md text-[#ACA690] hover:text-[#302B25] transition-colors duration-300"
+              className={`hidden md:inline-flex items-center justify-center w-9 h-9 rounded-md text-[#ACA690] transition-colors duration-300 ${darkMode ? 'hover:text-[#D9D0C1]' : 'hover:text-[#302B25]'}`}
               aria-label="Toggle dark mode"
               title={darkMode ? 'Light mode' : 'Dark mode'}
             >
@@ -378,7 +477,7 @@ export default function Home() {
             </a>
             <button
               onClick={() => setMobileMenuOpen((o) => !o)}
-              className="md:hidden text-[#302B25] p-1"
+              className="md:hidden p-1" style={{ color: rootText }}
               aria-label="Toggle menu"
             >
               <span className="material-symbols-outlined text-3xl">{mobileMenuOpen ? 'close' : 'menu'}</span>
@@ -497,8 +596,6 @@ export default function Home() {
           <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#ACA690] to-transparent" />
         </section>
 
-        <BarberPoleDivider />
-
         {/* ── About / Vibe ─────────────────────── */}
         <section className="py-20 md:py-28 bg-[#C5BBA8] texture-grain">
           <div className="max-w-6xl mx-auto px-6">
@@ -556,8 +653,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        <BarberPoleDivider />
 
         {/* ── Team ─────────────────────────────── */}
         <section id="team" className="py-20 md:py-28 bg-[#D9D0C1]">
@@ -624,8 +719,6 @@ export default function Home() {
           </div>
         </section>
 
-        <BarberPoleDivider inverted />
-
         {/* ── Services ─────────────────────────── */}
         <section id="services" className="py-20 md:py-28 bg-[#302B25] text-[#D9D0C1] texture-grain">
           <div className="max-w-6xl mx-auto px-6">
@@ -641,13 +734,25 @@ export default function Home() {
                     Straight-up pricing. No surprises.
                     Walk-ins welcome or call ahead to reserve your spot.
                   </p>
-                  <a
-                    href="tel:3309520777"
-                    className="inline-flex items-center gap-2 bg-[var(--accent)] text-white font-body font-semibold px-6 py-3 rounded-md hover:bg-[var(--accent-hover)] transition-colors duration-300"
-                  >
-                    <span className="material-symbols-outlined text-lg">call</span>
-                    Book by Phone
-                  </a>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <a
+                      href="https://app.squareup.com/appointments/buyer/widget/xcru7izyf4zhv6/LFCOT5CC7MY0S"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-[var(--accent)] font-body font-semibold px-6 py-3 rounded-md hover:bg-[var(--accent-hover)] transition-colors duration-300"
+                      style={{ color: darkMode ? '#302B25' : '#D9D0C1' }}
+                    >
+                      <span className="material-symbols-outlined text-lg">calendar_month</span>
+                      Book Online
+                    </a>
+                    <a
+                      href="tel:3309520777"
+                      className="inline-flex items-center gap-2 border border-[#ACA690] text-[#ACA690] font-body font-semibold px-6 py-3 rounded-md hover:border-[#D9D0C1] hover:text-[#D9D0C1] transition-colors duration-300"
+                    >
+                      <span className="material-symbols-outlined text-lg">call</span>
+                      (330) 952-0777
+                    </a>
+                  </div>
                 </FadeIn>
               </div>
               <div className="lg:col-span-3">
@@ -672,11 +777,15 @@ export default function Home() {
           </div>
         </section>
 
-        <BarberPoleDivider />
-
         {/* ── The Shop ─────────────────────────── */}
-        <section id="the-shop" className="py-20 md:py-28 bg-[#D9D0C1]">
-          <div className="max-w-6xl mx-auto px-6">
+        <section id="the-shop" className="py-20 md:py-28 bg-[#D9D0C1] relative overflow-hidden">
+          <div
+            className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
+            style={{ color: '#302B25', opacity: 0.08 }}
+          >
+            <SacredBarberPole className="h-full max-h-[700px]" />
+          </div>
+          <div className="max-w-6xl mx-auto px-6 relative z-10">
             <FadeIn>
               <div className="text-center mb-14">
                 <p className="font-label uppercase text-xs font-semibold text-[#ACA690] tracking-[0.2em] mb-3">Come Hang Out</p>
@@ -719,8 +828,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        <BarberPoleDivider inverted />
 
         {/* ── Visit / Contact ──────────────────── */}
         <section id="visit" className="py-20 md:py-28 bg-[#1A1410] text-[#D9D0C1] texture-grain">
