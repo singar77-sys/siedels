@@ -8,8 +8,8 @@ export function Hero() {
       {/* Background image with Ken Burns */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero.webp"
-          alt="Inside Siedel's Barbershop on Court Street in Medina, Ohio"
+          src="/images/heronew.png"
+          alt="Barber pole at sunset outside Siedel's Barbershop on Court Street in Medina, Ohio"
           fill
           priority
           sizes="100vw"
