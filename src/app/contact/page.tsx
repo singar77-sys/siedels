@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Nav } from '@/components/Nav';
 import { PageHero } from '@/components/PageHero';
 import { FadeIn } from '@/components/FadeIn';
+import { EmailCapture } from '@/components/EmailCapture';
 import { SacredBarberPole } from '@/components/SacredBarberPole';
 import { Footer } from '@/components/Footer';
 import { hours, PHONE, PHONE_HREF, ADDRESS, CITY_STATE_ZIP, MAPS_URL, SQUARE_BOOKING_URL } from '@/data/shop';
@@ -89,17 +90,13 @@ export default function ContactPage() {
                     ))}
                   </div>
 
-                  {/* Game day callout */}
+                  {/* Email signup */}
                   <div className="mt-10 p-6 bg-white/5 rounded-xl border border-line-inv">
-                    <div className="flex items-start gap-3">
-                      <span className="material-symbols-outlined text-2xl text-accent mt-0.5">sports_football</span>
-                      <div>
-                        <p className="font-headline text-base font-semibold mb-1">Game day? We&apos;re here.</p>
-                        <p className="font-body text-sm text-fg-inv-muted">
-                          Get cleaned up before kickoff. The shop runs on Cleveland time.
-                        </p>
-                      </div>
-                    </div>
+                    <p className="font-headline text-base font-semibold mb-1">Stay in the loop.</p>
+                    <p className="font-body text-sm text-fg-inv-muted mb-4">
+                      Deals, game day specials, and shop updates. No spam.
+                    </p>
+                    <EmailCapture />
                   </div>
                 </div>
               </FadeIn>
