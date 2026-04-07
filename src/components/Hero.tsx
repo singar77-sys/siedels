@@ -25,7 +25,7 @@ export function Hero() {
           {/* Copy */}
           <div className="flex-1 max-w-3xl">
             <FadeIn>
-              <p className="font-label uppercase text-sm font-semibold text-fg-subtle tracking-[0.15em] mb-4">
+              <p className="font-label uppercase text-sm font-semibold text-fg-muted tracking-[0.15em] mb-4">
                 Walk-ins Welcome · Medina, Ohio
               </p>
             </FadeIn>
@@ -37,10 +37,10 @@ export function Hero() {
               </h1>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <p className="font-body text-lg md:text-xl text-fg-muted max-w-xl leading-relaxed mb-4">
+              <p className="font-body text-lg md:text-xl text-fg max-w-xl leading-relaxed mb-4">
                 Cleveland sports on the TV. Good conversation in the chair.
               </p>
-              <p className="font-label text-sm text-fg-subtle tracking-[0.1em] mb-10">
+              <p className="font-label text-sm text-fg-muted tracking-[0.1em] mb-10">
                 982 N Court Street. We&apos;ve been here.
               </p>
             </FadeIn>
@@ -71,7 +71,7 @@ export function Hero() {
               </div>
               <div className="flex items-center gap-2 mt-5">
                 <span className="text-accent text-sm tracking-wider">★★★★★</span>
-                <span className="font-mono text-xs text-fg-muted">4.8 · Google</span>
+                <span className="font-mono text-xs text-fg">4.8 · Google</span>
               </div>
             </FadeIn>
           </div>
