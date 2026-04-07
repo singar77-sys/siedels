@@ -1,0 +1,16 @@
+{
+  "name": "Siedel's Barbershop",
+  "short_name": "Siedel's",
+  "description": "Your neighborhood barbershop in Medina, Ohio.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#D9D0C1",
+  "theme_color": "#302B25",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

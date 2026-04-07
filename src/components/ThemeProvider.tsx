@@ -22,7 +22,10 @@ const ThemeContext = createContext<ThemeContextValue>({
 export const useTheme = () => useContext(ThemeContext);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return localStorage.getItem('siedels-dark') === 'true';
+  });
   const [bannerDismissed, setBannerDismissed] = useState(false);
   const [sportsTheme, setSportsTheme] = useState<SportsTheme | null>(null);
 
@@ -32,6 +35,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode);
+    localStorage.setItem('siedels-dark', String(darkMode));
   }, [darkMode]);
 
   const toggleDark = useCallback(() => setDarkMode(d => !d), []);
