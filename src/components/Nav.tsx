@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useTheme } from './ThemeProvider';
 import { PHONE, PHONE_HREF, SQUARE_BOOKING_URL, CLOSING_HOURS } from '@/data/shop';
 
@@ -21,19 +23,28 @@ function useShopStatus() {
   return status;
 }
 
-const NAV_LINKS = ['Team', 'Services', 'The Shop', 'Visit'];
+const NAV_LINKS = [
+  { label: 'Team', href: '/team' },
+  { label: 'Services', href: '/services' },
+  { label: 'Contact', href: '/contact' },
+];
 
 export function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { darkMode, toggleDark, bannerVisible } = useTheme();
   const shopStatus = useShopStatus();
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   return (
     <nav
@@ -43,21 +54,23 @@ export function Nav() {
       <div className="max-w-6xl mx-auto grid grid-cols-3 items-center px-6 py-4">
         {/* Left — desktop links */}
         <div className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map((label) => (
-            <a
-              key={label}
-              href={`#${label.toLowerCase().replace(/\s/g, '-')}`}
-              className="font-body text-sm font-medium text-fg-muted hover:text-accent transition-colors duration-300"
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`font-body text-sm font-medium transition-colors duration-300 ${
+                pathname === link.href ? 'text-accent' : 'text-fg-muted hover:text-accent'
+              }`}
             >
-              {label}
-            </a>
+              {link.label}
+            </Link>
           ))}
         </div>
         <div className="md:hidden" />
 
         {/* Center — wordmark */}
         <div className="flex justify-center">
-          <a href="#home" className="flex flex-col items-center leading-none">
+          <Link href="/" className="flex flex-col items-center leading-none">
             <span className="font-brand text-4xl md:text-5xl uppercase text-fg" style={{ lineHeight: 1, letterSpacing: '-0.02em' }}>
               Siedel&apos;s
             </span>
@@ -66,7 +79,7 @@ export function Nav() {
             </span>
             <span className="block h-[2px] w-full mt-1.5 mb-1 bg-accent" />
             <span className="font-mono text-[9px] text-fg-subtle tracking-[0.25em] uppercase">Stay Sharp</span>
-          </a>
+          </Link>
         </div>
 
         {/* Right — status + dark mode + call + mobile toggle */}
@@ -112,15 +125,16 @@ export function Nav() {
       {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-surface border-t border-line">
-          {NAV_LINKS.map((label) => (
-            <a
-              key={label}
-              href={`#${label.toLowerCase().replace(/\s/g, '-')}`}
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-6 py-4 text-fg font-body border-b border-surface-alt hover:bg-surface-alt transition-colors"
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`block px-6 py-4 font-body border-b border-surface-alt transition-colors ${
+                pathname === link.href ? 'text-accent bg-surface-alt' : 'text-fg hover:bg-surface-alt'
+              }`}
             >
-              {label}
-            </a>
+              {link.label}
+            </Link>
           ))}
           <a href={PHONE_HREF} className="block px-6 py-4 font-body font-semibold text-accent border-b border-surface-alt">
             Call {PHONE}
