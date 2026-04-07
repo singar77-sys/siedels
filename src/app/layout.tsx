@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import { ThemeProvider } from '@/components/ThemeProvider';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -28,8 +29,10 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"
         />
       </head>
-      <body className="bg-[#F2F2F2] text-[#403E3B]">
-        {children}
+      <body>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
         <Script
           src="https://app.squareup.com/appointments/buyer/widget/xcru7izyf4zhv6/LFCOT5CC7MY0S.js"
           strategy="lazyOnload"

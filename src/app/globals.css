@@ -1,106 +1,160 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800;900&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
-/* ── Shop palette (from interior photo) ──────────────── */
+/* ══════════════════════════════════════════════════════
+   Siedel's Barbershop — Design System
+   5-color warm palette · CSS variable theming
+   ══════════════════════════════════════════════════════ */
+
+/* ── Raw Palette ──────────────────────────────────────── */
 :root {
-  --linen:      #D9D0C1;   /* lightest — main light bg         */
-  --stone-mid:  #ACA690;   /* medium — muted text, borders     */
-  --stone-dk:   #6E6458;   /* dark stone — accent, highlights  */
-  --slate:      #58595B;   /* cool dark gray                   */
-  --espresso:   #302B25;   /* darkest — dark sections, text    */
-
-  /* Derived surfaces */
-  --linen-alt:  #C5BBA8;   /* slightly darker linen — alt sections */
-  --espresso-dk:#1A1410;   /* near-black warm                  */
-
-  /* Accent system — no orange */
-  --accent:       #6E6458;
-  --accent-hover: #302B25;
-
-  /* Semantic aliases */
-  --cream:        var(--linen);
-  --charcoal:     var(--espresso);
-  --taupe:        var(--stone-mid);
+  --linen:       #D9D0C1;
+  --linen-alt:   #C5BBA8;
+  --stone-mid:   #ACA690;
+  --stone-dk:    #6E6458;
+  --slate:       #58595B;
+  --espresso:    #302B25;
+  --espresso-dk: #1A1410;
 }
 
-/* ── Base ──────────────────────────────────────────────── */
+/* ── Semantic Tokens (Light) ──────────────────────────── */
+:root {
+  --surface:      var(--linen);
+  --surface-alt:  var(--linen-alt);
+  --surface-inv:  var(--espresso);
+  --surface-deep: var(--espresso-dk);
+
+  --fg:           var(--espresso);
+  --fg-muted:     var(--stone-dk);
+  --fg-subtle:    var(--stone-mid);
+
+  --fg-inv:       var(--linen);
+  --fg-inv-muted: var(--stone-mid);
+  --fg-inv-soft:  var(--linen-alt);
+
+  --accent:       var(--stone-dk);
+  --accent-hover: var(--espresso);
+  --on-accent:    #FFFFFF;
+
+  --border:       var(--stone-mid);
+  --border-inv:   rgba(255, 255, 255, 0.1);
+
+  --status-open:  #6B7C5E;
+  --status-closed:var(--stone-mid);
+}
+
+/* ── Semantic Tokens (Dark) ───────────────────────────── */
+.dark {
+  --surface:      #0F0D0B;
+  --surface-alt:  #1A1714;
+  --surface-inv:  #252220;
+  --surface-deep: #0A0908;
+
+  --fg:           #E8E0D4;
+  --fg-muted:     #C5BBA8;
+  --fg-subtle:    #6E6458;
+
+  --fg-inv:       var(--linen);
+  --fg-inv-muted: var(--stone-mid);
+  --fg-inv-soft:  var(--linen-alt);
+
+  --accent:       #C5BBA8;
+  --accent-hover: #E8E0D4;
+  --on-accent:    #1A1410;
+
+  --border:       #3A352F;
+  --border-inv:   rgba(255, 255, 255, 0.06);
+}
+
+/* ── Tailwind 4 Theme ─────────────────────────────────── */
+@theme {
+  --color-surface:       var(--surface);
+  --color-surface-alt:   var(--surface-alt);
+  --color-surface-inv:   var(--surface-inv);
+  --color-surface-deep:  var(--surface-deep);
+  --color-fg:            var(--fg);
+  --color-fg-muted:      var(--fg-muted);
+  --color-fg-subtle:     var(--fg-subtle);
+  --color-fg-inv:        var(--fg-inv);
+  --color-fg-inv-muted:  var(--fg-inv-muted);
+  --color-fg-inv-soft:   var(--fg-inv-soft);
+  --color-accent:        var(--accent);
+  --color-accent-hover:  var(--accent-hover);
+  --color-on-accent:     var(--on-accent);
+  --color-line:          var(--border);
+  --color-line-inv:      var(--border-inv);
+  --color-status-open:   var(--status-open);
+  --color-status-closed: var(--status-closed);
+}
+
+/* ── Base ─────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
 body {
-  background: var(--linen);
-  color: var(--espresso);
+  background: var(--surface);
+  color: var(--fg);
   font-family: 'Barlow', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.7s, color 0.7s;
 }
 
-/* Display / Headlines */
-.font-headline,
-.font-brand {
+/* ── Typography ───────────────────────────────────────── */
+.font-headline, .font-brand {
   font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
   font-weight: 900;
   letter-spacing: -0.01em;
 }
+.font-body  { font-family: 'Barlow', Arial, sans-serif; }
+.font-label { font-family: 'Barlow', Arial, sans-serif; font-weight: 500; letter-spacing: 0.08em; }
+.font-mono  { font-family: 'IBM Plex Mono', 'Courier New', monospace; font-weight: 400; }
 
-/* Body / UI */
-.font-body {
-  font-family: 'Barlow', Arial, sans-serif;
-}
-
-/* Labels */
-.font-label {
-  font-family: 'Barlow', Arial, sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-}
-
-/* Data / Tabular */
-.font-mono {
-  font-family: 'IBM Plex Mono', 'Courier New', monospace;
-  font-weight: 400;
-}
-
-/* Material Symbols — owned explicitly, no CDN class reliance */
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: inherit;
-  line-height: 1;
-  display: inline-block;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-  -webkit-font-feature-settings: 'liga';
-  font-feature-settings: 'liga';
+  font-style: normal; font-weight: normal; font-size: inherit;
+  line-height: 1; display: inline-block;
+  text-transform: none; letter-spacing: normal;
+  word-wrap: normal; white-space: nowrap; direction: ltr;
+  -webkit-font-feature-settings: 'liga'; font-feature-settings: 'liga';
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
-::selection {
-  background: var(--espresso);
-  color: var(--linen);
-}
-
+/* ── Selection & Scrollbar ────────────────────────────── */
+::selection { background: var(--fg); color: var(--surface); }
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--linen); }
-::-webkit-scrollbar-thumb { background: var(--stone-mid); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--stone-dk); }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--fg-subtle); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--fg-muted); }
 
-/* Texture overlay */
+/* ── Texture & Overlays ───────────────────────────────── */
 .texture-grain { position: relative; }
 .texture-grain::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0.03;
+  content: ''; position: absolute; inset: 0;
+  opacity: 0.03; pointer-events: none; z-index: 1;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 1;
 }
 
 .warm-divider {
   height: 1px;
-  background: linear-gradient(to right, transparent, var(--stone-mid), transparent);
+  background: linear-gradient(to right, transparent, var(--border), transparent);
 }
 
-html { scroll-behavior: smooth; }
+.hero-overlay {
+  background: color-mix(in srgb, var(--surface) 75%, transparent);
+}
+
+.nav-scrolled {
+  background: color-mix(in srgb, var(--surface) 95%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--border);
+}
+
+/* ── Animations ───────────────────────────────────────── */
+@keyframes ken-burns {
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+.animate-ken-burns {
+  animation: ken-burns 20s ease-in-out infinite alternate;
+}
