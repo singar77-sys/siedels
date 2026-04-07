@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { FadeIn } from './FadeIn';
-import { AnimatedJim } from './AnimatedJim';
 import { PHONE, PHONE_HREF, SQUARE_BOOKING_URL } from '@/data/shop';
 
 export function Hero() {
@@ -76,10 +75,6 @@ export function Hero() {
             </FadeIn>
           </div>
 
-          {/* Animated Jim */}
-          <FadeIn delay={0.4} className="hidden md:block flex-shrink-0">
-            <AnimatedJim className="w-[340px] lg:w-[400px] xl:w-[440px]" />
-          </FadeIn>
         </div>
       </div>
 

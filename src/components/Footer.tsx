@@ -1,4 +1,3 @@
-import { AnimatedJim } from './AnimatedJim';
 import { PHONE, PHONE_HREF, ADDRESS } from '@/data/shop';
 
 export function Footer() {
@@ -7,9 +6,6 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-4">
-            <div className="opacity-40 flex-shrink-0 hidden md:block">
-              <AnimatedJim className="w-[48px]" />
-            </div>
             <div className="text-center md:text-left">
               <p className="font-brand text-4xl text-fg-inv uppercase" style={{ lineHeight: 1, letterSpacing: '-0.02em' }}>Siedel&apos;s</p>
               <p className="font-brand text-xl text-fg-inv uppercase" style={{ fontWeight: 900, lineHeight: 1, letterSpacing: '-0.01em' }}>Barbershop</p>
