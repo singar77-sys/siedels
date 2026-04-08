@@ -3,8 +3,6 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Nav } from './Nav';
-import { Footer } from './Footer';
 import { team, services, PHONE, PHONE_HREF, SQUARE_BOOKING_URL, hours } from '@/data/shop';
 
 const PANELS = ['HOME', 'TEAM', 'SERVICES', 'CONTACT'] as const;
@@ -41,9 +39,37 @@ export function HomeClient() {
   }, []);
 
   return (
-    <>
-      <Nav />
-      <main id="main" className="h-screen overflow-hidden relative">
+    <div className="h-screen flex flex-col overflow-hidden bg-black">
+      {/* ══ Letterbox top bar ══════════════════ */}
+      <header className="relative z-50 flex-none h-12 md:h-14 bg-black flex items-center justify-between px-6 md:px-8">
+        <Link href="/" className="font-headline text-sm md:text-base font-black tracking-tighter text-white uppercase">
+          SIEDEL&apos;S BARBERSHOP
+        </Link>
+        <nav className="hidden md:flex items-center gap-8">
+          {PANELS.map((label, i) => (
+            <button
+              key={label}
+              onClick={() => scrollToPanel(i)}
+              className={`font-headline text-[11px] font-bold uppercase tracking-tight transition-colors duration-300 ${
+                active === i ? 'text-red' : 'text-text-subtle hover:text-white'
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+          <a
+            href={SQUARE_BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-red text-white px-5 py-1.5 font-headline text-[11px] font-bold uppercase tracking-tight hover:bg-red-hover transition-colors"
+          >
+            BOOK NOW
+          </a>
+        </nav>
+      </header>
+
+      {/* ══ Main film frame ═══════════════════ */}
+      <main id="main" className="flex-1 overflow-hidden relative">
         {/* Panel nav dots */}
         <div className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-3">
           {PANELS.map((label, i) => (
@@ -81,7 +107,7 @@ export function HomeClient() {
                 priority
                 sizes="100vw"
                 quality={90}
-                className="object-cover object-center animate-ken-burns brightness-50"
+                className="object-cover object-center animate-ken-burns brightness-50 grayscale"
               />
             </div>
             <div className="relative z-10 max-w-7xl mx-auto px-8 pb-16 md:pb-24 pt-32 w-full">
@@ -260,6 +286,19 @@ export function HomeClient() {
           </section>
         </div>
       </main>
-    </>
+
+      {/* ══ Letterbox bottom bar ═══════════════ */}
+      <footer className="relative z-50 flex-none h-12 md:h-14 bg-black flex items-center justify-between px-6 md:px-8">
+        <p className="font-label text-[9px] tracking-[0.15em] text-text-subtle">
+          &copy; {new Date().getFullYear()} SIEDEL&apos;S BARBERSHOP
+        </p>
+        <div className="hidden md:flex items-center gap-8">
+          <Link href="/services" className="font-label text-[9px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">SERVICES</Link>
+          <Link href="/team" className="font-label text-[9px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">TEAM</Link>
+          <Link href="/contact" className="font-label text-[9px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">CONTACT</Link>
+          <a href={PHONE_HREF} className="font-label text-[9px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">{PHONE}</a>
+        </div>
+      </footer>
+    </div>
   );
 }
