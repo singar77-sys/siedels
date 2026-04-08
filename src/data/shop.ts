@@ -45,7 +45,13 @@ export const team: TeamMember[] = [
   },
   { name: 'Shannon Hadick', title: 'Master Barber', image: '', booking: sq('0lh9o00vt6or3u') },
   { name: 'Chris Hodge', title: 'Barber', image: '/images/chris-hodge.webp', booking: sq('taz4mvu6g9k73n') },
-  { name: 'Billy Rodriguez', title: 'Barber', image: '/images/billy-rodriguez.webp', booking: sq('e957m1qmqqdevp') },
+  {
+    name: 'Billy Rodriguez',
+    title: 'Barber',
+    image: '/images/billy-rodriguez.webp',
+    booking: sq('e957m1qmqqdevp'),
+    bio: "Over 15 years of experience specializing in clean, sharp cuts — from classic short styles to modern fades, flattops, and tapers. Coaches his kids' sports teams. Die-hard Cleveland sports fan.",
+  },
   {
     name: 'Sam Sickle',
     title: 'Barber · 5 Years',
@@ -79,7 +85,3 @@ export const hours = [
   { day: 'Saturday', time: '8 AM – 3 PM' },
   { day: 'Sunday', time: 'Closed' },
 ];
-
-export const CLOSING_HOURS: Record<number, number | null> = {
-  1: 20, 2: 18, 3: 18, 4: 20, 5: 18, 6: 15, 0: null,
-};
