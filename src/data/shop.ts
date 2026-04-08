@@ -14,6 +14,7 @@ export interface TeamMember {
   title: string;
   image: string;
   booking: string;
+  bio?: string;
 }
 
 export const team: TeamMember[] = [
@@ -21,13 +22,37 @@ export const team: TeamMember[] = [
   { name: 'Pierre Wright', title: 'Master Barber', image: '/images/pierre-wright.webp', booking: sq('mbwa7epvxqp3ya') },
   { name: 'Matt Hayes', title: 'Master Barber', image: '/images/matt-hayes.webp', booking: sq('ub0ju8v1q1926j') },
   { name: 'Ticia Husak', title: 'Master Stylist', image: '/images/ticia-husak.webp', booking: sq('xa1g2bceso9izn') },
-  { name: 'Krista Foecking', title: 'Stylist', image: '/images/krista-foecking.webp', booking: sq('h3ib29fkvqykvx') },
-  { name: 'Patrick Muranko', title: 'Barber', image: '/images/patrick-muranko.webp', booking: sq('x9bbe05slxw75e') },
-  { name: 'Will Dillon', title: 'Barber', image: '/images/will-dillon.webp', booking: sq('licxdz52l4jryx') },
+  {
+    name: 'Krista Foecking',
+    title: 'Stylist · 26 Years',
+    image: '/images/krista-foecking.webp',
+    booking: sq('h3ib29fkvqykvx'),
+    bio: "26 years cutting hair. Polaris Career Center graduate. Specializes in men's fades and kids' cuts — keeping both still and happy is its own skill. Wife and mother of two. Cheer coach for her daughter. When the weather's right, she's in the garden or checking on the bees.",
+  },
+  {
+    name: 'Patrick Muranko',
+    title: 'Barber · 4 Years',
+    image: '/images/patrick-muranko.webp',
+    booking: sq('x9bbe05slxw75e'),
+    bio: "Akron Barber College graduate. Four years in the chair. Originally from Parma, now in Medina. Veteran, husband, father of two daughters. When he's not here, he's at gymnastics meets, playing retro video games, or arguing about 90s wrestling.",
+  },
+  {
+    name: 'Will Dillon',
+    title: 'Barber · 10 Years',
+    image: '/images/will-dillon.webp',
+    booking: sq('licxdz52l4jryx'),
+    bio: "Originally from Wheeling, WV. Moved to Medina at 7, came up through Medina City Schools. Hope Valley Barber College graduate with 10 years behind the chair. Clipper cuts, designs, tight fades, tapers, beard shaping, razor lineups, hot towel shaves — that's the wheelhouse. Father of three boys. Pittsburgh sports diehard, especially the Steelers. Off the clock: fishing, coaching basketball, and keeping up with three kids.",
+  },
   { name: 'Shannon Hadick', title: 'Master Barber', image: '', booking: sq('0lh9o00vt6or3u') },
   { name: 'Chris Hodge', title: 'Barber', image: '/images/chris-hodge.webp', booking: sq('taz4mvu6g9k73n') },
   { name: 'Billy Rodriguez', title: 'Barber', image: '/images/billy-rodriguez.webp', booking: sq('e957m1qmqqdevp') },
-  { name: 'Sam Sickle', title: 'Barber', image: '', booking: sq('qj4tfubyvaebvj') },
+  {
+    name: 'Sam Sickle',
+    title: 'Barber · 5 Years',
+    image: '',
+    booking: sq('qj4tfubyvaebvj'),
+    bio: "Grew up in Litchfield, Ohio. Five years cutting, three of them at Siedel's. Strongest with men's clipper cuts and longer styles that need real shear work. Proud owner of two dogs (Preston and Scout), two cats, and nine hens. Yeah, nine.",
+  },
 ];
 
 export const services = [
