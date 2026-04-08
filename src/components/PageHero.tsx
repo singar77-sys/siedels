@@ -4,14 +4,15 @@ import { FadeIn } from './FadeIn';
 interface PageHeroProps {
   image: string;
   imageAlt: string;
+  label: string;
   title: string;
   titleAccent?: string;
   subtitle: string;
 }
 
-export function PageHero({ image, imageAlt, title, titleAccent, subtitle }: PageHeroProps) {
+export function PageHero({ image, imageAlt, label, title, titleAccent, subtitle }: PageHeroProps) {
   return (
-    <section className="relative min-h-[50vh] flex items-end texture-grain overflow-hidden">
+    <section className="relative min-h-[50vh] flex items-end overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image
           src={image}
@@ -20,19 +21,21 @@ export function PageHero({ image, imageAlt, title, titleAccent, subtitle }: Page
           priority
           sizes="100vw"
           quality={85}
-          className="object-cover object-center animate-ken-burns"
+          className="object-cover object-center animate-ken-burns brightness-[0.35] grayscale"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-surface-deep via-surface-deep/60 to-transparent" />
       </div>
-      <div className="relative z-10 max-w-6xl mx-auto px-6 pb-12 md:pb-16 pt-32">
+      <div className="relative z-10 max-w-7xl mx-auto px-8 pb-12 md:pb-16 pt-32 w-full">
         <FadeIn>
-          <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.92] tracking-tight mb-4 text-fg-inv">
-            {title}
-            {titleAccent && <>{' '}<span className="text-accent">{titleAccent}</span></>}
-          </h1>
-          <p className="font-body text-lg md:text-xl text-fg-inv/80 max-w-2xl leading-relaxed">
-            {subtitle}
-          </p>
+          <div className="border-l-4 border-red pl-8">
+            <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">{label}</p>
+            <h1 className="font-headline text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-[0.85] mb-4">
+              {title}
+              {titleAccent && <><br /><span className="text-red">{titleAccent}</span></>}
+            </h1>
+            <p className="font-body text-lg text-text-muted max-w-2xl leading-relaxed">
+              {subtitle}
+            </p>
+          </div>
         </FadeIn>
       </div>
     </section>
