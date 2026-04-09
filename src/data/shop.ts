@@ -19,7 +19,13 @@ export interface TeamMember {
 
 export const team: TeamMember[] = [
   { name: 'Jim LaMarca', title: 'Master Barber', image: '/images/jim-lamarca.webp', booking: sq('wx9txuouu9ti8w') },
-  { name: 'Pierre Wright', title: 'Master Barber', image: '/images/pierre-wright.webp', booking: sq('mbwa7epvxqp3ya') },
+  {
+    name: 'Pierre Wright',
+    title: 'Master Barber',
+    image: '/images/pierre-wright.webp',
+    booking: sq('mbwa7epvxqp3ya'),
+    bio: "26 years behind the chair. Barber school graduate, class of 2003. Man of faith. Specializes in fades, designs, and classic cuts with precision — keeping every customer clean with a feeling of greatness.",
+  },
   { name: 'Matt Hayes', title: 'Master Barber', image: '/images/matt-hayes.webp', booking: sq('ub0ju8v1q1926j') },
   { name: 'Ticia Husak', title: 'Master Stylist', image: '/images/ticia-husak.webp', booking: sq('xa1g2bceso9izn') },
   {
