@@ -1,5 +1,10 @@
 import { HomeClient } from '@/components/HomeClient';
-import { fetchSchedule, getWorkingToday, getTodayShiftsRecord } from '@/lib/schedule';
+import {
+  fetchSchedule,
+  getWorkingToday,
+  getTodayShiftsRecord,
+  toSerializable,
+} from '@/lib/schedule';
 
 // Revalidate the home page every 30 minutes so schedule edits in the sheet
 // propagate without a redeploy.
@@ -9,11 +14,15 @@ export default async function Home() {
   const week = await fetchSchedule();
   const today = getWorkingToday(week);
   const todayShifts = getTodayShiftsRecord(week);
+  const serializableWeek = toSerializable(week);
   return (
     <HomeClient
       scheduleToday={today}
       todayShifts={todayShifts}
       scheduleIsCurrent={week.isCurrent}
+      scheduleWeek={serializableWeek}
+      scheduleRelation={week.relation}
+      scheduleDaysUntilStart={week.daysUntilStart}
     />
   );
 }

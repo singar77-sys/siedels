@@ -3,7 +3,7 @@ import { PHONE, PHONE_HREF } from '@/data/shop';
 
 export function Footer() {
   return (
-    <footer className="bg-base border-t border-line-strong px-6 md:px-12 py-16">
+    <footer className="bg-ink border-t border-line-strong px-6 md:px-12 py-16">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
         <div className="flex flex-col gap-2">
           <Link href="/" className="font-headline text-lg font-black text-white uppercase tracking-tighter">

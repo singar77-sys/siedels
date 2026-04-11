@@ -6,7 +6,7 @@
    ══════════════════════════════════════════════════════ */
 
 :root {
-  --base:          #0E0E0E;
+  --ink:           #0E0E0E;
   --surface:       #131313;
   --surface-raised:#1C1B1B;
   --surface-high:  #2A2A2A;
@@ -23,7 +23,7 @@
 }
 
 @theme {
-  --color-base:           var(--base);
+  --color-ink:            var(--ink);
   --color-surface:        var(--surface);
   --color-surface-raised: var(--surface-raised);
   --color-surface-high:   var(--surface-high);
@@ -43,7 +43,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--base);
+  background: var(--ink);
   color: var(--text);
   font-family: 'Manrope', 'Arial', sans-serif;
   -webkit-font-smoothing: antialiased;

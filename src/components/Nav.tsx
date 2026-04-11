@@ -7,9 +7,9 @@ import { PHONE_HREF, SQUARE_BOOKING_URL } from '@/data/shop';
 
 const NAV_LINKS = [
   { label: 'HOME', href: '/' },
+  { label: 'SERVICES', href: '/services' },
   { label: 'TEAM', href: '/team' },
   { label: 'SCHEDULE', href: '/schedule' },
-  { label: 'SERVICES', href: '/services' },
   { label: 'CONTACT', href: '/contact' },
 ];
 
@@ -29,7 +29,7 @@ export function Nav() {
   return (
     <header
       className={`fixed top-0 z-50 w-full flex justify-between items-center px-6 md:px-8 h-20 transition-all duration-500 ${
-        scrolled ? 'bg-base/90 backdrop-blur-md' : 'bg-transparent'
+        scrolled ? 'bg-ink/90 backdrop-blur-md' : 'bg-transparent'
       }`}
     >
       {/* Brand */}

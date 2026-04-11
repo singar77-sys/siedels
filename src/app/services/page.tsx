@@ -4,7 +4,8 @@ import { PageHero } from '@/components/PageHero';
 import { FadeIn } from '@/components/FadeIn';
 import { CTASection } from '@/components/CTASection';
 import { Footer } from '@/components/Footer';
-import { services, PHONE, PHONE_HREF, SQUARE_BOOKING_URL } from '@/data/shop';
+import { ServicesList } from '@/components/ServicesList';
+import { PHONE, PHONE_HREF, SQUARE_BOOKING_URL } from '@/data/shop';
 
 export const metadata: Metadata = {
   title: "Services & Prices | Siedel's Barbershop | Medina, Ohio",
@@ -49,18 +50,7 @@ export default function ServicesPage() {
 
         <section className="py-20 md:py-28">
           <div className="max-w-5xl mx-auto px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16">
-              {services.map((service, idx) => (
-                <FadeIn key={idx} delay={idx * 0.03}>
-                  <div className="flex justify-between items-baseline py-5 border-b border-line-strong group">
-                    <span className="font-headline text-base md:text-lg font-bold uppercase tracking-tight text-text-muted group-hover:text-white transition-colors">
-                      {service.name}
-                    </span>
-                    <span className="font-headline text-xl md:text-2xl font-bold text-red">{service.price}</span>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
+            <ServicesList />
             <FadeIn delay={0.4}>
               <div className="mt-12 flex flex-col sm:flex-row gap-4">
                 <a

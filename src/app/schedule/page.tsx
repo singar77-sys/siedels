@@ -117,7 +117,7 @@ export default async function SchedulePage() {
             <div className="bg-surface border border-line-strong overflow-x-auto">
               <table className="w-full border-collapse">
                 <thead>
-                  <tr className="border-b border-line-strong">
+                  <tr className="border-b-2 border-red/40">
                     <th className="sticky left-0 bg-surface z-10 text-left p-4 font-label text-[10px] tracking-widest text-text-subtle border-r border-line-strong">
                       BARBER
                     </th>
@@ -126,15 +126,17 @@ export default async function SchedulePage() {
                       return (
                         <th
                           key={d.dayName}
-                          className={`text-left p-4 font-label text-[10px] tracking-widest border-r border-line-strong last:border-r-0 ${
-                            isToday ? 'bg-red/10 text-red' : 'text-text-subtle'
+                          className={`text-left p-4 font-label tracking-widest border-r border-line-strong last:border-r-0 ${
+                            isToday ? 'bg-red text-white' : 'text-white'
                           }`}
                         >
-                          <div className="font-black text-xs tracking-widest">
+                          <div className="font-black text-sm tracking-widest">
                             {d.dayName.substring(0, 3).toUpperCase()}
                           </div>
-                          <div className="text-[9px] mt-0.5 opacity-70">{formatDate(d.date)}</div>
-                          <div className="text-[9px] mt-1 font-normal normal-case tracking-normal">
+                          <div className={`text-[10px] mt-0.5 ${isToday ? 'text-white/85' : 'text-text-muted'}`}>
+                            {formatDate(d.date)}
+                          </div>
+                          <div className={`text-[10px] mt-1 font-normal normal-case tracking-normal ${isToday ? 'text-white/85' : 'text-text-subtle'}`}>
                             {d.shopHours}
                           </div>
                         </th>
@@ -143,39 +145,36 @@ export default async function SchedulePage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {staff.map((firstName) => {
+                  {staff.map((firstName, idx) => {
                     // Find matching team member for name display + booking link
                     const member = team.find(
                       (m) => m.name.split(/\s+/)[0].toLowerCase() === firstName
                     );
                     const displayName = member?.name.toUpperCase() ?? firstName.toUpperCase();
+                    const zebra = idx % 2 === 0 ? 'bg-surface' : 'bg-ink/50';
                     return (
-                      <tr key={firstName} className="border-b border-line-strong last:border-b-0">
-                        <td className="sticky left-0 bg-surface z-10 p-4 font-headline text-sm md:text-base font-black uppercase tracking-tight text-white border-r border-line-strong whitespace-nowrap">
+                      <tr key={firstName} className={`border-b border-line-strong last:border-b-0 ${zebra}`}>
+                        <td className={`sticky left-0 z-10 p-4 font-headline text-sm md:text-base font-black uppercase tracking-tight text-white border-r border-line-strong whitespace-nowrap ${zebra}`}>
+                          <span className="inline-block w-1 h-5 bg-red mr-3 align-middle" />
                           {displayName}
                         </td>
                         {week.days.map((d) => {
                           const shift = d.shifts.get(firstName);
                           const isToday = d.date === today.iso;
+                          const cellBase = `p-4 border-r border-line-strong last:border-r-0 ${
+                            isToday ? 'bg-red/15' : ''
+                          }`;
                           if (!shift) {
                             return (
-                              <td
-                                key={d.dayName}
-                                className={`p-4 border-r border-line-strong last:border-r-0 ${
-                                  isToday ? 'bg-red/5' : ''
-                                }`}
-                              >
+                              <td key={d.dayName} className={cellBase}>
                                 <span className="text-text-faint">—</span>
                               </td>
                             );
                           }
-                          const cellBase = `p-4 border-r border-line-strong last:border-r-0 ${
-                            isToday ? 'bg-red/5' : ''
-                          }`;
                           if (shift.status === 'working') {
                             return (
                               <td key={d.dayName} className={cellBase}>
-                                <span className="font-headline text-sm font-bold text-white">
+                                <span className="font-headline text-base font-bold text-white whitespace-nowrap">
                                   {shift.display}
                                 </span>
                               </td>
@@ -184,7 +183,7 @@ export default async function SchedulePage() {
                           if (shift.status === 'off') {
                             return (
                               <td key={d.dayName} className={cellBase}>
-                                <span className="font-label text-[10px] tracking-widest text-text-subtle">
+                                <span className="font-label text-[10px] tracking-widest text-text-faint">
                                   OFF
                                 </span>
                               </td>
