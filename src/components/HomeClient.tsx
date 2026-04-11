@@ -445,7 +445,7 @@ export function HomeClient({
                           alt={`${member.name}, ${member.title} at Siedel's Barbershop`}
                           fill
                           sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                          className="object-cover grayscale contrast-125 brightness-75 group-hover:scale-105 transition-transform duration-700"
+                          className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
@@ -719,7 +719,7 @@ export function HomeClient({
             </button>
             {selectedMember.image && (
               <div className="relative aspect-[4/3] w-full">
-                <Image src={selectedMember.image} alt={selectedMember.name} fill sizes="500px" className="object-cover object-top grayscale contrast-125 brightness-75" />
+                <Image src={selectedMember.image} alt={selectedMember.name} fill sizes="500px" className="object-cover object-top" />
               </div>
             )}
             <div className="p-8">
