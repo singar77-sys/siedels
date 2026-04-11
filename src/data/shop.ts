@@ -26,7 +26,13 @@ export const team: TeamMember[] = [
     booking: sq('mbwa7epvxqp3ya'),
     bio: "26 years behind the chair. Barber school graduate, class of 2003. Man of faith. Specializes in fades, designs, and classic cuts with precision — keeping every customer clean with a feeling of greatness.",
   },
-  { name: 'Matt Hayes', title: 'Master Barber', image: '/images/matt-hayes.webp', booking: sq('ub0ju8v1q1926j') },
+  {
+    name: 'Matt Hayes',
+    title: 'Master Barber · 7 Years',
+    image: '/images/matt-hayes.webp',
+    booking: sq('ub0ju8v1q1926j'),
+    bio: "Licensed barber for 7 years. Trained at LaBarberia in Mayfield. Specializes in clean fades, simple cuts, and hot towel face shaves. Big fan of horror and comedy movies, loves dropping '80s and '90s references, and passionate about music. Here to keep you looking sharp.",
+  },
   { name: 'Ticia Husak', title: 'Master Stylist', image: '/images/ticia-husak.webp', booking: sq('xa1g2bceso9izn') },
   {
     name: 'Krista Foecking',
@@ -49,8 +55,20 @@ export const team: TeamMember[] = [
     booking: sq('licxdz52l4jryx'),
     bio: "Originally from Wheeling, WV. Moved to Medina at 7, came up through Medina City Schools. Hope Valley Barber College graduate with 10 years behind the chair. Clipper cuts, designs, tight fades, tapers, beard shaping, razor lineups, hot towel shaves — that's the wheelhouse. Father of three boys. Pittsburgh sports diehard, especially the Steelers. Off the clock: fishing, coaching basketball, and keeping up with three kids.",
   },
-  { name: 'Shannon Hadick', title: 'Master Barber', image: '', booking: sq('0lh9o00vt6or3u') },
-  { name: 'Chris Hodge', title: 'Barber', image: '/images/chris-hodge.webp', booking: sq('taz4mvu6g9k73n') },
+  {
+    name: 'Shannon Hadick',
+    title: 'Master Barber · 9 Years',
+    image: '/images/shannon-hadick.webp',
+    booking: sq('0lh9o00vt6or3u'),
+    bio: "Over 9 years of experience. Specializes in men's and women's cuts. Three years in the area, almost two at Siedel's. Managed a shop before coming here. Looks forward to helping you look your very best.",
+  },
+  {
+    name: 'Chris Hodge',
+    title: 'Barber · 4 Years',
+    image: '/images/chris-hodge.webp',
+    booking: sq('taz4mvu6g9k73n'),
+    bio: "Four years behind the chair. Strongest with taper fades — that's the wheelhouse. Off the clock: fishing, riding his motorcycle, hiking, and driving semi-trucks.",
+  },
   {
     name: 'Billy Rodriguez',
     title: 'Barber',
@@ -61,7 +79,7 @@ export const team: TeamMember[] = [
   {
     name: 'Sam Sickle',
     title: 'Barber · 5 Years',
-    image: '',
+    image: '/images/sam-sickle.webp',
     booking: sq('qj4tfubyvaebvj'),
     bio: "Grew up in Litchfield, Ohio. Five years cutting, three of them at Siedel's. Strongest with men's clipper cuts and longer styles that need real shear work. Proud owner of two dogs (Preston and Scout), two cats, and nine hens. Yeah, nine.",
   },
