@@ -140,13 +140,13 @@ export function HomeClient({
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-black">
       {/* ══ Letterbox top bar ══════════════════ */}
-      <header className="relative z-50 flex-none h-14 md:h-[4.5rem] bg-black flex items-center justify-between px-6 md:px-8">
+      <header className="relative z-50 flex-none h-[6rem] md:h-[8rem] bg-black flex items-center justify-between px-6 md:px-12">
         <Link
           href="/"
           onClick={(e) => { e.preventDefault(); scrollToPanel(0); }}
-          className="flex items-center gap-3 font-headline text-base md:text-lg font-black tracking-tighter text-red uppercase"
+          className="flex items-center gap-4 font-headline text-xl md:text-3xl font-black tracking-tighter text-red uppercase"
         >
-          <svg width="14" height="32" viewBox="0 0 14 32" className="flex-none overflow-hidden" aria-hidden="true">
+          <svg width="24" height="56" viewBox="0 0 14 32" className="flex-none overflow-hidden" aria-hidden="true">
             {/* Pole body — clipped cylinder */}
             <defs>
               <clipPath id="pole-clip">
@@ -172,12 +172,12 @@ export function HomeClient({
           </svg>
           SIEDEL&apos;S BARBERSHOP
         </Link>
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-10">
           {PANELS.map((label, i) => (
             <button
               key={label}
               onClick={() => scrollToPanel(i)}
-              className={`font-headline text-[11px] font-bold uppercase tracking-tight transition-colors duration-300 ${
+              className={`font-headline text-[19px] font-bold uppercase tracking-tight transition-colors duration-300 ${
                 active === i ? 'text-red' : 'text-text-subtle hover:text-white'
               }`}
             >
@@ -188,7 +188,7 @@ export function HomeClient({
             href={SQUARE_BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-red text-white px-5 py-1.5 font-headline text-[11px] font-bold uppercase tracking-tight hover:bg-red-hover transition-colors"
+            className="bg-red text-white px-8 py-3 font-headline text-[19px] font-bold uppercase tracking-tight hover:bg-red-hover transition-colors"
           >
             BOOK NOW
           </a>
@@ -689,14 +689,14 @@ export function HomeClient({
       </main>
 
       {/* ══ Letterbox bottom bar ═══════════════ */}
-      <footer className="relative z-50 flex-none h-14 md:h-[4.5rem] bg-black flex items-center justify-between px-6 md:px-8">
-        <p className="font-label text-[9px] tracking-[0.15em] text-text-subtle">
+      <footer className="relative z-50 flex-none h-[6rem] md:h-[8rem] bg-black flex items-center justify-between px-6 md:px-12">
+        <p className="font-label text-[16px] tracking-[0.15em] text-text-subtle">
           &copy; {new Date().getFullYear()} SIEDEL&apos;S BARBERSHOP &mdash; POWERED BY{' '}
           <a href="https://huntersystems.dev" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-red transition-colors">HUNTER SYSTEMS</a>
         </p>
-        <div className="hidden md:flex items-center gap-8">
-          <span className="font-label text-[9px] tracking-[0.12em] text-text-subtle">982 N COURT ST, MEDINA OH 44256</span>
-          <a href={PHONE_HREF} className="font-label text-[9px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">{PHONE}</a>
+        <div className="hidden md:flex items-center gap-10">
+          <span className="font-label text-[16px] tracking-[0.12em] text-text-subtle">982 N COURT ST, MEDINA OH 44256</span>
+          <a href={PHONE_HREF} className="font-label text-[16px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">{PHONE}</a>
         </div>
       </footer>
 
