@@ -8,6 +8,7 @@ import { PHONE_HREF, SQUARE_BOOKING_URL } from '@/data/shop';
 const NAV_LINKS = [
   { label: 'HOME', href: '/' },
   { label: 'TEAM', href: '/team' },
+  { label: 'SCHEDULE', href: '/schedule' },
   { label: 'SERVICES', href: '/services' },
   { label: 'CONTACT', href: '/contact' },
 ];

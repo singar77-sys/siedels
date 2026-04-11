@@ -5,10 +5,29 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { team, services, PHONE, PHONE_HREF, SQUARE_BOOKING_URL, hours, type TeamMember } from '@/data/shop';
 import { EmailCapture } from './EmailCapture';
+import type { Shift } from '@/lib/schedule';
 
 const PANELS = ['HOME', 'TEAM', 'SERVICES', 'CONTACT'] as const;
 
-export function HomeClient() {
+interface ScheduleTodayProps {
+  shopHours: string | null;
+  working: { firstName: string; display: string; raw: string }[];
+  isClosed: boolean;
+  dayName: string;
+}
+
+interface HomeClientProps {
+  scheduleToday: ScheduleTodayProps;
+  todayShifts: Record<string, Shift>;
+  scheduleIsCurrent: boolean;
+}
+
+export function HomeClient({ scheduleToday, todayShifts, scheduleIsCurrent }: HomeClientProps) {
+  const getMemberShift = (memberName: string): Shift | null => {
+    if (!scheduleIsCurrent) return null;
+    const firstName = memberName.split(/\s+/)[0].toLowerCase();
+    return todayShifts[firstName] ?? null;
+  };
   const scrollRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -238,17 +257,104 @@ export function HomeClient() {
                   MEET THE<br /><span className="text-stroke">SPECIALISTS</span>
                 </h2>
               </div>
+
+              {/* ── IN TODAY live strip ── */}
+              {scheduleIsCurrent && !scheduleToday.isClosed && scheduleToday.working.length > 0 && (
+                <div className="mb-10 md:mb-14 bg-surface border border-red/40 p-5 md:p-6">
+                  <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
+                    <div className="flex items-center gap-3">
+                      <span className="relative flex h-2.5 w-2.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red" />
+                      </span>
+                      <p className="font-label text-[11px] tracking-[0.3em] text-red">
+                        IN THE CHAIR TODAY · {scheduleToday.dayName.toUpperCase()}
+                      </p>
+                    </div>
+                    {scheduleToday.shopHours && (
+                      <p className="font-label text-[10px] tracking-widest text-text-subtle">
+                        SHOP {scheduleToday.shopHours.toUpperCase()}
+                      </p>
+                    )}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {scheduleToday.working.map((w) => (
+                      <span
+                        key={w.firstName}
+                        className="inline-flex items-center gap-2 bg-base border border-line-strong px-3 py-1.5"
+                      >
+                        <span className="font-headline text-sm font-black uppercase tracking-tight text-white">
+                          {w.firstName.toUpperCase()}
+                        </span>
+                        <span className="font-label text-[9px] tracking-widest text-red">
+                          {w.display.toUpperCase()}
+                        </span>
+                      </span>
+                    ))}
+                  </div>
+                  <Link
+                    href="/schedule"
+                    className="inline-block mt-4 font-label text-[10px] tracking-widest text-text-subtle hover:text-red transition-colors"
+                  >
+                    VIEW FULL WEEK →
+                  </Link>
+                </div>
+              )}
+
+              {/* Closed today (Sunday or unknown) */}
+              {scheduleIsCurrent && scheduleToday.isClosed && scheduleToday.dayName === 'Sunday' && (
+                <div className="mb-10 md:mb-14 bg-surface border border-line-strong p-5 md:p-6">
+                  <p className="font-label text-[11px] tracking-[0.3em] text-text-subtle mb-2">CLOSED TODAY</p>
+                  <p className="font-body text-sm text-text-muted">
+                    Siedel&apos;s is closed on Sundays. We&apos;ll be back Monday morning.
+                  </p>
+                </div>
+              )}
+
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0">
-                {team.map((member) => (
+                {team.map((member) => {
+                  const shift = getMemberShift(member.name);
+                  const isWorking = shift?.status === 'working';
+                  const isOff = shift?.status === 'off';
+                  const isOffsite = shift?.status === 'offsite';
+                  return (
                   <div
                     key={member.name}
-                    className="bg-surface border border-line-strong p-4 md:p-6 group hover:bg-surface-high transition-colors duration-500 cursor-pointer"
+                    className="bg-surface border border-line-strong p-4 md:p-6 group hover:bg-surface-high transition-colors duration-500 cursor-pointer relative"
                     onClick={() => setSelectedMember(member)}
                     role="button"
                     tabIndex={0}
                     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedMember(member); } }}
                   >
-                    <div className="aspect-[3/4] overflow-hidden bg-surface-raised mb-4 relative">
+                    {/* Live status badge */}
+                    {shift && (
+                      <div className="absolute top-3 right-3 z-10">
+                        {isWorking && (
+                          <div className="flex items-center gap-1.5 bg-red text-white px-2 py-1">
+                            <span className="relative flex h-1.5 w-1.5">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
+                              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />
+                            </span>
+                            <span className="font-label text-[9px] tracking-widest font-bold">
+                              IN · {shift.display.toUpperCase()}
+                            </span>
+                          </div>
+                        )}
+                        {isOff && (
+                          <div className="bg-base/80 border border-line-strong px-2 py-1">
+                            <span className="font-label text-[9px] tracking-widest text-text-subtle">OFF TODAY</span>
+                          </div>
+                        )}
+                        {isOffsite && (
+                          <div className="bg-base/80 border border-line-strong px-2 py-1">
+                            <span className="font-label text-[9px] tracking-widest text-text-subtle">
+                              {shift.location?.toUpperCase() ?? 'AWAY'}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    <div className={`aspect-[3/4] overflow-hidden bg-surface-raised mb-4 relative ${!isWorking && shift ? 'opacity-60' : ''}`}>
                       {member.image ? (
                         <Image
                           src={member.image}
@@ -277,7 +383,8 @@ export function HomeClient() {
                       BOOK
                     </a>
                   </div>
-                ))}
+                  );
+                })}
                 {/* CTA card */}
                 <div className="bg-red border border-red p-4 md:p-6 flex flex-col items-center justify-center text-center">
                   <p className="font-headline text-lg md:text-2xl font-black uppercase tracking-tighter text-white mb-2">YOUR CHAIR<br />IS WAITING</p>
