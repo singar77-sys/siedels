@@ -321,19 +321,6 @@ export function getWorkingToday(week: WeekSchedule): {
   };
 }
 
-/** Get a specific member's shift for today. Used for the per-card badge. */
-export function getShiftForMember(
-  week: WeekSchedule,
-  fullName: string
-): Shift | null {
-  if (!week.isCurrent) return null;
-  const today = todayInMedina();
-  const day = week.days.find((d) => d.date === today.iso);
-  if (!day) return null;
-  const firstName = fullName.split(/\s+/)[0].toLowerCase();
-  return day.shifts.get(firstName) || null;
-}
-
 /**
  * Flatten today's shifts into a plain object keyed by lowercase first name,
  * so it can safely cross the server→client boundary (Maps don't serialize).

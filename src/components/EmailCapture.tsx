@@ -10,10 +10,10 @@ export function EmailCapture() {
     e.preventDefault();
     setStatus('sending');
     try {
-      const res = await fetch('https://formspree.io/f/meepnyaj', {
+      const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, _subject: "Siedel's — New email signup" }),
+        body: JSON.stringify({ email }),
       });
       setStatus(res.ok ? 'success' : 'error');
       if (res.ok) setEmail('');
@@ -24,7 +24,7 @@ export function EmailCapture() {
 
   if (status === 'success') {
     return (
-      <div className="flex items-center gap-3 py-3">
+      <div className="flex items-center gap-3 py-3" role="status" aria-live="polite">
         <span className="material-symbols-outlined text-xl text-red">check_circle</span>
         <p className="font-headline text-sm font-bold uppercase tracking-tight">YOU&apos;RE IN</p>
       </div>
@@ -54,7 +54,7 @@ export function EmailCapture() {
         </button>
       </div>
       {status === 'error' && (
-        <p className="font-body text-sm text-red">Something went wrong. Try again.</p>
+        <p className="font-body text-sm text-red" role="alert">Something went wrong. Try again.</p>
       )}
     </form>
   );

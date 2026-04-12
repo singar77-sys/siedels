@@ -1,47 +1,10 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import Image from 'next/image';
 import { FadeIn } from './FadeIn';
+import { Modal } from './Modal';
 import { team, PHONE, PHONE_HREF, type TeamMember } from '@/data/shop';
-
-function TeamModal({ member, onClose }: { member: TeamMember; onClose: () => void }) {
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
-    document.addEventListener('keydown', onKey);
-    document.body.style.overflow = 'hidden';
-    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = ''; };
-  }, [onClose]);
-
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={onClose} role="dialog" aria-modal="true">
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
-      <div className="relative bg-surface border border-line-strong max-w-lg w-full shadow-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()} style={{ scrollbarWidth: 'none' }}>
-        <button onClick={onClose} className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center text-text-subtle hover:text-white transition-colors" aria-label="Close">
-          <span className="material-symbols-outlined text-xl">close</span>
-        </button>
-        {member.image && (
-          <div className="relative aspect-[4/3] w-full">
-            <Image src={member.image} alt={`${member.name}, ${member.title} at Siedel's Barbershop`} fill sizes="500px" className="object-cover object-top" />
-          </div>
-        )}
-        <div className="p-8">
-          <h2 className="font-headline text-2xl md:text-3xl font-black uppercase tracking-tighter">{member.name}</h2>
-          <p className="font-label text-[10px] tracking-widest text-red mt-1 mb-6">{member.title.toUpperCase()}</p>
-          {member.bio && <p className="font-body text-sm text-text-muted leading-relaxed mb-8">{member.bio}</p>}
-          <a
-            href={member.booking}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block w-full py-4 bg-red text-white font-headline text-sm font-bold uppercase tracking-widest text-center hover:bg-red-hover transition-colors"
-          >
-            BOOK WITH {member.name.split(' ')[0].toUpperCase()}
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export function TeamGrid() {
   const [selected, setSelected] = useState<TeamMember | null>(null);
@@ -91,7 +54,36 @@ export function TeamGrid() {
           </FadeIn>
         ))}
       </div>
-      {selected && <TeamModal member={selected} onClose={closeModal} />}
+
+      {selected && (
+        <Modal onClose={closeModal}>
+          <button
+            onClick={closeModal}
+            className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center text-text-subtle hover:text-white transition-colors"
+            aria-label="Close"
+          >
+            <span className="material-symbols-outlined text-xl">close</span>
+          </button>
+          {selected.image && (
+            <div className="relative aspect-[4/3] w-full">
+              <Image src={selected.image} alt={`${selected.name}, ${selected.title} at Siedel's Barbershop`} fill sizes="500px" className="object-cover object-top" />
+            </div>
+          )}
+          <div className="p-8">
+            <h2 className="font-headline text-2xl md:text-3xl font-black uppercase tracking-tighter">{selected.name}</h2>
+            <p className="font-label text-[10px] tracking-widest text-red mt-1 mb-6">{selected.title.toUpperCase()}</p>
+            {selected.bio && <p className="font-body text-sm text-text-muted leading-relaxed mb-8">{selected.bio}</p>}
+            <a
+              href={selected.booking}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full py-4 bg-red text-white font-headline text-sm font-bold uppercase tracking-widest text-center hover:bg-red-hover transition-colors"
+            >
+              BOOK WITH {selected.name.split(' ')[0].toUpperCase()}
+            </a>
+          </div>
+        </Modal>
+      )}
     </>
   );
 }
