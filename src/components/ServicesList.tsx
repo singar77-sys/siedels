@@ -45,7 +45,7 @@ export function ServicesList() {
           >
             <button
               onClick={() => setSelectedService(null)}
-              className="absolute top-4 right-4 z-10 w-9 h-9 flex items-center justify-center bg-black/60 text-white hover:bg-red transition-colors"
+              className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center bg-black/60 text-white hover:bg-red transition-colors"
               aria-label="Close"
             >
               <span className="material-symbols-outlined text-xl">close</span>

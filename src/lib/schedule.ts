@@ -1,10 +1,8 @@
 /**
- * Schedule integration — reads Jim's live Google Sheet and normalizes it
+ * Schedule integration — reads live Google Sheet and normalizes it
  * for the site.
  *
- * Sheet: "Barbershop schedule Template copy 11"
- * Owner: genesim625@gmail.com
- * Must remain "Anyone with the link" viewable.
+ * Sheet must remain "Anyone with the link" viewable.
  *
  * Format expected (rows):
  *   row 0: blank, Monday, blank, Tuesday, blank, Wednesday, ... Saturday
@@ -15,7 +13,7 @@
  * Time zone: America/New_York. "Today" is resolved in that TZ.
  */
 
-const SHEET_ID = '1fyeoscOea4Xa2H-LIoFv96F-ILoBhnvL0KKzS3eC83Q';
+const SHEET_ID = process.env.GOOGLE_SHEET_ID ?? '1fyeoscOea4Xa2H-LIoFv96F-ILoBhnvL0KKzS3eC83Q';
 const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
 
 export type ShiftStatus = 'working' | 'off' | 'offsite';

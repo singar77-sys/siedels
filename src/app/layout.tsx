@@ -1,8 +1,14 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import './globals.css';
 
 const BASE_URL = 'https://siedels.vercel.app';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -35,7 +41,7 @@ const jsonLd = {
   '@type': 'BarberShop',
   '@id': `${BASE_URL}/#barbershop`,
   name: "Siedel's Barbershop",
-  image: `${BASE_URL}/images/heronew.png`,
+  image: `${BASE_URL}/images/hero.webp`,
   description: "Northeast Ohio's premier barbershop. Haircuts, fades, beard trims on Court Street in Medina.",
   url: BASE_URL,
   telephone: '+13309520777',
@@ -68,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
         />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#0E0E0E" />

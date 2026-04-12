@@ -42,7 +42,8 @@ export function EmailCapture() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="your@email.com"
           aria-label="Email address"
-          className="flex-1 bg-surface-raised border border-line-strong text-text placeholder:text-text-subtle font-body text-sm px-4 py-3 focus:outline-none focus:border-red transition-colors"
+          maxLength={254}
+          className="flex-1 bg-surface-raised border border-line-strong text-text placeholder:text-text-subtle font-body text-base md:text-sm px-4 py-3 focus:outline-none focus:border-red transition-colors"
         />
         <button
           type="submit"

@@ -15,8 +15,8 @@
   --red-hover:     #C00015;
   --text:          #E5E2E1;
   --text-muted:    rgba(255,255,255,0.7);
-  --text-subtle:   rgba(255,255,255,0.4);
-  --text-faint:    rgba(255,255,255,0.15);
+  --text-subtle:   rgba(255,255,255,0.55);
+  --text-faint:    rgba(255,255,255,0.45);
   --line:          rgba(255,255,255,0.05);
   --line-strong:   rgba(255,255,255,0.1);
   --warm:          #E7BDB8;

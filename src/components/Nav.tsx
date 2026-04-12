@@ -64,7 +64,7 @@ export function Nav() {
         </a>
         <button
           onClick={() => setMobileMenuOpen(o => !o)}
-          className="md:hidden p-1 text-white"
+          className="md:hidden p-3 text-white"
           aria-label="Toggle menu"
         >
           <span className="material-symbols-outlined text-3xl">

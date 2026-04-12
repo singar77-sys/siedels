@@ -16,8 +16,8 @@ function TeamModal({ member, onClose }: { member: TeamMember; onClose: () => voi
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={onClose} role="dialog" aria-modal="true">
       <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
-      <div className="relative bg-surface border border-line-strong max-w-lg w-full shadow-2xl" onClick={(e) => e.stopPropagation()}>
-        <button onClick={onClose} className="absolute top-4 right-4 z-10 w-9 h-9 flex items-center justify-center text-text-subtle hover:text-white transition-colors" aria-label="Close">
+      <div className="relative bg-surface border border-line-strong max-w-lg w-full shadow-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()} style={{ scrollbarWidth: 'none' }}>
+        <button onClick={onClose} className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center text-text-subtle hover:text-white transition-colors" aria-label="Close">
           <span className="material-symbols-outlined text-xl">close</span>
         </button>
         {member.image && (

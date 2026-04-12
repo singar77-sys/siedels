@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { team, services, PHONE, PHONE_HREF, SQUARE_BOOKING_URL, hours, type TeamMember, type Service } from '@/data/shop';
+import { team, services, PHONE, PHONE_HREF, SQUARE_BOOKING_URL, MAPS_URL, hours, type TeamMember, type Service } from '@/data/shop';
 import { EmailCapture } from './EmailCapture';
 import type { Shift, SerializableWeekSchedule, WeekRelation } from '@/lib/schedule';
 
@@ -137,8 +137,26 @@ export function HomeClient({
     return () => window.removeEventListener('keydown', onKey);
   }, [active, scrollToPanel]);
 
+  // Lock body scroll and handle Escape key when any modal is open
+  useEffect(() => {
+    const isOpen = selectedMember || selectedService;
+    if (!isOpen) return;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedMember(null);
+        setSelectedService(null);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [selectedMember, selectedService]);
+
   return (
-    <div className="h-screen flex flex-col overflow-hidden bg-black">
+    <div className="h-dvh flex flex-col overflow-hidden bg-black">
       {/* ══ Letterbox top bar ══════════════════ */}
       <header className="relative z-50 flex-none h-[6rem] md:h-[8rem] bg-black flex items-center justify-between px-6 md:px-12">
         <Link
@@ -195,7 +213,7 @@ export function HomeClient({
         </nav>
         <button
           onClick={() => setMobileMenuOpen(o => !o)}
-          className="md:hidden p-1 text-white"
+          className="md:hidden p-3 text-white"
           aria-label="Toggle menu"
         >
           <span className="material-symbols-outlined text-2xl">
@@ -255,14 +273,14 @@ export function HomeClient({
         {/* Horizontal scroll container */}
         <div
           ref={scrollRef}
-          className="flex h-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory"
+          className="flex h-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory overscroll-x-contain"
           style={{ scrollbarWidth: 'none' }}
         >
           {/* ══ Panel 1: Hero ══════════════════════ */}
           <section className="min-w-full h-full snap-start relative flex items-end overflow-hidden">
             <div className="absolute inset-0 z-0">
               <Image
-                src="/images/heronew.png"
+                src="/images/hero.webp"
                 alt="Barber pole at golden hour outside Siedel's Barbershop, Medina Ohio"
                 fill
                 priority
@@ -292,7 +310,7 @@ export function HomeClient({
                   </a>
                   <Link
                     href="/services"
-                    className="inline-flex items-center justify-center gap-2 border border-text-subtle text-text-muted font-headline font-bold uppercase tracking-tight px-8 py-4 hover:text-white hover:border-white transition-colors duration-300"
+                    className="inline-flex items-center justify-center gap-2 border border-line-strong text-text-muted font-headline font-bold uppercase tracking-tight px-8 py-4 hover:text-white hover:border-white transition-colors duration-300"
                   >
                     EXPLORE SERVICES
                   </Link>
@@ -323,7 +341,7 @@ export function HomeClient({
                   <button
                     key={service.name}
                     onClick={() => setSelectedService(service)}
-                    className="flex justify-between items-baseline py-5 border-b border-line-strong group text-left cursor-pointer hover:pl-2 transition-all"
+                    className="w-full flex justify-between items-baseline py-5 border-b border-line-strong group text-left cursor-pointer hover:pl-2 transition-all"
                   >
                     <span className="flex items-center gap-3 font-headline text-base md:text-lg font-bold uppercase tracking-tight text-white group-hover:text-red transition-colors">
                       {service.name}
@@ -621,7 +639,7 @@ export function HomeClient({
             </div>
           </section>
 
-          {/* ══ Panel 4: Contact ══════════════════ */}
+          {/* ══ Panel 5: Contact ══════════════════ */}
           <section className="min-w-full h-full snap-start grid-bg overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
             <div className="max-w-5xl mx-auto px-8 py-16 md:py-24 w-full">
               <div className="border-l-4 border-red pl-8 mb-10 md:mb-14">
@@ -644,7 +662,7 @@ export function HomeClient({
                   </div>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <a
-                      href="https://maps.google.com/?q=982+N+Court+Street+Medina+OH+44256"
+                      href={MAPS_URL}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-2 bg-red text-white font-headline font-bold uppercase tracking-tight px-6 py-3.5 hover:bg-red-hover transition-colors"
@@ -709,10 +727,10 @@ export function HomeClient({
           aria-modal="true"
         >
           <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
-          <div className="relative bg-surface border border-line-strong max-w-lg w-full shadow-2xl" onClick={(e) => e.stopPropagation()}>
+          <div className="relative bg-surface border border-line-strong max-w-lg w-full shadow-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()} style={{ scrollbarWidth: 'none' }}>
             <button
               onClick={() => setSelectedMember(null)}
-              className="absolute top-4 right-4 z-10 w-9 h-9 flex items-center justify-center text-text-subtle hover:text-white transition-colors"
+              className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center text-text-subtle hover:text-white transition-colors"
               aria-label="Close"
             >
               <span className="material-symbols-outlined text-xl">close</span>
@@ -751,7 +769,7 @@ export function HomeClient({
           <div className="relative bg-surface border border-line-strong max-w-lg w-full shadow-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()} style={{ scrollbarWidth: 'none' }}>
             <button
               onClick={() => setSelectedService(null)}
-              className="absolute top-4 right-4 z-10 w-9 h-9 flex items-center justify-center bg-black/60 text-white hover:bg-red transition-colors"
+              className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center bg-black/60 text-white hover:bg-red transition-colors"
               aria-label="Close"
             >
               <span className="material-symbols-outlined text-xl">close</span>
