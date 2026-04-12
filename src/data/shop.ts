@@ -104,7 +104,7 @@ export const services: Service[] = [
       "A precision men's haircut from a master barber. Consultation, shampoo, and a tailored cut using clippers, shears, or a combination — scissor-over-comb, tapers, fades, classic side parts, or whatever shape you need. Finished with a hot towel, styling, and a neck shave.",
     includes: ['Consultation', 'Shampoo', 'Precision cut', 'Hot towel finish', 'Neck clean-up', 'Styling'],
     duration: '30 min',
-    image: '/images/services/haircut.webp',
+    image: '/images/mens-cut-scissors-01.webp',
   },
   {
     name: 'Razor / Foil Fade',
@@ -114,7 +114,7 @@ export const services: Service[] = [
       "Our sharpest fade work. Built with foil shavers and a straight razor for a crisp, skin-tight blend and a razor-defined lineup. Ideal for bald fades, skin fades, and anyone who wants the cleanest edge in Medina.",
     includes: ['Detailed fade', 'Foil shaver blend', 'Straight razor lineup', 'Shampoo', 'Styling'],
     duration: '45 min',
-    image: '/images/services/razor-fade.webp',
+    image: '/images/fade-lineup-01.webp',
   },
   {
     name: 'Haircut + Beard Trim',
@@ -124,7 +124,7 @@ export const services: Service[] = [
       "Our most popular combo. A complete haircut paired with a full beard shape-up — cheek and neck lines defined, length balanced, and the whole thing finished with hot towel and beard oil. Walk out looking like a different man.",
     includes: ['Full haircut', 'Beard shape + trim', 'Line work', 'Hot towel', 'Beard oil'],
     duration: '45 min',
-    image: '/images/services/haircut-beard.webp',
+    image: '/images/beard-trim-clippers-01.webp',
   },
   {
     name: 'Full Service Shave',
@@ -134,7 +134,7 @@ export const services: Service[] = [
       "The full old-school treatment. Warm lather, hot towels, and a straight razor shave done the way barbers have done it for a century. Pre-shave oil, two passes, cold towel finish, and aftershave balm. Worth booking just for the ritual.",
     includes: ['Pre-shave oil', 'Hot towel prep', 'Straight razor — two passes', 'Cold towel finish', 'Aftershave balm'],
     duration: '45 min',
-    image: '/images/services/shave.webp',
+    image: '/images/straight-razor-shave-01.webp',
   },
   {
     name: 'Head Shave',
@@ -144,7 +144,7 @@ export const services: Service[] = [
       "A full head shave with hot towels and a straight razor. Whether you're maintaining a bald look or going for it for the first time, you'll walk out smooth, conditioned, and comfortable. Includes scalp treatment.",
     includes: ['Hot towel prep', 'Straight razor head shave', 'Scalp treatment', 'Aftershave balm'],
     duration: '40 min',
-    image: '/images/services/head-shave.webp',
+    image: '/images/shave-lather-01.webp',
   },
   {
     name: 'Beard Trim',
@@ -154,7 +154,7 @@ export const services: Service[] = [
       "Beard shape-up with clean cheek and neck lines, length balancing, and detailing. Finished with hot towel and beard oil. Book this on its own or add it to any haircut.",
     includes: ['Beard shape', 'Cheek + neck lines', 'Length balance', 'Hot towel', 'Beard oil'],
     duration: '20 min',
-    image: '/images/services/beard-trim.webp',
+    image: '/images/beard-trim-scissors-01.webp',
   },
   {
     name: 'Shoulder Length Cut + Rough Dry',
@@ -164,7 +164,7 @@ export const services: Service[] = [
       "Longer men's styles need real shear work. Shampoo, precision cut with scissors, and a rough dry so you can see the shape before you walk out. Ideal for shoulder-length and flow cuts.",
     includes: ['Shampoo', 'Shear cut', 'Rough dry', 'Styling'],
     duration: '40 min',
-    image: '/images/services/long-cut.webp',
+    image: '/images/womens-style-01.webp',
   },
   {
     name: 'Duo Haircut',
@@ -174,7 +174,7 @@ export const services: Service[] = [
       "Two haircuts booked together, back-to-back in the same chair or in adjacent chairs. Popular for dads with kids, brothers, or anyone who wants to make a trip of it.",
     includes: ['Two full haircuts', 'Back-to-back timing'],
     duration: '60 min',
-    image: '/images/services/duo.webp',
+    image: '/images/kids-cut-01.webp',
   },
   {
     name: 'Trio Haircut',
@@ -184,7 +184,7 @@ export const services: Service[] = [
       "Three haircuts booked together. Great for families with multiple kids, groomsmen before a wedding, or any group that wants to come in together.",
     includes: ['Three full haircuts', 'Coordinated timing'],
     duration: '90 min',
-    image: '/images/services/trio.webp',
+    image: '/images/kids-fade-01.webp',
   },
   {
     name: 'Eyebrow / Lip / Chin',
@@ -194,7 +194,7 @@ export const services: Service[] = [
       "Precision trimming and shape-up on the eyebrows, upper lip, or chin. Clean, quick, and a huge difference in how your grooming reads. Add it to any other service.",
     includes: ['Detailed shaping', 'Precision trim'],
     duration: '15 min',
-    image: '/images/services/detail.webp',
+    image: '/images/detail-tools-01.webp',
   },
   {
     name: 'Shampoo',
@@ -204,7 +204,7 @@ export const services: Service[] = [
       "A proper shampoo and scalp massage. Add it to any haircut or service for a few extra dollars and walk out feeling twice as clean.",
     includes: ['Shampoo', 'Scalp massage', 'Conditioner'],
     duration: '10 min',
-    image: '/images/services/shampoo.webp',
+    image: '/images/hot-towel-01.webp',
   },
   {
     name: 'Shampoo + Style',
@@ -214,7 +214,7 @@ export const services: Service[] = [
       "Full shampoo, blow dry, and style — no cut. Perfect for a special event, a date night, or anytime you want to look your best without a full trim.",
     includes: ['Shampoo', 'Blow dry', 'Style', 'Product finish'],
     duration: '25 min',
-    image: '/images/services/shampoo-style.webp',
+    image: '/images/mens-cut-pov-01.webp',
   },
 ];
 

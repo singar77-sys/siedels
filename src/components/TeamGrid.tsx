@@ -22,7 +22,7 @@ function TeamModal({ member, onClose }: { member: TeamMember; onClose: () => voi
         </button>
         {member.image && (
           <div className="relative aspect-[4/3] w-full">
-            <Image src={member.image} alt={member.name} fill sizes="500px" className="object-cover object-top" />
+            <Image src={member.image} alt={`${member.name}, ${member.title} at Siedel's Barbershop`} fill sizes="500px" className="object-cover object-top" />
           </div>
         )}
         <div className="p-8">

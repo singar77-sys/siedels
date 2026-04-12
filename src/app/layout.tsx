@@ -23,11 +23,13 @@ export const metadata: Metadata = {
     siteName: "Siedel's Barbershop",
     type: 'website',
     locale: 'en_US',
+    images: [{ url: '/images/hero.webp', width: 1920, height: 1080, alt: "Siedel's Barbershop interior in Medina Ohio" }],
   },
   twitter: {
     card: 'summary_large_image',
     title: "Siedel's Barbershop | Medina, Ohio",
     description: "Northeast Ohio's premier barbershop. 11 barbers, walk-ins welcome.",
+    images: ['/images/hero.webp'],
   },
   robots: {
     index: true,
