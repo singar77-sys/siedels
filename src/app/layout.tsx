@@ -48,6 +48,7 @@ const jsonLd = {
   url: BASE_URL,
   telephone: '+13309520777',
   priceRange: '$23–$96',
+  sameAs: ['https://share.google/n7DB5686mE05Db6tK'],
   address: {
     '@type': 'PostalAddress',
     streetAddress: '982 N Court Street',

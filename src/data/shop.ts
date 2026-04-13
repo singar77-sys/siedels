@@ -8,6 +8,7 @@ export const PHONE_HREF = 'tel:3309520777';
 export const ADDRESS = '982 N Court Street';
 export const CITY_STATE_ZIP = 'Medina, Ohio 44256';
 export const MAPS_URL = 'https://maps.google.com/?q=982+N+Court+Street+Medina+OH+44256';
+export const GOOGLE_BUSINESS_URL = 'https://share.google/n7DB5686mE05Db6tK';
 
 export interface TeamMember {
   name: string;

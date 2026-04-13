@@ -4,7 +4,7 @@ import { PageHero } from '@/components/PageHero';
 import { FadeIn } from '@/components/FadeIn';
 import { EmailCapture } from '@/components/EmailCapture';
 import { Footer } from '@/components/Footer';
-import { hours, PHONE, PHONE_HREF, ADDRESS, CITY_STATE_ZIP, MAPS_URL, SQUARE_BOOKING_URL } from '@/data/shop';
+import { hours, PHONE, PHONE_HREF, ADDRESS, CITY_STATE_ZIP, MAPS_URL, SQUARE_BOOKING_URL, GOOGLE_BUSINESS_URL } from '@/data/shop';
 
 export const metadata: Metadata = {
   title: "Contact & Hours | Siedel's Barbershop | Medina, Ohio",
@@ -79,7 +79,22 @@ export default function ContactPage() {
                       <span className="font-bold">{h.time}</span>
                     </div>
                   ))}
-                  <div className="mt-10 bg-surface border border-line-strong p-6">
+                  <div className="mt-10 bg-surface border border-red/40 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                      <p className="font-headline text-sm font-bold uppercase tracking-tight mb-1">BEEN IN THE CHAIR?</p>
+                      <p className="font-body text-xs text-text-subtle">Leave us a review — it means the world.</p>
+                    </div>
+                    <a
+                      href={GOOGLE_BUSINESS_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 border border-red text-red font-headline text-sm font-bold uppercase tracking-tight px-5 py-3 hover:bg-red hover:text-white transition-all duration-300 whitespace-nowrap"
+                    >
+                      LEAVE A REVIEW
+                      <span className="material-symbols-outlined text-base">star</span>
+                    </a>
+                  </div>
+                  <div className="mt-4 bg-surface border border-line-strong p-6">
                     <p className="font-headline text-sm font-bold uppercase tracking-tight mb-1">STAY IN THE LOOP</p>
                     <p className="font-body text-xs text-text-subtle mb-4">Deals, game day specials, and shop updates. No spam.</p>
                     <EmailCapture />

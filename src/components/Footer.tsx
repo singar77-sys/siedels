@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { PHONE, PHONE_HREF } from '@/data/shop';
+import { PHONE, PHONE_HREF, GOOGLE_BUSINESS_URL } from '@/data/shop';
 
 export function Footer() {
   return (
@@ -30,6 +30,9 @@ export function Footer() {
           ))}
           <a href={PHONE_HREF} className="font-label text-[11px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">
             {PHONE}
+          </a>
+          <a href={GOOGLE_BUSINESS_URL} target="_blank" rel="noopener noreferrer" className="font-label text-[11px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">
+            GOOGLE
           </a>
         </div>
       </div>

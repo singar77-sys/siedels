@@ -1,4 +1,4 @@
-import { PHONE, PHONE_HREF, SQUARE_BOOKING_URL, MAPS_URL, hours } from '@/data/shop';
+import { PHONE, PHONE_HREF, SQUARE_BOOKING_URL, MAPS_URL, GOOGLE_BUSINESS_URL, hours } from '@/data/shop';
 import { EmailCapture } from './EmailCapture';
 
 export function ContactPanel() {
@@ -56,7 +56,24 @@ export function ContactPanel() {
           </div>
         </div>
 
-        <div className="mt-12 bg-surface border border-line-strong p-8 md:p-10">
+        {/* Google Reviews CTA */}
+        <div className="mt-12 bg-surface border border-red/40 p-8 md:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div>
+            <p className="font-headline text-lg font-bold uppercase tracking-tight mb-1 text-white">BEEN IN THE CHAIR?</p>
+            <p className="font-body text-xs text-text-subtle">Leave us a review — it means the world to the crew.</p>
+          </div>
+          <a
+            href={GOOGLE_BUSINESS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 border border-red text-red font-headline font-bold uppercase tracking-tight px-6 py-3.5 hover:bg-red hover:text-white transition-all duration-300 whitespace-nowrap"
+          >
+            LEAVE A REVIEW
+            <span className="material-symbols-outlined text-lg">star</span>
+          </a>
+        </div>
+
+        <div className="mt-6 bg-surface border border-line-strong p-8 md:p-10">
           <p className="font-headline text-lg font-bold uppercase tracking-tight mb-1 text-white">STAY IN THE LOOP</p>
           <p className="font-body text-xs text-text-subtle mb-5">Deals, game day specials, and shop updates. No spam.</p>
           <EmailCapture />
