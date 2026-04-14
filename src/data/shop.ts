@@ -34,7 +34,13 @@ export const team: TeamMember[] = [
     booking: sq('ub0ju8v1q1926j'),
     bio: "Licensed barber for 7 years. Trained at LaBarberia in Mayfield. Specializes in clean fades, simple cuts, and hot towel face shaves. Big fan of horror and comedy movies, loves dropping '80s and '90s references, and passionate about music. Here to keep you looking sharp.",
   },
-  { name: 'Ticia Husak', title: 'Master Stylist', image: '/images/ticia-husak.webp', booking: sq('xa1g2bceso9izn') },
+  {
+    name: 'Ticia Husak',
+    title: 'Master Stylist · 16 Years',
+    image: '/images/ticia-husak.webp',
+    booking: sq('xa1g2bceso9izn'),
+    bio: "16+ years behind the chair. Specializes in clipper, scissor, and foil cuts — keeping everything clean, sharp, and on point. Takes pride in her work and making sure every client leaves smiling. Wife, mom of two boys, and a registered nurse. When she's not at work, she's in the gym or spending time with her family.",
+  },
   {
     name: 'Krista Foecking',
     title: 'Stylist · 26 Years',
