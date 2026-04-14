@@ -128,6 +128,16 @@ export const services: Service[] = [
     image: '/images/beard-trim-clippers-01.webp',
   },
   {
+    name: 'Haircut + Face Shave',
+    price: '$63',
+    tagline: 'The full treatment, head to jaw',
+    description:
+      "A complete haircut paired with a full straight razor face shave. Hot towels, lather, two passes, cold towel finish — the works. Walk out with a fresh cut and the smoothest shave in Medina.",
+    includes: ['Full haircut', 'Hot towel prep', 'Straight razor face shave', 'Cold towel finish', 'Aftershave balm'],
+    duration: '60 min',
+    image: '/images/shave-lather-01.webp',
+  },
+  {
     name: 'Full Service Shave',
     price: '$44',
     tagline: 'The classic straight razor shave',
