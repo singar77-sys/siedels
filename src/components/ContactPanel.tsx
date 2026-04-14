@@ -1,4 +1,4 @@
-import { PHONE, PHONE_HREF, SQUARE_BOOKING_URL, MAPS_URL, GOOGLE_BUSINESS_URL, hours } from '@/data/shop';
+import { PHONE, PHONE_HREF, SQUARE_BOOKING_URL, MAPS_URL, GOOGLE_BUSINESS_URL, hours, testimonials } from '@/data/shop';
 import { EmailCapture } from './EmailCapture';
 
 export function ContactPanel() {
@@ -56,8 +56,33 @@ export function ContactPanel() {
           </div>
         </div>
 
+        {/* Testimonials */}
+        <div className="mt-12">
+          <div className="flex items-center justify-between mb-6">
+            <p className="font-label text-[10px] tracking-widest text-text-subtle">WHAT THEY&apos;RE SAYING · 4.9 STARS · 249 REVIEWS</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {testimonials.slice(0, 6).map((t) => (
+              <div key={t.name} className="bg-surface border border-line-strong p-6">
+                <div className="flex items-center gap-1 mb-3">
+                  {Array.from({ length: t.rating }).map((_, i) => (
+                    <span key={i} className="text-red text-xs">&#9733;</span>
+                  ))}
+                </div>
+                <p className="font-body text-sm text-text-muted leading-relaxed mb-4">&ldquo;{t.text}&rdquo;</p>
+                <div className="flex items-center justify-between">
+                  <span className="font-headline text-xs font-bold uppercase tracking-tight text-white">{t.name}</span>
+                  {t.barber && (
+                    <span className="font-label text-[9px] tracking-widest text-text-subtle">w/ {t.barber.split(' ')[0].toUpperCase()}</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Google Reviews CTA */}
-        <div className="mt-12 bg-surface border border-red/40 p-8 md:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="mt-6 bg-surface border border-red/40 p-8 md:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
             <p className="font-headline text-lg font-bold uppercase tracking-tight mb-1 text-white">BEEN IN THE CHAIR?</p>
             <p className="font-body text-xs text-text-subtle">Leave us a review — it means the world to the crew.</p>

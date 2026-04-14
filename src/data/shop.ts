@@ -229,6 +229,72 @@ export const services: Service[] = [
   },
 ];
 
+export interface Testimonial {
+  name: string;
+  text: string;
+  barber?: string;
+  rating: number;
+}
+
+export const testimonials: Testimonial[] = [
+  {
+    name: 'Joshua P.',
+    text: "The entire crew at Siedel's are amazing, especially Matt! Matt knows me through and through at this point. I am a retired Marine who always shaved my face. Matt and my old lady recommended an attempt at a beard. 3, maybe 4 months later now, and I am loving the full beard. I leave it to Matt's professional hands. Semper Fidelis!",
+    barber: 'Matt Hayes',
+    rating: 5,
+  },
+  {
+    name: 'Colton S.',
+    text: "Billy is the most technically qualified & gifted barber in all of Northeast OH. His incredible attention to detail and ability to bring your vision to life is 10/10. The shop is in a great location, great owners, they support veterans, all around an excellent shop.",
+    barber: 'Billy Rodriguez',
+    rating: 5,
+  },
+  {
+    name: 'Gregory B.',
+    text: "Since the first haircut a year or two ago, I haven't gotten it done anywhere else. Professional staff and amazing haircuts every time.",
+    rating: 5,
+  },
+  {
+    name: 'Renier G.',
+    text: "Have been going here for years, service is always good, have never been disappointed. Staff is always friendly.",
+    barber: 'Jim LaMarca',
+    rating: 5,
+  },
+  {
+    name: 'George B.',
+    text: "The booking went smoothly. My barber Will did a great job and he was very cordial and professional.",
+    barber: 'Will Dillon',
+    rating: 5,
+  },
+  {
+    name: 'Arthur D.',
+    text: "Sam was really wonderful! Took her time and made my grandson feel comfortable!",
+    barber: 'Sam Sickle',
+    rating: 5,
+  },
+  {
+    name: 'Scott K.',
+    text: "Easy to schedule, Billy always does a great job and very professional.",
+    barber: 'Billy Rodriguez',
+    rating: 5,
+  },
+  {
+    name: 'Frank K.',
+    text: "Great shop, all barbers there are great.",
+    rating: 5,
+  },
+  {
+    name: 'Madison M.',
+    text: "Great barber and the shop is a good environment also!",
+    rating: 5,
+  },
+  {
+    name: 'Jim M.',
+    text: "Very nice staff. Quality haircut.",
+    rating: 5,
+  },
+];
+
 export const hours = [
   { day: 'Monday', time: '8 AM – 8 PM' },
   { day: 'Tuesday', time: '8 AM – 6 PM' },
