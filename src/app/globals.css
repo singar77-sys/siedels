@@ -10,7 +10,6 @@
   --surface:       #131313;
   --surface-raised:#1C1B1B;
   --surface-high:  #2A2A2A;
-  --surface-bright:#393939;
   --red:           #E31B23;
   --red-hover:     #C00015;
   --text:          #E5E2E1;
@@ -19,7 +18,6 @@
   --text-faint:    rgba(255,255,255,0.45);
   --line:          rgba(255,255,255,0.05);
   --line-strong:   rgba(255,255,255,0.1);
-  --warm:          #E7BDB8;
 }
 
 @theme {
@@ -27,7 +25,6 @@
   --color-surface:        var(--surface);
   --color-surface-raised: var(--surface-raised);
   --color-surface-high:   var(--surface-high);
-  --color-surface-bright: var(--surface-bright);
   --color-red:            var(--red);
   --color-red-hover:      var(--red-hover);
   --color-text:           var(--text);
@@ -36,7 +33,6 @@
   --color-text-faint:     var(--text-faint);
   --color-line:           var(--line);
   --color-line-strong:    var(--line-strong);
-  --color-warm:           var(--warm);
 }
 
 /* ── Base ─────────────────────────────────────────────── */
@@ -51,7 +47,7 @@ body {
 }
 
 /* ── Typography ───────────────────────────────────────── */
-.font-headline, .font-brand {
+.font-headline {
   font-family: 'Barlow Condensed', 'Arial', sans-serif;
   font-weight: 700;
 }
@@ -62,11 +58,6 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
-.font-mono {
-  font-family: 'Barlow Condensed', 'Courier New', monospace;
-  font-weight: 400;
-}
-
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined', sans-serif;
   font-style: normal; font-weight: normal; font-size: inherit;
@@ -90,11 +81,6 @@ body {
   color: transparent;
   -webkit-text-stroke: 2px white;
 }
-.text-stroke-red {
-  color: transparent;
-  -webkit-text-stroke: 2px var(--red);
-}
-
 /* ── Accessibility ────────────────────────────────────── */
 *:focus-visible {
   outline: 2px solid var(--red);

@@ -233,7 +233,7 @@ export function HomeClient({
           <a href="https://huntersystems.dev" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-red transition-colors">HUNTER SYSTEMS</a>
         </p>
         <div className="hidden md:flex items-center gap-10">
-          <span className="font-label text-[16px] tracking-[0.12em] text-text-subtle">982 N COURT ST, MEDINA OH 44256</span>
+          <span className="font-label text-[16px] tracking-[0.12em] text-text-subtle">982 N COURT STREET, MEDINA, OHIO 44256</span>
           <a href={PHONE_HREF} className="font-label text-[16px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">{PHONE}</a>
         </div>
       </footer>

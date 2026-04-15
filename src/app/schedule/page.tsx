@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { fetchSchedule, todayInMedina } from '@/lib/schedule';
-import { team } from '@/data/shop';
+import { team, PHONE, PHONE_HREF } from '@/data/shop';
 
 export const revalidate = 1800;
 
@@ -84,8 +84,8 @@ export default async function SchedulePage() {
               <p className="font-label text-[11px] tracking-[0.3em] text-red mb-2">SCHEDULE UNAVAILABLE</p>
               <p className="font-body text-sm text-text-muted">
                 We can&apos;t load the schedule right now. Please call{' '}
-                <a href="tel:3309520777" className="text-red hover:underline">
-                  (330) 952-0777
+                <a href={PHONE_HREF} className="text-red hover:underline">
+                  {PHONE}
                 </a>{' '}
                 for today&apos;s hours.
               </p>
@@ -97,8 +97,8 @@ export default async function SchedulePage() {
               <p className="font-label text-[11px] tracking-[0.3em] text-red mb-2">NEXT WEEK&apos;S SCHEDULE</p>
               <p className="font-body text-sm text-text-muted">
                 Showing the week starting {week.daysUntilStart === 1 ? 'tomorrow' : `in ${week.daysUntilStart} days`}. For today&apos;s hours call{' '}
-                <a href="tel:3309520777" className="text-red hover:underline">
-                  (330) 952-0777
+                <a href={PHONE_HREF} className="text-red hover:underline">
+                  {PHONE}
                 </a>
                 .
               </p>
@@ -110,8 +110,8 @@ export default async function SchedulePage() {
               <p className="font-label text-[11px] tracking-[0.3em] text-red mb-2">SCHEDULE UPDATING</p>
               <p className="font-body text-sm text-text-muted">
                 This week&apos;s schedule is being updated. Call{' '}
-                <a href="tel:3309520777" className="text-red hover:underline">
-                  (330) 952-0777
+                <a href={PHONE_HREF} className="text-red hover:underline">
+                  {PHONE}
                 </a>{' '}
                 to confirm today&apos;s availability.
               </p>

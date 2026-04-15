@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 const faqItems = [
   { q: 'Do you take walk-ins?', a: "Yes. Walk-ins are always welcome. No appointment necessary. If you want a specific time, book online or call (330) 952-0777." },
-  { q: "How much is a haircut at Siedel's?", a: 'Standard haircut is $32. Razor or foil fades $38. Haircut with beard trim $42.' },
+  { q: "How much is a haircut at Siedel's?", a: 'Standard haircut is $32. Razor / foil fades $38. Haircut + beard trim $42. Haircut + face shave $63.' },
   { q: 'Can I book a specific barber?', a: 'Yes. 11 barbers on staff, each with their own booking link. Visit the Team page to pick yours.' },
   { q: 'What payment methods do you accept?', a: 'Cash and all major credit cards.' },
 ];

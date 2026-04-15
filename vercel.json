@@ -3,7 +3,7 @@
   "outputDirectory": ".next",
   "installCommand": "npm install",
   "env": {
-    "NEXT_PUBLIC_APP_NAME": "Siedels Barbershop"
+    "NEXT_PUBLIC_APP_NAME": "Siedel's Barbershop"
   },
   "headers": [
     {

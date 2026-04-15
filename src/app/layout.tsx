@@ -47,7 +47,7 @@ const jsonLd = {
   description: "Northeast Ohio's premier barbershop. Haircuts, fades, beard trims on Court Street in Medina.",
   url: BASE_URL,
   telephone: '+13309520777',
-  priceRange: '$23–$96',
+  priceRange: '$5–$96',
   sameAs: ['https://share.google/n7DB5686mE05Db6tK'],
   address: {
     '@type': 'PostalAddress',
