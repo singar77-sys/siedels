@@ -22,7 +22,7 @@ export default function ContactPage() {
       <Nav />
       <main id="main" className="grid-bg min-h-screen">
         <PageHero
-          image="/images/exterior-01.webp"
+          image="/images/siedels-barbershop-storefront-medina-ohio.webp"
           imageAlt="Siedel's Barbershop storefront on Court Street in Medina, Ohio"
           label="DESTINATION FOUND"
           title="MEDINA"

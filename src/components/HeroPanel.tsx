@@ -11,7 +11,7 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
     <section className="min-w-full h-full snap-start relative flex items-end overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero.webp"
+          src="/images/siedels-barbershop-medina-ohio.webp"
           alt="Barber pole at golden hour outside Siedel's Barbershop, Medina Ohio"
           fill
           priority

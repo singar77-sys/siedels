@@ -21,7 +21,7 @@ export default function TeamPage() {
       <Nav />
       <main id="main" className="grid-bg min-h-screen">
         <PageHero
-          image="/images/interior-stations-02.webp"
+          image="/images/barber-stations-siedels-barbershop-medina.webp"
           imageAlt="Barber stations inside Siedel's Barbershop, Medina Ohio"
           label="PERSONNEL DOSSIER"
           title="THE"

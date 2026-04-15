@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "This Week's Schedule | Siedel's Barbershop",
     description: "See which barbers are working this week at Siedel's Barbershop in Medina, Ohio.",
-    images: [{ url: '/images/hero.webp', width: 1920, height: 1080, alt: "Siedel's Barbershop in Medina Ohio" }],
+    images: [{ url: '/images/siedels-barbershop-medina-ohio.webp', width: 1920, height: 1080, alt: "Siedel's Barbershop in Medina Ohio" }],
   },
 };
 

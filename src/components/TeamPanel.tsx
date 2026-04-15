@@ -104,7 +104,7 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
                   {member.image ? (
                     <Image
                       src={member.image}
-                      alt={`${member.name}, ${member.title} at Siedel's Barbershop`}
+                      alt={`${member.name}, ${member.title} at Siedel's Barbershop in Medina, Ohio`}
                       fill
                       sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                       className="object-cover object-top group-hover:scale-105 transition-transform duration-700"

@@ -250,7 +250,7 @@ export function HomeClient({
           </button>
           {selectedMember.image && (
             <div className="relative aspect-[4/3] w-full">
-              <Image src={selectedMember.image} alt={`${selectedMember.name}, ${selectedMember.title} at Siedel's Barbershop`} fill sizes="500px" className="object-cover object-top" />
+              <Image src={selectedMember.image} alt={`${selectedMember.name}, ${selectedMember.title} at Siedel's Barbershop in Medina, Ohio`} fill sizes="500px" className="object-cover object-top" />
             </div>
           )}
           <div className="p-8">

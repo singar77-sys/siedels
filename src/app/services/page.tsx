@@ -40,8 +40,8 @@ export default function ServicesPage() {
       <Nav />
       <main id="main" className="grid-bg min-h-screen">
         <PageHero
-          image="/images/detail-tools-01.webp"
-          imageAlt="Professional barber tools at Siedel's Barbershop"
+          image="/images/barber-tools-siedels-barbershop-medina.webp"
+          imageAlt="Professional barber tools at Siedel's Barbershop in Medina, Ohio"
           label="ELITE CRAFTSMANSHIP"
           title="SERVICES &"
           titleAccent="PRICES"
