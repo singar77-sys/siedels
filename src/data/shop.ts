@@ -19,7 +19,13 @@ export interface TeamMember {
 }
 
 export const team: TeamMember[] = [
-  { name: 'Jim LaMarca', title: 'Master Barber', image: '/images/jim-lamarca.webp', booking: sq('wx9txuouu9ti8w') },
+  {
+    name: 'Jim LaMarca',
+    title: 'Owner · Master Barber · 31 Years',
+    image: '/images/jim-lamarca.webp',
+    booking: sq('wx9txuouu9ti8w'),
+    bio: "Behind the chair since 1995. Owner of Siedel's and the face you'll see when you walk in. Specializes in bald fades and kids' cuts — patient enough to keep a 4-year-old still and sharp enough to send a grown man out looking clean. Former bass player of Chimaira. Cleveland sports diehard. Family man. Probably cracking jokes before the cape's even on.",
+  },
   {
     name: 'Pierre Wright',
     title: 'Master Barber',
