@@ -21,10 +21,10 @@ export interface TeamMember {
 export const team: TeamMember[] = [
   {
     name: 'Jim LaMarca',
-    title: 'Owner · Master Barber · 31 Years',
+    title: 'Master Barber · 31 Years',
     image: '/images/jim-lamarca.webp',
     booking: sq('wx9txuouu9ti8w'),
-    bio: "Behind the chair since 1995. Owner of Siedel's and the face you'll see when you walk in. Specializes in bald fades and kids' cuts — patient enough to keep a 4-year-old still and sharp enough to send a grown man out looking clean. Bass player of Chimaira. Yes, that Chimaira. Cuts hair by day, melts faces by night. Cleveland sports diehard. Family man. Probably cracking jokes before the cape's even on.",
+    bio: "Behind the chair since 1995. Cappo of Siedel's and the face you'll see when you walk in. Bass player of Chimaira. Yes, that Chimaira. Specializes in bald fades and kids' cuts. Cleveland sports diehard and family man. Probably cracking jokes before the cape's even on.",
   },
   {
     name: 'Pierre Wright',
