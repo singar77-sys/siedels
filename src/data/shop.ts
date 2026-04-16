@@ -12,7 +12,7 @@ export const GOOGLE_BUSINESS_URL = 'https://share.google/n7DB5686mE05Db6tK';
 export const EMAIL = 'siedelsbarbershop@gmail.com';
 export const EMAIL_HREF = 'mailto:siedelsbarbershop@gmail.com';
 export const FACEBOOK_URL = 'https://www.facebook.com/siedelsbarbershop';
-export const INSTAGRAM_URL = 'https://www.instagram.com/siedels';
+export const INSTAGRAM_URL = 'https://www.instagram.com/siedelsbarber';
 
 export interface TeamMember {
   name: string;

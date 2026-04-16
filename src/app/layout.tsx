@@ -52,7 +52,7 @@ const jsonLd = {
   sameAs: [
     'https://share.google/n7DB5686mE05Db6tK',
     'https://www.facebook.com/siedelsbarbershop',
-    'https://www.instagram.com/siedels',
+    'https://www.instagram.com/siedelsbarber',
   ],
   address: {
     '@type': 'PostalAddress',
