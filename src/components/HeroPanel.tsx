@@ -27,8 +27,8 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
           priority
           sizes="100vw"
           quality={90}
-          className={`object-cover object-[75%_center] md:object-center animate-ken-burns ${
-            isLight ? 'brightness-[0.32]' : 'brightness-50 grayscale'
+          className={`object-cover object-center animate-ken-burns ${
+            isLight ? 'brightness-[0.32]' : 'brightness-50'
           }`}
         />
       </div>
