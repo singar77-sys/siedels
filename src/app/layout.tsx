@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
+import { ThemeProvider } from '@/components/ThemeProvider';
 import './globals.css';
 
 const BASE_URL = 'https://siedels.vercel.app';
@@ -85,7 +86,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <a href="#main" className="skip-link">Skip to main content</a>
+        <ThemeProvider>
         {children}
+        </ThemeProvider>
         <Script
           src="https://app.squareup.com/appointments/buyer/widget/xcru7izyf4zhv6/LFCOT5CC7MY0S.js"
           strategy="lazyOnload"

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { PHONE_HREF, SQUARE_BOOKING_URL } from '@/data/shop';
+import { ThemeToggle } from './ThemeToggle';
 
 const NAV_LINKS = [
   { label: 'HOME', href: '/' },
@@ -52,8 +53,9 @@ export function Nav() {
         ))}
       </nav>
 
-      {/* Book Now + Mobile toggle */}
-      <div className="flex items-center gap-4">
+      {/* Book Now + Theme + Mobile toggle */}
+      <div className="flex items-center gap-2">
+        <ThemeToggle />
         <a
           href={SQUARE_BOOKING_URL}
           target="_blank"
@@ -64,7 +66,7 @@ export function Nav() {
         </a>
         <button
           onClick={() => setMobileMenuOpen(o => !o)}
-          className="md:hidden p-3 text-white"
+          className="md:hidden p-3 text-text-subtle"
           aria-label="Toggle menu"
         >
           <span className="material-symbols-outlined text-3xl">

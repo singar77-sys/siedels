@@ -2,10 +2,12 @@
 @import "tailwindcss";
 
 /* ══════════════════════════════════════════════════════
-   Siedel's Barbershop — Dark Tactical Design System
+   Siedel's Barbershop — Multi-Theme Design System
    ══════════════════════════════════════════════════════ */
 
-:root {
+/* ── Dark Theme (default) ────────────────────────────── */
+:root,
+[data-theme="dark"] {
   --ink:           #0E0E0E;
   --surface:       #131313;
   --surface-raised:#1C1B1B;
@@ -18,6 +20,40 @@
   --text-faint:    rgba(255,255,255,0.45);
   --line:          rgba(255,255,255,0.05);
   --line-strong:   rgba(255,255,255,0.1);
+  --stroke-color:  white;
+  --selection-bg:  #E31B23;
+  --selection-text: white;
+  --grid-line:     rgba(255,255,255,0.04);
+  --pole-red:      #E31B23;
+  --pole-white:    rgba(255,255,255,0.5);
+  --pole-cap:      rgba(255,255,255,0.3);
+  --pole-body:     rgba(255,255,255,0.12);
+  --hero-brightness: 0.5;
+}
+
+/* ── Light Theme (shop palette) ──────────────────────── */
+[data-theme="light"] {
+  --ink:           #CDC7BB;
+  --surface:       #C0BBB8;
+  --surface-raised:#938884;
+  --surface-high:  #B8B0A4;
+  --red:           #362D1E;
+  --red-hover:     #2A2216;
+  --text:          #1A1610;
+  --text-muted:    rgba(0,0,0,0.65);
+  --text-subtle:   rgba(0,0,0,0.45);
+  --text-faint:    rgba(0,0,0,0.3);
+  --line:          rgba(0,0,0,0.06);
+  --line-strong:   rgba(0,0,0,0.12);
+  --stroke-color:  #362D1E;
+  --selection-bg:  #362D1E;
+  --selection-text: #CDC7BB;
+  --grid-line:     rgba(0,0,0,0.05);
+  --pole-red:      #362D1E;
+  --pole-white:    rgba(0,0,0,0.15);
+  --pole-cap:      rgba(0,0,0,0.2);
+  --pole-body:     rgba(0,0,0,0.06);
+  --hero-brightness: 0.6;
 }
 
 @theme {
@@ -44,6 +80,7 @@ body {
   font-family: 'Manrope', 'Arial', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* ── Typography ───────────────────────────────────────── */
@@ -71,16 +108,17 @@ body {
 /* ── Grid Background ──────────────────────────────────── */
 .grid-bg {
   background-image:
-    linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
 /* ── Stroke Text ──────────────────────────────────────── */
 .text-stroke {
   color: transparent;
-  -webkit-text-stroke: 2px white;
+  -webkit-text-stroke: 2px var(--stroke-color);
 }
+
 /* ── Accessibility ────────────────────────────────────── */
 *:focus-visible {
   outline: 2px solid var(--red);
@@ -94,13 +132,13 @@ body {
 .skip-link:focus {
   position: fixed; top: 0; left: 0;
   width: auto; height: auto; padding: 1rem 2rem;
-  background: var(--red); color: white;
+  background: var(--red); color: var(--selection-text);
   font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
   z-index: 9999;
 }
 
 /* ── Selection & Scrollbar ────────────────────────────── */
-::selection { background: var(--red); color: white; }
+::selection { background: var(--selection-bg); color: var(--selection-text); }
 ::-webkit-scrollbar { width: 0; height: 0; }
 
 /* ── Animations ───────────────────────────────────────── */

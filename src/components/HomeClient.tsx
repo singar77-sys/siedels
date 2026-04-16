@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { SQUARE_BOOKING_URL, PHONE, PHONE_HREF, type TeamMember, type Service } from '@/data/shop';
 import { Modal } from './Modal';
+import { ThemeToggle } from './ThemeToggle';
 import { HeroPanel } from './HeroPanel';
 import { ServicesPanel } from './ServicesPanel';
 import { TeamPanel } from './TeamPanel';
@@ -95,9 +96,9 @@ export function HomeClient({
   }, [active, scrollToPanel]);
 
   return (
-    <div className="h-dvh flex flex-col overflow-hidden bg-black">
+    <div className="h-dvh flex flex-col overflow-hidden bg-ink">
       {/* ══ Header ══════════════════════════════ */}
-      <header className="relative z-50 flex-none h-[6rem] md:h-[8rem] bg-black flex items-center justify-between px-6 md:px-12">
+      <header className="relative z-50 flex-none h-[6rem] md:h-[8rem] bg-ink flex items-center justify-between px-6 md:px-12">
         <Link
           href="/"
           onClick={(e) => { e.preventDefault(); scrollToPanel(0); }}
@@ -109,15 +110,15 @@ export function HomeClient({
                 <rect x="1" y="3" width="12" height="26" rx="6" />
               </clipPath>
             </defs>
-            <rect x="2" y="0" width="10" height="4" rx="2" fill="rgba(255,255,255,0.3)" />
-            <rect x="2" y="28" width="10" height="4" rx="2" fill="rgba(255,255,255,0.3)" />
+            <rect x="2" y="0" width="10" height="4" rx="2" fill="var(--pole-cap)" />
+            <rect x="2" y="28" width="10" height="4" rx="2" fill="var(--pole-cap)" />
             <g clipPath="url(#pole-clip)">
-              <rect x="0" y="2" width="14" height="28" fill="rgba(255,255,255,0.12)" />
+              <rect x="0" y="2" width="14" height="28" fill="var(--pole-body)" />
               <g className="animate-pole-spin">
                 {Array.from({ length: 12 }).map((_, i) => (
                   <g key={i}>
-                    <line x1="-4" y1={i * 6 - 6} x2="18" y2={i * 6 - 14} stroke="#E31B23" strokeWidth="3" />
-                    <line x1="-4" y1={i * 6 - 3} x2="18" y2={i * 6 - 11} stroke="rgba(255,255,255,0.5)" strokeWidth="2" />
+                    <line x1="-4" y1={i * 6 - 6} x2="18" y2={i * 6 - 14} stroke="var(--pole-red)" strokeWidth="3" />
+                    <line x1="-4" y1={i * 6 - 3} x2="18" y2={i * 6 - 11} stroke="var(--pole-white)" strokeWidth="2" />
                   </g>
                 ))}
               </g>
@@ -137,6 +138,7 @@ export function HomeClient({
               {label}
             </button>
           ))}
+          <ThemeToggle />
           <a
             href={SQUARE_BOOKING_URL}
             target="_blank"
@@ -146,17 +148,20 @@ export function HomeClient({
             BOOK NOW
           </a>
         </nav>
-        <button
-          onClick={() => setMobileMenuOpen(o => !o)}
-          className="md:hidden p-3 text-white"
+        <div className="md:hidden flex items-center gap-1">
+          <ThemeToggle />
+          <button
+            onClick={() => setMobileMenuOpen(o => !o)}
+            className="p-3 text-text-subtle"
           aria-label="Toggle menu"
         >
           <span className="material-symbols-outlined text-2xl">
             {mobileMenuOpen ? 'close' : 'menu'}
           </span>
-        </button>
+          </button>
+        </div>
         {mobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-black border-t border-line-strong md:hidden z-50">
+          <div className="absolute top-full left-0 right-0 bg-ink border-t border-line-strong md:hidden z-50">
             {PANELS.map((label, i) => (
               <button
                 key={label}
@@ -227,7 +232,7 @@ export function HomeClient({
       </main>
 
       {/* ══ Footer ═════════════════════════════ */}
-      <footer className="relative z-50 flex-none h-[6rem] md:h-[8rem] bg-black flex items-center justify-between px-6 md:px-12">
+      <footer className="relative z-50 flex-none h-[6rem] md:h-[8rem] bg-ink flex items-center justify-between px-6 md:px-12">
         <p className="font-label text-[16px] tracking-[0.15em] text-text-subtle">
           &copy; {new Date().getFullYear()} SIEDEL&apos;S BARBERSHOP &mdash; POWERED BY{' '}
           <a href="https://huntersystems.dev" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-red transition-colors">HUNTER SYSTEMS</a>
@@ -274,7 +279,7 @@ export function HomeClient({
         <Modal onClose={() => setSelectedService(null)}>
           <button
             onClick={() => setSelectedService(null)}
-            className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center bg-black/60 text-white hover:bg-red transition-colors"
+            className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center bg-ink/60 text-white hover:bg-red transition-colors"
             aria-label="Close"
           >
             <span className="material-symbols-outlined text-xl">close</span>

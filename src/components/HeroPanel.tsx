@@ -1,23 +1,34 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { SQUARE_BOOKING_URL } from '@/data/shop';
+import { useTheme } from './ThemeProvider';
+
+const HERO_DARK = '/images/siedels-barbershop-medina-ohio.webp';
+const HERO_LIGHT = '/images/siedels-barbershop-golden-hour-medina-ohio.webp';
 
 interface HeroPanelProps {
   onScrollNext: () => void;
 }
 
 export function HeroPanel({ onScrollNext }: HeroPanelProps) {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
+
   return (
     <section className="min-w-full h-full snap-start relative flex items-end overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/siedels-barbershop-medina-ohio.webp"
+          src={isLight ? HERO_LIGHT : HERO_DARK}
           alt="Barber pole at golden hour outside Siedel's Barbershop, Medina Ohio"
           fill
           priority
           sizes="100vw"
           quality={90}
-          className="object-cover object-[75%_center] md:object-center animate-ken-burns brightness-50 grayscale"
+          className={`object-cover object-[75%_center] md:object-center animate-ken-burns ${
+            isLight ? 'brightness-[0.45]' : 'brightness-50 grayscale'
+          }`}
         />
       </div>
       <div className="relative z-10 max-w-7xl mx-auto px-8 pb-16 md:pb-24 pt-32 w-full">
