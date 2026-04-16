@@ -21,30 +21,32 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>('dark');
-  const [mounted, setMounted] = useState(false);
+  // Read initial theme from DOM (set by inline script in <head>)
+  const [theme, setThemeState] = useState<Theme>(() => {
+    if (typeof document !== 'undefined') {
+      return (document.documentElement.getAttribute('data-theme') as Theme) || 'dark';
+    }
+    return 'dark';
+  });
 
   useEffect(() => {
     const stored = localStorage.getItem('siedels-theme') as Theme | null;
     if (stored === 'light' || stored === 'dark') {
       setThemeState(stored);
-      document.documentElement.setAttribute('data-theme', stored);
     }
-    setMounted(true);
   }, []);
 
   const setTheme = useCallback((t: Theme) => {
     setThemeState(t);
     document.documentElement.setAttribute('data-theme', t);
     localStorage.setItem('siedels-theme', t);
+    document.querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', t === 'dark' ? '#0E0E0E' : '#CDC7BB');
   }, []);
 
   const toggle = useCallback(() => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   }, [theme, setTheme]);
-
-  // Prevent flash of wrong theme
-  if (!mounted) return null;
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, toggle }}>

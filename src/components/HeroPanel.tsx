@@ -40,19 +40,19 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
 
       <div className="relative z-10 max-w-7xl mx-auto px-8 pb-16 md:pb-24 pt-32 w-full">
         <div className="border-l-4 border-red pl-8">
-          <p className={`font-label text-[11px] tracking-[0.3em] mb-6 ${
+          <p className={`font-label text-[11px] tracking-[0.3em] mb-6 hero-stagger-1 ${
             isLight ? 'text-[#C5B699]' : 'text-red'
-          }`}>ESTABLISHED IN MEDINA</p>
+          }`}>SINCE DAY ONE</p>
           <h1 className="font-headline text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black uppercase tracking-tighter leading-[0.85] mb-8">
-            <span className={isLight ? 'text-[#E5E0D4]' : 'text-white'}>STAY</span><br />
-            <span className={isLight ? 'text-[#C5B699]' : 'text-stroke'}>SHARP</span>
+            <span className={`hero-stagger-2 inline-block ${isLight ? 'text-[#E5E0D4]' : 'text-white'}`}>STAY</span><br />
+            <span className={`hero-stagger-3 inline-block ${isLight ? 'text-[#C5B699]' : 'text-stroke'}`}>SHARP</span>
           </h1>
-          <p className={`font-body text-lg md:text-xl max-w-xl leading-relaxed mb-10 ${
+          <p className={`font-body text-lg md:text-xl max-w-xl leading-relaxed mb-10 hero-stagger-4 ${
             isLight ? 'text-[#CDC7BB]' : 'text-text-muted'
           }`}>
             Northeast Ohio&apos;s premier barbershop. Precision craftsmanship and honest conversation on Court Street.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 hero-stagger-5">
             <a
               href={SQUARE_BOOKING_URL}
               target="_blank"

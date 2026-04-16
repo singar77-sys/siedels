@@ -13,7 +13,7 @@ import { SchedulePanel } from './SchedulePanel';
 import { ContactPanel } from './ContactPanel';
 import type { Shift, SerializableWeekSchedule, WeekRelation } from '@/lib/schedule';
 
-const PANELS = ['HOME', 'SERVICES', 'TEAM', 'SCHEDULE', 'CONTACT'] as const;
+const PANELS = ['HOME', 'TEAM', 'SERVICES', 'SCHEDULE', 'CONTACT'] as const;
 
 interface ScheduleTodayProps {
   shopHours: string | null;
@@ -233,13 +233,13 @@ export function HomeClient({
           style={{ scrollbarWidth: 'none' }}
         >
           <HeroPanel onScrollNext={() => scrollToPanel(1)} />
-          <ServicesPanel onSelectService={setSelectedService} />
           <TeamPanel
             onSelectMember={setSelectedMember}
             scheduleIsCurrent={scheduleIsCurrent}
             scheduleToday={scheduleToday}
             todayShifts={todayShifts}
           />
+          <ServicesPanel onSelectService={setSelectedService} />
           <SchedulePanel
             scheduleWeek={scheduleWeek}
             scheduleRelation={scheduleRelation}
@@ -250,14 +250,19 @@ export function HomeClient({
       </main>
 
       {/* ══ Footer ═════════════════════════════ */}
-      <footer className="relative z-50 flex-none h-[6rem] md:h-[8rem] bg-ink flex items-center justify-between px-6 md:px-12">
-        <p className="font-label text-[16px] tracking-[0.15em] text-text-subtle">
-          &copy; {new Date().getFullYear()} SIEDEL&apos;S BARBERSHOP &mdash; POWERED BY{' '}
-          <a href="https://huntersystems.dev" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-red transition-colors">HUNTER SYSTEMS</a>
-        </p>
+      <footer className="relative z-50 flex-none bg-ink px-6 md:px-12 py-4 md:py-0 md:h-[8rem] flex flex-col md:flex-row items-center justify-between gap-2">
+        <div className="flex flex-col items-center md:items-start gap-1">
+          <p className="font-label text-[13px] tracking-[0.15em] text-text-subtle">
+            &copy; {new Date().getFullYear()} SIEDEL&apos;S BARBERSHOP &mdash; POWERED BY{' '}
+            <a href="https://huntersystems.dev" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-red transition-colors">HUNTER SYSTEMS</a>
+          </p>
+          <p className="font-body text-[10px] text-text-faint italic tracking-wide">
+            Named for Carl Siedel. A tribute.
+          </p>
+        </div>
         <div className="hidden md:flex items-center gap-10">
-          <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="font-label text-[16px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">982 N COURT STREET, MEDINA, OHIO 44256</a>
-          <a href={PHONE_HREF} className="font-label text-[16px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">{PHONE}</a>
+          <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="font-label text-[13px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">982 N COURT STREET, MEDINA, OHIO 44256</a>
+          <a href={PHONE_HREF} className="font-label text-[13px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">{PHONE}</a>
         </div>
       </footer>
 

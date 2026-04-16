@@ -83,6 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#0E0E0E" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('siedels-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);document.querySelector('meta[name="theme-color"]')?.setAttribute('content',t==='dark'?'#0E0E0E':'#CDC7BB');}})();` }} />
       </head>
       <body>
         <a href="#main" className="skip-link">Skip to main content</a>
