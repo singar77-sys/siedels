@@ -40,7 +40,7 @@ export function ServicesPanel({ onSelectService }: ServicesPanelProps) {
         <div className="mt-12 bg-red p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <p className="font-headline text-xl md:text-2xl font-black uppercase tracking-tighter text-white">READY TO BOOK?</p>
-            <p className="font-body text-sm text-white/70 mt-1">Walk-ins welcome. Or lock in your time online.</p>
+            <p className="font-body text-sm text-white/70 mt-1">Lock in your time online. Cash only at checkout.</p>
           </div>
           <div className="flex gap-4">
             <a

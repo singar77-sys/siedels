@@ -75,7 +75,7 @@ export default async function SchedulePage() {
               <span className="text-stroke">{week.relation === 'upcoming' ? 'UP' : 'WEEK'}</span>
             </h1>
             <p className="font-body text-base md:text-lg text-text-muted max-w-2xl mt-6">
-              Who&apos;s in the chair, when. Updated weekly. Walk-ins welcome every day but Sunday.
+              Who&apos;s in the chair, when. Updated weekly.
             </p>
           </div>
 

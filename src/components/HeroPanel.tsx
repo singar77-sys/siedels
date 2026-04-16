@@ -42,15 +42,20 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
         <div className="border-l-4 border-red pl-8">
           <p className={`font-label text-[11px] tracking-[0.3em] mb-6 hero-stagger-1 ${
             isLight ? 'text-[#C5B699]' : 'text-red'
-          }`}>MEDINA, OHIO</p>
+          }`}>IN MEMORY OF CARL SIEDEL</p>
           <h1 className="font-headline text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black uppercase tracking-tighter leading-[0.85] mb-8">
             <span className={`hero-stagger-2 inline-block ${isLight ? 'text-[#E5E0D4]' : 'text-white'}`}>STAY</span><br />
             <span className={`hero-stagger-3 inline-block ${isLight ? 'text-[#C5B699]' : 'text-stroke'}`}>SHARP</span>
           </h1>
-          <p className={`font-body text-lg md:text-xl max-w-xl leading-relaxed mb-10 hero-stagger-4 ${
+          <p className={`font-body text-lg md:text-xl max-w-xl leading-relaxed mb-4 hero-stagger-4 ${
             isLight ? 'text-[#CDC7BB]' : 'text-text-muted'
           }`}>
-            Eleven barbers. Walk-ins welcome. Court Street.
+            Haircuts, fades, beard work, and straight razor shaves on Court Street in Medina, Ohio.
+          </p>
+          <p className={`font-label text-[11px] tracking-[0.25em] mb-10 hero-stagger-4 ${
+            isLight ? 'text-[#C5B699]' : 'text-red'
+          }`}>
+            CASH ONLY · ATM ON SITE
           </p>
           <div className="flex flex-col sm:flex-row gap-4 hero-stagger-5">
             <a

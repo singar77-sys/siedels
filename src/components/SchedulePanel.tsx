@@ -41,7 +41,7 @@ export function SchedulePanel({ scheduleWeek, scheduleRelation, scheduleDaysUnti
               {scheduleRelation === 'upcoming' ? 'NEXT WEEK' : 'THIS WEEK'}
             </h2>
             <p className="font-body text-sm text-text-subtle mt-2">
-              Who&apos;s in the chair, when. Walk-ins welcome.
+              Who&apos;s in the chair, when. Book online or call ahead.
             </p>
           </div>
           <span className="font-label text-[9px] tracking-widest text-red whitespace-nowrap">

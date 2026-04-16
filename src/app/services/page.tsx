@@ -9,7 +9,7 @@ import { PHONE, PHONE_HREF, SQUARE_BOOKING_URL } from '@/data/shop';
 
 export const metadata: Metadata = {
   title: "Services & Prices | Siedel's Barbershop | Medina, Ohio",
-  description: "Haircuts, fades, beard trims, head shaves, and more. Straight-up pricing from $5–$96. Walk-ins welcome at Siedel's Barbershop.",
+  description: "Haircuts, fades, beard work, head shaves, and more. Straight-up pricing from $5–$96. Cash only. ATM on site.",
   alternates: { canonical: '/services' },
   openGraph: {
     title: "Services & Prices | Siedel's Barbershop",
@@ -18,7 +18,8 @@ export const metadata: Metadata = {
 };
 
 const faqItems = [
-  { q: 'Do you take walk-ins?', a: "Yes. Walk-ins are always welcome. No appointment necessary. If you want a specific time, book online or call (330) 952-0777." },
+  { q: 'How do I book?', a: "Book online through Square or call (330) 952-0777 to reserve a specific time with the barber of your choice." },
+  { q: 'Do you take cards?', a: "Cash only. There is an ATM on site." },
   { q: "How much is a haircut at Siedel's?", a: 'Standard haircut is $32. Razor / foil fades $38. Haircut + beard trim $42. Haircut + face shave $63.' },
   { q: 'Can I book a specific barber?', a: 'Yes. 11 barbers on staff, each with their own booking link. Visit the Team page to pick yours.' },
   { q: 'What payment methods do you accept?', a: 'Cash and all major credit cards.' },
@@ -45,7 +46,7 @@ export default function ServicesPage() {
           label="ELITE CRAFTSMANSHIP"
           title="SERVICES &"
           titleAccent="PRICES"
-          subtitle="Straight-up pricing. No surprises. Walk-ins welcome or call ahead."
+          subtitle="Straight-up pricing. No surprises. Cash only. ATM on site."
         />
 
         <section className="py-20 md:py-28">

@@ -14,12 +14,12 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: "Siedel's Barbershop | Haircuts & Fades | Medina, Ohio",
-  description: "11 barbers in Medina, Ohio. Walk-ins welcome. Haircuts, fades, beard trims, straight razor shaves on Court Street.",
-  keywords: ['barbershop', 'Medina Ohio', 'haircuts', 'beard trim', 'barber', 'fades', 'Cleveland', 'Medina County', 'walk-ins', 'Court Street'],
+  description: "Eleven barbers in Medina, Ohio. Haircuts, fades, beard work, straight razor shaves. Cash only. ATM on site.",
+  keywords: ['barbershop', 'Medina Ohio', 'haircuts', 'beard trim', 'barber', 'fades', 'Cleveland', 'Medina County', 'straight razor shave', 'Court Street'],
   alternates: { canonical: '/' },
   openGraph: {
     title: "Siedel's Barbershop | Medina, Ohio",
-    description: "11 barbers in Medina, Ohio. Walk-ins welcome.",
+    description: "Eleven barbers in Medina, Ohio. Cash only. ATM on site.",
     url: '/',
     siteName: "Siedel's Barbershop",
     type: 'website',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Siedel's Barbershop | Medina, Ohio",
-    description: "11 barbers in Medina, Ohio. Walk-ins welcome.",
+    description: "Eleven barbers in Medina, Ohio. Cash only. ATM on site.",
     images: ['/images/siedels-barbershop-medina-ohio.webp'],
   },
   robots: {
@@ -45,7 +45,7 @@ const jsonLd = {
   '@id': `${BASE_URL}/#barbershop`,
   name: "Siedel's Barbershop",
   image: `${BASE_URL}/images/siedels-barbershop-medina-ohio.webp`,
-  description: "11 barbers in Medina, Ohio. Walk-ins welcome. Haircuts, fades, beard trims, straight razor shaves.",
+  description: "Eleven barbers in Medina, Ohio. Haircuts, fades, beard work, straight razor shaves. Cash only.",
   url: BASE_URL,
   telephone: '+13309520777',
   priceRange: '$5–$96',

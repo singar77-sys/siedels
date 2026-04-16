@@ -139,7 +139,7 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
           })}
           <div className="bg-red border border-red p-4 md:p-6 flex flex-col items-center justify-center text-center">
             <p className="font-headline text-lg md:text-2xl font-black uppercase tracking-tighter text-white mb-2">YOUR CHAIR<br />IS WAITING</p>
-            <p className="font-body text-xs text-white/70 mb-6">Walk-ins welcome every day but Sunday.</p>
+            <p className="font-body text-xs text-white/70 mb-6">Book online or call to reserve your chair.</p>
             <a
               href={PHONE_HREF}
               className="block w-full py-2 md:py-3 border border-white text-white font-headline text-xs md:text-sm font-bold uppercase tracking-widest text-center hover:bg-white hover:text-red transition-all duration-300"

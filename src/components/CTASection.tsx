@@ -13,7 +13,7 @@ export function CTASection() {
             </h2>
           </div>
           <p className="font-body text-text-muted text-base md:text-lg mb-10 max-w-xl mx-auto">
-            Walk-ins welcome. Or call ahead and we&apos;ll have a chair waiting.
+            Book online or call ahead. Cash only at checkout. ATM on site.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a

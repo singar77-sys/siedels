@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/contact' },
   openGraph: {
     title: "Contact & Hours | Siedel's Barbershop",
-    description: "982 N Court Street, Medina Ohio. Open Mon–Sat. Walk-ins welcome.",
+    description: "982 N Court Street, Medina Ohio. Open Monday through Saturday. Cash only. ATM on site.",
   },
 };
 
@@ -27,7 +27,7 @@ export default function ContactPage() {
           label="DESTINATION FOUND"
           title="MEDINA"
           titleAccent="CENTRAL"
-          subtitle="982 N Court Street, Medina. Walk-ins welcome every day but Sunday."
+          subtitle="982 N Court Street, Medina. Cash only. ATM on site."
         />
 
         <section className="py-20 md:py-28">
