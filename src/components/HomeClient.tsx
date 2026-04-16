@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SQUARE_BOOKING_URL, PHONE, PHONE_HREF, type TeamMember, type Service } from '@/data/shop';
+import { SQUARE_BOOKING_URL, PHONE, PHONE_HREF, MAPS_URL, type TeamMember, type Service } from '@/data/shop';
 import { Modal } from './Modal';
 import { ThemeToggle } from './ThemeToggle';
 import { HeroPanel } from './HeroPanel';
@@ -126,24 +126,42 @@ export function HomeClient({
           </svg>
           SIEDEL&apos;S BARBERSHOP
         </Link>
-        <nav className="hidden md:flex items-center gap-10">
-          {PANELS.map((label, i) => (
-            <button
-              key={label}
-              onClick={() => scrollToPanel(i)}
-              className={`font-headline text-[19px] font-bold uppercase tracking-tight transition-colors duration-300 ${
-                active === i ? 'text-red' : 'text-text-subtle hover:text-white'
-              }`}
-            >
-              {label}
-            </button>
-          ))}
+        <nav className="hidden md:flex items-center gap-6">
+          <div className="flex items-center gap-0 relative">
+            {/* Track line */}
+            <div className="absolute top-1/2 left-0 right-0 h-px bg-line-strong -translate-y-[14px]" />
+            {/* Progress fill */}
+            <div
+              className="absolute top-1/2 left-0 h-px bg-red -translate-y-[14px] transition-all duration-500 ease-out"
+              style={{ width: `${(active / (PANELS.length - 1)) * 100}%` }}
+            />
+            {PANELS.map((label, i) => (
+              <button
+                key={label}
+                onClick={() => scrollToPanel(i)}
+                className="flex flex-col items-center gap-2 px-4 group relative"
+              >
+                {/* Dot */}
+                <div className={`w-2.5 h-2.5 rounded-full border-2 transition-all duration-300 ${
+                  i <= active
+                    ? 'bg-red border-red scale-100'
+                    : 'bg-transparent border-line-strong group-hover:border-text-subtle scale-90'
+                }`} />
+                {/* Label */}
+                <span className={`font-headline text-[13px] font-bold uppercase tracking-tight transition-all duration-300 ${
+                  active === i ? 'text-red' : 'text-text-subtle group-hover:text-text-muted'
+                }`}>
+                  {label}
+                </span>
+              </button>
+            ))}
+          </div>
           <ThemeToggle />
           <a
             href={SQUARE_BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-red text-white px-8 py-3 font-headline text-[19px] font-bold uppercase tracking-tight hover:bg-red-hover transition-colors"
+            className="bg-red text-white px-8 py-3 font-headline text-[15px] font-bold uppercase tracking-tight hover:bg-red-hover transition-colors"
           >
             BOOK NOW
           </a>
@@ -238,7 +256,7 @@ export function HomeClient({
           <a href="https://huntersystems.dev" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-red transition-colors">HUNTER SYSTEMS</a>
         </p>
         <div className="hidden md:flex items-center gap-10">
-          <span className="font-label text-[16px] tracking-[0.12em] text-text-subtle">982 N COURT STREET, MEDINA, OHIO 44256</span>
+          <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="font-label text-[16px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">982 N COURT STREET, MEDINA, OHIO 44256</a>
           <a href={PHONE_HREF} className="font-label text-[16px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">{PHONE}</a>
         </div>
       </footer>
