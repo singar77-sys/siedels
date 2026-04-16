@@ -5,11 +5,13 @@ export function ContactPanel() {
   return (
     <section className="min-w-full h-full snap-start grid-bg overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
       <div className="max-w-5xl mx-auto px-8 py-16 md:py-24 w-full">
-        <div className="border-l-4 border-red pl-8 mb-10 md:mb-14">
-          <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">DESTINATION FOUND</p>
-          <h2 className="font-headline text-4xl md:text-7xl font-black uppercase tracking-tighter leading-[0.85]">
-            MEDINA<br /><span className="text-red">CENTRAL</span>
+        <div className="mb-10 md:mb-14">
+          <h2 className="font-headline text-5xl md:text-[7vw] font-black uppercase tracking-tighter leading-[0.82]">
+            982 N COURT
           </h2>
+          <p className="font-headline text-3xl md:text-[4vw] font-black uppercase tracking-tighter leading-[0.85] text-stroke">
+            MEDINA, OHIO
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
@@ -56,27 +58,34 @@ export function ContactPanel() {
           </div>
         </div>
 
-        {/* Testimonials */}
-        <div className="mt-12">
-          <div className="flex items-center justify-between mb-6">
-            <p className="font-label text-[10px] tracking-widest text-text-subtle">WHAT THEY&apos;RE SAYING · 4.9 STARS · 249 REVIEWS</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {testimonials.slice(0, 6).map((t) => (
-              <div key={t.name} className="bg-surface border border-line-strong p-6">
-                <div className="flex items-center gap-1 mb-3">
-                  {Array.from({ length: t.rating }).map((_, i) => (
-                    <span key={i} className="text-red text-xs">&#9733;</span>
-                  ))}
-                </div>
-                <p className="font-body text-sm text-text-muted leading-relaxed mb-4">&ldquo;{t.text}&rdquo;</p>
-                <div className="flex items-center justify-between">
-                  <span className="font-headline text-xs font-bold uppercase tracking-tight text-white">{t.name}</span>
-                  {t.barber && (
-                    <span className="font-label text-[9px] tracking-widest text-text-subtle">w/ {t.barber.split(' ')[0].toUpperCase()}</span>
-                  )}
-                </div>
-              </div>
+        {/* Featured Testimonial — cinematic block */}
+        <div className="mt-12 py-10 md:py-14 border-t border-b border-line-strong">
+          <p className="font-label text-[10px] tracking-widest text-text-subtle mb-6">4.9 STARS · 249 REVIEWS</p>
+          <blockquote className="max-w-3xl">
+            <p className="font-body text-lg md:text-2xl text-text-muted leading-relaxed italic">
+              &ldquo;{testimonials[0].text}&rdquo;
+            </p>
+            <footer className="mt-6 flex items-center gap-3">
+              <div className="w-8 h-px bg-red" />
+              <span className="font-headline text-sm font-bold uppercase tracking-tight">{testimonials[0].name}</span>
+              {testimonials[0].barber && (
+                <span className="font-label text-[9px] tracking-widest text-text-subtle">
+                  w/ <span className="text-red">{testimonials[0].barber.split(' ')[0].toUpperCase()}</span>
+                </span>
+              )}
+            </footer>
+          </blockquote>
+        </div>
+
+        {/* Ambient review ticker */}
+        <div className="mt-6 overflow-hidden relative">
+          <div className="flex gap-8 animate-ticker whitespace-nowrap">
+            {[...testimonials.slice(1), ...testimonials.slice(1)].map((t, i) => (
+              <span key={i} className="font-body text-sm text-text-subtle inline-flex items-center gap-2 flex-none">
+                <span className="text-red text-xs">&#9733;</span>
+                &ldquo;{t.text}&rdquo;
+                <span className="font-headline text-xs font-bold text-text-faint">&mdash; {t.name}</span>
+              </span>
             ))}
           </div>
         </div>

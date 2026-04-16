@@ -7,12 +7,14 @@ export function ThemeToggle() {
 
   return (
     <button
-      onClick={toggle}
+      onClick={(e) => toggle(e)}
       className="p-2 text-text-subtle hover:text-red transition-colors"
       aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
       title={theme === 'dark' ? 'Shop palette' : 'Dark mode'}
     >
-      <span className="material-symbols-outlined text-lg">
+      <span className={`material-symbols-outlined text-lg transition-transform duration-300 inline-block ${
+        theme === 'light' ? 'rotate-180' : 'rotate-0'
+      }`}>
         {theme === 'dark' ? 'light_mode' : 'dark_mode'}
       </span>
     </button>

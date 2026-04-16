@@ -35,17 +35,18 @@ export function SchedulePanel({ scheduleWeek, scheduleRelation, scheduleDaysUnti
   return (
     <section className="min-w-full h-full snap-start grid-bg overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
       <div className="max-w-7xl mx-auto px-8 py-16 md:py-24 w-full">
-        <div className="border-l-4 border-red pl-8 mb-10 md:mb-14">
-          <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">
-            {scheduleRelation === 'upcoming' ? 'NEXT WEEK' : 'WEEKLY ROSTER'}
-          </p>
-          <h2 className="font-headline text-4xl md:text-7xl font-black uppercase tracking-tighter leading-[0.85]">
-            {scheduleRelation === 'upcoming' ? 'COMING' : 'THIS'}<br />
-            <span className="text-stroke">{scheduleRelation === 'upcoming' ? 'UP' : 'WEEK'}</span>
-          </h2>
-          <p className="font-body text-base md:text-lg text-text-muted max-w-2xl mt-6">
-            Who&apos;s in the chair, when. Updated weekly. Walk-ins welcome every day but Sunday.
-          </p>
+        <div className="mb-10 md:mb-14 flex items-baseline justify-between gap-4">
+          <div>
+            <h2 className="font-headline text-2xl md:text-4xl font-bold uppercase tracking-tight">
+              {scheduleRelation === 'upcoming' ? 'NEXT WEEK' : 'THIS WEEK'}
+            </h2>
+            <p className="font-body text-sm text-text-subtle mt-2">
+              Who&apos;s in the chair, when. Walk-ins welcome.
+            </p>
+          </div>
+          <span className="font-label text-[9px] tracking-widest text-red whitespace-nowrap">
+            {scheduleRelation === 'upcoming' ? 'UPCOMING' : 'LIVE'}
+          </span>
         </div>
 
         {scheduleWeek.stale && (

@@ -27,10 +27,10 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
     <section className="min-w-full h-full snap-start grid-bg overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
       <div className="max-w-7xl mx-auto px-8 py-16 md:py-24 w-full">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10 md:mb-14">
-          <div className="border-l-4 border-red pl-8">
+          <div>
             <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">THE CREW</p>
-            <h2 className="font-headline text-4xl md:text-7xl font-black uppercase tracking-tighter leading-[0.85]">
-              MEET THE<br /><span className="text-stroke">SPECIALISTS</span>
+            <h2 className="font-headline text-5xl md:text-[8vw] lg:text-[6vw] font-black uppercase tracking-tighter leading-[0.82] text-text-faint">
+              MEET THE<br /><span className="text-text">SPECIALISTS</span>
             </h2>
           </div>
           {scheduleIsCurrent && !scheduleToday.isClosed && scheduleToday.working.length > 0 && (
@@ -59,15 +59,18 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
         )}
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0">
-          {team.map((member) => {
+          {team.map((member, idx) => {
             const shift = getMemberShift(member.name);
             const isWorking = shift?.status === 'working';
             const isOff = shift?.status === 'off';
             const isOffsite = shift?.status === 'offsite';
+            const isAnchor = idx === 0; // Jim — double-width
             return (
               <div
                 key={member.name}
-                className="bg-surface border border-line-strong p-4 md:p-6 group hover:bg-surface-high transition-colors duration-500 cursor-pointer relative"
+                className={`bg-surface border border-line-strong p-4 md:p-6 group hover:bg-surface-high transition-colors duration-500 cursor-pointer relative ${
+                  isAnchor ? 'col-span-2 row-span-1' : ''
+                }`}
                 onClick={() => onSelectMember(member)}
                 role="button"
                 tabIndex={0}
@@ -100,7 +103,7 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
                     )}
                   </div>
                 )}
-                <div className={`aspect-[3/4] overflow-hidden bg-surface-raised mb-4 relative ${!isWorking && shift ? 'opacity-60' : ''}`}>
+                <div className={`${isAnchor ? 'aspect-[3/2]' : 'aspect-[3/4]'} overflow-hidden bg-surface-raised mb-4 relative ${!isWorking && shift ? 'opacity-60' : ''}`}>
                   {member.image ? (
                     <Image
                       src={member.image}
@@ -117,8 +120,11 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
                     </div>
                   )}
                 </div>
-                <h3 className="font-headline text-base md:text-xl font-black uppercase tracking-tighter mb-1 text-white">{member.name}</h3>
-                <p className="font-label text-[8px] md:text-[10px] tracking-widest text-red mb-4">{member.title.toUpperCase()}</p>
+                <h3 className={`font-headline font-black uppercase tracking-tighter mb-1 text-white ${isAnchor ? 'text-xl md:text-2xl' : 'text-base md:text-xl'}`}>{member.name}</h3>
+                <p className="font-label text-[8px] md:text-[10px] tracking-widest text-red mb-3">{member.title.toUpperCase()}</p>
+                {isAnchor && member.bio && (
+                  <p className="font-body text-xs text-text-muted leading-relaxed mb-4 line-clamp-2 hidden md:block">{member.bio}</p>
+                )}
                 <a
                   href={member.booking}
                   target="_blank"
