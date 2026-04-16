@@ -9,6 +9,10 @@ export const ADDRESS = '982 N Court Street';
 export const CITY_STATE_ZIP = 'Medina, Ohio 44256';
 export const MAPS_URL = 'https://maps.google.com/?q=982+N+Court+Street+Medina+OH+44256';
 export const GOOGLE_BUSINESS_URL = 'https://share.google/n7DB5686mE05Db6tK';
+export const EMAIL = 'siedelsbarbershop@gmail.com';
+export const EMAIL_HREF = 'mailto:siedelsbarbershop@gmail.com';
+export const FACEBOOK_URL = 'https://www.facebook.com/siedelsbarbershop';
+export const INSTAGRAM_URL = 'https://www.instagram.com/siedels';
 
 export interface TeamMember {
   name: string;

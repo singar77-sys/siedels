@@ -14,12 +14,12 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: "Siedel's Barbershop | Haircuts & Fades | Medina, Ohio",
-  description: "Northeast Ohio's premier barbershop. 11 barbers, walk-ins welcome. Haircuts, fades, beard trims on Court Street in Medina.",
+  description: "11 barbers in Medina, Ohio. Walk-ins welcome. Haircuts, fades, beard trims, straight razor shaves on Court Street.",
   keywords: ['barbershop', 'Medina Ohio', 'haircuts', 'beard trim', 'barber', 'fades', 'Cleveland', 'Medina County', 'walk-ins', 'Court Street'],
   alternates: { canonical: '/' },
   openGraph: {
     title: "Siedel's Barbershop | Medina, Ohio",
-    description: "Northeast Ohio's premier barbershop. 11 barbers, walk-ins welcome.",
+    description: "11 barbers in Medina, Ohio. Walk-ins welcome.",
     url: '/',
     siteName: "Siedel's Barbershop",
     type: 'website',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Siedel's Barbershop | Medina, Ohio",
-    description: "Northeast Ohio's premier barbershop. 11 barbers, walk-ins welcome.",
+    description: "11 barbers in Medina, Ohio. Walk-ins welcome.",
     images: ['/images/siedels-barbershop-medina-ohio.webp'],
   },
   robots: {
@@ -45,11 +45,15 @@ const jsonLd = {
   '@id': `${BASE_URL}/#barbershop`,
   name: "Siedel's Barbershop",
   image: `${BASE_URL}/images/siedels-barbershop-medina-ohio.webp`,
-  description: "Northeast Ohio's premier barbershop. Haircuts, fades, beard trims on Court Street in Medina.",
+  description: "11 barbers in Medina, Ohio. Walk-ins welcome. Haircuts, fades, beard trims, straight razor shaves.",
   url: BASE_URL,
   telephone: '+13309520777',
   priceRange: '$5–$96',
-  sameAs: ['https://share.google/n7DB5686mE05Db6tK'],
+  sameAs: [
+    'https://share.google/n7DB5686mE05Db6tK',
+    'https://www.facebook.com/siedelsbarbershop',
+    'https://www.instagram.com/siedels',
+  ],
   address: {
     '@type': 'PostalAddress',
     streetAddress: '982 N Court Street',

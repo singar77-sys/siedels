@@ -82,7 +82,7 @@ export default function ContactPage() {
                   <div className="mt-10 bg-surface border border-red/40 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div>
                       <p className="font-headline text-sm font-bold uppercase tracking-tight mb-1">BEEN IN THE CHAIR?</p>
-                      <p className="font-body text-xs text-text-subtle">Leave us a review — it means the world.</p>
+                      <p className="font-body text-xs text-text-subtle">Tell us how we did.</p>
                     </div>
                     <a
                       href={GOOGLE_BUSINESS_URL}

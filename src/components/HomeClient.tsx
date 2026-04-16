@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { SQUARE_BOOKING_URL, PHONE, PHONE_HREF, MAPS_URL, type TeamMember, type Service } from '@/data/shop';
 import { Modal } from './Modal';
 import { ThemeToggle } from './ThemeToggle';
+import { SocialIcons } from './SocialIcons';
 import { HeroPanel } from './HeroPanel';
 import { ServicesPanel } from './ServicesPanel';
 import { TeamPanel } from './TeamPanel';
@@ -250,19 +251,23 @@ export function HomeClient({
       </main>
 
       {/* ══ Footer ═════════════════════════════ */}
-      <footer className="relative z-50 flex-none bg-ink px-6 md:px-12 py-4 md:py-0 md:h-[8rem] flex flex-col md:flex-row items-center justify-between gap-2">
+      <footer className="relative z-50 flex-none bg-ink px-6 md:px-12 py-4 md:py-0 md:h-[8rem] flex flex-col md:flex-row items-center justify-between gap-3">
         <div className="flex flex-col items-center md:items-start gap-1">
           <p className="font-label text-[13px] tracking-[0.15em] text-text-subtle">
-            &copy; {new Date().getFullYear()} SIEDEL&apos;S BARBERSHOP &mdash; POWERED BY{' '}
-            <a href="https://huntersystems.dev" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-red transition-colors">HUNTER SYSTEMS</a>
+            &copy; {new Date().getFullYear()} SIEDEL&apos;S BARBERSHOP
           </p>
-          <p className="font-body text-[10px] text-text-faint italic tracking-wide">
-            Named for Carl Siedel. A tribute.
+          <p className="font-label text-[10px] tracking-[0.15em] text-text-faint">
+            BUILT BY{' '}
+            <a href="https://huntersystems.dev" target="_blank" rel="noopener noreferrer" className="text-text-subtle hover:text-red transition-colors">HUNTER SYSTEMS</a>
           </p>
         </div>
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-8">
           <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="font-label text-[13px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">982 N COURT STREET, MEDINA, OHIO 44256</a>
           <a href={PHONE_HREF} className="font-label text-[13px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">{PHONE}</a>
+          <SocialIcons />
+        </div>
+        <div className="md:hidden">
+          <SocialIcons />
         </div>
       </footer>
 

@@ -42,7 +42,7 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
         <div className="border-l-4 border-red pl-8">
           <p className={`font-label text-[11px] tracking-[0.3em] mb-6 hero-stagger-1 ${
             isLight ? 'text-[#C5B699]' : 'text-red'
-          }`}>IN MEMORY OF CARL SIEDEL</p>
+          }`}>MEDINA, OHIO</p>
           <h1 className="font-headline text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black uppercase tracking-tighter leading-[0.85] mb-8">
             <span className={`hero-stagger-2 inline-block ${isLight ? 'text-[#E5E0D4]' : 'text-white'}`}>STAY</span><br />
             <span className={`hero-stagger-3 inline-block ${isLight ? 'text-[#C5B699]' : 'text-stroke'}`}>SHARP</span>
@@ -50,7 +50,7 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
           <p className={`font-body text-lg md:text-xl max-w-xl leading-relaxed mb-10 hero-stagger-4 ${
             isLight ? 'text-[#CDC7BB]' : 'text-text-muted'
           }`}>
-            Built for Carl. Honest cuts, honest conversation. Court Street, Medina &mdash; open since day one.
+            Eleven barbers. Walk-ins welcome. Court Street.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 hero-stagger-5">
             <a

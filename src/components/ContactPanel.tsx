@@ -84,7 +84,7 @@ export function ContactPanel() {
               <span key={i} className="font-body text-sm text-text-subtle inline-flex items-center gap-2 flex-none">
                 <span className="text-red text-xs">&#9733;</span>
                 &ldquo;{t.text}&rdquo;
-                <span className="font-headline text-xs font-bold text-text-faint">&mdash; {t.name}</span>
+                <span className="font-headline text-xs font-bold text-text-faint">/ {t.name}</span>
               </span>
             ))}
           </div>
@@ -94,7 +94,7 @@ export function ContactPanel() {
         <div className="mt-6 bg-surface border border-red/40 p-8 md:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
             <p className="font-headline text-lg font-bold uppercase tracking-tight mb-1 text-white">BEEN IN THE CHAIR?</p>
-            <p className="font-body text-xs text-text-subtle">Leave us a review — it means the world to the crew.</p>
+            <p className="font-body text-xs text-text-subtle">Tell us how we did. The crew reads every one.</p>
           </div>
           <a
             href={GOOGLE_BUSINESS_URL}
