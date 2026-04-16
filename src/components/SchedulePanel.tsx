@@ -100,11 +100,13 @@ export function SchedulePanel({ scheduleWeek, scheduleRelation, scheduleDaysUnti
                 </tr>
               </thead>
               <tbody>
-                {team.map((member, idx) => {
+                {(() => {
+                  let rowIndex = 0;
+                  return team.map((member) => {
                   const firstName = member.name.split(/\s+/)[0].toLowerCase();
                   const hasData = scheduleWeek.days.some((d) => d.shifts[firstName]);
                   if (!hasData) return null;
-                  const zebra = idx % 2 === 0 ? 'bg-surface' : 'bg-ink/50';
+                  const zebra = rowIndex++ % 2 === 0 ? 'bg-surface' : 'bg-ink/50';
                   return (
                     <tr key={firstName} className={`border-b border-line-strong last:border-b-0 ${zebra}`}>
                       <td className={`sticky left-0 z-10 p-4 font-headline text-sm md:text-base font-black uppercase tracking-tight text-white border-r border-line-strong whitespace-nowrap ${zebra}`}>
@@ -148,7 +150,8 @@ export function SchedulePanel({ scheduleWeek, scheduleRelation, scheduleDaysUnti
                       })}
                     </tr>
                   );
-                })}
+                  });
+                })()}
               </tbody>
             </table>
           </div>
@@ -156,7 +159,10 @@ export function SchedulePanel({ scheduleWeek, scheduleRelation, scheduleDaysUnti
 
         <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <p className="font-label text-[10px] tracking-widest text-text-subtle">
-            UPDATES EVERY 30 MINUTES · SCHEDULE LAST SYNCED {new Date(scheduleWeek.fetchedAt).toLocaleString('en-US', { timeZone: 'America/New_York' })}
+            UPDATES EVERY 30 MINUTES · SCHEDULE LAST SYNCED{' '}
+            {scheduleWeek.fetchedAt
+              ? new Date(scheduleWeek.fetchedAt).toLocaleString('en-US', { timeZone: 'America/New_York' })
+              : 'UNKNOWN'}
           </p>
           <Link
             href="/schedule"

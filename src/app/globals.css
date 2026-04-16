@@ -37,8 +37,8 @@
   --surface:       #C0BBB8;
   --surface-raised:#938884;
   --surface-high:  #B8B0A4;
-  --red:           #362D1E;
-  --red-hover:     #2A2216;
+  --red:           #E31B23;
+  --red-hover:     #C00015;
   --text:          #1A1610;
   --text-muted:    rgba(0,0,0,0.65);
   --text-subtle:   rgba(0,0,0,0.45);
@@ -46,10 +46,10 @@
   --line:          rgba(0,0,0,0.06);
   --line-strong:   rgba(0,0,0,0.12);
   --stroke-color:  #362D1E;
-  --selection-bg:  #362D1E;
-  --selection-text: #CDC7BB;
+  --selection-bg:  #E31B23;
+  --selection-text: white;
   --texture-opacity: 0.05;
-  --pole-red:      #362D1E;
+  --pole-red:      #E31B23;
   --pole-white:    rgba(0,0,0,0.15);
   --pole-cap:      rgba(0,0,0,0.2);
   --pole-body:     rgba(0,0,0,0.06);

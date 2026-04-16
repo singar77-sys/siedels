@@ -130,7 +130,7 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="block w-full py-2 md:py-3 border border-red text-red font-headline text-xs md:text-sm font-bold uppercase tracking-widest text-center hover:bg-red hover:text-white transition-all duration-300"
+                  className="block w-full py-3 border border-red text-red font-headline text-xs md:text-sm font-bold uppercase tracking-widest text-center hover:bg-red hover:text-white transition-all duration-300"
                 >
                   BOOK
                 </a>

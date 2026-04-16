@@ -13,7 +13,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Siedel's Barbershop | Medina, Ohio Since Day One",
+  title: "Siedel's Barbershop | Haircuts & Fades | Medina, Ohio",
   description: "Northeast Ohio's premier barbershop. 11 barbers, walk-ins welcome. Haircuts, fades, beard trims on Court Street in Medina.",
   keywords: ['barbershop', 'Medina Ohio', 'haircuts', 'beard trim', 'barber', 'fades', 'Cleveland', 'Medina County', 'walk-ins', 'Court Street'],
   alternates: { canonical: '/' },
@@ -67,7 +67,7 @@ const jsonLd = {
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '08:00', closes: '18:00' },
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '08:00', closes: '15:00' },
   ],
-  aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.8', reviewCount: '200', bestRating: '5' },
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '249', bestRating: '5' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
