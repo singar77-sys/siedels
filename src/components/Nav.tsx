@@ -8,8 +8,8 @@ import { ThemeToggle } from './ThemeToggle';
 
 const NAV_LINKS = [
   { label: 'HOME', href: '/' },
-  { label: 'SERVICES', href: '/services' },
   { label: 'TEAM', href: '/team' },
+  { label: 'SERVICES', href: '/services' },
   { label: 'SCHEDULE', href: '/schedule' },
   { label: 'CONTACT', href: '/contact' },
 ];
@@ -34,7 +34,7 @@ export function Nav() {
       }`}
     >
       {/* Brand */}
-      <Link href="/" className="font-headline text-xl md:text-2xl font-black tracking-tighter text-white uppercase">
+      <Link href="/" className="font-headline text-xl md:text-2xl font-black tracking-tighter text-text uppercase">
         SIEDEL&apos;S BARBERSHOP
       </Link>
 
