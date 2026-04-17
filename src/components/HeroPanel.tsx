@@ -55,7 +55,7 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
           </p>
           <h1 className="font-headline text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black uppercase tracking-tighter leading-[0.85] mb-8">
             <span className="hero-stagger-2 inline-block" style={{ color: 'var(--hero-h1)' }}>STAY</span><br />
-            <span className="hero-stagger-3 inline-block text-stroke">SHARP</span>
+            <span className="hero-stagger-3 inline-block hero-sharp">SHARP</span>
           </h1>
           <p
             className="font-body text-lg md:text-xl max-w-xl leading-relaxed mb-4 hero-stagger-4"
