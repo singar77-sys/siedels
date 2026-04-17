@@ -27,7 +27,7 @@ export function Modal({ onClose, children }: ModalProps) {
       role="dialog"
       aria-modal="true"
     >
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
+      <div className="absolute inset-0 backdrop-blur-sm" style={{ background: 'var(--scrim)' }} />
       <div
         className="relative bg-surface border border-line-strong max-w-lg w-full shadow-2xl max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}

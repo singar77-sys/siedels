@@ -85,9 +85,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
         />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#0E0E0E" />
+        <meta name="theme-color" content="#CDC7BB" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('siedels-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);document.querySelector('meta[name="theme-color"]')?.setAttribute('content',t==='dark'?'#0E0E0E':'#CDC7BB');}})();` }} />
+        <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('siedels-theme');var theme=(t==='light'||t==='dark')?t:'light';document.documentElement.setAttribute('data-theme',theme);document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme==='dark'?'#0E0E0E':'#CDC7BB');})();` }} />
       </head>
       <body>
         <a href="#main" className="skip-link">Skip to main content</a>

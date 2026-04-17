@@ -5,33 +5,8 @@
    Siedel's Barbershop — Multi-Theme Design System
    ══════════════════════════════════════════════════════ */
 
-/* ── Dark Theme (default) ────────────────────────────── */
+/* ── Light Theme (default — shop palette) ────────────── */
 :root,
-[data-theme="dark"] {
-  --ink:           #0E0E0E;
-  --surface:       #131313;
-  --surface-raised:#1C1B1B;
-  --surface-high:  #2A2A2A;
-  --red:           #E31B23;
-  --red-hover:     #C00015;
-  --text:          #E5E2E1;
-  --text-muted:    rgba(255,255,255,0.7);
-  --text-subtle:   rgba(255,255,255,0.55);
-  --text-faint:    rgba(255,255,255,0.45);
-  --line:          rgba(255,255,255,0.05);
-  --line-strong:   rgba(255,255,255,0.1);
-  --stroke-color:  white;
-  --selection-bg:  #E31B23;
-  --selection-text: white;
-  --texture-opacity: 0.035;
-  --pole-red:      #E31B23;
-  --pole-white:    rgba(255,255,255,0.5);
-  --pole-cap:      rgba(255,255,255,0.3);
-  --pole-body:     rgba(255,255,255,0.12);
-  --hero-brightness: 0.5;
-}
-
-/* ── Light Theme (shop palette) ──────────────────────── */
 [data-theme="light"] {
   --ink:           #CDC7BB;
   --surface:       #C0BBB8;
@@ -54,6 +29,53 @@
   --pole-cap:      rgba(0,0,0,0.2);
   --pole-body:     rgba(0,0,0,0.06);
   --hero-brightness: 0.6;
+  --scrim:         rgba(0,0,0,0.6);
+  --hero-overlay:  linear-gradient(to right, rgba(0,0,0,0.55), rgba(0,0,0,0.25), transparent);
+  --hero-eyebrow:  #C5B699;
+  --hero-h1:       #E5E0D4;
+  --hero-h1-accent:#C5B699;
+  --hero-tagline:  #CDC7BB;
+  --hero-cta-bg:   #C5B699;
+  --hero-cta-text: #1A1610;
+  --hero-cta-hover:#B8A88A;
+  --hero-ghost-border: rgba(197,182,153,0.4);
+  --hero-ghost-text:   #CDC7BB;
+}
+
+/* ── Dark Theme ──────────────────────────────────────── */
+[data-theme="dark"] {
+  --ink:           #0E0E0E;
+  --surface:       #131313;
+  --surface-raised:#1C1B1B;
+  --surface-high:  #2A2A2A;
+  --red:           #E31B23;
+  --red-hover:     #C00015;
+  --text:          #E5E2E1;
+  --text-muted:    rgba(255,255,255,0.7);
+  --text-subtle:   rgba(255,255,255,0.55);
+  --text-faint:    rgba(255,255,255,0.45);
+  --line:          rgba(255,255,255,0.05);
+  --line-strong:   rgba(255,255,255,0.1);
+  --stroke-color:  white;
+  --selection-bg:  #E31B23;
+  --selection-text: white;
+  --texture-opacity: 0.035;
+  --pole-red:      #E31B23;
+  --pole-white:    rgba(255,255,255,0.5);
+  --pole-cap:      rgba(255,255,255,0.3);
+  --pole-body:     rgba(255,255,255,0.12);
+  --hero-brightness: 0.5;
+  --scrim:         rgba(0,0,0,0.8);
+  --hero-overlay:  none;
+  --hero-eyebrow:  #E31B23;
+  --hero-h1:       #ffffff;
+  --hero-h1-accent:transparent;
+  --hero-tagline:  rgba(255,255,255,0.7);
+  --hero-cta-bg:   #E31B23;
+  --hero-cta-text: #ffffff;
+  --hero-cta-hover:#C00015;
+  --hero-ghost-border: rgba(255,255,255,0.1);
+  --hero-ghost-text:   rgba(255,255,255,0.7);
 }
 
 @theme {
@@ -165,6 +187,27 @@ body {
 .animate-pole-spin {
   animation: pole-spin 0.8s linear infinite;
 }
+
+/* ── Hero CTA buttons (theme-aware) ──────────────────── */
+.hero-cta-primary {
+  background-color: var(--hero-cta-bg);
+  color: var(--hero-cta-text);
+}
+.hero-cta-primary:hover { background-color: var(--hero-cta-hover); }
+.hero-cta-ghost {
+  border-color: var(--hero-ghost-border);
+  color: var(--hero-ghost-text);
+}
+.hero-cta-ghost:hover {
+  color: var(--hero-h1);
+  border-color: var(--hero-cta-bg);
+}
+
+/* ── Hero theme-swap visibility ──────────────────────── */
+.hero-img-light { display: block; }
+.hero-img-dark  { display: none; }
+[data-theme="dark"] .hero-img-light { display: none; }
+[data-theme="dark"] .hero-img-dark  { display: block; }
 
 /* ── Hero Entrance ───────────────────────────────────── */
 @keyframes hero-rise {
