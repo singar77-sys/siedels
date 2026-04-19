@@ -7,6 +7,7 @@ import { SQUARE_BOOKING_URL, PHONE, PHONE_HREF, MAPS_URL, type TeamMember, type 
 import { Modal } from './Modal';
 import { ThemeToggle } from './ThemeToggle';
 import { SocialIcons } from './SocialIcons';
+import { HunterMark } from './HunterMark';
 import { HeroPanel } from './HeroPanel';
 import { ServicesPanel } from './ServicesPanel';
 import { GalleryPanel } from './GalleryPanel';
@@ -260,7 +261,10 @@ export function HomeClient({
           </p>
           <p className="font-label text-[10px] tracking-[0.15em] text-text-faint">
             BUILT BY{' '}
-            <a href="https://huntersystems.dev" target="_blank" rel="noopener noreferrer" className="text-text-subtle hover:text-red transition-colors">HUNTER SYSTEMS</a>
+            <a href="https://huntersystems.dev" target="_blank" rel="noopener noreferrer" className="text-text-subtle hover:text-red transition-colors inline-flex items-center gap-1.5 align-middle">
+              <HunterMark className="w-2.5 h-2.5" />
+              HUNTER SYSTEMS
+            </a>
           </p>
         </div>
         <div className="hidden md:flex items-center gap-8">

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { PHONE, PHONE_HREF, MAPS_URL, GOOGLE_BUSINESS_URL } from '@/data/shop';
 import { SocialIcons } from './SocialIcons';
+import { HunterMark } from './HunterMark';
 
 export function Footer() {
   return (
@@ -15,7 +16,8 @@ export function Footer() {
           </p>
           <p className="font-label text-[10px] tracking-[0.15em] text-text-faint">
             BUILT BY{' '}
-            <a href="https://huntersystems.dev" target="_blank" rel="noopener noreferrer" className="text-text-subtle hover:text-red transition-colors">
+            <a href="https://huntersystems.dev" target="_blank" rel="noopener noreferrer" className="text-text-subtle hover:text-red transition-colors inline-flex items-center gap-1.5 align-middle">
+              <HunterMark className="w-2.5 h-2.5" />
               HUNTER SYSTEMS
             </a>
           </p>
