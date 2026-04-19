@@ -311,6 +311,28 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
+export interface GalleryItem {
+  src: string;
+  alt: string;
+  barber?: string;
+  tag?: string;
+}
+
+export const gallery: GalleryItem[] = [
+  { src: '/images/fade-haircut-razor-lineup-siedels-medina.webp', alt: 'Razor fade with sharp lineup at Siedel\'s Barbershop, Medina Ohio', tag: 'FADE' },
+  { src: '/images/mens-haircut-scissors-siedels-medina.webp', alt: 'Precision men\'s haircut with scissors', tag: 'CLASSIC' },
+  { src: '/images/straight-razor-shave-hot-towel-siedels-medina.webp', alt: 'Hot towel and lather for straight razor shave', tag: 'SHAVE' },
+  { src: '/images/beard-trim-clippers-siedels-medina.webp', alt: 'Beard trim and shape-up with clippers', tag: 'BEARD' },
+  { src: '/images/full-service-straight-razor-shave-siedels-medina.webp', alt: 'Full service straight razor shave', tag: 'RITUAL' },
+  { src: '/images/beard-trim-scissors-siedels-medina.webp', alt: 'Beard detail work with scissors', tag: 'DETAIL' },
+  { src: '/images/mens-haircut-styling-siedels-medina.webp', alt: 'Men\'s haircut styling and finish', tag: 'STYLE' },
+  { src: '/images/kids-fade-haircut-siedels-medina.webp', alt: 'Kids fade haircut', tag: 'KIDS' },
+  { src: '/images/shoulder-length-haircut-siedels-medina.webp', alt: 'Shoulder-length haircut styling', tag: 'SHEAR WORK' },
+  { src: '/images/hot-towel-shampoo-siedels-medina.webp', alt: 'Hot towel shampoo treatment', tag: 'FINISH' },
+  { src: '/images/kids-haircut-siedels-medina-ohio.webp', alt: 'Kids haircut at Siedel\'s', tag: 'KIDS' },
+  { src: '/images/barber-tools-siedels-barbershop-medina.webp', alt: 'Barber tools laid out at Siedel\'s', tag: 'TOOLS' },
+];
+
 export const hours = [
   { day: 'Monday', time: '8 AM – 8 PM' },
   { day: 'Tuesday', time: '8 AM – 6 PM' },

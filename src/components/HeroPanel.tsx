@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { SQUARE_BOOKING_URL } from '@/data/shop';
+import { SQUARE_BOOKING_URL, testimonials } from '@/data/shop';
 
 const HERO_DARK = '/images/siedels-barbershop-medina-ohio.webp';
 const HERO_LIGHT = '/images/siedels-barbershop-golden-hour-medina-ohio.webp';
@@ -87,6 +87,32 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
           </div>
         </div>
       </div>
+      {/* Featured testimonial — bottom right, desktop only */}
+      <aside className="hidden lg:block absolute bottom-10 right-10 z-10 max-w-sm hero-stagger-5">
+        <div className="border-l-2 border-red pl-5 py-2">
+          <div className="flex items-center gap-1 mb-2">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <span key={i} className="text-red text-xs">&#9733;</span>
+            ))}
+          </div>
+          <p
+            className="font-body text-sm leading-relaxed italic mb-3 line-clamp-4"
+            style={{ color: 'var(--hero-tagline)' }}
+          >
+            &ldquo;{testimonials[0].text}&rdquo;
+          </p>
+          <p className="font-label text-[10px] tracking-widest" style={{ color: 'var(--hero-eyebrow)' }}>
+            {testimonials[0].name}
+            {testimonials[0].barber && (
+              <span style={{ color: 'var(--hero-tagline)' }}> / W/ {testimonials[0].barber.split(' ')[0].toUpperCase()}</span>
+            )}
+          </p>
+          <p className="font-label text-[9px] tracking-widest mt-1" style={{ color: 'var(--hero-tagline)' }}>
+            4.9 STARS · 249 REVIEWS
+          </p>
+        </div>
+      </aside>
+
       <button
         onClick={onScrollNext}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 text-text-subtle hover:text-red transition-colors animate-pulse"

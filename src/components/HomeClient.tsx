@@ -9,12 +9,13 @@ import { ThemeToggle } from './ThemeToggle';
 import { SocialIcons } from './SocialIcons';
 import { HeroPanel } from './HeroPanel';
 import { ServicesPanel } from './ServicesPanel';
+import { GalleryPanel } from './GalleryPanel';
 import { TeamPanel } from './TeamPanel';
 import { SchedulePanel } from './SchedulePanel';
 import { ContactPanel } from './ContactPanel';
 import type { Shift, SerializableWeekSchedule, WeekRelation } from '@/lib/schedule';
 
-const PANELS = ['HOME', 'TEAM', 'SERVICES', 'SCHEDULE', 'CONTACT'] as const;
+const PANELS = ['HOME', 'TEAM', 'WORK', 'SERVICES', 'SCHEDULE', 'CONTACT'] as const;
 
 interface ScheduleTodayProps {
   shopHours: string | null;
@@ -240,6 +241,7 @@ export function HomeClient({
             scheduleToday={scheduleToday}
             todayShifts={todayShifts}
           />
+          <GalleryPanel />
           <ServicesPanel onSelectService={setSelectedService} />
           <SchedulePanel
             scheduleWeek={scheduleWeek}
