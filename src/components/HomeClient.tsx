@@ -7,6 +7,7 @@ import { SQUARE_BOOKING_URL, PHONE, PHONE_HREF, MAPS_URL, type TeamMember, type 
 import { Modal } from './Modal';
 import { ThemeToggle } from './ThemeToggle';
 import { Icon } from './Icon';
+import { Logo } from './Logo';
 import { SocialIcons } from './SocialIcons';
 import { HunterMark } from './HunterMark';
 import { HeroPanel } from './HeroPanel';
@@ -106,29 +107,11 @@ export function HomeClient({
         <Link
           href="/"
           onClick={(e) => { e.preventDefault(); scrollToPanel(0); }}
-          className="flex items-center gap-4 font-headline text-xl md:text-3xl font-black tracking-tighter text-red uppercase"
+          aria-label="Siedel's Barbershop — home"
+          className="flex items-center"
         >
-          <svg width="24" height="56" viewBox="0 0 14 32" className="flex-none overflow-hidden" aria-hidden="true">
-            <defs>
-              <clipPath id="pole-clip">
-                <rect x="1" y="3" width="12" height="26" rx="6" />
-              </clipPath>
-            </defs>
-            <rect x="2" y="0" width="10" height="4" rx="2" fill="var(--pole-cap)" />
-            <rect x="2" y="28" width="10" height="4" rx="2" fill="var(--pole-cap)" />
-            <g clipPath="url(#pole-clip)">
-              <rect x="0" y="2" width="14" height="28" fill="var(--pole-body)" />
-              <g className="animate-pole-spin">
-                {Array.from({ length: 12 }).map((_, i) => (
-                  <g key={i}>
-                    <line x1="-4" y1={i * 6 - 6} x2="18" y2={i * 6 - 14} stroke="var(--pole-red)" strokeWidth="3" />
-                    <line x1="-4" y1={i * 6 - 3} x2="18" y2={i * 6 - 11} stroke="var(--pole-white)" strokeWidth="2" />
-                  </g>
-                ))}
-              </g>
-            </g>
-          </svg>
-          SIEDEL&apos;S BARBERSHOP
+          <Logo width={180} priority className="md:hidden" />
+          <Logo width={240} priority className="hidden md:block" />
         </Link>
         <nav className="hidden md:flex items-center gap-6">
           <div className="flex items-center gap-0 relative">

@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { PHONE_HREF, SQUARE_BOOKING_URL } from '@/data/shop';
 import { ThemeToggle } from './ThemeToggle';
 import { Icon } from './Icon';
+import { Logo } from './Logo';
 
 const NAV_LINKS = [
   { label: 'HOME', href: '/' },
@@ -35,8 +36,9 @@ export function Nav() {
       }`}
     >
       {/* Brand */}
-      <Link href="/" className="font-headline text-xl md:text-2xl font-black tracking-tighter text-text uppercase">
-        SIEDEL&apos;S BARBERSHOP
+      <Link href="/" aria-label="Siedel's Barbershop — home" className="flex items-center">
+        <Logo width={160} className="md:hidden" />
+        <Logo width={200} className="hidden md:block" />
       </Link>
 
       {/* Desktop nav */}

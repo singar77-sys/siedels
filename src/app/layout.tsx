@@ -1,15 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
-import { Khand } from 'next/font/google';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import './globals.css';
-
-const khand = Khand({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-headline',
-  display: 'swap',
-});
 
 const BASE_URL = 'https://siedels.vercel.app';
 
@@ -85,7 +77,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={khand.variable}>
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

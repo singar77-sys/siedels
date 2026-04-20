@@ -2,14 +2,15 @@ import Link from 'next/link';
 import { PHONE, PHONE_HREF, MAPS_URL, GOOGLE_BUSINESS_URL } from '@/data/shop';
 import { SocialIcons } from './SocialIcons';
 import { HunterMark } from './HunterMark';
+import { Logo } from './Logo';
 
 export function Footer() {
   return (
     <footer className="bg-ink border-t border-line-strong px-6 md:px-12 py-12 md:py-16">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
         <div className="flex flex-col gap-2">
-          <Link href="/" className="font-headline text-lg font-black text-text uppercase tracking-tighter">
-            SIEDEL&apos;S BARBERSHOP
+          <Link href="/" aria-label="Siedel's Barbershop — home" className="flex items-center mb-1">
+            <Logo width={180} />
           </Link>
           <p className="font-label text-[10px] tracking-[0.15em] text-text-subtle">
             &copy; {new Date().getFullYear()} SIEDEL&apos;S BARBERSHOP. ALL RIGHTS RESERVED.

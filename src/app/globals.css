@@ -106,14 +106,17 @@ body {
 
 /* ── Typography ───────────────────────────────────────── */
 .font-headline {
-  font-family: var(--font-headline), 'Arial', sans-serif;
+  font-family: 'General Sans', 'Arial', sans-serif;
   font-weight: 700;
 }
-.font-body  { font-family: 'General Sans', 'Arial', sans-serif; }
+.font-body  {
+  font-family: 'General Sans', 'Arial', sans-serif;
+  font-weight: 400;
+}
 .font-label {
-  font-family: var(--font-headline), 'Arial', sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.2em;
+  font-family: 'General Sans', 'Arial', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 /* ── Shop Texture ────────────────────────────────────── */
@@ -203,6 +206,12 @@ body {
 .hero-img-dark  { display: none; }
 [data-theme="dark"] .hero-img-light { display: none; }
 [data-theme="dark"] .hero-img-dark  { display: block; }
+
+/* ── Logo theme-swap visibility ──────────────────────── */
+.logo-light { display: block; }
+.logo-dark  { display: none; }
+[data-theme="dark"] .logo-light { display: none; }
+[data-theme="dark"] .logo-dark  { display: block; }
 
 /* ── Hero Entrance ───────────────────────────────────── */
 @keyframes hero-rise {
