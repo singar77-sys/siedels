@@ -28,11 +28,14 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
     <section className="min-w-full h-full snap-start grid-bg overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
       <div className="max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-24 w-full">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10 md:mb-14">
-          <div>
+          <div className="border-l-4 border-red pl-6 md:pl-8">
             <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">THE CREW</p>
-            <h2 className="font-headline text-4xl md:text-6xl lg:text-7xl uppercase tracking-tight leading-[0.88] text-text-faint">
-              MEET THE<br /><span className="text-text">SPECIALISTS</span>
+            <h2 className="font-headline text-4xl md:text-6xl uppercase tracking-tight leading-[0.88]">
+              MEET THE<br /><span className="text-stroke">SPECIALISTS</span>
             </h2>
+            <p className="font-body text-base md:text-lg text-text-muted max-w-xl mt-4">
+              Every skill level, from fades to full-service shaves.
+            </p>
           </div>
           {scheduleIsCurrent && !scheduleToday.isClosed && scheduleToday.working.length > 0 && (
             <div className="flex items-center gap-3 bg-surface border border-red/40 px-5 py-4">
