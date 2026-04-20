@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { team, GOOGLE_BUSINESS_URL, SQUARE_BOOKING_URL, PHONE, PHONE_HREF } from '@/data/shop';
+import { team, GOOGLE_BUSINESS_URL, PHONE, PHONE_HREF } from '@/data/shop';
+import { slugFromName, findBySlug } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: "Thanks — Siedel's Barbershop",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export function generateStaticParams() {
-  return team.map((m) => ({ slug: m.name.split(' ')[0].toLowerCase() }));
+  return team.map((m) => ({ slug: slugFromName(m.name) }));
 }
 
 interface PageProps {
@@ -19,12 +20,12 @@ interface PageProps {
 
 export default async function ThanksPage({ params }: PageProps) {
   const { slug } = await params;
-  const member = team.find((m) => m.name.split(' ')[0].toLowerCase() === slug.toLowerCase());
+  const member = findBySlug(team, slug);
 
   if (!member) notFound();
 
   const firstName = member.name.split(' ')[0];
-  const reviewUrl = `${GOOGLE_BUSINESS_URL}#ref=${slug}`;
+  const reviewUrl = `${GOOGLE_BUSINESS_URL}#ref=${slugFromName(member.name)}`;
 
   return (
     <main className="min-h-dvh bg-ink grid-bg flex items-center justify-center px-6 py-12">
@@ -49,7 +50,7 @@ export default async function ThanksPage({ params }: PageProps) {
           {member.name.toUpperCase()}
         </h1>
         <p className="font-body text-base md:text-lg text-text-muted leading-relaxed mb-8">
-          Your review helps the whole crew. If {firstName} made your day, mention them by name.
+          If {firstName} made your day, mention them by name.
         </p>
 
         {/* Primary CTA — Google review */}

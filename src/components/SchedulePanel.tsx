@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { team, PHONE, PHONE_HREF } from '@/data/shop';
+import { slugFromName } from '@/lib/utils';
 import type { SerializableWeekSchedule, WeekRelation } from '@/lib/schedule';
 
 function getClientTodayIso(): string {
@@ -103,7 +104,7 @@ export function SchedulePanel({ scheduleWeek, scheduleRelation, scheduleDaysUnti
                 {(() => {
                   let rowIndex = 0;
                   return team.map((member) => {
-                  const firstName = member.name.split(/\s+/)[0].toLowerCase();
+                  const firstName = slugFromName(member.name);
                   const hasData = scheduleWeek.days.some((d) => d.shifts[firstName]);
                   if (!hasData) return null;
                   const zebra = rowIndex++ % 2 === 0 ? 'bg-surface' : 'bg-ink/50';

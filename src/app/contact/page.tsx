@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Nav } from '@/components/Nav';
 import { PageHero } from '@/components/PageHero';
 import { FadeIn } from '@/components/FadeIn';
-import { EmailCapture } from '@/components/EmailCapture';
 import { Footer } from '@/components/Footer';
 import { hours, PHONE, PHONE_HREF, ADDRESS, CITY_STATE_ZIP, MAPS_URL, SQUARE_BOOKING_URL, GOOGLE_BUSINESS_URL } from '@/data/shop';
 
@@ -93,11 +92,6 @@ export default function ContactPage() {
                       LEAVE A REVIEW
                       <span className="material-symbols-outlined text-base">star</span>
                     </a>
-                  </div>
-                  <div className="mt-4 bg-surface border border-line-strong p-6">
-                    <p className="font-headline text-sm font-bold uppercase tracking-tight mb-1">STAY IN THE LOOP</p>
-                    <p className="font-body text-xs text-text-subtle mb-4">Deals, game day specials, and shop updates. No spam.</p>
-                    <EmailCapture />
                   </div>
                 </div>
               </FadeIn>

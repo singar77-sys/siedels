@@ -4,7 +4,7 @@ const sq = (id: string) => `${SQUARE_BASE}/${id}/${LOCATION}`;
 
 export const SQUARE_BOOKING_URL = `${SQUARE_BASE}/xcru7izyf4zhv6/${LOCATION}`;
 export const PHONE = '(330) 952-0777';
-export const PHONE_HREF = 'tel:3309520777';
+export const PHONE_HREF = 'tel:+13309520777';
 export const ADDRESS = '982 N Court Street';
 export const CITY_STATE_ZIP = 'Medina, Ohio 44256';
 export const MAPS_URL = 'https://maps.google.com/?q=982+N+Court+Street+Medina+OH+44256';
@@ -32,10 +32,10 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Pierre Wright',
-    title: 'Master Barber',
+    title: 'Master Barber · 23 Years',
     image: '/images/pierre-wright-master-barber-siedels-medina.webp',
     booking: sq('mbwa7epvxqp3ya'),
-    bio: "26 years behind the chair. Barber school graduate, class of 2003. Man of faith. Specializes in fades, designs, and classic cuts with precision — keeping every customer clean with a feeling of greatness.",
+    bio: "23 years behind the chair. Barber school graduate, class of 2003. Man of faith. Specializes in fades, designs, and classic cuts.",
   },
   {
     name: 'Matt Hayes',

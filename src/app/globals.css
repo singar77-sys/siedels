@@ -98,7 +98,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--ink);
   color: var(--text);
-  font-family: var(--font-body), 'Arial', sans-serif;
+  font-family: 'General Sans', 'Arial', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.4s ease, color 0.4s ease;
@@ -109,7 +109,7 @@ body {
   font-family: var(--font-headline), 'Arial', sans-serif;
   font-weight: 700;
 }
-.font-body  { font-family: var(--font-body), 'Arial', sans-serif; }
+.font-body  { font-family: 'General Sans', 'Arial', sans-serif; }
 .font-label {
   font-family: var(--font-headline), 'Arial', sans-serif;
   font-weight: 500;

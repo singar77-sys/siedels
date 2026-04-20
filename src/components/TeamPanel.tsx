@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { team, PHONE_HREF, type TeamMember } from '@/data/shop';
+import { slugFromName } from '@/lib/utils';
 import type { Shift } from '@/lib/schedule';
 
 interface ScheduleTodayProps {
@@ -19,7 +20,7 @@ interface TeamPanelProps {
 export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, todayShifts }: TeamPanelProps) {
   const getMemberShift = (memberName: string): Shift | null => {
     if (!scheduleIsCurrent) return null;
-    const firstName = memberName.split(/\s+/)[0].toLowerCase();
+    const firstName = slugFromName(memberName);
     return todayShifts[firstName] ?? null;
   };
 

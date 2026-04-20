@@ -4,6 +4,7 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { fetchSchedule, todayInMedina } from '@/lib/schedule';
 import { team, PHONE, PHONE_HREF } from '@/data/shop';
+import { slugFromName } from '@/lib/utils';
 
 export const revalidate = 1800;
 
@@ -40,7 +41,7 @@ export default async function SchedulePage() {
   const orderedFirstNames: string[] = [];
   const seen = new Set<string>();
   team.forEach((m) => {
-    const fn = m.name.split(/\s+/)[0].toLowerCase();
+    const fn = slugFromName(m.name);
     if (!seen.has(fn)) {
       orderedFirstNames.push(fn);
       seen.add(fn);
@@ -75,7 +76,7 @@ export default async function SchedulePage() {
               <span className="text-stroke">{week.relation === 'upcoming' ? 'UP' : 'WEEK'}</span>
             </h1>
             <p className="font-body text-base md:text-lg text-text-muted max-w-2xl mt-6">
-              Who&apos;s in the chair, when. Updated weekly.
+              Who&apos;s in the chair, when.
             </p>
           </div>
 
@@ -153,7 +154,7 @@ export default async function SchedulePage() {
                   {staff.map((firstName, idx) => {
                     // Find matching team member for name display + booking link
                     const member = team.find(
-                      (m) => m.name.split(/\s+/)[0].toLowerCase() === firstName
+                      (m) => slugFromName(m.name) === firstName
                     );
                     const displayName = member?.name.toUpperCase() ?? firstName.toUpperCase();
                     const zebra = idx % 2 === 0 ? 'bg-surface' : 'bg-ink/50';

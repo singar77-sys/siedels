@@ -5,24 +5,33 @@ import { FadeIn } from '@/components/FadeIn';
 import { CTASection } from '@/components/CTASection';
 import { Footer } from '@/components/Footer';
 import { ServicesList } from '@/components/ServicesList';
-import { PHONE, PHONE_HREF, SQUARE_BOOKING_URL } from '@/data/shop';
+import { PHONE, PHONE_HREF, SQUARE_BOOKING_URL, services } from '@/data/shop';
+
+const priceOf = (name: string) => services.find((s) => s.name === name)?.price ?? '';
+const PRICE_HAIRCUT = priceOf('Haircut');
+const PRICE_RAZOR_FADE = priceOf('Razor / Foil Fade');
+const PRICE_HAIRCUT_BEARD = priceOf('Haircut + Beard Trim');
+const PRICE_HAIRCUT_FACE_SHAVE = priceOf('Haircut + Face Shave');
+const prices = services.map((s) => s.price.replace('$', '').replace('+', ''))
+  .map(Number).filter(n => !isNaN(n));
+const PRICE_MIN = `$${Math.min(...prices)}`;
+const PRICE_MAX = `$${Math.max(...prices)}`;
 
 export const metadata: Metadata = {
   title: "Services & Prices | Siedel's Barbershop | Medina, Ohio",
-  description: "Haircuts, fades, beard work, head shaves, and more. Straight-up pricing from $5–$96. Cash only. ATM on site.",
+  description: `Haircuts, fades, beard work, head shaves, and more. Straight-up pricing from ${PRICE_MIN}–${PRICE_MAX}. Cash only. We have an ATM.`,
   alternates: { canonical: '/services' },
   openGraph: {
     title: "Services & Prices | Siedel's Barbershop",
-    description: "Haircuts $32, Fades $38, Beard Trims $29. Full service list with prices.",
+    description: `Haircuts ${PRICE_HAIRCUT}, Fades ${PRICE_RAZOR_FADE}, Haircut + Beard ${PRICE_HAIRCUT_BEARD}. Full list with prices.`,
   },
 };
 
 const faqItems = [
-  { q: 'How do I book?', a: "Book online through Square or call (330) 952-0777 to reserve a specific time with the barber of your choice." },
-  { q: 'Do you take cards?', a: "Cash only. There is an ATM on site." },
-  { q: "How much is a haircut at Siedel's?", a: 'Standard haircut is $32. Razor / foil fades $38. Haircut + beard trim $42. Haircut + face shave $63.' },
+  { q: 'How do I book?', a: "Book online through Square or call (330) 952-0777 to reserve a time with the barber of your choice." },
+  { q: 'Do you take cards?', a: "Cash only. We have an ATM." },
+  { q: "How much is a haircut at Siedel's?", a: `Standard haircut is ${PRICE_HAIRCUT}. Razor / foil fades ${PRICE_RAZOR_FADE}. Haircut + beard trim ${PRICE_HAIRCUT_BEARD}. Haircut + face shave ${PRICE_HAIRCUT_FACE_SHAVE}.` },
   { q: 'Can I book a specific barber?', a: 'Yes. 11 barbers on staff, each with their own booking link. Visit the Team page to pick yours.' },
-  { q: 'What payment methods do you accept?', a: 'Cash and all major credit cards.' },
 ];
 
 const faqSchema = {

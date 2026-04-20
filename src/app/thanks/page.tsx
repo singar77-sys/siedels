@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { team, GOOGLE_BUSINESS_URL, PHONE, PHONE_HREF } from '@/data/shop';
+import { slugFromName } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: "Thanks — Siedel's Barbershop",
@@ -19,14 +20,14 @@ export default function ThanksIndex() {
             <span className="hero-sharp">YOUR HAIR?</span>
           </h1>
           <p className="font-body text-base md:text-lg text-text-muted max-w-xl mx-auto">
-            Tap your barber. Drop a quick Google review. It helps the whole crew.
+            Pick your barber. Leave a review.
           </p>
         </div>
 
         {/* Barber grid — tap to pick */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 mb-12">
           {team.map((member) => {
-            const slug = member.name.split(' ')[0].toLowerCase();
+            const slug = slugFromName(member.name);
             return (
               <Link
                 key={member.name}

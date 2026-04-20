@@ -1,5 +1,4 @@
 import { PHONE, PHONE_HREF, SQUARE_BOOKING_URL, MAPS_URL, GOOGLE_BUSINESS_URL, hours, testimonials } from '@/data/shop';
-import { EmailCapture } from './EmailCapture';
 
 export function ContactPanel() {
   return (
@@ -107,11 +106,6 @@ export function ContactPanel() {
           </a>
         </div>
 
-        <div className="mt-6 bg-surface border border-line-strong p-8 md:p-10">
-          <p className="font-headline text-lg font-bold uppercase tracking-tight mb-1 text-white">STAY IN THE LOOP</p>
-          <p className="font-body text-xs text-text-subtle mb-5">Deals, game day specials, and shop updates. No spam.</p>
-          <EmailCapture />
-        </div>
       </div>
     </section>
   );
