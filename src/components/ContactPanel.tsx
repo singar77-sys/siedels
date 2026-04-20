@@ -6,7 +6,7 @@ export function ContactPanel() {
     <section className="min-w-full h-full snap-start grid-bg overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
       <div className="max-w-5xl mx-auto px-8 py-16 md:py-24 w-full">
         <div className="mb-10 md:mb-14">
-          <h2 className="font-headline text-5xl md:text-[7vw] font-black uppercase tracking-tighter leading-[0.82]">
+          <h2 className="font-headline text-4xl md:text-[5.5vw] font-black uppercase tracking-tight leading-[0.88]">
             982 N COURT
           </h2>
           <p className="font-headline text-3xl md:text-[4vw] font-black uppercase tracking-tighter leading-[0.85] text-stroke">

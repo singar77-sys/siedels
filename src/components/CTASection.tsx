@@ -9,7 +9,7 @@ export function CTASection() {
         <FadeIn>
           <div className="inline-block border-l-4 border-red pl-8 text-left mb-8">
             <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">READY?</p>
-            <h2 className="font-headline text-4xl md:text-7xl font-black uppercase tracking-tighter leading-[0.85]">
+            <h2 className="font-headline text-3xl md:text-5xl font-black uppercase tracking-tight leading-[0.88]">
               YOUR CHAIR<br /><span className="text-stroke">IS WAITING</span>
             </h2>
           </div>

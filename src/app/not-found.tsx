@@ -10,7 +10,7 @@ export default function NotFound() {
         <div className="max-w-md w-full text-center">
           <div className="border-l-4 border-red pl-8 text-left mb-10">
             <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">PAGE NOT FOUND</p>
-            <h1 className="font-headline text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.85] text-white">
+            <h1 className="font-headline text-4xl md:text-6xl font-black uppercase tracking-tight leading-[0.88] text-white">
               WRONG<br /><span className="text-stroke">CHAIR</span>
             </h1>
           </div>

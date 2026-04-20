@@ -30,7 +30,7 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10 md:mb-14">
           <div>
             <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">THE CREW</p>
-            <h2 className="font-headline text-5xl md:text-[8vw] lg:text-[6vw] font-black uppercase tracking-tighter leading-[0.82] text-text-faint">
+            <h2 className="font-headline text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[0.88] text-text-faint">
               MEET THE<br /><span className="text-text">SPECIALISTS</span>
             </h2>
           </div>

@@ -71,7 +71,7 @@ export default async function SchedulePage() {
             <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">
               {week.relation === 'upcoming' ? 'NEXT WEEK' : 'WEEKLY ROSTER'}
             </p>
-            <h1 className="font-headline text-4xl md:text-7xl font-black uppercase tracking-tighter leading-[0.85]">
+            <h1 className="font-headline text-3xl md:text-5xl font-black uppercase tracking-tight leading-[0.88]">
               {week.relation === 'upcoming' ? 'COMING' : 'THIS'}<br />
               <span className="text-stroke">{week.relation === 'upcoming' ? 'UP' : 'WEEK'}</span>
             </h1>

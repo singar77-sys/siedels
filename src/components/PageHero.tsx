@@ -28,7 +28,7 @@ export function PageHero({ image, imageAlt, label, title, titleAccent, subtitle 
         <FadeIn>
           <div className="border-l-4 border-red pl-8">
             <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">{label}</p>
-            <h1 className="font-headline text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-[0.85] mb-4">
+            <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[0.88] mb-4">
               {title}
               {titleAccent && <><br /><span className="text-red">{titleAccent}</span></>}
             </h1>
