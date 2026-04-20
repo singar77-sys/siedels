@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react';
 import Image from 'next/image';
 import { FadeIn } from './FadeIn';
 import { Modal } from './Modal';
+import { Icon } from './Icon';
 import { team, PHONE, PHONE_HREF, type TeamMember } from '@/data/shop';
 
 export function TeamGrid() {
@@ -62,7 +63,7 @@ export function TeamGrid() {
             className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center text-text-subtle hover:text-white transition-colors"
             aria-label="Close"
           >
-            <span className="material-symbols-outlined text-xl">close</span>
+            <Icon name="close" className="w-5 h-5" />
           </button>
           {selected.image && (
             <div className="relative aspect-[4/3] w-full">

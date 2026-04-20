@@ -5,6 +5,7 @@ import { FadeIn } from '@/components/FadeIn';
 import { CTASection } from '@/components/CTASection';
 import { Footer } from '@/components/Footer';
 import { ServicesList } from '@/components/ServicesList';
+import { Icon } from '@/components/Icon';
 import { PHONE, PHONE_HREF, SQUARE_BOOKING_URL, services } from '@/data/shop';
 
 const priceOf = (name: string) => services.find((s) => s.name === name)?.price ?? '';
@@ -75,7 +76,7 @@ export default function ServicesPage() {
                   href={PHONE_HREF}
                   className="inline-flex items-center justify-center gap-2 border border-line-strong text-text-muted font-headline font-bold uppercase tracking-tight px-8 py-4 hover:text-white hover:border-white transition-colors"
                 >
-                  <span className="material-symbols-outlined text-xl">call</span>
+                  <Icon name="call" className="w-5 h-5" />
                   {PHONE}
                 </a>
               </div>

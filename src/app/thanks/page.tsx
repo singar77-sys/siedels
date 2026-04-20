@@ -5,7 +5,7 @@ import { team, GOOGLE_BUSINESS_URL, PHONE, PHONE_HREF } from '@/data/shop';
 import { slugFromName } from '@/lib/utils';
 
 export const metadata: Metadata = {
-  title: "Thanks — Siedel's Barbershop",
+  title: "Thanks | Siedel's Barbershop | Medina, Ohio",
   robots: { index: false, follow: false },
 };
 

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { SQUARE_BOOKING_URL, PHONE, PHONE_HREF, MAPS_URL, type TeamMember, type Service } from '@/data/shop';
 import { Modal } from './Modal';
 import { ThemeToggle } from './ThemeToggle';
+import { Icon } from './Icon';
 import { SocialIcons } from './SocialIcons';
 import { HunterMark } from './HunterMark';
 import { HeroPanel } from './HeroPanel';
@@ -176,9 +177,7 @@ export function HomeClient({
             className="p-3 text-text-subtle"
           aria-label="Toggle menu"
         >
-          <span className="material-symbols-outlined text-2xl">
-            {mobileMenuOpen ? 'close' : 'menu'}
-          </span>
+          <Icon name={mobileMenuOpen ? 'close' : 'menu'} className="w-6 h-6" />
           </button>
         </div>
         {mobileMenuOpen && (
@@ -285,7 +284,7 @@ export function HomeClient({
             className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center text-text-subtle hover:text-white transition-colors"
             aria-label="Close"
           >
-            <span className="material-symbols-outlined text-xl">close</span>
+            <Icon name="close" className="w-5 h-5" />
           </button>
           {selectedMember.image && (
             <div className="relative aspect-[4/3] w-full">
@@ -316,7 +315,7 @@ export function HomeClient({
             className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center bg-ink/60 text-white hover:bg-red transition-colors"
             aria-label="Close"
           >
-            <span className="material-symbols-outlined text-xl">close</span>
+            <Icon name="close" className="w-5 h-5" />
           </button>
           {selectedService.image && (
             <div className="relative aspect-[16/9] w-full bg-surface-raised">

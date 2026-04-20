@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { services, SQUARE_BOOKING_URL, type Service } from '@/data/shop';
 import { FadeIn } from './FadeIn';
 import { Modal } from './Modal';
+import { Icon } from './Icon';
 
 export function ServicesList() {
   const [selectedService, setSelectedService] = useState<Service | null>(null);
@@ -21,7 +22,7 @@ export function ServicesList() {
             >
               <span className="flex items-center gap-3 font-headline text-base md:text-lg font-bold uppercase tracking-tight text-text-muted group-hover:text-white transition-colors">
                 {service.name}
-                <span className="material-symbols-outlined text-sm text-text-subtle group-hover:text-red transition-colors">add_circle</span>
+                <Icon name="add_circle" className="w-4 h-4 text-text-subtle group-hover:text-red transition-colors" />
               </span>
               <span className="font-headline text-xl md:text-2xl font-bold text-red">{service.price}</span>
             </button>
@@ -39,7 +40,7 @@ export function ServicesList() {
             className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center bg-black/60 text-white hover:bg-red transition-colors"
             aria-label="Close"
           >
-            <span className="material-symbols-outlined text-xl">close</span>
+            <Icon name="close" className="w-5 h-5" />
           </button>
           {selectedService.image && (
             <div className="relative aspect-[16/9] w-full bg-surface-raised">

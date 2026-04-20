@@ -160,9 +160,21 @@ export default async function SchedulePage() {
                     const zebra = idx % 2 === 0 ? 'bg-surface' : 'bg-ink/50';
                     return (
                       <tr key={firstName} className={`border-b border-line-strong last:border-b-0 ${zebra}`}>
-                        <td className={`sticky left-0 z-10 p-4 font-headline text-sm md:text-base font-black uppercase tracking-tight text-white border-r border-line-strong whitespace-nowrap ${zebra}`}>
+                        <td className={`sticky left-0 z-10 p-4 font-headline text-sm md:text-base font-black uppercase tracking-tight border-r border-line-strong whitespace-nowrap ${zebra}`}>
                           <span className="inline-block w-1 h-5 bg-red mr-3 align-middle" />
-                          {displayName}
+                          {member?.booking ? (
+                            <a
+                              href={member.booking}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-text hover:text-red transition-colors"
+                              aria-label={`Book with ${member.name}`}
+                            >
+                              {displayName}
+                            </a>
+                          ) : (
+                            <span className="text-text">{displayName}</span>
+                          )}
                         </td>
                         {week.days.map((d) => {
                           const shift = d.shifts.get(firstName);

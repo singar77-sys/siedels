@@ -1,4 +1,5 @@
 import { PHONE, PHONE_HREF, SQUARE_BOOKING_URL, MAPS_URL, GOOGLE_BUSINESS_URL, hours, testimonials } from '@/data/shop';
+import { Icon } from './Icon';
 
 export function ContactPanel() {
   return (
@@ -31,7 +32,7 @@ export function ContactPanel() {
                 className="inline-flex items-center justify-center gap-2 bg-red text-white font-headline font-bold uppercase tracking-tight px-6 py-3.5 hover:bg-red-hover transition-colors"
               >
                 GET DIRECTIONS
-                <span className="material-symbols-outlined text-lg">arrow_forward</span>
+                <Icon name="arrow_forward" className="w-4 h-4" />
               </a>
               <a
                 href={SQUARE_BOOKING_URL}
@@ -102,7 +103,7 @@ export function ContactPanel() {
             className="inline-flex items-center justify-center gap-2 border border-red text-red font-headline font-bold uppercase tracking-tight px-6 py-3.5 hover:bg-red hover:text-white transition-all duration-300 whitespace-nowrap"
           >
             LEAVE A REVIEW
-            <span className="material-symbols-outlined text-lg">star</span>
+            <Icon name="star" className="w-4 h-4" />
           </a>
         </div>
 

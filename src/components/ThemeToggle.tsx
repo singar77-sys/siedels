@@ -1,6 +1,7 @@
 'use client';
 
 import { useTheme } from './ThemeProvider';
+import { Icon } from './Icon';
 
 export function ThemeToggle() {
   const { theme, toggle } = useTheme();
@@ -12,11 +13,10 @@ export function ThemeToggle() {
       aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
       title={theme === 'dark' ? 'Shop palette' : 'Dark mode'}
     >
-      <span className={`material-symbols-outlined text-lg transition-transform duration-300 inline-block ${
-        theme === 'light' ? 'rotate-180' : 'rotate-0'
-      }`}>
-        {theme === 'dark' ? 'light_mode' : 'dark_mode'}
-      </span>
+      <Icon
+        name={theme === 'dark' ? 'light_mode' : 'dark_mode'}
+        className={`w-5 h-5 transition-transform duration-300 ${theme === 'light' ? 'rotate-180' : 'rotate-0'}`}
+      />
     </button>
   );
 }

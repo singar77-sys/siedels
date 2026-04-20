@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: "Siedel's Barbershop | Haircuts & Fades | Medina, Ohio",
   description: "Eleven barbers in Medina, Ohio. Haircuts, fades, beard work, straight razor shaves. Cash only. ATM on site.",
-  keywords: ['barbershop', 'Medina Ohio', 'haircuts', 'beard trim', 'barber', 'fades', 'Cleveland', 'Medina County', 'straight razor shave', 'Court Street'],
+  keywords: ['barbershop', 'Medina Ohio', 'haircuts', 'beard trim', 'barber', 'fades', 'Cleveland', 'Medina County', 'straight razor shave', 'Court Street', 'N Court Street', 'barber shop near me'],
   alternates: { canonical: '/' },
   openGraph: {
     title: "Siedel's Barbershop | Medina, Ohio",
@@ -94,10 +94,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link
           rel="stylesheet"
           href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
         />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#CDC7BB" />

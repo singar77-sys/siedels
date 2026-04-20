@@ -235,7 +235,7 @@ export const services: Service[] = [
   },
   {
     name: 'Shampoo + Style',
-    price: '$25+',
+    price: '$25',
     tagline: 'Wash, dry, style',
     description:
       "Full shampoo, blow dry, and style — no cut. Perfect for a special event, a date night, or anytime you want to look your best without a full trim.",

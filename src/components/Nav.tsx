@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { PHONE_HREF, SQUARE_BOOKING_URL } from '@/data/shop';
 import { ThemeToggle } from './ThemeToggle';
+import { Icon } from './Icon';
 
 const NAV_LINKS = [
   { label: 'HOME', href: '/' },
@@ -69,9 +70,7 @@ export function Nav() {
           className="md:hidden p-3 text-text-subtle"
           aria-label="Toggle menu"
         >
-          <span className="material-symbols-outlined text-3xl">
-            {mobileMenuOpen ? 'close' : 'menu'}
-          </span>
+          <Icon name={mobileMenuOpen ? 'close' : 'menu'} className="w-7 h-7" />
         </button>
       </div>
 

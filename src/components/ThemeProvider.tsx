@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from 'react';
+import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
 
 export type Theme = 'dark' | 'light';
 
@@ -21,20 +21,14 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  // Read initial theme from DOM (set by inline script in <head>)
+  // Inline script in layout.tsx <head> sets data-theme before hydration,
+  // so we read it from the DOM on first render. No useEffect sync needed.
   const [theme, setThemeState] = useState<Theme>(() => {
     if (typeof document !== 'undefined') {
       return (document.documentElement.getAttribute('data-theme') as Theme) || 'light';
     }
     return 'light';
   });
-
-  useEffect(() => {
-    const stored = localStorage.getItem('siedels-theme') as Theme | null;
-    if (stored === 'light' || stored === 'dark') {
-      setThemeState(stored);
-    }
-  }, []);
 
   const setTheme = useCallback((t: Theme) => {
     setThemeState(t);

@@ -1,5 +1,6 @@
 import { FadeIn } from './FadeIn';
 import { PHONE, PHONE_HREF, SQUARE_BOOKING_URL } from '@/data/shop';
+import { Icon } from './Icon';
 
 export function CTASection() {
   return (
@@ -20,7 +21,7 @@ export function CTASection() {
               href={PHONE_HREF}
               className="inline-flex items-center justify-center gap-2 bg-red text-white font-headline font-bold uppercase tracking-tight px-8 py-4 hover:bg-red-hover transition-colors duration-200"
             >
-              <span className="material-symbols-outlined text-xl">call</span>
+              <Icon name="call" className="w-5 h-5" />
               CALL {PHONE}
             </a>
             <a
@@ -29,7 +30,7 @@ export function CTASection() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 border border-line-strong text-text-muted font-headline font-bold uppercase tracking-tight px-8 py-4 hover:text-white hover:border-white transition-all duration-300"
             >
-              <span className="material-symbols-outlined text-xl">calendar_month</span>
+              <Icon name="calendar_month" className="w-5 h-5" />
               BOOK ONLINE
             </a>
           </div>

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { SQUARE_BOOKING_URL, testimonials } from '@/data/shop';
+import { Icon } from './Icon';
 
 const HERO_DARK = '/images/siedels-barbershop-medina-ohio.webp';
 const HERO_LIGHT = '/images/siedels-barbershop-golden-hour-medina-ohio.webp';
@@ -118,9 +119,9 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
         className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 text-text-subtle hover:text-red transition-colors animate-pulse"
         aria-label="Next panel"
       >
-        <span className="material-symbols-outlined text-2xl md:hidden">swipe_right</span>
+        <Icon name="swipe_right" className="w-6 h-6 md:hidden" />
         <span className="font-label text-[10px] tracking-widest md:hidden">SWIPE</span>
-        <span className="material-symbols-outlined text-3xl rotate-90 hidden md:inline">chevron_right</span>
+        <Icon name="chevron_right" className="w-7 h-7 rotate-90 hidden md:inline-block" />
       </button>
     </section>
   );

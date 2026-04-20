@@ -4,9 +4,11 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { team, GOOGLE_BUSINESS_URL, PHONE, PHONE_HREF } from '@/data/shop';
 import { slugFromName, findBySlug } from '@/lib/utils';
+import { Icon } from '@/components/Icon';
+import { ReviewCTA } from '@/components/ReviewCTA';
 
 export const metadata: Metadata = {
-  title: "Thanks — Siedel's Barbershop",
+  title: "Thanks | Siedel's Barbershop | Medina, Ohio",
   robots: { index: false, follow: false },
 };
 
@@ -53,16 +55,11 @@ export default async function ThanksPage({ params }: PageProps) {
           If {firstName} made your day, mention them by name.
         </p>
 
-        {/* Primary CTA — Google review */}
-        <a
-          href={reviewUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block w-full bg-red text-white font-headline font-bold uppercase tracking-tight text-center px-6 py-4 mb-3 hover:bg-red-hover transition-colors"
-        >
-          LEAVE A GOOGLE REVIEW
-          <span className="material-symbols-outlined text-sm align-middle ml-2">arrow_forward</span>
-        </a>
+        {/* Primary CTA — Google review with clipboard pre-fill */}
+        <ReviewCTA
+          reviewUrl={reviewUrl}
+          suggestedText={`Went to Siedel's and ${firstName} did a great job. `}
+        />
 
         {/* Secondary CTAs */}
         <div className="grid grid-cols-2 gap-3 mb-8">

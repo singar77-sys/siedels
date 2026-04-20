@@ -26,7 +26,7 @@ export default function TeamPage() {
           label="PERSONNEL DOSSIER"
           title="THE"
           titleAccent="SPECIALISTS"
-          subtitle="Eleven barbers. Every skill level from fades to full-service shaves. Find your person."
+          subtitle="Eleven barbers and stylists. Every skill level from fades to full-service shaves."
         />
 
         <section className="py-20 md:py-28">

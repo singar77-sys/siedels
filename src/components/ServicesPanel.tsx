@@ -1,4 +1,5 @@
 import { services, SQUARE_BOOKING_URL, PHONE_HREF, type Service } from '@/data/shop';
+import { Icon } from './Icon';
 
 interface ServicesPanelProps {
   onSelectService: (service: Service) => void;
@@ -30,9 +31,7 @@ export function ServicesPanel({ onSelectService }: ServicesPanelProps) {
               </span>
               <span className="flex-1 mx-3 border-b border-dotted border-text-faint translate-y-[-4px]" />
               <span className="font-headline text-lg md:text-xl font-bold text-red whitespace-nowrap">{service.price}</span>
-              <span className="material-symbols-outlined text-sm text-text-subtle group-hover:text-red group-hover:rotate-45 transition-all duration-200 ml-2">
-                add
-              </span>
+              <Icon name="add" className="w-4 h-4 text-text-subtle group-hover:text-red group-hover:rotate-45 transition-all duration-200 ml-2" />
             </button>
           ))}
         </div>

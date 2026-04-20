@@ -4,6 +4,7 @@ import { PageHero } from '@/components/PageHero';
 import { FadeIn } from '@/components/FadeIn';
 import { Footer } from '@/components/Footer';
 import { hours, PHONE, PHONE_HREF, ADDRESS, CITY_STATE_ZIP, MAPS_URL, SQUARE_BOOKING_URL, GOOGLE_BUSINESS_URL } from '@/data/shop';
+import { Icon } from '@/components/Icon';
 
 export const metadata: Metadata = {
   title: "Contact & Hours | Siedel's Barbershop | Medina, Ohio",
@@ -53,7 +54,7 @@ export default function ContactPage() {
                       className="inline-flex items-center justify-center gap-2 bg-red text-white font-headline font-bold uppercase tracking-tight px-6 py-3.5 hover:bg-red-hover transition-colors"
                     >
                       GET DIRECTIONS
-                      <span className="material-symbols-outlined text-lg">arrow_forward</span>
+                      <Icon name="arrow_forward" className="w-4 h-4" />
                     </a>
                     <a
                       href={SQUARE_BOOKING_URL}
@@ -90,7 +91,7 @@ export default function ContactPage() {
                       className="inline-flex items-center justify-center gap-2 border border-red text-red font-headline text-sm font-bold uppercase tracking-tight px-5 py-3 hover:bg-red hover:text-white transition-all duration-300 whitespace-nowrap"
                     >
                       LEAVE A REVIEW
-                      <span className="material-symbols-outlined text-base">star</span>
+                      <Icon name="star" className="w-3.5 h-3.5" />
                     </a>
                   </div>
                 </div>

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { gallery, SQUARE_BOOKING_URL } from '@/data/shop';
+import { Icon } from './Icon';
 
 export function GalleryPanel() {
   return (
@@ -19,7 +20,7 @@ export function GalleryPanel() {
             className="hidden md:inline-flex font-label text-[10px] tracking-widest text-red hover:text-red-hover transition-colors whitespace-nowrap items-center gap-2"
           >
             BOOK YOUR CHAIR
-            <span className="material-symbols-outlined text-sm">arrow_forward</span>
+            <Icon name="arrow_forward" className="w-4 h-4" />
           </a>
         </div>
 
