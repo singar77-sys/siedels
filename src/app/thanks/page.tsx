@@ -15,7 +15,7 @@ export default function ThanksIndex() {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-10 md:mb-14">
           <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">THANKS FOR STOPPING IN</p>
-          <h1 className="font-headline text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-6 text-text">
+          <h1 className="font-headline text-4xl md:text-6xl uppercase tracking-tight leading-[0.9] mb-6 text-text">
             WHO CUT<br />
             <span className="hero-sharp">YOUR HAIR?</span>
           </h1>
@@ -47,7 +47,7 @@ export default function ThanksIndex() {
                   </div>
                 )}
                 <div className="absolute bottom-0 left-0 right-0 p-3">
-                  <p className="font-headline text-sm md:text-base font-black uppercase tracking-tight text-white">
+                  <p className="font-headline text-sm md:text-base uppercase tracking-tight text-white">
                     {member.name}
                   </p>
                 </div>

@@ -10,7 +10,7 @@ export default function NotFound() {
         <div className="max-w-md w-full text-center">
           <div className="border-l-4 border-red pl-8 text-left mb-10">
             <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">PAGE NOT FOUND</p>
-            <h1 className="font-headline text-4xl md:text-6xl font-black uppercase tracking-tight leading-[0.88] text-white">
+            <h1 className="font-headline text-4xl md:text-6xl uppercase tracking-tight leading-[0.88] text-text">
               WRONG<br /><span className="text-stroke">CHAIR</span>
             </h1>
           </div>
@@ -26,7 +26,7 @@ export default function NotFound() {
             </Link>
             <Link
               href="/services"
-              className="inline-flex items-center justify-center gap-2 border border-line-strong text-text-muted font-headline font-bold uppercase tracking-tight px-8 py-4 hover:text-white hover:border-white transition-colors"
+              className="inline-flex items-center justify-center gap-2 border border-line-strong text-text-muted font-headline font-bold uppercase tracking-tight px-8 py-4 hover:text-text hover:border-text transition-colors"
             >
               VIEW SERVICES
             </Link>

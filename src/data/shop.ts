@@ -10,9 +10,15 @@ export const CITY_STATE_ZIP = 'Medina, Ohio 44256';
 export const MAPS_URL = 'https://maps.google.com/?q=982+N+Court+Street+Medina+OH+44256';
 export const GOOGLE_BUSINESS_URL = 'https://share.google/n7DB5686mE05Db6tK';
 export const EMAIL = 'siedelsbarbershop@gmail.com';
-export const EMAIL_HREF = 'mailto:siedelsbarbershop@gmail.com';
+export const EMAIL_HREF = `mailto:${EMAIL}`;
 export const FACEBOOK_URL = 'https://www.facebook.com/siedelsbarbershop';
 export const INSTAGRAM_URL = 'https://www.instagram.com/siedelsbarber';
+
+// Canonical social-proof + staff-count constants — used in metadata, JSON-LD, and UI.
+// Update here, not inline.
+export const TEAM_COUNT = 11;
+export const RATING = '4.9';
+export const REVIEW_COUNT = '249';
 
 export interface TeamMember {
   name: string;

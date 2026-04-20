@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { SQUARE_BOOKING_URL, testimonials } from '@/data/shop';
+import { SQUARE_BOOKING_URL, RATING, REVIEW_COUNT, testimonials } from '@/data/shop';
 import { Icon } from './Icon';
 
 const HERO_DARK = '/images/siedels-barbershop-medina-ohio.webp';
@@ -54,7 +54,7 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
           >
             IN MEMORY OF CARL SIEDEL
           </p>
-          <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-[0.88] mb-8">
+          <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight leading-[0.88] mb-8">
             <span className="hero-stagger-2 inline-block" style={{ color: 'var(--hero-h1)' }}>STAY</span><br />
             <span className="hero-stagger-3 inline-block hero-sharp">SHARP</span>
           </h1>
@@ -109,7 +109,7 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
             )}
           </p>
           <p className="font-label text-[9px] tracking-widest mt-1" style={{ color: 'var(--hero-tagline)' }}>
-            4.9 STARS · 249 REVIEWS
+            {RATING} STARS · {REVIEW_COUNT} REVIEWS
           </p>
         </div>
       </aside>

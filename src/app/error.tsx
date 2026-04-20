@@ -8,7 +8,7 @@ export default function Error({ reset }: { error: Error; reset: () => void }) {
       <div className="max-w-md w-full text-center">
         <div className="border-l-4 border-red pl-8 text-left mb-10">
           <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">SOMETHING WENT WRONG</p>
-          <h1 className="font-headline text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.85] text-white">
+          <h1 className="font-headline text-4xl md:text-6xl uppercase tracking-tight leading-[0.88] text-text">
             HOLD<br /><span className="text-stroke">TIGHT</span>
           </h1>
         </div>
@@ -24,7 +24,7 @@ export default function Error({ reset }: { error: Error; reset: () => void }) {
           </button>
           <a
             href={PHONE_HREF}
-            className="inline-flex items-center justify-center gap-2 border border-line-strong text-text-muted font-headline font-bold uppercase tracking-tight px-8 py-4 hover:text-white hover:border-white transition-colors"
+            className="inline-flex items-center justify-center gap-2 border border-line-strong text-text-muted font-headline font-bold uppercase tracking-tight px-8 py-4 hover:text-text hover:border-text transition-colors"
           >
             CALL {PHONE}
           </a>

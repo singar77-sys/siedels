@@ -48,7 +48,7 @@ export function Nav() {
             key={link.href}
             href={link.href}
             className={`font-headline text-sm font-bold uppercase tracking-tight transition-colors duration-300 ${
-              pathname === link.href ? 'text-red' : 'text-text-muted hover:text-white'
+              pathname === link.href ? 'text-red' : 'text-text-muted hover:text-text'
             }`}
           >
             {link.label}
@@ -84,7 +84,7 @@ export function Nav() {
               key={link.href}
               href={link.href}
               className={`block px-6 py-4 font-headline text-sm font-bold uppercase tracking-tight border-b border-line transition-colors ${
-                pathname === link.href ? 'text-red bg-surface-raised' : 'text-text-muted hover:text-white hover:bg-surface-raised'
+                pathname === link.href ? 'text-red bg-surface-raised' : 'text-text-muted hover:text-text hover:bg-surface-raised'
               }`}
             >
               {link.label}

@@ -30,7 +30,7 @@ export default function ContactPage() {
           subtitle="982 N Court Street, Medina. Cash only. ATM on site."
         />
 
-        <section className="py-20 md:py-28">
+        <section className="py-16 md:py-24">
           <div className="max-w-6xl mx-auto px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
               <FadeIn>
@@ -51,7 +51,7 @@ export default function ContactPage() {
                       href={MAPS_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 bg-red text-white font-headline font-bold uppercase tracking-tight px-6 py-3.5 hover:bg-red-hover transition-colors"
+                      className="inline-flex items-center justify-center gap-2 bg-red text-white font-headline font-bold uppercase tracking-tight px-6 py-3 hover:bg-red-hover transition-colors"
                     >
                       GET DIRECTIONS
                       <Icon name="arrow_forward" className="w-4 h-4" />
@@ -60,7 +60,7 @@ export default function ContactPage() {
                       href={SQUARE_BOOKING_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 border border-line-strong text-text-muted font-headline font-bold uppercase tracking-tight px-6 py-3.5 hover:text-white hover:border-white transition-colors"
+                      className="inline-flex items-center justify-center gap-2 border border-line-strong text-text-muted font-headline font-bold uppercase tracking-tight px-6 py-3 hover:text-text hover:border-text transition-colors"
                     >
                       BOOK ONLINE
                     </a>
@@ -88,7 +88,7 @@ export default function ContactPage() {
                       href={GOOGLE_BUSINESS_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 border border-red text-red font-headline text-sm font-bold uppercase tracking-tight px-5 py-3 hover:bg-red hover:text-white transition-all duration-300 whitespace-nowrap"
+                      className="inline-flex items-center justify-center gap-2 border border-red text-red font-headline text-sm font-bold uppercase tracking-tight px-6 py-3 hover:bg-red hover:text-white transition-all duration-300 whitespace-nowrap"
                     >
                       LEAVE A REVIEW
                       <Icon name="star" className="w-3.5 h-3.5" />

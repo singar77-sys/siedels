@@ -65,13 +65,13 @@ export default async function SchedulePage() {
   return (
     <>
       <Nav />
-      <main id="main" className="grid-bg min-h-screen pt-24 pb-24">
+      <main id="main" className="grid-bg min-h-screen py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="border-l-4 border-red pl-6 md:pl-8 mb-10 md:mb-14">
             <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">
               {week.relation === 'upcoming' ? 'NEXT WEEK' : 'WEEKLY ROSTER'}
             </p>
-            <h1 className="font-headline text-3xl md:text-5xl font-black uppercase tracking-tight leading-[0.88]">
+            <h1 className="font-headline text-3xl md:text-5xl uppercase tracking-tight leading-[0.88]">
               {week.relation === 'upcoming' ? 'COMING' : 'THIS'}<br />
               <span className="text-stroke">{week.relation === 'upcoming' ? 'UP' : 'WEEK'}</span>
             </h1>
@@ -133,10 +133,10 @@ export default async function SchedulePage() {
                         <th
                           key={d.dayName}
                           className={`text-left p-4 font-label tracking-widest border-r border-line-strong last:border-r-0 ${
-                            isToday ? 'bg-red text-white' : 'text-white'
+                            isToday ? 'bg-red text-white' : 'text-text'
                           }`}
                         >
-                          <div className="font-black text-sm tracking-widest">
+                          <div className="text-sm tracking-widest">
                             {d.dayName.substring(0, 3).toUpperCase()}
                           </div>
                           <div className={`text-[10px] mt-0.5 ${isToday ? 'text-white/85' : 'text-text-muted'}`}>
@@ -160,7 +160,7 @@ export default async function SchedulePage() {
                     const zebra = idx % 2 === 0 ? 'bg-surface' : 'bg-ink/50';
                     return (
                       <tr key={firstName} className={`border-b border-line-strong last:border-b-0 ${zebra}`}>
-                        <td className={`sticky left-0 z-10 p-4 font-headline text-sm md:text-base font-black uppercase tracking-tight border-r border-line-strong whitespace-nowrap ${zebra}`}>
+                        <td className={`sticky left-0 z-10 p-4 font-headline text-sm md:text-base uppercase tracking-tight border-r border-line-strong whitespace-nowrap ${zebra}`}>
                           <span className="inline-block w-1 h-5 bg-red mr-3 align-middle" />
                           {member?.booking ? (
                             <a
@@ -192,7 +192,7 @@ export default async function SchedulePage() {
                           if (shift.status === 'working') {
                             return (
                               <td key={d.dayName} className={cellBase}>
-                                <span className="font-headline text-base font-bold text-white whitespace-nowrap">
+                                <span className="font-headline text-base font-bold text-text whitespace-nowrap">
                                   {shift.display}
                                 </span>
                               </td>

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { team, GOOGLE_BUSINESS_URL, PHONE, PHONE_HREF } from '@/data/shop';
+import { team, GOOGLE_BUSINESS_URL, PHONE, PHONE_HREF, ADDRESS, CITY_STATE_ZIP } from '@/data/shop';
 import { slugFromName, findBySlug } from '@/lib/utils';
 import { Icon } from '@/components/Icon';
 import { ReviewCTA } from '@/components/ReviewCTA';
@@ -48,7 +48,7 @@ export default async function ThanksPage({ params }: PageProps) {
 
         {/* Headline */}
         <p className="font-label text-[11px] tracking-[0.3em] text-red mb-3">THANKS FOR TRUSTING</p>
-        <h1 className="font-headline text-4xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] mb-4 text-text">
+        <h1 className="font-headline text-4xl md:text-5xl uppercase tracking-tight leading-[0.9] mb-4 text-text">
           {member.name.toUpperCase()}
         </h1>
         <p className="font-body text-base md:text-lg text-text-muted leading-relaxed mb-8">
@@ -81,7 +81,7 @@ export default async function ThanksPage({ params }: PageProps) {
 
         {/* Fine print */}
         <p className="font-label text-[10px] tracking-widest text-text-subtle text-center mb-2">
-          SIEDEL&apos;S BARBERSHOP · 982 N COURT STREET · MEDINA, OHIO
+          {`SIEDEL'S BARBERSHOP · ${ADDRESS} · ${CITY_STATE_ZIP.split(',')[0]}`.toUpperCase()}
         </p>
         <p className="font-body text-xs text-text-faint italic text-center">
           Cash only. ATM on site.

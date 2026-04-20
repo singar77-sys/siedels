@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { FadeIn } from './FadeIn';
 import { Modal } from './Modal';
 import { Icon } from './Icon';
-import { team, PHONE, PHONE_HREF, type TeamMember } from '@/data/shop';
+import { team, type TeamMember } from '@/data/shop';
 
 export function TeamGrid() {
   const [selected, setSelected] = useState<TeamMember | null>(null);
@@ -34,13 +34,13 @@ export function TeamGrid() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <span className="font-headline text-6xl font-black text-text-subtle">
+                    <span className="font-headline text-6xl text-text-subtle">
                       {member.name.split(' ').map(n => n[0]).join('')}
                     </span>
                   </div>
                 )}
               </div>
-              <h3 className="font-headline text-2xl md:text-3xl font-black uppercase tracking-tighter mb-1">{member.name}</h3>
+              <h3 className="font-headline text-2xl md:text-3xl uppercase tracking-tight mb-1">{member.name}</h3>
               <p className="font-label text-[10px] tracking-widest text-red mb-6">{member.title.toUpperCase()}</p>
               <a
                 href={member.booking}
@@ -49,7 +49,7 @@ export function TeamGrid() {
                 onClick={(e) => e.stopPropagation()}
                 className="block w-full py-3 border border-red text-red font-headline text-sm font-bold uppercase tracking-widest text-center hover:bg-red hover:text-white transition-all duration-300"
               >
-                BOOK SESSION
+                BOOK WITH {member.name.split(' ')[0].toUpperCase()}
               </a>
             </article>
           </FadeIn>
@@ -60,7 +60,7 @@ export function TeamGrid() {
         <Modal onClose={closeModal}>
           <button
             onClick={closeModal}
-            className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center text-text-subtle hover:text-white transition-colors"
+            className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center text-text-subtle hover:text-text transition-colors"
             aria-label="Close"
           >
             <Icon name="close" className="w-5 h-5" />
@@ -71,7 +71,7 @@ export function TeamGrid() {
             </div>
           )}
           <div className="p-8">
-            <h2 className="font-headline text-2xl md:text-3xl font-black uppercase tracking-tighter">{selected.name}</h2>
+            <h2 className="font-headline text-2xl md:text-3xl uppercase tracking-tight">{selected.name}</h2>
             <p className="font-label text-[10px] tracking-widest text-red mt-1 mb-6">{selected.title.toUpperCase()}</p>
             {selected.bio && <p className="font-body text-sm text-text-muted leading-relaxed mb-8">{selected.bio}</p>}
             <a

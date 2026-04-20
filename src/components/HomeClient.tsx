@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SQUARE_BOOKING_URL, PHONE, PHONE_HREF, MAPS_URL, type TeamMember, type Service } from '@/data/shop';
+import { SQUARE_BOOKING_URL, PHONE, PHONE_HREF, MAPS_URL, ADDRESS, CITY_STATE_ZIP, type TeamMember, type Service } from '@/data/shop';
 import { Modal } from './Modal';
 import { ThemeToggle } from './ThemeToggle';
 import { Icon } from './Icon';
@@ -250,7 +250,7 @@ export function HomeClient({
           </p>
         </div>
         <div className="hidden md:flex items-center gap-8">
-          <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="font-label text-[13px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">982 N COURT STREET, MEDINA, OHIO 44256</a>
+          <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="font-label text-[13px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">{`${ADDRESS}, ${CITY_STATE_ZIP}`.toUpperCase()}</a>
           <a href={PHONE_HREF} className="font-label text-[13px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">{PHONE}</a>
           <SocialIcons />
         </div>
@@ -264,7 +264,7 @@ export function HomeClient({
         <Modal onClose={() => setSelectedMember(null)}>
           <button
             onClick={() => setSelectedMember(null)}
-            className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center text-text-subtle hover:text-white transition-colors"
+            className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center text-text-subtle hover:text-text transition-colors"
             aria-label="Close"
           >
             <Icon name="close" className="w-5 h-5" />
@@ -275,7 +275,7 @@ export function HomeClient({
             </div>
           )}
           <div className="p-8">
-            <h2 className="font-headline text-2xl md:text-3xl font-black uppercase tracking-tighter text-white">{selectedMember.name}</h2>
+            <h2 className="font-headline text-2xl md:text-3xl uppercase tracking-tight text-text">{selectedMember.name}</h2>
             <p className="font-label text-[10px] tracking-widest text-red mt-1 mb-6">{selectedMember.title.toUpperCase()}</p>
             {selectedMember.bio && <p className="font-body text-sm text-text-muted leading-relaxed mb-8">{selectedMember.bio}</p>}
             <a
@@ -315,8 +315,8 @@ export function HomeClient({
           )}
           <div className="p-8">
             <div className="flex items-start justify-between gap-4 mb-2">
-              <h2 className="font-headline text-2xl md:text-3xl font-black uppercase tracking-tighter text-white leading-none">{selectedService.name}</h2>
-              <span className="font-headline text-2xl md:text-3xl font-black text-red whitespace-nowrap">{selectedService.price}</span>
+              <h2 className="font-headline text-2xl md:text-3xl uppercase tracking-tight text-text leading-none">{selectedService.name}</h2>
+              <span className="font-headline text-2xl md:text-3xl text-red whitespace-nowrap">{selectedService.price}</span>
             </div>
             <p className="font-label text-[10px] tracking-widest text-red mb-6">{selectedService.tagline.toUpperCase()} · {selectedService.duration.toUpperCase()}</p>
             <p className="font-body text-sm text-text-muted leading-relaxed mb-6">{selectedService.description}</p>
@@ -324,7 +324,7 @@ export function HomeClient({
               <p className="font-label text-[10px] tracking-widest text-text-subtle mb-3">WHAT&apos;S INCLUDED</p>
               <ul className="space-y-2">
                 {selectedService.includes.map((item) => (
-                  <li key={item} className="flex items-start gap-3 font-body text-sm text-white">
+                  <li key={item} className="flex items-start gap-3 font-body text-sm text-text">
                     <span className="inline-block w-1 h-1 bg-red mt-2 flex-none" />
                     {item}
                   </li>

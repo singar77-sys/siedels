@@ -26,11 +26,11 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
 
   return (
     <section className="min-w-full h-full snap-start grid-bg overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
-      <div className="max-w-7xl mx-auto px-8 py-16 md:py-24 w-full">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-24 w-full">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10 md:mb-14">
           <div>
             <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">THE CREW</p>
-            <h2 className="font-headline text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[0.88] text-text-faint">
+            <h2 className="font-headline text-4xl md:text-6xl lg:text-7xl uppercase tracking-tight leading-[0.88] text-text-faint">
               MEET THE<br /><span className="text-text">SPECIALISTS</span>
             </h2>
           </div>
@@ -115,13 +115,13 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <span className="font-headline text-4xl md:text-5xl font-black text-text-subtle">
+                      <span className="font-headline text-4xl md:text-5xl text-text-subtle">
                         {member.name.split(' ').map(n => n[0]).join('')}
                       </span>
                     </div>
                   )}
                 </div>
-                <h3 className={`font-headline font-black uppercase tracking-tighter mb-1 text-white ${isAnchor ? 'text-xl md:text-2xl' : 'text-base md:text-xl'}`}>{member.name}</h3>
+                <h3 className={`font-headline uppercase tracking-tight mb-1 text-text ${isAnchor ? 'text-xl md:text-2xl' : 'text-base md:text-xl'}`}>{member.name}</h3>
                 <p className="font-label text-[8px] md:text-[10px] tracking-widest text-red mb-3">{member.title.toUpperCase()}</p>
                 {isAnchor && member.bio && (
                   <p className="font-body text-xs text-text-muted leading-relaxed mb-4 line-clamp-2 hidden md:block">{member.bio}</p>
@@ -139,7 +139,7 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
             );
           })}
           <div className="bg-red border border-red p-4 md:p-6 flex flex-col items-center justify-center text-center">
-            <p className="font-headline text-lg md:text-2xl font-black uppercase tracking-tighter text-white mb-2">YOUR CHAIR<br />IS WAITING</p>
+            <p className="font-headline text-lg md:text-2xl uppercase tracking-tight text-white mb-2">YOUR CHAIR<br />IS WAITING</p>
             <p className="font-body text-xs text-white/70 mb-6">Book online or call to reserve your chair.</p>
             <a
               href={PHONE_HREF}

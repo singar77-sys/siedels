@@ -20,7 +20,7 @@ export function ServicesList() {
               onClick={() => setSelectedService(service)}
               className="w-full flex justify-between items-baseline py-5 border-b border-line-strong group text-left cursor-pointer hover:pl-2 transition-all"
             >
-              <span className="flex items-center gap-3 font-headline text-base md:text-lg font-bold uppercase tracking-tight text-text-muted group-hover:text-white transition-colors">
+              <span className="flex items-center gap-3 font-headline text-base md:text-lg font-bold uppercase tracking-tight text-text-muted group-hover:text-text transition-colors">
                 {service.name}
                 <Icon name="add_circle" className="w-4 h-4 text-text-subtle group-hover:text-red transition-colors" />
               </span>
@@ -57,10 +57,10 @@ export function ServicesList() {
           )}
           <div className="p-8">
             <div className="flex items-start justify-between gap-4 mb-2">
-              <h2 className="font-headline text-2xl md:text-3xl font-black uppercase tracking-tighter text-white leading-none">
+              <h2 className="font-headline text-2xl md:text-3xl uppercase tracking-tight text-text leading-none">
                 {selectedService.name}
               </h2>
-              <span className="font-headline text-2xl md:text-3xl font-black text-red whitespace-nowrap">
+              <span className="font-headline text-2xl md:text-3xl text-red whitespace-nowrap">
                 {selectedService.price}
               </span>
             </div>
@@ -74,7 +74,7 @@ export function ServicesList() {
               <p className="font-label text-[10px] tracking-widest text-text-subtle mb-3">WHAT&apos;S INCLUDED</p>
               <ul className="space-y-2">
                 {selectedService.includes.map((item) => (
-                  <li key={item} className="flex items-start gap-3 font-body text-sm text-white">
+                  <li key={item} className="flex items-start gap-3 font-body text-sm text-text">
                     <span className="inline-block w-1 h-1 bg-red mt-2 flex-none" />
                     {item}
                   </li>

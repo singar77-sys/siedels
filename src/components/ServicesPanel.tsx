@@ -8,9 +8,9 @@ interface ServicesPanelProps {
 export function ServicesPanel({ onSelectService }: ServicesPanelProps) {
   return (
     <section className="min-w-full h-full snap-start grid-bg overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
-      <div className="max-w-5xl mx-auto px-8 py-12 md:py-20 w-full">
+      <div className="max-w-5xl mx-auto px-6 md:px-8 py-16 md:py-24 w-full">
         <div className="mb-10 md:mb-14">
-          <h2 className="font-headline text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.85] mb-3">
+          <h2 className="font-headline text-4xl md:text-6xl uppercase tracking-tight leading-[0.85] mb-3">
             SERVICES &amp; <span className="text-red">PRICES</span>
           </h2>
           <div className="flex items-center gap-4">
@@ -38,7 +38,7 @@ export function ServicesPanel({ onSelectService }: ServicesPanelProps) {
         <p className="font-label text-[10px] tracking-widest text-text-subtle mt-6">TAP ANY SERVICE FOR DETAILS</p>
         <div className="mt-12 bg-red p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <p className="font-headline text-xl md:text-2xl font-black uppercase tracking-tighter text-white">READY TO BOOK?</p>
+            <p className="font-headline text-xl md:text-2xl uppercase tracking-tight text-white">READY TO BOOK?</p>
             <p className="font-body text-sm text-white/70 mt-1">Lock in your time online. Cash only at checkout.</p>
           </div>
           <div className="flex gap-4">

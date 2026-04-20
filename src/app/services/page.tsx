@@ -6,7 +6,7 @@ import { CTASection } from '@/components/CTASection';
 import { Footer } from '@/components/Footer';
 import { ServicesList } from '@/components/ServicesList';
 import { Icon } from '@/components/Icon';
-import { PHONE, PHONE_HREF, SQUARE_BOOKING_URL, services } from '@/data/shop';
+import { PHONE, PHONE_HREF, SQUARE_BOOKING_URL, TEAM_COUNT, services } from '@/data/shop';
 
 const priceOf = (name: string) => services.find((s) => s.name === name)?.price ?? '';
 const PRICE_HAIRCUT = priceOf('Haircut');
@@ -20,7 +20,7 @@ const PRICE_MAX = `$${Math.max(...prices)}`;
 
 export const metadata: Metadata = {
   title: "Services & Prices | Siedel's Barbershop | Medina, Ohio",
-  description: `Haircuts, fades, beard work, head shaves, and more. Straight-up pricing from ${PRICE_MIN}–${PRICE_MAX}. Cash only. We have an ATM.`,
+  description: `Haircuts, fades, beard work, head shaves, and more. Straight-up pricing from ${PRICE_MIN}–${PRICE_MAX}. Cash only. ATM on site.`,
   alternates: { canonical: '/services' },
   openGraph: {
     title: "Services & Prices | Siedel's Barbershop",
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
 
 const faqItems = [
   { q: 'How do I book?', a: "Book online through Square or call (330) 952-0777 to reserve a time with the barber of your choice." },
-  { q: 'Do you take cards?', a: "Cash only. We have an ATM." },
+  { q: 'Do you take cards?', a: "Cash only. ATM on site." },
   { q: "How much is a haircut at Siedel's?", a: `Standard haircut is ${PRICE_HAIRCUT}. Razor / foil fades ${PRICE_RAZOR_FADE}. Haircut + beard trim ${PRICE_HAIRCUT_BEARD}. Haircut + face shave ${PRICE_HAIRCUT_FACE_SHAVE}.` },
-  { q: 'Can I book a specific barber?', a: 'Yes. 11 barbers on staff, each with their own booking link. Visit the Team page to pick yours.' },
+  { q: 'Can I book a specific barber?', a: `Yes. ${TEAM_COUNT} barbers on staff, each with their own booking link. Visit the Team page to pick yours.` },
 ];
 
 const faqSchema = {
@@ -59,7 +59,7 @@ export default function ServicesPage() {
           subtitle="Straight-up pricing. No surprises. Cash only. ATM on site."
         />
 
-        <section className="py-20 md:py-28">
+        <section className="py-16 md:py-24">
           <div className="max-w-5xl mx-auto px-8">
             <ServicesList />
             <FadeIn delay={0.4}>
@@ -74,7 +74,7 @@ export default function ServicesPage() {
                 </a>
                 <a
                   href={PHONE_HREF}
-                  className="inline-flex items-center justify-center gap-2 border border-line-strong text-text-muted font-headline font-bold uppercase tracking-tight px-8 py-4 hover:text-white hover:border-white transition-colors"
+                  className="inline-flex items-center justify-center gap-2 border border-line-strong text-text-muted font-headline font-bold uppercase tracking-tight px-8 py-4 hover:text-text hover:border-text transition-colors"
                 >
                   <Icon name="call" className="w-5 h-5" />
                   {PHONE}
@@ -84,12 +84,12 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        <section className="py-20 md:py-28 border-t border-line-strong">
+        <section className="py-16 md:py-24 border-t border-line-strong">
           <div className="max-w-3xl mx-auto px-8">
             <FadeIn>
               <div className="border-l-4 border-red pl-8 mb-12">
                 <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">INTEL</p>
-                <h2 className="font-headline text-3xl md:text-5xl font-black uppercase tracking-tighter">
+                <h2 className="font-headline text-3xl md:text-5xl uppercase tracking-tight">
                   GOOD TO <span className="text-red">KNOW</span>
                 </h2>
               </div>

@@ -4,14 +4,15 @@ import { PageHero } from '@/components/PageHero';
 import { TeamGrid } from '@/components/TeamGrid';
 import { CTASection } from '@/components/CTASection';
 import { Footer } from '@/components/Footer';
+import { TEAM_COUNT } from '@/data/shop';
 
 export const metadata: Metadata = {
   title: "Meet the Barbers | Siedel's Barbershop | Medina, Ohio",
-  description: "11 barbers and stylists on staff. Master barbers, fades, women's cuts, and beard work. Book your favorite barber online.",
+  description: `${TEAM_COUNT} barbers and stylists on staff. Master barbers, fades, women's cuts, and beard work. Book your favorite barber online.`,
   alternates: { canonical: '/team' },
   openGraph: {
     title: "Meet the Barbers | Siedel's Barbershop",
-    description: "11 barbers and stylists. Book online with your favorite barber.",
+    description: `${TEAM_COUNT} barbers and stylists. Book online with your favorite barber.`,
   },
 };
 
@@ -29,7 +30,7 @@ export default function TeamPage() {
           subtitle="Eleven barbers and stylists. Every skill level from fades to full-service shaves."
         />
 
-        <section className="py-20 md:py-28">
+        <section className="py-16 md:py-24">
           <div className="max-w-7xl mx-auto px-8">
             <TeamGrid />
           </div>

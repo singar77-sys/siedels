@@ -35,7 +35,7 @@ export function SchedulePanel({ scheduleWeek, scheduleRelation, scheduleDaysUnti
 
   return (
     <section className="min-w-full h-full snap-start grid-bg overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
-      <div className="max-w-7xl mx-auto px-8 py-16 md:py-24 w-full">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-24 w-full">
         <div className="mb-10 md:mb-14 flex items-baseline justify-between gap-4">
           <div>
             <h2 className="font-headline text-2xl md:text-4xl font-bold uppercase tracking-tight">
@@ -83,10 +83,10 @@ export function SchedulePanel({ scheduleWeek, scheduleRelation, scheduleDaysUnti
                       <th
                         key={d.dayName}
                         className={`text-left p-4 font-label tracking-widest border-r border-line-strong last:border-r-0 ${
-                          isToday ? 'bg-red text-white' : 'text-white'
+                          isToday ? 'bg-red text-white' : 'text-text'
                         }`}
                       >
-                        <div className="font-black text-sm tracking-widest">
+                        <div className="text-sm tracking-widest">
                           {d.dayName.substring(0, 3).toUpperCase()}
                         </div>
                         <div className={`text-[10px] mt-0.5 ${isToday ? 'text-white/85' : 'text-text-muted'}`}>
@@ -110,7 +110,7 @@ export function SchedulePanel({ scheduleWeek, scheduleRelation, scheduleDaysUnti
                   const zebra = rowIndex++ % 2 === 0 ? 'bg-surface' : 'bg-ink/50';
                   return (
                     <tr key={firstName} className={`border-b border-line-strong last:border-b-0 ${zebra}`}>
-                      <td className={`sticky left-0 z-10 p-4 font-headline text-sm md:text-base font-black uppercase tracking-tight text-white border-r border-line-strong whitespace-nowrap ${zebra}`}>
+                      <td className={`sticky left-0 z-10 p-4 font-headline text-sm md:text-base uppercase tracking-tight text-text border-r border-line-strong whitespace-nowrap ${zebra}`}>
                         <span className="inline-block w-1 h-5 bg-red mr-3 align-middle" />
                         {member.name.toUpperCase()}
                       </td>
@@ -128,7 +128,7 @@ export function SchedulePanel({ scheduleWeek, scheduleRelation, scheduleDaysUnti
                         if (shift.status === 'working') {
                           return (
                             <td key={d.dayName} className={cellBase}>
-                              <span className="font-headline text-base font-bold text-white whitespace-nowrap">
+                              <span className="font-headline text-base font-bold text-text whitespace-nowrap">
                                 {shift.display}
                               </span>
                             </td>

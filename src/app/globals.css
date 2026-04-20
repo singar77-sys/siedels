@@ -23,16 +23,10 @@
   --selection-bg:  #E31B23;
   --selection-text: white;
   --texture-opacity: 0.05;
-  --pole-red:      #E31B23;
-  --pole-white:    rgba(0,0,0,0.15);
-  --pole-cap:      rgba(0,0,0,0.2);
-  --pole-body:     rgba(0,0,0,0.06);
-  --hero-brightness: 0.6;
   --scrim:         rgba(0,0,0,0.6);
   --hero-overlay:  linear-gradient(to right, rgba(0,0,0,0.55), rgba(0,0,0,0.25), transparent);
   --hero-eyebrow:  #C5B699;
   --hero-h1:       #E5E0D4;
-  --hero-h1-accent:#C5B699;
   --hero-tagline:  #CDC7BB;
   --hero-cta-bg:   #C5B699;
   --hero-cta-text: #1A1610;
@@ -59,16 +53,10 @@
   --selection-bg:  #E31B23;
   --selection-text: white;
   --texture-opacity: 0.035;
-  --pole-red:      #E31B23;
-  --pole-white:    rgba(255,255,255,0.5);
-  --pole-cap:      rgba(255,255,255,0.3);
-  --pole-body:     rgba(255,255,255,0.12);
-  --hero-brightness: 0.5;
   --scrim:         rgba(0,0,0,0.8);
   --hero-overlay:  none;
   --hero-eyebrow:  #E31B23;
   --hero-h1:       #ffffff;
-  --hero-h1-accent:transparent;
   --hero-tagline:  rgba(255,255,255,0.7);
   --hero-cta-bg:   #E31B23;
   --hero-cta-text: #ffffff;
@@ -116,9 +104,26 @@ body {
 .font-label {
   font-family: 'General Sans', 'Arial', sans-serif;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
 }
+
+/* ══════════════════════════════════════════════════════
+   Spacing Scale (canonical)
+     — panel py:  py-16 md:py-24
+     — panel px:  px-6 md:px-8
+     — heading→content:  mb-10 md:mb-14
+     — section max:  max-w-7xl (grids) or max-w-5xl (prose)
+     — card p:  p-6 md:p-8
+     — card gap: gap-4 (tight) / gap-8 (loose) / gap-12 md:gap-16 (section split)
+
+   Typography Scale
+     — display headline (hero h1):  text-5xl sm:text-6xl md:text-7xl lg:text-8xl
+     — section headline (panel h2): text-4xl md:text-6xl lg:text-7xl
+     — subsection h2/h3:            text-3xl md:text-5xl
+     — eyebrow label:               text-[11px] tracking-[0.25em]
+     — small label:                 text-[10px] tracking-[0.15em]
+   ══════════════════════════════════════════════════════ */
 /* ── Shop Texture ────────────────────────────────────── */
 .grid-bg {
   position: relative;
@@ -155,7 +160,7 @@ body {
   position: fixed; top: 0; left: 0;
   width: auto; height: auto; padding: 1rem 2rem;
   background: var(--red); color: var(--selection-text);
-  font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+  font-family: 'General Sans', sans-serif; font-weight: 700;
   z-index: 9999;
 }
 
@@ -170,14 +175,6 @@ body {
 }
 .animate-ken-burns {
   animation: ken-burns 18s ease-in-out infinite alternate;
-}
-
-@keyframes pole-spin {
-  0%   { transform: translateY(0); }
-  100% { transform: translateY(6px); }
-}
-.animate-pole-spin {
-  animation: pole-spin 0.8s linear infinite;
 }
 
 /* ── Hero SHARP — outlined white in both themes ──────── */

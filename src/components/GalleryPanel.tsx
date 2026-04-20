@@ -5,11 +5,11 @@ import { Icon } from './Icon';
 export function GalleryPanel() {
   return (
     <section className="min-w-full h-full snap-start grid-bg overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
-      <div className="max-w-7xl mx-auto px-8 py-12 md:py-20 w-full">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-24 w-full">
         <div className="mb-10 md:mb-14 flex items-baseline justify-between gap-4">
           <div>
             <p className="font-label text-[11px] tracking-[0.3em] text-red mb-3">THE WORK</p>
-            <h2 className="font-headline text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.85]">
+            <h2 className="font-headline text-4xl md:text-6xl uppercase tracking-tight leading-[0.85]">
               FRESH <span className="text-red">FROM THE CHAIR</span>
             </h2>
           </div>

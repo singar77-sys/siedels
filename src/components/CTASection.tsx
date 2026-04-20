@@ -4,12 +4,12 @@ import { Icon } from './Icon';
 
 export function CTASection() {
   return (
-    <section className="py-20 md:py-28 bg-surface grid-bg relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-surface grid-bg relative overflow-hidden">
       <div className="max-w-4xl mx-auto px-8 text-center">
         <FadeIn>
           <div className="inline-block border-l-4 border-red pl-8 text-left mb-8">
             <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">READY?</p>
-            <h2 className="font-headline text-3xl md:text-5xl font-black uppercase tracking-tight leading-[0.88]">
+            <h2 className="font-headline text-3xl md:text-5xl uppercase tracking-tight leading-[0.88]">
               YOUR CHAIR<br /><span className="text-stroke">IS WAITING</span>
             </h2>
           </div>
@@ -28,7 +28,7 @@ export function CTASection() {
               href={SQUARE_BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 border border-line-strong text-text-muted font-headline font-bold uppercase tracking-tight px-8 py-4 hover:text-white hover:border-white transition-all duration-300"
+              className="inline-flex items-center justify-center gap-2 border border-line-strong text-text-muted font-headline font-bold uppercase tracking-tight px-8 py-4 hover:text-text hover:border-text transition-all duration-300"
             >
               <Icon name="calendar_month" className="w-5 h-5" />
               BOOK ONLINE

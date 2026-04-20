@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import { RATING, REVIEW_COUNT } from '@/data/shop';
 import './globals.css';
 
 const BASE_URL = 'https://siedels.vercel.app';
@@ -45,7 +46,7 @@ const jsonLd = {
   '@id': `${BASE_URL}/#barbershop`,
   name: "Siedel's Barbershop",
   image: `${BASE_URL}/images/siedels-barbershop-medina-ohio.webp`,
-  description: "Eleven barbers in Medina, Ohio. Haircuts, fades, beard work, straight razor shaves. Cash only.",
+  description: "Eleven barbers in Medina, Ohio. Haircuts, fades, beard work, straight razor shaves. Cash only. ATM on site.",
   url: BASE_URL,
   telephone: '+13309520777',
   priceRange: '$5–$96',
@@ -72,15 +73,13 @@ const jsonLd = {
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '08:00', closes: '15:00' },
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '00:00', closes: '00:00' },
   ],
-  aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '249', bestRating: '5' },
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: RATING, reviewCount: REVIEW_COUNT, bestRating: '5' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
         <link
