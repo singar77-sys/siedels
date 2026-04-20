@@ -25,6 +25,11 @@
 *.pem
 *.psd
 
+# internal notes + agent scratchpads
+hunter-fixes*.md
+.claude/worktrees/
+.claude/worktrees/*
+
 # debug
 npm-debug.log*
 yarn-debug.log*
