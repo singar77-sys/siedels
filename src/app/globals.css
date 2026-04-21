@@ -269,6 +269,74 @@ body {
   to   { clip-path: circle(150% at var(--toggle-x, 50%) var(--toggle-y, 50%)); }
 }
 
+/* ── Sacrifix easter egg — keyboard trigger "sacrifix" ── */
+@keyframes sacrifix-lightning {
+  0%   { opacity: 0; }
+  1%   { opacity: 0.95; }
+  3%   { opacity: 0.2; }
+  4%   { opacity: 0.9; }
+  6%   { opacity: 0; }
+  14%  { opacity: 0; }
+  15%  { opacity: 0.8; }
+  17%  { opacity: 0.15; }
+  18%  { opacity: 0.7; }
+  20%  { opacity: 0; }
+  45%  { opacity: 0; }
+  46%  { opacity: 0.6; }
+  48%  { opacity: 0.1; }
+  49%  { opacity: 0.5; }
+  51%  { opacity: 0; }
+  75%  { opacity: 0; }
+  76%  { opacity: 0.7; }
+  78%  { opacity: 0.15; }
+  79%  { opacity: 0.55; }
+  82%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+.sacrifix-lightning {
+  animation: sacrifix-lightning 30s linear forwards;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+@keyframes sacrifix-smoke {
+  0%   { opacity: 0; transform: translateY(30%); }
+  15%  { opacity: 0.55; transform: translateY(0); }
+  100% { opacity: 0.75; transform: translateY(-10%); }
+}
+.sacrifix-smoke {
+  background:
+    radial-gradient(ellipse at 30% 110%, rgba(0,0,0,0.9) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 120%, rgba(0,0,0,0.85) 0%, transparent 60%),
+    linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 70%);
+  animation: sacrifix-smoke 30s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes sacrifix-rain {
+  0%   { transform: translateY(-10vh); }
+  100% { transform: translateY(120vh); }
+}
+.sacrifix-rain {
+  animation-name: sacrifix-rain;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes sacrifix-emoji {
+  0%   { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { transform: translateY(120vh) rotate(var(--rotate-end, 360deg)); opacity: 0; }
+}
+.sacrifix-emoji {
+  animation-name: sacrifix-emoji;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
 /* ── Reduced Motion ───────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

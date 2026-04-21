@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import { SacrifixEasterEgg } from '@/components/SacrifixEasterEgg';
 import { RATING, REVIEW_COUNT } from '@/data/shop';
 import './globals.css';
 
@@ -95,6 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main" className="skip-link">Skip to main content</a>
         <ThemeProvider>
         {children}
+        <SacrifixEasterEgg />
         </ThemeProvider>
         <Script
           src="https://app.squareup.com/appointments/buyer/widget/xcru7izyf4zhv6/LFCOT5CC7MY0S.js"
