@@ -325,8 +325,16 @@ export interface GalleryItem {
 }
 
 export const gallery: GalleryItem[] = [
-  // Hero craft shots — fades, shaves, lineups
+  // Feature tile (2×2 anchor)
   { src: '/images/mens-fade-with-beard-siedels-medina.webp', alt: 'Men\'s short fade haircut with beard at Siedel\'s Barbershop in Medina, Ohio', tag: 'FADE' },
+
+  // Kids — surfaced early so parents see them on first view
+  { src: '/images/kids-fade-clippers-siedels-medina.webp', alt: 'Kids fade with clippers at Siedel\'s Barbershop in Medina, Ohio', tag: 'KIDS' },
+  { src: '/images/kids-haircut-happy-siedels-medina.webp', alt: 'Happy kid getting a clipper haircut at Siedel\'s Barbershop', tag: 'KIDS' },
+  { src: '/images/boys-fade-top-view-siedels-medina.webp', alt: 'Boy\'s fade haircut finish at Siedel\'s Barbershop in Medina, Ohio', tag: 'KIDS' },
+  { src: '/images/kids-first-haircut-scissors-siedels-medina.webp', alt: 'Toddler\'s first haircut with scissors at Siedel\'s Barbershop', tag: 'FIRST CUT' },
+
+  // Craft shots — fades, shaves, lineups
   { src: '/images/straight-razor-fade-lineup-siedels-medina.webp', alt: 'Straight razor cleanup on a skin fade at Siedel\'s Barbershop in Medina, Ohio', tag: 'LINEUP' },
   { src: '/images/hot-towel-face-shave-siedels-medina.webp', alt: 'Hot towel face shave at Siedel\'s Barbershop in Medina, Ohio', tag: 'RITUAL' },
   { src: '/images/straight-razor-shave-lather-siedels-medina.webp', alt: 'Straight razor shave with lather at Siedel\'s Barbershop in Medina, Ohio', tag: 'SHAVE' },
@@ -334,12 +342,6 @@ export const gallery: GalleryItem[] = [
   { src: '/images/mens-scissor-over-comb-siedels-medina.webp', alt: 'Scissor-over-comb cut at Siedel\'s Barbershop, Medina, Ohio', tag: 'SHEAR WORK' },
   { src: '/images/neck-lineup-straight-razor-siedels-medina.webp', alt: 'Neck lineup with straight razor at Siedel\'s Barbershop in Medina, Ohio', tag: 'LINEUP' },
   { src: '/images/straight-razor-beard-shave-siedels-medina.webp', alt: 'Straight razor shave on bearded client at Siedel\'s Barbershop in Medina, Ohio', tag: 'SHAVE' },
-
-  // Kids
-  { src: '/images/kids-fade-clippers-siedels-medina.webp', alt: 'Kids fade with clippers at Siedel\'s Barbershop in Medina, Ohio', tag: 'KIDS' },
-  { src: '/images/kids-haircut-happy-siedels-medina.webp', alt: 'Happy kid getting a clipper haircut at Siedel\'s Barbershop', tag: 'KIDS' },
-  { src: '/images/boys-fade-top-view-siedels-medina.webp', alt: 'Boy\'s fade haircut finish at Siedel\'s Barbershop in Medina, Ohio', tag: 'KIDS' },
-  { src: '/images/kids-first-haircut-scissors-siedels-medina.webp', alt: 'Toddler\'s first haircut with scissors at Siedel\'s Barbershop', tag: 'FIRST CUT' },
 
   // Beard + detail
   { src: '/images/beard-dusting-brush-siedels-medina.webp', alt: 'Beard dusting with brush after shave at Siedel\'s Barbershop', tag: 'FINISH' },
