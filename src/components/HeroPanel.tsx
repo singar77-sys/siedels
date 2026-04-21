@@ -46,8 +46,8 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
         style={{ background: 'var(--hero-overlay)' }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-8 pb-16 md:pb-24 pt-20 md:pt-32 w-full">
-        <div className="border-l-4 border-red pl-8">
+      <div className="relative z-10 w-full px-6 md:px-12 lg:px-16 xl:px-24 pb-16 md:pb-24 pt-20 md:pt-32">
+        <div className="border-l-4 border-red pl-6 md:pl-8 max-w-2xl">
           <p
             className="font-label text-[11px] tracking-[0.3em] mb-6 hero-stagger-1"
             style={{ color: 'var(--hero-eyebrow)' }}
