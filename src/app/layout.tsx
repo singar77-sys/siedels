@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { SacrifixEasterEgg } from '@/components/SacrifixEasterEgg';
+import { MedinaAmbience } from '@/components/MedinaAmbience';
+import { fetchWeather } from '@/lib/weather';
 import { RATING, REVIEW_COUNT } from '@/data/shop';
 import './globals.css';
 
@@ -77,9 +79,15 @@ const jsonLd = {
   aggregateRating: { '@type': 'AggregateRating', ratingValue: RATING, reviewCount: REVIEW_COUNT, bestRating: '5' },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Weather-aware default theme: if it's night in Medina right now
+  // we render with dark as the default. User preference from localStorage
+  // always wins (read in the inline script below).
+  const weather = await fetchWeather();
+  const defaultTheme = weather.current?.is_day === 0 ? 'dark' : 'light';
+
   return (
-    <html lang="en">
+    <html lang="en" data-default-theme={defaultTheme}>
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
@@ -88,14 +96,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap"
         />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#CDC7BB" />
+        <meta name="theme-color" content={defaultTheme === 'dark' ? '#0E0E0E' : '#CDC7BB'} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('siedels-theme');var theme=(t==='light'||t==='dark')?t:'light';document.documentElement.setAttribute('data-theme',theme);document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme==='dark'?'#0E0E0E':'#CDC7BB');})();` }} />
+        <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('siedels-theme');var def=document.documentElement.getAttribute('data-default-theme')||'light';var theme=(t==='light'||t==='dark')?t:def;document.documentElement.setAttribute('data-theme',theme);document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme==='dark'?'#0E0E0E':'#CDC7BB');})();` }} />
       </head>
       <body>
         <a href="#main" className="skip-link">Skip to main content</a>
         <ThemeProvider>
         {children}
+        <MedinaAmbience />
         <SacrifixEasterEgg />
         </ThemeProvider>
         <Script
