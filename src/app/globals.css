@@ -5,16 +5,15 @@
    ══════════════════════════════════════════════════════ */
 
 /* ── Light Theme (default — shop palette) ─────────────
-   Every color here is one of the 5 shop swatches, plus
-   the brand red and alphas derived from #362D1E espresso
-   or #C5B699 khaki. No invented middle tones.
-   #CDC7BB  wall     #C0BBB8  surface    #938884  wood
-   #C5B699  khaki    #362D1E  espresso                      */
+   Four shop swatches + brand red. #938884 grey has been
+   dropped; elevated surfaces use khaki, CTA hover uses red.
+   #CDC7BB  wall     #C0BBB8  surface    #C5B699  khaki
+   #362D1E  espresso #E31B23  red                             */
 :root,
 [data-theme="light"] {
   --ink:           #CDC7BB;
   --surface:       #C0BBB8;
-  --surface-raised:#938884;
+  --surface-raised:#C5B699;
   --surface-high:  #C5B699;
   --red:           #E31B23;
   --red-hover:     #C00015;
@@ -28,14 +27,15 @@
   --selection-bg:  #E31B23;
   --selection-text: #CDC7BB;
   --texture-opacity: 0.05;
-  --scrim:         rgba(54,45,30,0.6);
+  --scrim:         rgba(54,45,30,0.75);
   --hero-overlay:  linear-gradient(to right, rgba(54,45,30,0.55), rgba(54,45,30,0.25), transparent);
   --hero-eyebrow:  #C5B699;
   --hero-h1:       #CDC7BB;
   --hero-tagline:  #CDC7BB;
   --hero-cta-bg:   #C5B699;
   --hero-cta-text: #362D1E;
-  --hero-cta-hover:#938884;
+  --hero-cta-hover:#E31B23;
+  --hero-cta-hover-text: #FFFFFF;
   --hero-ghost-border: rgba(197,182,153,0.4);
   --hero-ghost-text:   #CDC7BB;
 }
@@ -66,6 +66,7 @@
   --hero-cta-bg:   #E31B23;
   --hero-cta-text: #ffffff;
   --hero-cta-hover:#C00015;
+  --hero-cta-hover-text: #ffffff;
   --hero-ghost-border: rgba(255,255,255,0.1);
   --hero-ghost-text:   rgba(255,255,255,0.7);
 }
@@ -202,7 +203,10 @@ body {
   background-color: var(--hero-cta-bg);
   color: var(--hero-cta-text);
 }
-.hero-cta-primary:hover { background-color: var(--hero-cta-hover); }
+.hero-cta-primary:hover {
+  background-color: var(--hero-cta-hover);
+  color: var(--hero-cta-hover-text);
+}
 .hero-cta-ghost {
   border-color: var(--hero-ghost-border);
   color: var(--hero-ghost-text);
