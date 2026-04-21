@@ -7,7 +7,8 @@ import { useTheme } from './ThemeProvider';
  * Easter egg — type "sacrifix" anywhere on the site (not in a form
  * field) and summon the full ritual: flip to dark mode, lightning,
  * smoke, rain, and a rain of pizza/tombstone/skull emojis. Soundtrack
- * lives at /public/audio/sacrifix.mp3.
+ * lives at /public/audio/sacrifix.mp4 (MP4 container, audio-only or
+ * video+audio — the Audio() element decodes the audio track).
  *
  * Duration: 30s, or ESC to dismiss.
  * Respects prefers-reduced-motion (plays audio + flips theme, skips
@@ -47,7 +48,7 @@ export function SacrifixEasterEgg() {
     setActive(true);
 
     if (!audioRef.current) {
-      audioRef.current = new Audio('/audio/sacrifix.mp3');
+      audioRef.current = new Audio('/audio/sacrifix.mp4');
       audioRef.current.volume = 0.85;
     }
     audioRef.current.currentTime = 0;
