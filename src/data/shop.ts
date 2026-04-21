@@ -190,6 +190,16 @@ export const services: Service[] = [
     image: '/images/beard-trim-scissors-siedels-medina.webp',
   },
   {
+    name: 'Eyebrow / Lip / Chin',
+    price: '$23',
+    tagline: 'Detail work',
+    description:
+      "Precision trimming and shape-up on the eyebrows, upper lip, or chin. Clean, quick, and a huge difference in how your grooming reads. Add it to any other service.",
+    includes: ['Detailed shaping', 'Precision trim'],
+    duration: '15 min',
+    image: '/images/barber-tools-siedels-barbershop-medina.webp',
+  },
+  {
     name: 'Shoulder Length Cut + Rough Dry',
     price: '$38',
     tagline: 'Longer styles, dialed in',
@@ -198,6 +208,16 @@ export const services: Service[] = [
     includes: ['Shampoo', 'Shear cut', 'Rough dry', 'Styling'],
     duration: '40 min',
     image: '/images/shoulder-length-haircut-siedels-medina.webp',
+  },
+  {
+    name: 'Shampoo + Style',
+    price: '$25',
+    tagline: 'Wash, dry, style',
+    description:
+      "Full shampoo, blow dry, and style — no cut. Perfect for a special event, a date night, or anytime you want to look your best without a full trim.",
+    includes: ['Shampoo', 'Blow dry', 'Style', 'Product finish'],
+    duration: '25 min',
+    image: '/images/mens-haircut-styling-siedels-medina.webp',
   },
   {
     name: 'Duo Haircut',
@@ -220,16 +240,6 @@ export const services: Service[] = [
     image: '/images/kids-fade-haircut-siedels-medina.webp',
   },
   {
-    name: 'Eyebrow / Lip / Chin',
-    price: '$23',
-    tagline: 'Detail work',
-    description:
-      "Precision trimming and shape-up on the eyebrows, upper lip, or chin. Clean, quick, and a huge difference in how your grooming reads. Add it to any other service.",
-    includes: ['Detailed shaping', 'Precision trim'],
-    duration: '15 min',
-    image: '/images/barber-tools-siedels-barbershop-medina.webp',
-  },
-  {
     name: 'Shampoo',
     price: '$5',
     tagline: 'Add-on',
@@ -238,16 +248,6 @@ export const services: Service[] = [
     includes: ['Shampoo', 'Scalp massage', 'Conditioner'],
     duration: '10 min',
     image: '/images/hot-towel-shampoo-siedels-medina.webp',
-  },
-  {
-    name: 'Shampoo + Style',
-    price: '$25',
-    tagline: 'Wash, dry, style',
-    description:
-      "Full shampoo, blow dry, and style — no cut. Perfect for a special event, a date night, or anytime you want to look your best without a full trim.",
-    includes: ['Shampoo', 'Blow dry', 'Style', 'Product finish'],
-    duration: '25 min',
-    image: '/images/mens-haircut-styling-siedels-medina.webp',
   },
 ];
 
