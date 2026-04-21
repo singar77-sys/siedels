@@ -5,14 +5,15 @@
    ══════════════════════════════════════════════════════ */
 
 /* ── Light Theme (default — shop palette) ─────────────
-   Four shop swatches + brand red. #938884 grey has been
-   dropped; elevated surfaces use khaki, CTA hover uses red.
-   #CDC7BB  wall     #C0BBB8  surface    #C5B699  khaki
+   Four warm tans + brand red. #938884 grey and the very
+   low-saturation #C0BBB8 have both been dropped; surfaces
+   now sit on a consistent warm-tan ramp.
+   #CDC7BB  wall     #C9BEAA  surface    #C5B699  khaki
    #362D1E  espresso #E31B23  red                             */
 :root,
 [data-theme="light"] {
   --ink:           #CDC7BB;
-  --surface:       #C0BBB8;
+  --surface:       #C9BEAA;
   --surface-raised:#C5B699;
   --surface-high:  #C5B699;
   --red:           #E31B23;
