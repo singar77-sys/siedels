@@ -4,33 +4,38 @@
    Siedel's Barbershop — Multi-Theme Design System
    ══════════════════════════════════════════════════════ */
 
-/* ── Light Theme (default — shop palette) ────────────── */
+/* ── Light Theme (default — shop palette) ─────────────
+   Every color here is one of the 5 shop swatches, plus
+   the brand red and alphas derived from #362D1E espresso
+   or #C5B699 khaki. No invented middle tones.
+   #CDC7BB  wall     #C0BBB8  surface    #938884  wood
+   #C5B699  khaki    #362D1E  espresso                      */
 :root,
 [data-theme="light"] {
   --ink:           #CDC7BB;
   --surface:       #C0BBB8;
   --surface-raised:#938884;
-  --surface-high:  #B8B0A4;
+  --surface-high:  #C5B699;
   --red:           #E31B23;
   --red-hover:     #C00015;
-  --text:          #1A1610;
-  --text-muted:    rgba(0,0,0,0.65);
-  --text-subtle:   rgba(0,0,0,0.45);
-  --text-faint:    rgba(0,0,0,0.3);
-  --line:          rgba(0,0,0,0.06);
-  --line-strong:   rgba(0,0,0,0.12);
+  --text:          #362D1E;
+  --text-muted:    rgba(54,45,30,0.75);
+  --text-subtle:   rgba(54,45,30,0.55);
+  --text-faint:    rgba(54,45,30,0.4);
+  --line:          rgba(54,45,30,0.08);
+  --line-strong:   rgba(54,45,30,0.16);
   --stroke-color:  #362D1E;
   --selection-bg:  #E31B23;
-  --selection-text: white;
+  --selection-text: #CDC7BB;
   --texture-opacity: 0.05;
-  --scrim:         rgba(0,0,0,0.6);
-  --hero-overlay:  linear-gradient(to right, rgba(0,0,0,0.55), rgba(0,0,0,0.25), transparent);
+  --scrim:         rgba(54,45,30,0.6);
+  --hero-overlay:  linear-gradient(to right, rgba(54,45,30,0.55), rgba(54,45,30,0.25), transparent);
   --hero-eyebrow:  #C5B699;
-  --hero-h1:       #E5E0D4;
+  --hero-h1:       #CDC7BB;
   --hero-tagline:  #CDC7BB;
   --hero-cta-bg:   #C5B699;
-  --hero-cta-text: #1A1610;
-  --hero-cta-hover:#B8A88A;
+  --hero-cta-text: #362D1E;
+  --hero-cta-hover:#938884;
   --hero-ghost-border: rgba(197,182,153,0.4);
   --hero-ghost-text:   #CDC7BB;
 }

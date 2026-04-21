@@ -231,8 +231,8 @@ export function HomeClient({
           </p>
           <p className="font-label text-[10px] tracking-[0.15em] text-text-faint">
             BUILT BY{' '}
-            <a href="https://huntersystems.dev" target="_blank" rel="noopener noreferrer" className="text-text-subtle hover:text-red transition-colors inline-flex items-center gap-1.5 align-middle">
-              <HunterMark className="w-2.5 h-2.5" />
+            <a href="https://huntersystems.dev" target="_blank" rel="noopener noreferrer" className="text-text-subtle hover:text-red transition-colors">
+              <HunterMark className="inline-block align-middle w-2.5 h-2.5 mr-1.5 -translate-y-px" />
               HUNTER SYSTEMS
             </a>
           </p>
