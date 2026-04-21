@@ -27,17 +27,14 @@ export function GalleryPanel() {
           </a>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 md:gap-2">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-dense gap-1 md:gap-2">
           {gallery.map((item, idx) => {
-            // Vary aspect ratios for visual rhythm
-            const isTall = idx === 0 || idx === 5 || idx === 8;
-            const isWide = idx === 2 || idx === 9;
-            const aspect = isTall ? 'aspect-[3/4]' : isWide ? 'aspect-[4/3]' : 'aspect-square';
-            const span = isTall ? 'row-span-2' : '';
+            // First tile is a 2×2 feature; everything else is uniform square.
+            const isFeature = idx === 0;
             return (
               <figure
                 key={idx}
-                className={`relative overflow-hidden bg-surface-raised group cursor-pointer ${aspect} ${span}`}
+                className={`relative overflow-hidden bg-surface-raised group cursor-pointer aspect-square ${isFeature ? 'col-span-2 row-span-2' : ''}`}
               >
                 <Image
                   src={item.src}
