@@ -253,8 +253,23 @@ body {
 /* ── Logo theme-swap visibility ──────────────────────── */
 .logo-light { display: block; }
 .logo-dark  { display: none; }
+.logo-team  { display: none; }
 [data-theme="dark"] .logo-light { display: none; }
 [data-theme="dark"] .logo-dark  { display: block; }
+
+/* Team modes + italy mode: hide both baseline logos and paint the
+   masked logo-team layer with the current mode's --team-logo-color */
+[data-team-mode] .logo-light,
+[data-team-mode] .logo-dark,
+.italy-mode .logo-light,
+.italy-mode .logo-dark {
+  display: none !important;
+}
+[data-team-mode] .logo-team,
+.italy-mode .logo-team {
+  display: block;
+  background-color: var(--team-logo-color, currentColor);
+}
 
 /* ── Hero Entrance ───────────────────────────────────── */
 @keyframes hero-rise {
@@ -411,6 +426,7 @@ body {
   --hero-cta-hover-text: #FFFFFF;
   --hero-ghost-border: rgba(255,255,255,0.55);
   --hero-ghost-text:   #FFFFFF;
+  --team-logo-color:   #E50022;
 }
 [data-team-mode="tribe"] .grid-bg::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%2300385D' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
@@ -445,6 +461,7 @@ body {
   --hero-cta-hover-text: #FFFFFF;
   --hero-ghost-border: rgba(253,187,48,0.55);
   --hero-ghost-text:   #FDBB30;
+  --team-logo-color:   #FDBB30;
 }
 [data-team-mode="cavs"] .grid-bg::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FDBB30' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
@@ -479,6 +496,7 @@ body {
   --hero-cta-hover-text: #E35205;
   --hero-ghost-border: rgba(255,255,255,0.55);
   --hero-ghost-text:   #FFFFFF;
+  --team-logo-color:   #E35205;
 }
 [data-team-mode="price"] .grid-bg::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%2327251F' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
@@ -513,6 +531,7 @@ body {
   --hero-cta-hover-text: #311D00;
   --hero-ghost-border: rgba(255,60,0,0.55);
   --hero-ghost-text:   #FFFFFF;
+  --team-logo-color:   #FF3C00;
 }
 [data-team-mode="browns"] .grid-bg::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FF3C00' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
@@ -591,6 +610,7 @@ body {
   --hero-cta-hover-text: #FFFFFF;
   --hero-ghost-border: rgba(255,255,255,0.6);
   --hero-ghost-text: #FFFFFF;
+  --team-logo-color: #009246;             /* green Siedel's logo */
 }
 /* Swap the honeycomb layer to green lines so the ambient mesh matches */
 .italy-mode .grid-bg::after {

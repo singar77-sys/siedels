@@ -27,20 +27,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 
 export type TeamMode = 'tribe' | 'cavs' | 'price' | 'browns';
 
-interface TeamModeInfo {
-  label: string;
-  subtitle: string;
-  emoji: string;
-}
-
-const MODES: Record<TeamMode, TeamModeInfo> = {
-  tribe: { label: 'CLEVELAND GUARDIANS', subtitle: 'TRIBE MODE', emoji: '⚾' },
-  cavs:  { label: 'CLEVELAND CAVALIERS', subtitle: 'CAVS MODE',  emoji: '🏀' },
-  price: { label: "PRICE ERA '89",       subtitle: 'CAVS RETRO', emoji: '🏀' },
-  browns:{ label: 'CLEVELAND BROWNS',    subtitle: 'BROWNS MODE',emoji: '🏈' },
-};
-
-const TRIGGERS = Object.keys(MODES) as TeamMode[];
+const TRIGGERS: TeamMode[] = ['tribe', 'cavs', 'price', 'browns'];
 const MAX_TRIGGER_LEN = Math.max(...TRIGGERS.map((t) => t.length));
 const DURATION_MS = 30_000;
 
@@ -140,24 +127,7 @@ export function TeamModeEasterEgg({ forcedMode }: Props = {}) {
     []
   );
 
-  if (!active) return null;
-  const info = MODES[active];
-
-  return (
-    <div
-      className="fixed top-8 inset-x-0 z-[9997] pointer-events-none flex justify-center"
-      aria-hidden
-    >
-      <div className="team-mode-banner flex items-center gap-5 px-8 py-4 bg-black/45 backdrop-blur-sm border border-white/30">
-        <span className="text-3xl md:text-4xl">{info.emoji}</span>
-        <div className="text-left">
-          <p className="font-label text-[10px] tracking-[0.3em] text-white/70">{info.subtitle}</p>
-          <p className="font-headline text-xl md:text-3xl uppercase tracking-tight text-white">
-            {info.label}
-          </p>
-        </div>
-        <span className="text-3xl md:text-4xl">{info.emoji}</span>
-      </div>
-    </div>
-  );
+  // Palette swap is driven entirely by data-team-mode on <html>.
+  // No visible banner — just the color flip.
+  return null;
 }
