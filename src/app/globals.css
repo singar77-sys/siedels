@@ -132,8 +132,13 @@ body {
      — small label:                 text-[10px] tracking-[0.15em]
    ══════════════════════════════════════════════════════ */
 /* ── Shop Texture ────────────────────────────────────── */
+/* isolation:isolate creates a stacking context on .grid-bg so the
+   z-index:-1 pseudos below sit beneath ALL children (including images,
+   modals that portal into the subtree, etc.) without leaking below
+   the element itself. */
 .grid-bg {
   position: relative;
+  isolation: isolate;
 }
 .grid-bg::before {
   content: '';
@@ -144,23 +149,25 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   background-size: 200px 200px;
   mix-blend-mode: overlay;
-  z-index: 0;
+  z-index: -1;
 }
 
-/* Honeycomb — slow breathing pulse, theme-aware stroke. Sits on the
-   same z-index as the noise texture; content must use z-index > 0. */
+/* Honeycomb — slow breathing pulse, theme-aware stroke.
+   Tile is 28x48: one pointy-top hex + one shared vertical edge that
+   completes the neighboring row-1 hexagons on tile boundaries. No
+   connecting stems — renders as proper shared-edge honeycomb. */
 .grid-bg::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23362D1E' stroke-width='1'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23362D1E' stroke-width='1'/%3E%3C/svg%3E");
-  background-size: 56px 100px;
+  z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23362D1E' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 28px 48px;
   animation: honeycomb-breathe 9s ease-in-out infinite;
 }
 [data-theme="dark"] .grid-bg::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23E31B23' stroke-width='1'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23E31B23' stroke-width='1'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23E31B23' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
 }
 @keyframes honeycomb-breathe {
   0%, 100% { opacity: 0.035; }
