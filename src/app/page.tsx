@@ -3,26 +3,21 @@ import {
   fetchSchedule,
   getWorkingToday,
   getTodayShiftsRecord,
-  toSerializable,
 } from '@/lib/schedule';
 
-// Revalidate the home page every 30 minutes so schedule edits in the sheet
-// propagate without a redeploy.
+// Revalidate every 30 minutes so IN TODAY badges pick up sheet edits
+// without a redeploy.
 export const revalidate = 1800;
 
 export default async function Home() {
   const week = await fetchSchedule();
   const today = getWorkingToday(week);
   const todayShifts = getTodayShiftsRecord(week);
-  const serializableWeek = toSerializable(week);
   return (
     <HomeClient
       scheduleToday={today}
       todayShifts={todayShifts}
       scheduleIsCurrent={week.isCurrent}
-      scheduleWeek={serializableWeek}
-      scheduleRelation={week.relation}
-      scheduleDaysUntilStart={week.daysUntilStart}
     />
   );
 }

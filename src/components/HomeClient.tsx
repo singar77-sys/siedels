@@ -14,11 +14,10 @@ import { HeroPanel } from './HeroPanel';
 import { ServicesPanel } from './ServicesPanel';
 import { GalleryPanel } from './GalleryPanel';
 import { TeamPanel } from './TeamPanel';
-import { SchedulePanel } from './SchedulePanel';
 import { ContactPanel } from './ContactPanel';
-import type { Shift, SerializableWeekSchedule, WeekRelation } from '@/lib/schedule';
+import type { Shift } from '@/lib/schedule';
 
-const PANELS = ['HOME', 'TEAM', 'WORK', 'SERVICES', 'SCHEDULE', 'CONTACT'] as const;
+const PANELS = ['HOME', 'TEAM', 'WORK', 'SERVICES', 'CONTACT'] as const;
 
 interface ScheduleTodayProps {
   shopHours: string | null;
@@ -31,18 +30,12 @@ interface HomeClientProps {
   scheduleToday: ScheduleTodayProps;
   todayShifts: Record<string, Shift>;
   scheduleIsCurrent: boolean;
-  scheduleWeek: SerializableWeekSchedule;
-  scheduleRelation: WeekRelation;
-  scheduleDaysUntilStart: number | null;
 }
 
 export function HomeClient({
   scheduleToday,
   todayShifts,
   scheduleIsCurrent,
-  scheduleWeek,
-  scheduleRelation,
-  scheduleDaysUntilStart,
 }: HomeClientProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
@@ -226,11 +219,6 @@ export function HomeClient({
           />
           <GalleryPanel />
           <ServicesPanel onSelectService={setSelectedService} />
-          <SchedulePanel
-            scheduleWeek={scheduleWeek}
-            scheduleRelation={scheduleRelation}
-            scheduleDaysUntilStart={scheduleDaysUntilStart}
-          />
           <ContactPanel />
         </div>
       </main>

@@ -28,7 +28,6 @@ export function Footer() {
             {[
               { label: 'TEAM', href: '/team' },
               { label: 'SERVICES', href: '/services' },
-              { label: 'SCHEDULE', href: '/schedule' },
               { label: 'CONTACT', href: '/contact' },
             ].map((link) => (
               <Link
