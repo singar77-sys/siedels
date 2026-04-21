@@ -114,7 +114,7 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
                       alt={`${member.name}, ${member.title} at Siedel's Barbershop in Medina, Ohio`}
                       fill
                       sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                      className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                      className="object-cover object-top theme-photo group-hover:scale-105 transition-transform duration-700"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">

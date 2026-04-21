@@ -271,7 +271,7 @@ export function HomeClient({
           </button>
           {selectedMember.image && (
             <div className="relative aspect-[4/3] w-full">
-              <Image src={selectedMember.image} alt={`${selectedMember.name}, ${selectedMember.title} at Siedel's Barbershop in Medina, Ohio`} fill sizes="500px" className="object-cover object-top" />
+              <Image src={selectedMember.image} alt={`${selectedMember.name}, ${selectedMember.title} at Siedel's Barbershop in Medina, Ohio`} fill sizes="500px" className="object-cover object-top theme-photo" />
             </div>
           )}
           <div className="p-8">
@@ -307,7 +307,7 @@ export function HomeClient({
                 alt={`${selectedService.name} at Siedel's Barbershop, Medina Ohio`}
                 fill
                 sizes="500px"
-                className="object-cover grayscale contrast-125 brightness-75"
+                className="object-cover theme-photo contrast-110 brightness-90"
                 onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-surface to-transparent" />

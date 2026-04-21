@@ -35,7 +35,7 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
             sizes="100vw"
             quality={85}
             className="object-cover object-center animate-ken-burns"
-            style={{ filter: 'brightness(0.5)' }}
+            style={{ filter: 'brightness(0.5) grayscale(1)' }}
           />
         </div>
       </div>

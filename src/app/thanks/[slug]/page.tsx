@@ -41,7 +41,7 @@ export default async function ThanksPage({ params }: PageProps) {
               fill
               priority
               sizes="500px"
-              className="object-cover object-top"
+              className="object-cover object-top theme-photo"
             />
           </div>
         )}

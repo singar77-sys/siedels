@@ -49,7 +49,7 @@ export function ServicesList() {
                 alt={`${selectedService.name} at Siedel's Barbershop, Medina Ohio`}
                 fill
                 sizes="500px"
-                className="object-cover grayscale contrast-125 brightness-75"
+                className="object-cover theme-photo contrast-110 brightness-90"
                 onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-surface to-transparent" />

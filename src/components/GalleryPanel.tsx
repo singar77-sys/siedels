@@ -41,7 +41,7 @@ export function GalleryPanel() {
                   alt={item.alt}
                   fill
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover theme-photo group-hover:scale-105 transition-transform duration-700"
                 />
                 {/* Subtle dark gradient for tag legibility */}
                 <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

@@ -21,7 +21,7 @@ export function PageHero({ image, imageAlt, label, title, titleAccent, subtitle 
           priority
           sizes="100vw"
           quality={85}
-          className="object-cover object-center animate-ken-burns brightness-[0.35] grayscale"
+          className="object-cover object-center animate-ken-burns brightness-[0.35] theme-photo"
         />
       </div>
       <div className="relative z-10 max-w-7xl mx-auto px-8 pb-12 md:pb-16 pt-32 w-full">

@@ -30,7 +30,7 @@ export function TeamGrid() {
                     alt={`${member.name}, ${member.title} at Siedel's Barbershop in Medina, Ohio`}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                    className="object-cover object-top theme-photo group-hover:scale-105 transition-transform duration-700"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
@@ -67,7 +67,7 @@ export function TeamGrid() {
           </button>
           {selected.image && (
             <div className="relative aspect-[4/3] w-full">
-              <Image src={selected.image} alt={`${selected.name}, ${selected.title} at Siedel's Barbershop in Medina, Ohio`} fill sizes="500px" className="object-cover object-top" />
+              <Image src={selected.image} alt={`${selected.name}, ${selected.title} at Siedel's Barbershop in Medina, Ohio`} fill sizes="500px" className="object-cover object-top theme-photo" />
             </div>
           )}
           <div className="p-8">
