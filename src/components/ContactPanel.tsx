@@ -4,7 +4,7 @@ import { Icon } from './Icon';
 export function ContactPanel() {
   return (
     <section className="min-w-full h-full snap-start grid-bg overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
-      <div className="max-w-5xl mx-auto px-6 md:px-8 py-16 md:py-24 w-full">
+      <div className="max-w-screen-2xl mx-auto px-6 md:px-8 py-16 md:py-24 w-full">
         <div className="border-l-4 border-red pl-6 md:pl-8 mb-10 md:mb-14">
           <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">FIND THE SHOP</p>
           <h2 className="font-headline text-4xl md:text-6xl uppercase tracking-tight leading-[0.88]">

@@ -5,7 +5,7 @@ import { Icon } from './Icon';
 export function GalleryPanel() {
   return (
     <section className="min-w-full h-full snap-start grid-bg overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
-      <div className="max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-24 w-full">
+      <div className="max-w-screen-2xl mx-auto px-6 md:px-8 py-16 md:py-24 w-full">
         <div className="mb-10 md:mb-14 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
           <div className="border-l-4 border-red pl-6 md:pl-8">
             <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">THE WORK</p>
