@@ -38,7 +38,7 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Billy Rodriguez',
-    title: 'Barber',
+    title: 'Barber · 16 Years',
     image: '/images/billy-rodriguez-barber-siedels-medina.webp',
     booking: sq('e957m1qmqqdevp'),
     bio: "Over 15 years of experience specializing in clean, sharp cuts — from classic short styles to modern fades, flattops, and tapers. Coaches his kids' sports teams. Die-hard Cleveland sports fan.",
