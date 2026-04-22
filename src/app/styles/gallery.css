@@ -14,8 +14,7 @@
 }
 
 /* Grid fills the entire wall frame — width AND height.
-   5 cols × 3 rows at lg+ is a perfect 15-cell layout for the
-   current gallery. */
+   6 cols × 3 rows at lg+ is a perfect 18-cell layout. */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -24,7 +23,8 @@
   width: 100%;
   height: 100%;
 }
-@media (min-width: 1024px) { .gallery-grid { grid-template-columns: repeat(5, 1fr); gap: 3px; } }
+@media (min-width: 640px)  { .gallery-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 1024px) { .gallery-grid { grid-template-columns: repeat(6, 1fr); gap: 3px; } }
 
 /* Tiles stretch with the grid cell — no fixed aspect, so they fill the frame. */
 .gallery-tile {

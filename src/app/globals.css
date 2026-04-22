@@ -315,6 +315,18 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Pricing pitch — each slide fades + rises in on change */
+.pitch-fade {
+  animation: pitch-fade-in 350ms ease-out both;
+}
+@keyframes pitch-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pitch-fade { animation: none; }
+}
+
 
 
 /* ── Theme Transition (View Transitions API) ─────────── */
@@ -686,7 +698,6 @@ body {
   will-change: transform;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
 }
-
 
 /* ── Reduced Motion ───────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
