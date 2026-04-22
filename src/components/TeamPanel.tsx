@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import { team, PHONE_HREF, type TeamMember } from '@/data/shop';
 import { slugFromName } from '@/lib/utils';
 import type { Shift } from '@/lib/schedule';
+import { BaseballCard } from './BaseballCard';
 
 interface ScheduleTodayProps {
   shopHours: string | null;
@@ -62,91 +62,24 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
           </div>
         )}
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0">
-          {team.map((member, idx) => {
-            const shift = getMemberShift(member.name);
-            const isWorking = shift?.status === 'working';
-            const isOff = shift?.status === 'off';
-            const isOffsite = shift?.status === 'offsite';
-            const isAnchor = idx === 0; // Jim — double-width
-            return (
-              <div
-                key={member.name}
-                className={`bg-surface border border-line-strong p-4 md:p-6 group hover:bg-surface-high transition-colors duration-500 cursor-pointer relative ${
-                  isAnchor ? 'col-span-2 row-span-1' : ''
-                }`}
-                onClick={() => onSelectMember(member)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelectMember(member); } }}
-              >
-                {shift && (
-                  <div className="absolute top-3 right-3 z-10">
-                    {isWorking && (
-                      <div className="flex items-center gap-1.5 bg-red text-white px-2 py-1">
-                        <span className="relative flex h-1.5 w-1.5">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
-                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />
-                        </span>
-                        <span className="font-label text-[9px] tracking-widest font-bold">
-                          IN · {shift.display.toUpperCase()}
-                        </span>
-                      </div>
-                    )}
-                    {isOff && (
-                      <div className="bg-ink/80 border border-line-strong px-2 py-1">
-                        <span className="font-label text-[9px] tracking-widest text-text-subtle">OFF TODAY</span>
-                      </div>
-                    )}
-                    {isOffsite && (
-                      <div className="bg-ink/80 border border-line-strong px-2 py-1">
-                        <span className="font-label text-[9px] tracking-widest text-text-subtle">
-                          {shift.location?.toUpperCase() ?? 'AWAY'}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                )}
-                <div className={`${isAnchor ? 'aspect-[3/2]' : 'aspect-[3/4]'} overflow-hidden bg-surface-raised mb-4 relative ${!isWorking && shift ? 'opacity-60' : ''}`}>
-                  {member.image ? (
-                    <Image
-                      src={member.image}
-                      alt={`${member.name}, ${member.title} at Siedel's Barbershop in Medina, Ohio`}
-                      fill
-                      sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                      className="object-cover object-top theme-photo group-hover:scale-105 transition-transform duration-700"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <span className="font-headline text-4xl md:text-5xl text-text-subtle">
-                        {member.name.split(' ').map(n => n[0]).join('')}
-                      </span>
-                    </div>
-                  )}
-                </div>
-                <h3 className={`font-headline uppercase tracking-tight mb-1 text-text ${isAnchor ? 'text-xl md:text-2xl' : 'text-base md:text-xl'}`}>{member.name}</h3>
-                <p className="font-label text-[8px] md:text-[10px] tracking-widest text-red mb-3">{member.title.toUpperCase()}</p>
-                {isAnchor && member.bio && (
-                  <p className="font-body text-xs text-text-muted leading-relaxed mb-4 line-clamp-2 hidden md:block">{member.bio}</p>
-                )}
-                <a
-                  href={member.booking}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="block w-full py-3 border border-red text-red font-headline text-xs md:text-sm font-bold uppercase tracking-widest text-center hover:bg-red hover:text-white transition-all duration-300"
-                >
-                  BOOK
-                </a>
-              </div>
-            );
-          })}
-          <div className="bg-red border border-red p-4 md:p-6 flex flex-col items-center justify-center text-center">
-            <p className="font-headline text-lg md:text-2xl uppercase tracking-tight text-white mb-2">YOUR CHAIR<br />IS WAITING</p>
-            <p className="font-body text-xs text-white/70 mb-6">Book online or call to reserve your chair.</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
+          {team.map((member, idx) => (
+            <BaseballCard
+              key={member.name}
+              member={member}
+              idx={idx}
+              shift={getMemberShift(member.name)}
+              onSelect={onSelectMember}
+            />
+          ))}
+          {/* CTA slot — same aspect as a card so the grid stays tidy */}
+          <div className="card-86 scheme-red flex flex-col items-center justify-center text-center p-4 bg-red border-red">
+            <p className="font-headline text-base md:text-lg uppercase tracking-tight text-white mb-1 leading-tight">YOUR CHAIR<br />IS WAITING</p>
+            <p className="font-body text-[10px] text-white/70 mb-3">Call to reserve</p>
             <a
               href={PHONE_HREF}
-              className="block w-full py-2 md:py-3 border border-white text-white font-headline text-xs md:text-sm font-bold uppercase tracking-widest text-center hover:bg-white hover:text-red transition-all duration-300"
+              onClick={(e) => e.stopPropagation()}
+              className="block w-full py-2 border border-white text-white font-headline text-[11px] font-bold uppercase tracking-widest text-center hover:bg-white hover:text-red transition-all duration-300"
             >
               CALL NOW
             </a>
