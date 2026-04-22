@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { useEffect, useMemo, useState } from 'react';
 import {
   PHONE,
   PHONE_HREF,
@@ -16,26 +17,35 @@ import {
 } from '@/data/shop';
 import { Icon } from './Icon';
 
-// Pool skips index 0 (that testimonial is already featured on the hero panel).
-const CONTACT_TESTIMONIALS = testimonials.slice(1);
-const ROTATE_MS = 7500;
+// Pool skips index 0 — that testimonial is already featured on the hero panel.
+const REVIEW_POOL = testimonials.slice(1);
+const VISIBLE = 3;
+const ROTATE_MS = 9000;
 
-const MAP_EMBED_URL =
-  'https://maps.google.com/maps?q=982+N+Court+Street+Medina+OH+44256&hl=en&t=m&z=15&output=embed';
+// Shop coordinates — 982 N Court St, Medina OH. Shown as a HUD readout.
+const COORDS = '41.1387° N  81.8594° W';
+const STOREFRONT = '/images/siedels-barbershop-storefront-medina-ohio.webp';
 
 export function ContactPanel() {
-  const [quoteIdx, setQuoteIdx] = useState(0);
+  const [cursor, setCursor] = useState(0);
 
   useEffect(() => {
     const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduce || CONTACT_TESTIMONIALS.length <= 1) return;
+    if (prefersReduce || REVIEW_POOL.length <= VISIBLE) return;
     const id = setInterval(() => {
-      setQuoteIdx((i) => (i + 1) % CONTACT_TESTIMONIALS.length);
+      setCursor((c) => (c + 1) % REVIEW_POOL.length);
     }, ROTATE_MS);
     return () => clearInterval(id);
   }, []);
 
-  const quote = CONTACT_TESTIMONIALS[quoteIdx];
+  // Take VISIBLE testimonials starting at cursor, wrapping the pool.
+  const visible = useMemo(
+    () =>
+      Array.from({ length: Math.min(VISIBLE, REVIEW_POOL.length) }, (_, k) =>
+        REVIEW_POOL[(cursor + k) % REVIEW_POOL.length],
+      ),
+    [cursor],
+  );
 
   return (
     <section className="min-w-full h-full snap-start grid-bg overflow-hidden">
@@ -61,7 +71,7 @@ export function ContactPanel() {
 
         {/* Three-column body fills the remaining frame */}
         <div className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 overflow-hidden">
-          {/* Col 1 — Address, phone, map, CTAs */}
+          {/* Col 1 — Address, phone, tactical map, CTAs */}
           <div className="bg-surface border-l-4 border-red p-5 md:p-6 flex flex-col overflow-hidden">
             <div className="flex-none mb-4">
               <p className="font-label text-[10px] tracking-widest text-text-subtle mb-1">SHOP</p>
@@ -78,23 +88,43 @@ export function ContactPanel() {
               </a>
             </div>
 
-            {/* Map fills the negative space between phone and CTAs */}
+            {/* STOREFRONT RECON — photo of the shop with an AI/HUD overlay */}
             <a
               href={MAPS_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Open Siedel's Barbershop in Google Maps"
-              className="relative flex-1 min-h-[140px] mb-4 border border-line-strong overflow-hidden group"
+              className="tac-map relative flex-1 min-h-[140px] mb-4 border border-red/60 bg-black overflow-hidden group"
             >
-              <iframe
-                title="Siedel's Barbershop map"
-                src={MAP_EMBED_URL}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0 w-full h-full pointer-events-none contact-map"
+              <Image
+                src={STOREFRONT}
+                alt="Exterior of Siedel's Barbershop storefront at 982 N Court Street, Medina Ohio"
+                fill
+                sizes="(max-width: 768px) 90vw, 30vw"
+                className="tac-map__tile object-cover"
               />
-              {/* Click-through scrim so the whole tile is tappable */}
-              <span className="absolute inset-0 bg-transparent group-hover:bg-red/5 transition-colors" />
+              {/* Scan lines */}
+              <span className="tac-map__scan" aria-hidden="true" />
+              {/* Sweeping radar beam */}
+              <span className="tac-map__radar" aria-hidden="true" />
+              {/* HUD corners */}
+              <span className="tac-map__corner tl" aria-hidden="true" />
+              <span className="tac-map__corner tr" aria-hidden="true" />
+              <span className="tac-map__corner bl" aria-hidden="true" />
+              <span className="tac-map__corner br" aria-hidden="true" />
+              {/* Top-left readout */}
+              <span className="tac-map__tag top-2 left-2">
+                <span className="tac-map__dot" />
+                LIVE
+              </span>
+              {/* Top-right coordinates */}
+              <span className="tac-map__tag top-2 right-2">{COORDS}</span>
+              {/* Bottom strip */}
+              <span className="tac-map__footer">
+                <span className="text-red font-bold">SIEDEL&apos;S</span>
+                <span className="opacity-70">/ TAP FOR DIRECTIONS</span>
+                <span className="opacity-60 ml-auto">↗</span>
+              </span>
             </a>
 
             <div className="flex-none flex flex-col gap-2">
@@ -136,43 +166,50 @@ export function ContactPanel() {
             </div>
           </div>
 
-          {/* Col 3 — Rotating testimonials + review CTA */}
+          {/* Col 3 — Stacked rotating testimonials + review CTA */}
           <div className="bg-surface p-5 md:p-6 flex flex-col overflow-hidden">
             <div className="flex-none mb-3 flex items-center justify-between">
               <p className="font-label text-[10px] tracking-widest text-red">
                 {RATING} ★ · {REVIEW_COUNT} REVIEWS
               </p>
               <div className="flex gap-1">
-                {CONTACT_TESTIMONIALS.map((_, i) => (
+                {REVIEW_POOL.map((_, i) => (
                   <span
                     key={i}
                     aria-hidden="true"
-                    className={`h-[2px] w-3 transition-colors duration-500 ${
-                      i === quoteIdx ? 'bg-red' : 'bg-line-strong'
+                    className={`h-[2px] w-2 transition-colors duration-500 ${
+                      i === cursor ? 'bg-red' : 'bg-line-strong'
                     }`}
                   />
                 ))}
               </div>
             </div>
-            <blockquote
-              key={quoteIdx}
-              className="flex-1 min-h-0 overflow-hidden flex flex-col testimonial-fade"
-            >
-              <p className="font-body text-sm md:text-base text-text-muted leading-relaxed italic overflow-hidden">
-                &ldquo;{quote.text}&rdquo;
-              </p>
-              <footer className="mt-3 flex items-center gap-2 flex-none flex-wrap">
-                <div className="w-6 h-px bg-red flex-none" />
-                <span className="font-headline text-xs font-bold uppercase tracking-tight">
-                  {quote.name}
-                </span>
-                {quote.barber && (
-                  <span className="font-label text-[9px] tracking-widest text-text-subtle">
-                    w/ <span className="text-red">{quote.barber.split(' ')[0].toUpperCase()}</span>
-                  </span>
-                )}
-              </footer>
-            </blockquote>
+            <div className="flex-1 min-h-0 flex flex-col gap-3 md:gap-4 overflow-hidden">
+              {visible.map((t, i) => (
+                <blockquote
+                  key={`${cursor}-${i}-${t.name}`}
+                  className="testimonial-fade flex-1 min-h-0 border-l-2 border-red/40 pl-3 flex flex-col overflow-hidden"
+                  style={{ animationDelay: `${i * 120}ms` }}
+                >
+                  <p className="font-body text-[13px] md:text-sm text-text-muted leading-relaxed italic overflow-hidden flex-1 min-h-0">
+                    &ldquo;{t.text}&rdquo;
+                  </p>
+                  <footer className="mt-2 flex items-center gap-2 flex-none flex-wrap">
+                    <span className="font-headline text-[11px] font-bold uppercase tracking-tight text-text">
+                      {t.name}
+                    </span>
+                    {t.barber && (
+                      <span className="font-label text-[9px] tracking-widest text-text-subtle">
+                        w/ <span className="text-red">{t.barber.split(' ')[0].toUpperCase()}</span>
+                      </span>
+                    )}
+                    <span className="ml-auto text-red text-[10px] tracking-widest">
+                      {'★'.repeat(t.rating)}
+                    </span>
+                  </footer>
+                </blockquote>
+              ))}
+            </div>
             <a
               href={GOOGLE_BUSINESS_URL}
               target="_blank"

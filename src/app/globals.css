@@ -298,7 +298,7 @@ body {
   animation-play-state: paused;
 }
 
-/* Contact testimonial — crossfade between quotes as state rotates */
+/* Contact testimonial — fade each quote in on change */
 .testimonial-fade {
   animation: testimonial-fade-in 600ms ease-out both;
 }
@@ -307,13 +307,167 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Contact map — blend with the shop palette so it doesn't flash white.
-   The iframe itself can't be themed, so we tone it down via filter. */
-.contact-map {
-  filter: saturate(0.85) contrast(0.95);
+/* ══════════════════════════════════════════════════════
+   Tactical Map — storefront photo with HUD/radar overlay
+   ══════════════════════════════════════════════════════ */
+.tac-map {
+  isolation: isolate;
 }
-[data-theme="dark"] .contact-map {
-  filter: saturate(0.6) brightness(0.65) contrast(1.1) invert(0.92) hue-rotate(180deg);
+.tac-map__tile {
+  filter: saturate(0.35) contrast(1.1) brightness(0.55);
+  transition: filter 0.5s ease;
+  z-index: 0;
+}
+.tac-map:hover .tac-map__tile {
+  filter: saturate(0.55) contrast(1.15) brightness(0.68);
+}
+
+/* Scan lines — thin horizontal bands overlayed on the photo */
+.tac-map__scan {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0,
+    transparent 2px,
+    rgba(227, 27, 35, 0.08) 2px,
+    rgba(227, 27, 35, 0.08) 3px
+  );
+  mix-blend-mode: screen;
+}
+
+/* Radar beam — rotating conic sweep, originates from center */
+.tac-map__radar {
+  position: absolute;
+  inset: -40%;
+  z-index: 2;
+  pointer-events: none;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    transparent 70%,
+    rgba(227, 27, 35, 0.0) 80%,
+    rgba(227, 27, 35, 0.35) 92%,
+    rgba(227, 27, 35, 0.6) 100%
+  );
+  mix-blend-mode: screen;
+  animation: tac-radar 7s linear infinite;
+}
+@keyframes tac-radar {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Center crosshair + pulsing target dot */
+.tac-map__crosshair {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 28px; height: 28px;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  pointer-events: none;
+  border: 1px solid rgba(227, 27, 35, 0.85);
+  border-radius: 50%;
+  box-shadow: 0 0 18px rgba(227, 27, 35, 0.35);
+}
+.tac-map__crosshair::before,
+.tac-map__crosshair::after {
+  content: '';
+  position: absolute;
+  background: rgba(227, 27, 35, 0.85);
+}
+.tac-map__crosshair::before {
+  top: 50%; left: -8px; right: -8px; height: 1px;
+  transform: translateY(-50%);
+}
+.tac-map__crosshair::after {
+  left: 50%; top: -8px; bottom: -8px; width: 1px;
+  transform: translateX(-50%);
+}
+.tac-map__pulse {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 8px; height: 8px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #E31B23;
+  box-shadow: 0 0 0 0 rgba(227, 27, 35, 0.7);
+  animation: tac-pulse 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes tac-pulse {
+  0%   { box-shadow: 0 0 0 0   rgba(227, 27, 35, 0.7); }
+  70%  { box-shadow: 0 0 0 18px rgba(227, 27, 35, 0); }
+  100% { box-shadow: 0 0 0 0   rgba(227, 27, 35, 0); }
+}
+
+/* HUD corner brackets — L-shapes at each corner */
+.tac-map__corner {
+  position: absolute;
+  width: 14px; height: 14px;
+  z-index: 5;
+  pointer-events: none;
+  border: 1.5px solid rgba(227, 27, 35, 0.85);
+}
+.tac-map__corner.tl { top: 6px;    left: 6px;   border-right: 0; border-bottom: 0; }
+.tac-map__corner.tr { top: 6px;    right: 6px;  border-left: 0;  border-bottom: 0; }
+.tac-map__corner.bl { bottom: 6px; left: 6px;   border-right: 0; border-top: 0; }
+.tac-map__corner.br { bottom: 6px; right: 6px;  border-left: 0;  border-top: 0; }
+
+/* HUD label chips — LIVE indicator + coordinate readout */
+.tac-map__tag {
+  position: absolute;
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 6px;
+  font-family: 'General Sans', 'Arial', sans-serif;
+  font-size: 8.5px;
+  letter-spacing: 0.15em;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(227, 27, 35, 0.55);
+  pointer-events: none;
+  text-transform: uppercase;
+  backdrop-filter: blur(2px);
+}
+.tac-map__dot {
+  width: 6px; height: 6px;
+  background: #E31B23;
+  border-radius: 50%;
+  animation: tac-blink 1.4s ease-in-out infinite;
+}
+@keyframes tac-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.2; }
+}
+
+/* Bottom identifier strip */
+.tac-map__footer {
+  position: absolute;
+  left: 6px; right: 6px; bottom: 6px;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  font-family: 'General Sans', 'Arial', sans-serif;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.65);
+  border-top: 1px solid rgba(227, 27, 35, 0.5);
+  border-left: 1px solid rgba(227, 27, 35, 0.25);
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tac-map__radar { animation: none; }
+  .tac-map__pulse { animation: none; }
+  .tac-map__dot   { animation: none; }
 }
 
 /* ── Theme Transition (View Transitions API) ─────────── */
