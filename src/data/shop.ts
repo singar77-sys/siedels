@@ -252,16 +252,6 @@ export const services: Service[] = [
     duration: '90 min',
     image: '/images/kids-fade-haircut-siedels-medina.webp',
   },
-  {
-    name: 'Shampoo',
-    price: '$5',
-    tagline: 'Add-on',
-    description:
-      "A proper shampoo and scalp massage. Add it to any haircut or service for a few extra dollars and walk out feeling twice as clean.",
-    includes: ['Shampoo', 'Scalp massage', 'Conditioner'],
-    duration: '10 min',
-    image: '/images/hot-towel-shampoo-siedels-medina.webp',
-  },
 ];
 
 export interface Testimonial {
