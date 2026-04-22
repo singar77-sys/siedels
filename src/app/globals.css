@@ -572,13 +572,28 @@ body {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
-.card-flip-back { transform: rotateY(180deg); overflow-y: auto; }
+.card-flip-back { transform: rotateY(180deg); }
 /* Front face delegates to BaseballCard — make sure the inner
    card fills the face and doesn't hover-transform inside the flip */
 .card-flip-front .card-86 {
   width: 100%;
   height: 100%;
   aspect-ratio: auto;
+}
+/* Back face: match the front's size + border exactly so the card
+   reads as two sides of the same object, not two different blocks */
+.card-flip-back .card-back {
+  height: 100%;
+  box-sizing: border-box;
+  border: 2px solid var(--text);
+  background: var(--surface);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+/* Let the stamp pin to the bottom edge inside the back */
+.card-flip-back .card-back-stamp {
+  margin-top: auto;
 }
 
 /* ── Card back (modal) — reads like a 1986 Topps card back ──── */
