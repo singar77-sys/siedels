@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { PHONE, PHONE_HREF, MAPS_URL, GOOGLE_BUSINESS_URL } from '@/data/shop';
+import { FOOTER_ROUTES } from '@/data/nav';
 import { SocialIcons } from './SocialIcons';
 import { HunterMark } from './HunterMark';
 import { Logo } from './Logo';
@@ -25,12 +26,7 @@ export function Footer() {
         </div>
         <div className="flex flex-col items-start md:items-end gap-6">
           <div className="flex flex-wrap gap-8 md:gap-10 md:justify-end">
-            {[
-              { label: 'TEAM', href: '/team' },
-              { label: 'GALLERY', href: '/gallery' },
-              { label: 'SERVICES', href: '/services' },
-              { label: 'CONTACT', href: '/contact' },
-            ].map((link) => (
+            {FOOTER_ROUTES.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}

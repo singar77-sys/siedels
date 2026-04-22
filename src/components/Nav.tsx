@@ -4,17 +4,10 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { PHONE_HREF, SQUARE_BOOKING_URL } from '@/data/shop';
+import { NAV_ROUTES } from '@/data/nav';
 import { ThemeToggle } from './ThemeToggle';
 import { Icon } from './Icon';
 import { Logo } from './Logo';
-
-const NAV_LINKS = [
-  { label: 'HOME', href: '/' },
-  { label: 'TEAM', href: '/team' },
-  { label: 'GALLERY', href: '/gallery' },
-  { label: 'SERVICES', href: '/services' },
-  { label: 'CONTACT', href: '/contact' },
-];
 
 export function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -43,7 +36,7 @@ export function Nav() {
 
       {/* Desktop nav */}
       <nav className="hidden md:flex items-center gap-10">
-        {NAV_LINKS.map((link) => (
+        {NAV_ROUTES.map((link) => (
           <Link
             key={link.href}
             href={link.href}
@@ -79,7 +72,7 @@ export function Nav() {
       {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="absolute top-20 left-0 right-0 bg-surface border-t border-line-strong md:hidden">
-          {NAV_LINKS.map((link) => (
+          {NAV_ROUTES.map((link) => (
             <Link
               key={link.href}
               href={link.href}

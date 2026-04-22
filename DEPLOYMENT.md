@@ -31,12 +31,14 @@ siedels/
 
 ## Technology Stack
 
-- **Framework**: Next.js 16.2.0 (App Router)
-- **UI Library**: React 19.2.4
+- **Framework**: Next.js 16 (App Router)
+- **UI Library**: React 19
 - **Styling**: Tailwind CSS 4 with PostCSS
 - **Language**: TypeScript 5
 - **Compiler**: Babel React Compiler for optimization
 - **Linting**: ESLint 9
+
+See `package.json` for exact pinned versions.
 
 ## Deployment to Vercel
 

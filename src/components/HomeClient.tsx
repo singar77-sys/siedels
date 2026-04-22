@@ -25,6 +25,7 @@ interface ScheduleTodayProps {
   shopHours: string | null;
   working: { firstName: string; display: string; raw: string }[];
   isClosed: boolean;
+  scheduleKnown: boolean;
   dayName: string;
 }
 
@@ -97,7 +98,13 @@ export function HomeClient({
 
   return (
     <div className="h-dvh flex flex-col overflow-hidden bg-ink">
-      {/* ══ Header ══════════════════════════════ */}
+      {/* ══ Header ══════════════════════════════
+           This is intentionally NOT the shared <Nav /> component. Inner
+           pages use <Nav /> for traditional top-nav + mobile dropdown.
+           Home uses a horizontal-panel UX with a progress-bar that tracks
+           which panel is active — the rendering + interaction model is
+           different enough that unifying the two adds more complexity
+           than it removes. Keep route labels in sync via PANELS below. */}
       <header className="relative z-50 flex-none h-[6rem] md:h-[8rem] bg-ink flex items-center justify-between px-6 md:px-12">
         <Link
           href="/"

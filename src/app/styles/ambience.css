@@ -1,0 +1,78 @@
+/* ── Medina Ambience — live-weather FX, once per session ── */
+.ambience-root {
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+.ambience-phase-in  { opacity: 1; }
+.ambience-phase-out { opacity: 0; }
+
+/* Snow — drifting flakes with horizontal drift */
+@keyframes snow-fall {
+  0%   { transform: translate(0, -10vh); opacity: 0; }
+  10%  { opacity: 0.9; }
+  90%  { opacity: 0.9; }
+  100% { transform: translate(var(--drift, 0px), 110vh); opacity: 0; }
+}
+.snow-flake {
+  animation-name: snow-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  filter: blur(0.5px);
+  will-change: transform;
+}
+
+/* Rain — vertical streaks */
+@keyframes rain-drop {
+  0%   { transform: translateY(-10vh); }
+  100% { transform: translateY(120vh); }
+}
+.rain-drop {
+  animation-name: rain-drop;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+/* Rain — intermittent lightning flashes */
+@keyframes rain-lightning {
+  0%, 100%      { opacity: 0; }
+  24%           { opacity: 0; }
+  25%           { opacity: 0.45; }
+  25.4%         { opacity: 0.1; }
+  25.8%         { opacity: 0.4; }
+  26.5%         { opacity: 0; }
+  62%           { opacity: 0; }
+  63%           { opacity: 0.35; }
+  63.3%         { opacity: 0.1; }
+  63.8%         { opacity: 0.3; }
+  64.5%         { opacity: 0; }
+}
+.rain-lightning {
+  animation: rain-lightning 8s linear infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+/* Fog — two drifting haze layers */
+@keyframes fog-drift {
+  0%   { transform: translateX(-6%); }
+  100% { transform: translateX(6%); }
+}
+.fog-layer {
+  pointer-events: none;
+  animation: fog-drift 20s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.fog-layer-1 {
+  background:
+    radial-gradient(ellipse at 30% 60%, rgba(255,255,255,0.28) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 40%, rgba(255,255,255,0.22) 0%, transparent 60%);
+  animation-duration: 26s;
+}
+.fog-layer-2 {
+  background:
+    radial-gradient(ellipse at 50% 80%, rgba(255,255,255,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 25%, rgba(255,255,255,0.18) 0%, transparent 65%);
+  animation-duration: 18s;
+  animation-direction: alternate-reverse;
+}

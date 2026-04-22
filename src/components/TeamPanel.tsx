@@ -7,6 +7,7 @@ interface ScheduleTodayProps {
   shopHours: string | null;
   working: { firstName: string; display: string; raw: string }[];
   isClosed: boolean;
+  scheduleKnown: boolean;
   dayName: string;
 }
 

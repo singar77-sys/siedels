@@ -1,6 +1,12 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: "Not Found | Siedel's Barbershop",
+  robots: { index: false, follow: false },
+};
 
 export default function NotFound() {
   return (
