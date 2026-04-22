@@ -340,7 +340,7 @@ export interface GalleryItem {
 export const gallery: GalleryItem[] = [
   // Curated 18 — 6×3 wall, reordered so the candid sits next to CUT
   // and the three technique shots lead into the shop-interior closer.
-  { src: '/images/siedels-storefront-summer-medina-ohio.webp', alt: 'Siedel\'s Barbershop storefront on a summer day in Medina, Ohio', tag: 'SHOP' },
+  { src: '/images/siedels-barbershop-storefront-medina-ohio.webp', alt: 'Siedel\'s Barbershop storefront with sign at 982 N Court Street in Medina, Ohio', tag: 'SHOP' },
   { src: '/images/cleveland-skyline-hair-design-siedels-medina.webp', alt: 'Cleveland skyline shaved into a hair design at Siedel\'s Barbershop', tag: 'DESIGN' },
   { src: '/images/kids-haircut-happy-siedels-medina.webp', alt: 'Happy kid getting a haircut at Siedel\'s Barbershop in Medina, Ohio', tag: 'KIDS' },
   { src: '/images/mohawk-fade-wave-design-siedels-medina.webp', alt: 'Mohawk fade with wave design at Siedel\'s Barbershop', tag: 'DESIGN' },
