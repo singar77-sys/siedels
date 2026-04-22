@@ -60,6 +60,13 @@ interface NumberSlide {
   label: string;
   footnote: string;
 }
+interface PizzaSlide {
+  kind: 'pizza';
+  eyebrow: string;
+  title: string;
+  cards: { emoji: string; headline: string; line: string; cost: string }[];
+  footer: string;
+}
 interface CloseSlide {
   kind: 'close';
 }
@@ -71,6 +78,7 @@ type Slide =
   | RuleSlide
   | MarketSlide
   | NumberSlide
+  | PizzaSlide
   | CloseSlide;
 
 const SLIDES: Slide[] = [
@@ -162,6 +170,32 @@ const SLIDES: Slide[] = [
       { label: 'SIEDEL\'S (you)', price: '$35', you: true, emoji: '🔥' },
       { label: 'Studio Fade (premium)', price: '$75 combo', emoji: '💎' },
     ],
+  },
+  {
+    kind: 'pizza',
+    eyebrow: 'HOW MUCH YOU LEAVE ON THE TABLE',
+    title: 'THE PIZZA MATH',
+    cards: [
+      {
+        emoji: '🍕🍕',
+        headline: 'BUY 2, GET ONE HALF-OFF',
+        line: 'Your cut + beard combo is 31% off. No pizzeria gives away that much.',
+        cost: '$29k / year',
+      },
+      {
+        emoji: '🍕 ≠ 🍕🍖🌶️',
+        headline: 'CHEESE ≠ SUPREME',
+        line: 'A fade takes more time + more skill. Today you charge like it\'s a plain cheese.',
+        cost: '$17k / year',
+      },
+      {
+        emoji: '👨‍🍳',
+        headline: 'MASTER CHEF, ROOKIE PAY',
+        line: 'Jim and Pierre charge the same as a 4-year barber. Head chef doesn\'t work for tips.',
+        cost: '$19k / year',
+      },
+    ],
+    footer: "That's about $120,000 walking out the door every year.",
   },
   {
     kind: 'bignumber',
@@ -370,6 +404,28 @@ export function PricingPitchEasterEgg() {
               </div>
               <p className="font-body text-base md:text-lg text-text-muted text-center mt-8 max-w-2xl mx-auto">
                 You&apos;re not the cheap shop. You&apos;re not the fancy shop. You&apos;re the right-in-the-middle shop — and that&apos;s the spot to be.
+              </p>
+            </div>
+          )}
+
+          {current.kind === 'pizza' && (
+            <div>
+              <p className="font-label text-[11px] md:text-[13px] tracking-[0.4em] text-red mb-4 text-center">{current.eyebrow}</p>
+              <h3 className="font-headline uppercase tracking-tight text-4xl md:text-6xl leading-[0.95] text-center mb-8 md:mb-10">
+                THE <span className="text-stroke">PIZZA MATH</span>
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5 mb-6 md:mb-8">
+                {current.cards.map((card) => (
+                  <div key={card.headline} className="bg-surface border border-line-strong p-5 md:p-6 flex flex-col items-center text-center">
+                    <span className="text-4xl md:text-5xl mb-3">{card.emoji}</span>
+                    <p className="font-headline font-bold uppercase tracking-tight text-sm md:text-base text-text mb-2">{card.headline}</p>
+                    <p className="font-body text-sm md:text-base text-text-muted leading-snug mb-4 flex-1">{card.line}</p>
+                    <p className="font-headline font-bold text-2xl md:text-3xl text-red">{card.cost}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="font-headline uppercase tracking-tight text-center text-lg md:text-2xl text-red">
+                {current.footer}
               </p>
             </div>
           )}
