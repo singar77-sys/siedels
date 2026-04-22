@@ -298,6 +298,24 @@ body {
   animation-play-state: paused;
 }
 
+/* Contact testimonial — crossfade between quotes as state rotates */
+.testimonial-fade {
+  animation: testimonial-fade-in 600ms ease-out both;
+}
+@keyframes testimonial-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Contact map — blend with the shop palette so it doesn't flash white.
+   The iframe itself can't be themed, so we tone it down via filter. */
+.contact-map {
+  filter: saturate(0.85) contrast(0.95);
+}
+[data-theme="dark"] .contact-map {
+  filter: saturate(0.6) brightness(0.65) contrast(1.1) invert(0.92) hue-rotate(180deg);
+}
+
 /* ── Theme Transition (View Transitions API) ─────────── */
 ::view-transition-old(root) {
   animation: none;

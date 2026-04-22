@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import {
   PHONE,
   PHONE_HREF,
@@ -13,7 +16,27 @@ import {
 } from '@/data/shop';
 import { Icon } from './Icon';
 
+// Pool skips index 0 (that testimonial is already featured on the hero panel).
+const CONTACT_TESTIMONIALS = testimonials.slice(1);
+const ROTATE_MS = 7500;
+
+const MAP_EMBED_URL =
+  'https://maps.google.com/maps?q=982+N+Court+Street+Medina+OH+44256&hl=en&t=m&z=15&output=embed';
+
 export function ContactPanel() {
+  const [quoteIdx, setQuoteIdx] = useState(0);
+
+  useEffect(() => {
+    const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduce || CONTACT_TESTIMONIALS.length <= 1) return;
+    const id = setInterval(() => {
+      setQuoteIdx((i) => (i + 1) % CONTACT_TESTIMONIALS.length);
+    }, ROTATE_MS);
+    return () => clearInterval(id);
+  }, []);
+
+  const quote = CONTACT_TESTIMONIALS[quoteIdx];
+
   return (
     <section className="min-w-full h-full snap-start grid-bg overflow-hidden">
       <div className="max-w-screen-2xl mx-auto h-full px-4 md:px-8 py-5 md:py-8 w-full flex flex-col">
@@ -38,14 +61,14 @@ export function ContactPanel() {
 
         {/* Three-column body fills the remaining frame */}
         <div className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 overflow-hidden">
-          {/* Col 1 — Address, phone, CTAs */}
+          {/* Col 1 — Address, phone, map, CTAs */}
           <div className="bg-surface border-l-4 border-red p-5 md:p-6 flex flex-col overflow-hidden">
-            <div className="mb-5">
+            <div className="flex-none mb-4">
               <p className="font-label text-[10px] tracking-widest text-text-subtle mb-1">SHOP</p>
               <p className="font-headline text-base md:text-lg font-bold uppercase tracking-tight text-text">{ADDRESS}</p>
               <p className="font-body text-sm text-text-subtle">{CITY_STATE_ZIP}</p>
             </div>
-            <div className="mb-5">
+            <div className="flex-none mb-4">
               <p className="font-label text-[10px] tracking-widest text-text-subtle mb-1">PHONE</p>
               <a
                 href={PHONE_HREF}
@@ -54,7 +77,27 @@ export function ContactPanel() {
                 {PHONE}
               </a>
             </div>
-            <div className="mt-auto flex flex-col gap-2">
+
+            {/* Map fills the negative space between phone and CTAs */}
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Siedel's Barbershop in Google Maps"
+              className="relative flex-1 min-h-[140px] mb-4 border border-line-strong overflow-hidden group"
+            >
+              <iframe
+                title="Siedel's Barbershop map"
+                src={MAP_EMBED_URL}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="absolute inset-0 w-full h-full pointer-events-none contact-map"
+              />
+              {/* Click-through scrim so the whole tile is tappable */}
+              <span className="absolute inset-0 bg-transparent group-hover:bg-red/5 transition-colors" />
+            </a>
+
+            <div className="flex-none flex flex-col gap-2">
               <a
                 href={SQUARE_BOOKING_URL}
                 target="_blank"
@@ -93,23 +136,39 @@ export function ContactPanel() {
             </div>
           </div>
 
-          {/* Col 3 — Featured testimonial + review CTA */}
+          {/* Col 3 — Rotating testimonials + review CTA */}
           <div className="bg-surface p-5 md:p-6 flex flex-col overflow-hidden">
-            <p className="font-label text-[10px] tracking-widest text-red mb-3 flex-none">
-              {RATING} ★ · {REVIEW_COUNT} REVIEWS
-            </p>
-            <blockquote className="flex-1 min-h-0 overflow-hidden flex flex-col">
-              <p className="font-body text-sm md:text-base text-text-muted leading-relaxed italic overflow-hidden">
-                &ldquo;{testimonials[0].text}&rdquo;
+            <div className="flex-none mb-3 flex items-center justify-between">
+              <p className="font-label text-[10px] tracking-widest text-red">
+                {RATING} ★ · {REVIEW_COUNT} REVIEWS
               </p>
-              <footer className="mt-3 flex items-center gap-2 flex-none">
-                <div className="w-6 h-px bg-red" />
+              <div className="flex gap-1">
+                {CONTACT_TESTIMONIALS.map((_, i) => (
+                  <span
+                    key={i}
+                    aria-hidden="true"
+                    className={`h-[2px] w-3 transition-colors duration-500 ${
+                      i === quoteIdx ? 'bg-red' : 'bg-line-strong'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+            <blockquote
+              key={quoteIdx}
+              className="flex-1 min-h-0 overflow-hidden flex flex-col testimonial-fade"
+            >
+              <p className="font-body text-sm md:text-base text-text-muted leading-relaxed italic overflow-hidden">
+                &ldquo;{quote.text}&rdquo;
+              </p>
+              <footer className="mt-3 flex items-center gap-2 flex-none flex-wrap">
+                <div className="w-6 h-px bg-red flex-none" />
                 <span className="font-headline text-xs font-bold uppercase tracking-tight">
-                  {testimonials[0].name}
+                  {quote.name}
                 </span>
-                {testimonials[0].barber && (
+                {quote.barber && (
                   <span className="font-label text-[9px] tracking-widest text-text-subtle">
-                    w/ <span className="text-red">{testimonials[0].barber.split(' ')[0].toUpperCase()}</span>
+                    w/ <span className="text-red">{quote.barber.split(' ')[0].toUpperCase()}</span>
                   </span>
                 )}
               </footer>
@@ -123,19 +182,6 @@ export function ContactPanel() {
               LEAVE A REVIEW
               <Icon name="star" className="w-4 h-4" />
             </a>
-          </div>
-        </div>
-
-        {/* Ambient review ticker — thin strip under the columns */}
-        <div className="mt-3 md:mt-4 overflow-hidden relative flex-none">
-          <div className="flex gap-8 animate-ticker whitespace-nowrap">
-            {[...testimonials.slice(1), ...testimonials.slice(1)].map((t, i) => (
-              <span key={i} className="font-body text-xs text-text-subtle inline-flex items-center gap-2 flex-none">
-                <span className="text-red">&#9733;</span>
-                &ldquo;{t.text}&rdquo;
-                <span className="font-headline text-[11px] font-bold text-text-faint">/ {t.name}</span>
-              </span>
-            ))}
           </div>
         </div>
       </div>
