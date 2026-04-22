@@ -1,20 +1,105 @@
+'use client';
+
 import Image from 'next/image';
+import { useEffect, useRef } from 'react';
 import { gallery, SQUARE_BOOKING_URL } from '@/data/shop';
 import { Icon } from './Icon';
 
 export function GalleryPanel() {
+  const wallRef = useRef<HTMLDivElement>(null);
+  const spotRef = useRef<HTMLDivElement>(null);
+  const dimRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = wallRef.current;
+    const spot = spotRef.current;
+    const dim = dimRef.current;
+    if (!el || !spot || !dim) return;
+
+    // Respect reduced motion & skip coarse pointers (touch) — static crisp tiles.
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    if (reduceMotion || coarsePointer) {
+      el.classList.add('is-static');
+      return;
+    }
+
+    let rafId: number | null = null;
+    let tx = 50, ty = 50; // target % position
+    let cx = 50, cy = 50; // current (lerped)
+    let active = false;
+
+    // Mask size params — keep in sync with CSS --spot-clear/--spot-soft.
+    const CLEAR = 100; // px
+    const SOFT = 280;  // px
+
+    const applyMask = () => {
+      const mask = `radial-gradient(circle at ${cx}% ${cy}%, transparent 0, transparent ${CLEAR}px, #000 ${SOFT}px)`;
+      spot.style.maskImage = mask;
+      spot.style.webkitMaskImage = mask;
+      dim.style.maskImage = mask;
+      dim.style.webkitMaskImage = mask;
+      el.style.setProperty('--mx', `${cx}%`);
+      el.style.setProperty('--my', `${cy}%`);
+    };
+
+    // Paint initial center mask so the overlays render correctly even before hover.
+    applyMask();
+
+    const kick = () => {
+      if (rafId == null) rafId = requestAnimationFrame(tick);
+    };
+
+    const tick = () => {
+      const dx = tx - cx;
+      const dy = ty - cy;
+      cx += dx * 0.18;
+      cy += dy * 0.18;
+      applyMask();
+      if (Math.abs(dx) < 0.05 && Math.abs(dy) < 0.05) {
+        rafId = null; // idle — let the browser rest
+        return;
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+
+    const onMove = (e: PointerEvent) => {
+      const r = el.getBoundingClientRect();
+      tx = ((e.clientX - r.left) / r.width) * 100;
+      ty = ((e.clientY - r.top) / r.height) * 100;
+      if (!active) {
+        active = true;
+        el.classList.add('is-hot');
+      }
+      kick();
+    };
+    const onLeave = () => {
+      active = false;
+      el.classList.remove('is-hot');
+      // Drift target back to center — one last settle — then idle.
+      tx = 50; ty = 50;
+      kick();
+    };
+
+    el.addEventListener('pointermove', onMove);
+    el.addEventListener('pointerleave', onLeave);
+    return () => {
+      if (rafId != null) cancelAnimationFrame(rafId);
+      el.removeEventListener('pointermove', onMove);
+      el.removeEventListener('pointerleave', onLeave);
+    };
+  }, []);
+
   return (
-    <section className="min-w-full h-full snap-start grid-bg overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
-      <div className="max-w-screen-2xl mx-auto px-6 md:px-8 py-16 md:py-24 w-full">
-        <div className="mb-10 md:mb-14 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-          <div className="border-l-4 border-red pl-6 md:pl-8">
-            <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">THE WORK</p>
-            <h2 className="font-headline text-4xl md:text-6xl uppercase tracking-tight leading-[0.88]">
-              FRESH FROM<br /><span className="text-stroke">THE CHAIR</span>
+    <section className="min-w-full h-full snap-start grid-bg overflow-hidden">
+      <div className="max-w-screen-2xl mx-auto h-full px-4 md:px-8 py-5 md:py-8 w-full flex flex-col">
+        {/* Head — single line, matches Team density */}
+        <div className="flex items-end justify-between gap-4 mb-4 md:mb-5 flex-none">
+          <div className="border-l-4 border-red pl-4 md:pl-6">
+            <p className="font-label text-[10px] tracking-[0.3em] text-red mb-1">THE WORK</p>
+            <h2 className="font-headline text-2xl md:text-4xl uppercase tracking-tight leading-[0.9]">
+              FRESH FROM <span className="text-stroke">THE CHAIR</span>
             </h2>
-            <p className="font-body text-base md:text-lg text-text-muted max-w-xl mt-4">
-              Cuts, fades, and shaves straight off the floor.
-            </p>
           </div>
           <a
             href={SQUARE_BOOKING_URL}
@@ -27,38 +112,40 @@ export function GalleryPanel() {
           </a>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-dense gap-1 md:gap-2">
-          {gallery.map((item, idx) => {
-            // First tile is a 2×2 feature; everything else is uniform square.
-            const isFeature = idx === 0;
-            return (
+        {/* The Wall — proximity-reactive halftone spotlight */}
+        <div ref={wallRef} className="gallery-wall relative flex-1 min-h-0 overflow-hidden">
+          <div className="gallery-grid">
+            {gallery.map((item, idx) => (
               <figure
                 key={idx}
-                className={`relative overflow-hidden bg-surface-raised group cursor-pointer aspect-square ${isFeature ? 'col-span-2 row-span-2' : ''}`}
+                className="gallery-tile relative overflow-hidden bg-surface-raised"
+                style={{ ['--i' as string]: idx }}
               >
                 <Image
                   src={item.src}
                   alt={item.alt}
                   fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-cover theme-photo group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 768px) 25vw, (max-width: 1024px) 17vw, (max-width: 1280px) 14vw, 12vw"
+                  className="object-cover theme-photo"
                 />
-                {/* Subtle dark gradient for tag legibility */}
-                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 {item.tag && (
-                  <figcaption className="absolute bottom-3 left-3 z-10 font-label text-[9px] tracking-widest text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <figcaption className="gallery-cap absolute bottom-1 left-1 right-1 font-label text-[8px] md:text-[9px] tracking-widest text-white/95 truncate">
                     {item.tag}
-                    {item.barber && <span className="text-white/70"> / {item.barber.toUpperCase()}</span>}
                   </figcaption>
                 )}
               </figure>
-            );
-          })}
-        </div>
+            ))}
+          </div>
 
-        <p className="font-label text-[10px] tracking-widest text-text-subtle mt-8 text-center">
-          MORE ON INSTAGRAM @SIEDELSBARBER
-        </p>
+          {/* Desaturation overlay — drains color outside the loupe */}
+          <div ref={spotRef} className="gallery-spotlight" aria-hidden="true" />
+          {/* Dim overlay — newsprint tint outside the loupe */}
+          <div ref={dimRef} className="gallery-spotlight-dim" aria-hidden="true" />
+          {/* Vertical red "chair light" beam at cursor X */}
+          <div className="gallery-beam" aria-hidden="true" />
+          {/* Outer loupe ring that rides the cursor */}
+          <div className="gallery-ring" aria-hidden="true" />
+        </div>
       </div>
     </section>
   );

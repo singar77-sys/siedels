@@ -1136,6 +1136,145 @@ body {
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
 }
 
+/* ══════════════════════════════════════════════════════
+   The Wall — proximity-reactive halftone spotlight
+   ══════════════════════════════════════════════════════ */
+.gallery-wall {
+  --mx: 50%;
+  --my: 50%;
+  --spot-clear: 100px;   /* fully revealed radius */
+  --spot-soft: 280px;    /* full halftone radius */
+  --beam-opacity: 0;
+  isolation: isolate;
+}
+.gallery-wall.is-hot {
+  --beam-opacity: 1;
+}
+
+/* Grid fills the container's height + width — cells are sized by grid, not aspect. */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 2px;
+  height: 100%;
+  width: 100%;
+}
+@media (min-width: 768px)  { .gallery-grid { grid-template-columns: repeat(6, 1fr); gap: 3px; } }
+@media (min-width: 1024px) { .gallery-grid { grid-template-columns: repeat(7, 1fr); } }
+@media (min-width: 1280px) { .gallery-grid { grid-template-columns: repeat(8, 1fr); } }
+
+/* Tiles sit flat; the OVERLAY is what does the work. */
+.gallery-tile {
+  transform: translateZ(0); /* promote to own layer for clean backdrop-filter */
+}
+.gallery-tile .theme-photo {
+  transition: transform 0.5s ease;
+}
+.gallery-wall.is-hot .gallery-tile:hover .theme-photo {
+  transform: scale(1.04);
+}
+.gallery-cap {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
+  padding: 6px 2px 2px;
+  pointer-events: none;
+}
+.gallery-tile:hover .gallery-cap { opacity: 1; }
+
+/* The loupe — a soft radial hole in a stack of overlays.
+   Blend-mode desaturates behind without relying on backdrop-filter. */
+.gallery-spotlight,
+.gallery-spotlight-dim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mask-image: radial-gradient(
+    circle at var(--mx) var(--my),
+    transparent 0,
+    transparent var(--spot-clear),
+    #000 var(--spot-soft)
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at var(--mx) var(--my),
+    transparent 0,
+    transparent var(--spot-clear),
+    #000 var(--spot-soft)
+  );
+}
+/* Desaturate the tiles that are NOT near the cursor */
+.gallery-spotlight {
+  background: rgb(128, 128, 128);
+  mix-blend-mode: saturation;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+/* Dim + contrast lift, newsprint-tinted */
+.gallery-spotlight-dim {
+  background: rgba(20, 17, 12, 0.35);
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+/* Fade overlays in when cursor is on the wall — resting state is full color */
+.gallery-wall.is-hot .gallery-spotlight { opacity: 1; }
+.gallery-wall.is-hot .gallery-spotlight-dim { opacity: 1; }
+
+/* Vertical red "chair light" beam at cursor X */
+.gallery-beam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--mx);
+  width: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(227, 27, 35, 0.55) 35%,
+    rgba(227, 27, 35, 0.85) 50%,
+    rgba(227, 27, 35, 0.55) 65%,
+    transparent 100%
+  );
+  box-shadow: 0 0 18px rgba(227, 27, 35, 0.45), 0 0 40px rgba(227, 27, 35, 0.25);
+  transform: translateX(-0.5px);
+  mix-blend-mode: screen;
+  opacity: var(--beam-opacity);
+  transition: opacity 0.35s ease;
+  z-index: 3;
+}
+
+/* Outer loupe ring — a slim circle around the clear zone */
+.gallery-ring {
+  position: absolute;
+  left: var(--mx);
+  top: var(--my);
+  width: calc(var(--spot-clear) * 2);
+  height: calc(var(--spot-clear) * 2);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  border-radius: 50%;
+  border: 1px solid rgba(227, 27, 35, 0.35);
+  box-shadow: inset 0 0 24px rgba(227, 27, 35, 0.08);
+  opacity: var(--beam-opacity);
+  transition: opacity 0.35s ease;
+  z-index: 4;
+}
+
+/* Bump z-index on beam/ring — above both overlays */
+.gallery-beam { z-index: 4; }
+.gallery-ring { z-index: 5; }
+
+/* Static fallback — no JS / reduced motion / touch */
+.gallery-wall.is-static .gallery-spotlight,
+.gallery-wall.is-static .gallery-spotlight-dim,
+.gallery-wall.is-static .gallery-beam,
+.gallery-wall.is-static .gallery-ring {
+  display: none;
+}
+
 /* ── Reduced Motion ───────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
