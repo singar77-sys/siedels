@@ -24,15 +24,15 @@ export function PageHero({ image, imageAlt, label, title, titleAccent, subtitle 
           className="object-cover object-center animate-ken-burns brightness-[0.35] theme-photo"
         />
       </div>
-      <div className="relative z-10 max-w-7xl mx-auto px-8 pb-12 md:pb-16 pt-32 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 pb-8 md:pb-16 pt-24 md:pt-32 w-full">
         <FadeIn>
           <div className="border-l-4 border-red pl-8">
             <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">{label}</p>
-            <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tight leading-[0.88] mb-4">
+            <h1 className="font-headline text-3xl sm:text-4xl md:text-6xl lg:text-7xl uppercase tracking-tight leading-[0.88] mb-3 md:mb-4">
               {title}
               {titleAccent && <><br /><span className="text-red">{titleAccent}</span></>}
             </h1>
-            <p className="font-body text-lg text-text-muted max-w-2xl leading-relaxed">
+            <p className="font-body text-base md:text-lg text-text-muted max-w-2xl leading-relaxed">
               {subtitle}
             </p>
           </div>
