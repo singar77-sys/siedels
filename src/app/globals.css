@@ -1331,8 +1331,8 @@ body {
 }
 
 /* Grid fills the entire wall frame — width AND height.
-   6 cols × 3 rows at md+ gives ~square tiles that fill the frame
-   (last 2 cells are empty by design — 16 photos, 18 cells). */
+   5 cols × 3 rows at lg+ is a perfect 15-cell layout for the
+   current gallery. */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1341,8 +1341,7 @@ body {
   width: 100%;
   height: 100%;
 }
-@media (min-width: 640px)  { .gallery-grid { grid-template-columns: repeat(4, 1fr); } }
-@media (min-width: 1024px) { .gallery-grid { grid-template-columns: repeat(6, 1fr); gap: 3px; } }
+@media (min-width: 1024px) { .gallery-grid { grid-template-columns: repeat(5, 1fr); gap: 3px; } }
 
 /* Tiles stretch with the grid cell — no fixed aspect, so they fill the frame. */
 .gallery-tile {
