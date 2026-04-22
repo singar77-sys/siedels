@@ -338,13 +338,15 @@ export interface GalleryItem {
 }
 
 export const gallery: GalleryItem[] = [
-  // Curated 16 — balanced across craft, service, and atmosphere.
+  // Curated 18 — fills the 6×3 wall exactly, balanced across craft,
+  // service, and atmosphere.
 
-  // ── 1. Feature — the headline shot (2×2 anchor at idx 0)
+  // ── 1. Feature — the headline shot
   { src: '/images/mens-fade-with-beard-siedels-medina.webp', alt: 'Men\'s short fade haircut with beard at Siedel\'s Barbershop in Medina, Ohio', tag: 'FADE' },
 
   // ── 2. Kids — family-friendly signal up top
   { src: '/images/kids-fade-clippers-siedels-medina.webp', alt: 'Kids fade with clippers at Siedel\'s Barbershop in Medina, Ohio', tag: 'KIDS' },
+  { src: '/images/kids-haircut-happy-siedels-medina.webp', alt: 'Happy kid getting a clipper haircut at Siedel\'s Barbershop', tag: 'KIDS' },
   { src: '/images/kids-first-haircut-scissors-siedels-medina.webp', alt: 'Toddler\'s first haircut with scissors at Siedel\'s Barbershop', tag: 'FIRST CUT' },
 
   // ── 3. Fades + shear work — the core haircut craft
@@ -362,6 +364,7 @@ export const gallery: GalleryItem[] = [
   // ── 6. Beard + detail work
   { src: '/images/beard-conditioning-brush-siedels-medina.webp', alt: 'Beard conditioning at Siedel\'s Barbershop in Medina, Ohio', tag: 'BEARD' },
   { src: '/images/eyebrow-detail-shaping-siedels-medina.webp', alt: 'Precision eyebrow detail work at Siedel\'s Barbershop', tag: 'DETAIL' },
+  { src: '/images/mens-neck-clipper-trim-siedels-medina.webp', alt: 'Clipper neck trim at Siedel\'s Barbershop in Medina, Ohio', tag: 'DETAIL' },
 
   // ── 7. Other services — longer hair, shampoo
   { src: '/images/womens-long-hair-trim-siedels-medina.webp', alt: 'Long hair trim at Siedel\'s Barbershop in Medina, Ohio', tag: 'LONG' },
