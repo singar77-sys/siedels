@@ -33,16 +33,13 @@ function parseTitle(title: string): { role: string; years: number | null } {
   return { role, years };
 }
 
-// Three ribbon schemes rotating. All use existing palette tokens so
-// they respect theme + team mode automatically.
-const SCHEMES = ['scheme-red', 'scheme-espresso', 'scheme-khaki'] as const;
-
-export function BaseballCard({ member, idx, shift, onSelect, interactive = true }: Props) {
+export function BaseballCard({ member, idx: _idx, shift, onSelect, interactive = true }: Props) {
   const { role, years } = parseTitle(member.title);
-  const scheme = SCHEMES[idx % SCHEMES.length];
   const isWorking = shift?.status === 'working';
   const isOff = shift?.status === 'off';
   const isOffsite = shift?.status === 'offsite';
+  // Ribbon color = availability status. Light: tan=in, dark-brown=off. Dark: red=in, grey=off.
+  const scheme = (isOff || isOffsite) ? 'scheme-status-off' : 'scheme-status-in';
 
   const click = () => { if (interactive && onSelect) onSelect(member); };
 

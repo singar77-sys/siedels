@@ -725,14 +725,16 @@ body {
   letter-spacing: 0.02em;
   line-height: 1.1;
 }
-/* Ribbon schemes — rotate per idx to add rhythm */
-.card-86.scheme-red .card-86-ribbon      { background: var(--red);           color: #fff; }
-.card-86.scheme-espresso .card-86-ribbon { background: var(--text);          color: var(--ink); }
-.card-86.scheme-khaki .card-86-ribbon    { background: var(--surface-high);  color: var(--text); }
-/* Badge color — opposite of the ribbon for contrast pop */
-.card-86.scheme-red .card-86-badge       { background: var(--text); }
-.card-86.scheme-espresso .card-86-badge  { background: var(--red); }
-.card-86.scheme-khaki .card-86-badge     { background: var(--red); }
+/* Ribbon schemes — driven by availability status, not index */
+/* Light: in=tan, off=dark-brown */
+.card-86.scheme-status-in  .card-86-ribbon { background: var(--surface-high); color: var(--text); }
+.card-86.scheme-status-off .card-86-ribbon { background: var(--text);         color: var(--ink);  }
+/* Dark override: in=red, off=dark-grey */
+[data-theme="dark"] .card-86.scheme-status-in  .card-86-ribbon { background: var(--red);          color: #fff; }
+[data-theme="dark"] .card-86.scheme-status-off .card-86-ribbon { background: var(--surface-high); color: var(--text); }
+/* Badge — always red for contrast */
+.card-86.scheme-status-in  .card-86-badge,
+.card-86.scheme-status-off .card-86-badge { background: var(--red); }
 
 /* ── Flip animation: modal card turns from front to back ───── */
 .card-flip-stage {
