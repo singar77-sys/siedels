@@ -88,8 +88,10 @@ function StatRow({
           <Price value={service.price} />
         </span>
         <Icon
-          name={open ? 'remove' : 'add'}
-          className="w-4 h-4 text-text-subtle flex-none"
+          name="add"
+          className={`w-4 h-4 text-text-subtle flex-none transition-transform duration-200 ${
+            open ? 'rotate-45' : ''
+          }`}
         />
       </button>
       {open && (
