@@ -113,9 +113,9 @@ export function GalleryPanel() {
   }, []);
 
   return (
-    <section className="min-w-full h-full snap-start grid-bg overflow-hidden">
-      <div className="max-w-screen-2xl mx-auto h-full px-4 md:px-8 py-5 md:py-8 w-full flex flex-col">
-        <div className="flex items-end justify-between gap-4 mb-4 md:mb-5 flex-none">
+    <section className="min-w-full h-full snap-start grid-bg overflow-hidden flex flex-col">
+      <div className="max-w-screen-2xl mx-auto w-full px-4 md:px-8 pt-5 md:pt-8 pb-3 md:pb-4 flex-none">
+        <div className="flex items-end justify-between gap-4">
           <div className="border-l-4 border-red pl-4 md:pl-6">
             <p className="font-label text-[10px] tracking-[0.3em] text-red mb-1">THE WORK</p>
             <h2 className="font-headline text-2xl md:text-4xl uppercase tracking-tight leading-[0.9]">
@@ -132,40 +132,40 @@ export function GalleryPanel() {
             <Icon name="arrow_forward" className="w-4 h-4" />
           </a>
         </div>
+      </div>
 
-        {/* The Wall — proximity-reactive halftone spotlight */}
-        <div ref={wallRef} className="gallery-wall relative flex-1 min-h-0 overflow-hidden flex items-center justify-center">
-          <div className="gallery-grid">
-            {gallery.map((item, idx) => (
-              <button
-                type="button"
-                key={idx}
-                onClick={() => setLightbox(idx)}
-                className="gallery-tile relative overflow-hidden bg-surface-raised cursor-pointer"
-                style={{ ['--i' as string]: idx }}
-                aria-label={`Open photo: ${item.alt}`}
-              >
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  fill
-                  sizes="(max-width: 768px) 25vw, 12vw"
-                  className="object-cover theme-photo"
-                />
-                {item.tag && (
-                  <span className="gallery-cap absolute bottom-1 left-1 right-1 font-label text-[8px] md:text-[9px] tracking-widest text-white/95 truncate">
-                    {item.tag}
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
-
-          <div ref={spotRef} className="gallery-spotlight" aria-hidden="true" />
-          <div ref={dimRef} className="gallery-spotlight-dim" aria-hidden="true" />
-          <div className="gallery-beam" aria-hidden="true" />
-          <div className="gallery-ring" aria-hidden="true" />
+      {/* The Wall — grid fills width edge-to-edge, centered vertically */}
+      <div ref={wallRef} className="gallery-wall relative flex-1 min-h-0 w-full overflow-hidden flex items-center">
+        <div className="gallery-grid">
+          {gallery.map((item, idx) => (
+            <button
+              type="button"
+              key={idx}
+              onClick={() => setLightbox(idx)}
+              className="gallery-tile relative overflow-hidden bg-surface-raised cursor-pointer"
+              style={{ ['--i' as string]: idx }}
+              aria-label={`Open photo: ${item.alt}`}
+            >
+              <Image
+                src={item.src}
+                alt={item.alt}
+                fill
+                sizes="(max-width: 768px) 25vw, 12vw"
+                className="object-cover theme-photo"
+              />
+              {item.tag && (
+                <span className="gallery-cap absolute bottom-1 left-1 right-1 font-label text-[8px] md:text-[9px] tracking-widest text-white/95 truncate">
+                  {item.tag}
+                </span>
+              )}
+            </button>
+          ))}
         </div>
+
+        <div ref={spotRef} className="gallery-spotlight" aria-hidden="true" />
+        <div ref={dimRef} className="gallery-spotlight-dim" aria-hidden="true" />
+        <div className="gallery-beam" aria-hidden="true" />
+        <div className="gallery-ring" aria-hidden="true" />
       </div>
 
       {lightbox != null && (
