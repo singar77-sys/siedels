@@ -4,21 +4,21 @@ import { Icon } from './Icon';
 export function ContactPanel() {
   return (
     <section className="min-w-full h-full snap-start grid-bg overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
-      <div className="max-w-screen-2xl mx-auto px-6 md:px-8 py-16 md:py-24 w-full">
-        <div className="border-l-4 border-red pl-6 md:pl-8 mb-10 md:mb-14">
-          <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">FIND THE SHOP</p>
-          <h2 className="font-headline text-4xl md:text-6xl uppercase tracking-tight leading-[0.88]">
+      <div className="max-w-screen-2xl mx-auto px-6 md:px-8 py-8 md:py-24 w-full">
+        <div className="border-l-4 border-red pl-6 md:pl-8 mb-6 md:mb-14">
+          <p className="font-label text-[11px] tracking-[0.3em] text-red mb-2 md:mb-4">FIND THE SHOP</p>
+          <h2 className="font-headline text-3xl md:text-6xl uppercase tracking-tight leading-[0.88]">
             982 N COURT<br />
             <span className="text-stroke">MEDINA, OHIO</span>
           </h2>
-          <p className="font-body text-base md:text-lg text-text-muted max-w-xl mt-4">
+          <p className="font-body text-sm md:text-lg text-text-muted max-w-xl mt-2 md:mt-4">
             On Court Street, open Monday through Saturday.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
-          <div className="space-y-8">
-            <div className="bg-surface border-l-4 border-red p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16">
+          <div className="space-y-5 md:space-y-8">
+            <div className="bg-surface border-l-4 border-red p-5 md:p-6">
               <p className="font-headline text-lg font-bold uppercase tracking-tight mb-1 text-text">{ADDRESS.toUpperCase()}</p>
               <p className="font-body text-sm text-text-subtle">{CITY_STATE_ZIP.toUpperCase()}</p>
             </div>
@@ -26,12 +26,12 @@ export function ContactPanel() {
               <p className="font-label text-[10px] tracking-widest text-text-subtle mb-2">PHONE</p>
               <a href={PHONE_HREF} className="font-headline text-2xl font-bold text-red hover:text-red-hover transition-colors">{PHONE}</a>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
               <a
                 href={MAPS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-red text-white font-headline font-bold uppercase tracking-tight px-6 py-3 hover:bg-red-hover transition-colors"
+                className="flex items-center justify-center gap-2 bg-red text-white font-headline font-bold uppercase tracking-tight px-6 py-3 hover:bg-red-hover transition-colors min-h-[44px]"
               >
                 GET DIRECTIONS
                 <Icon name="arrow_forward" className="w-4 h-4" />
@@ -40,7 +40,7 @@ export function ContactPanel() {
                 href={SQUARE_BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 border border-line-strong text-text-muted font-headline font-bold uppercase tracking-tight px-6 py-3 hover:text-text hover:border-text transition-colors"
+                className="flex items-center justify-center gap-2 border border-line-strong text-text-muted font-headline font-bold uppercase tracking-tight px-6 py-3 hover:text-text hover:border-text transition-colors min-h-[44px]"
               >
                 BOOK ONLINE
               </a>
@@ -48,9 +48,9 @@ export function ContactPanel() {
           </div>
 
           <div>
-            <p className="font-label text-[10px] tracking-widest text-text-subtle mb-4">OPERATING HOURS</p>
+            <p className="font-label text-[10px] tracking-widest text-text-subtle mb-3 md:mb-4">OPERATING HOURS</p>
             {hours.map((h) => (
-              <div key={h.day} className={`flex justify-between py-3.5 border-b border-line-strong font-headline text-sm uppercase tracking-tight ${
+              <div key={h.day} className={`flex justify-between py-2.5 md:py-3.5 border-b border-line-strong font-headline text-sm uppercase tracking-tight ${
                 h.day === 'Sunday' ? 'text-text-subtle' : 'text-text'
               }`}>
                 <span>{h.day}</span>
@@ -61,7 +61,7 @@ export function ContactPanel() {
         </div>
 
         {/* Featured Testimonial — cinematic block */}
-        <div className="mt-12 py-10 md:py-14 border-t border-b border-line-strong">
+        <div className="mt-6 md:mt-12 py-6 md:py-14 border-t border-b border-line-strong">
           <p className="font-label text-[10px] tracking-widest text-text-subtle mb-6">{RATING} STARS · {REVIEW_COUNT} REVIEWS</p>
           <blockquote className="max-w-3xl">
             <p className="font-body text-lg md:text-2xl text-text-muted leading-relaxed italic">
@@ -79,8 +79,8 @@ export function ContactPanel() {
           </blockquote>
         </div>
 
-        {/* Ambient review ticker */}
-        <div className="mt-6 overflow-hidden relative">
+        {/* Ambient review ticker — desktop only, too cramped on mobile */}
+        <div className="hidden md:block mt-6 overflow-hidden relative">
           <div className="flex gap-8 animate-ticker whitespace-nowrap">
             {[...testimonials.slice(1), ...testimonials.slice(1)].map((t, i) => (
               <span key={i} className="font-body text-sm text-text-subtle inline-flex items-center gap-2 flex-none">
@@ -93,7 +93,7 @@ export function ContactPanel() {
         </div>
 
         {/* Google Reviews CTA */}
-        <div className="mt-6 bg-surface border border-red/40 p-8 md:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="mt-4 md:mt-6 bg-surface border border-red/40 p-5 md:p-10 flex flex-col sm:flex-row items-center justify-between gap-4 md:gap-6">
           <div>
             <p className="font-headline text-lg font-bold uppercase tracking-tight mb-1 text-text">BEEN IN THE CHAIR?</p>
             <p className="font-body text-xs text-text-subtle">Tell us how we did. The crew reads every one.</p>
@@ -102,7 +102,7 @@ export function ContactPanel() {
             href={GOOGLE_BUSINESS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 border border-red text-red font-headline font-bold uppercase tracking-tight px-6 py-3 hover:bg-red hover:text-white transition-all duration-300 whitespace-nowrap"
+            className="flex w-full sm:w-auto items-center justify-center gap-2 border border-red text-red font-headline font-bold uppercase tracking-tight px-6 py-3 hover:bg-red hover:text-white transition-all duration-300 whitespace-nowrap min-h-[44px]"
           >
             LEAVE A REVIEW
             <Icon name="star" className="w-4 h-4" />
