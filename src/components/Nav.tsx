@@ -11,6 +11,7 @@ import { Logo } from './Logo';
 const NAV_LINKS = [
   { label: 'HOME', href: '/' },
   { label: 'TEAM', href: '/team' },
+  { label: 'GALLERY', href: '/gallery' },
   { label: 'SERVICES', href: '/services' },
   { label: 'CONTACT', href: '/contact' },
 ];

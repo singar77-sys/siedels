@@ -17,8 +17,22 @@ export const INSTAGRAM_URL = 'https://www.instagram.com/siedelsbarber';
 // Canonical social-proof + staff-count constants — used in metadata, JSON-LD, and UI.
 // Update here, not inline.
 export const TEAM_COUNT = 11;
+/** Word form of TEAM_COUNT — used in prose where "11 barbers" reads worse
+ *  than "Eleven barbers". Keep in sync with TEAM_COUNT by hand (small
+ *  numbers change rarely). */
+export const TEAM_COUNT_WORD = 'Eleven';
 export const RATING = '4.9';
 export const REVIEW_COUNT = '249';
+
+// Alt-text strings for images reused across multiple components. Keeps
+// alts consistent when the same file appears in several places.
+export const IMAGE_ALTS = {
+  storefront:
+    "Siedel's Barbershop storefront at 982 N Court Street, Medina Ohio",
+  heroGoldenHour:
+    "Barber pole at golden hour outside Siedel's Barbershop, Medina Ohio",
+  heroGrayscale: "Barber pole at Siedel's Barbershop, Medina Ohio",
+} as const;
 
 // Canonical shop coordinates — used in Schema.org JSON-LD and in the
 // ContactPanel HUD readout. Keep these in sync with the postal address.

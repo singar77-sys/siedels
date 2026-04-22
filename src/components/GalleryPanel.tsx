@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { gallery, SQUARE_BOOKING_URL } from '@/data/shop';
 import { Icon } from './Icon';
+import { GalleryLightbox } from './GalleryLightbox';
 
 export function GalleryPanel() {
   const wallRef = useRef<HTMLDivElement>(null);
@@ -17,22 +18,6 @@ export function GalleryPanel() {
       setLightbox((i) => (i == null ? i : (i + dir + gallery.length) % gallery.length)),
     [],
   );
-
-  useEffect(() => {
-    if (lightbox == null) return;
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') closeLightbox();
-      else if (e.key === 'ArrowRight') step(1);
-      else if (e.key === 'ArrowLeft') step(-1);
-    };
-    window.addEventListener('keydown', onKey);
-    return () => {
-      document.body.style.overflow = prevOverflow;
-      window.removeEventListener('keydown', onKey);
-    };
-  }, [lightbox, closeLightbox, step]);
 
   useEffect(() => {
     const el = wallRef.current;
@@ -169,58 +154,12 @@ export function GalleryPanel() {
       </div>
 
       {lightbox != null && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
-          onClick={closeLightbox}
-          role="dialog"
-          aria-modal="true"
-          aria-label={gallery[lightbox].alt}
-        >
-          <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" />
-          <button
-            type="button"
-            className="absolute top-4 right-4 z-10 text-white/80 hover:text-white p-2"
-            onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
-            aria-label="Close"
-          >
-            <Icon name="close" className="w-6 h-6" />
-          </button>
-          <button
-            type="button"
-            className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-10 text-white/80 hover:text-white p-3"
-            onClick={(e) => { e.stopPropagation(); step(-1); }}
-            aria-label="Previous photo"
-          >
-            <Icon name="arrow_forward" className="w-7 h-7 rotate-180" />
-          </button>
-          <button
-            type="button"
-            className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-10 text-white/80 hover:text-white p-3"
-            onClick={(e) => { e.stopPropagation(); step(1); }}
-            aria-label="Next photo"
-          >
-            <Icon name="arrow_forward" className="w-7 h-7" />
-          </button>
-          <div
-            className="relative z-[1] flex flex-col items-center"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="relative" style={{ width: 'min(92vw, calc(80vh * 3 / 2))', aspectRatio: '3 / 2' }}>
-              <Image
-                src={gallery[lightbox].src}
-                alt={gallery[lightbox].alt}
-                fill
-                sizes="92vw"
-                className="object-contain"
-                priority
-              />
-            </div>
-            <p className="mt-4 font-label text-[11px] tracking-[0.3em] text-white/80 text-center">
-              {gallery[lightbox].tag && <>{gallery[lightbox].tag}{' '}</>}
-              <span className="text-white/40">{lightbox + 1} / {gallery.length}</span>
-            </p>
-          </div>
-        </div>
+        <GalleryLightbox
+          items={gallery}
+          index={lightbox}
+          onClose={closeLightbox}
+          onStep={step}
+        />
       )}
     </section>
   );

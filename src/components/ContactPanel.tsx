@@ -11,6 +11,7 @@ import {
   ADDRESS,
   CITY_STATE_ZIP,
   COORDS_DISPLAY,
+  IMAGE_ALTS,
   RATING,
   REVIEW_COUNT,
   hours,
@@ -98,7 +99,7 @@ export function ContactPanel() {
             >
               <Image
                 src={STOREFRONT}
-                alt="Exterior of Siedel's Barbershop storefront at 982 N Court Street, Medina Ohio"
+                alt={IMAGE_ALTS.storefront}
                 fill
                 sizes="(max-width: 768px) 90vw, 30vw"
                 className="tac-map__tile object-cover"

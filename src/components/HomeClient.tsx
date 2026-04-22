@@ -209,7 +209,7 @@ export function HomeClient({
 
         <div
           ref={scrollRef}
-          className="flex h-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory overscroll-x-contain"
+          className="flex h-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory overscroll-x-contain touch-pan-x"
           style={{ scrollbarWidth: 'none' }}
         >
           <HeroPanel onScrollNext={() => scrollToPanel(1)} />
