@@ -41,7 +41,7 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Billy Rodriguez',
-    title: 'Barber · 16 Years',
+    title: 'Master Barber · 15 Years',
     image: '/images/billy-rodriguez-barber-siedels-medina.webp',
     booking: sq('e957m1qmqqdevp'),
     bio: "Over 15 years of experience specializing in clean, sharp cuts — from classic short styles to modern fades, flattops, and tapers. Coaches his kids' sports teams. Die-hard Cleveland sports fan.",
@@ -49,7 +49,7 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Patrick Muranko',
-    title: 'Barber · 4 Years',
+    title: 'Master Barber · 4 Years',
     image: '/images/patrick-muranko-barber-siedels-medina.webp',
     booking: sq('x9bbe05slxw75e'),
     bio: "Akron Barber College graduate. Four years in the chair. Originally from Parma, now in Medina. Veteran, husband, father of two daughters. When he's not here, he's at gymnastics meets, playing retro video games, or arguing about 90s wrestling.",
@@ -73,7 +73,7 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Krista Foecking',
-    title: 'Stylist · 26 Years',
+    title: 'Master Stylist · 26 Years',
     image: '/images/krista-foecking-stylist-siedels-medina.webp',
     booking: sq('h3ib29fkvqykvx'),
     bio: "26 years cutting hair. Polaris Career Center graduate. Specializes in men's fades and kids' cuts — keeping both still and happy is its own skill. Wife and mother of two. Cheer coach for her daughter. When the weather's right, she's in the garden or checking on the bees.",
@@ -89,7 +89,7 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Will Dillon',
-    title: 'Barber · 10 Years',
+    title: 'Master Barber · 10 Years',
     image: '/images/will-dillon-barber-siedels-medina.webp',
     booking: sq('licxdz52l4jryx'),
     bio: "Originally from Wheeling, WV. Moved to Medina at 7, came up through Medina City Schools. Hope Valley Barber College graduate with 10 years behind the chair. Clipper cuts, designs, tight fades, tapers, beard shaping, razor lineups, hot towel shaves — that's the wheelhouse. Father of three boys. Pittsburgh sports diehard, especially the Steelers. Off the clock: fishing, coaching basketball, and keeping up with three kids.",
@@ -97,7 +97,7 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Chris Hodge',
-    title: 'Barber · 4 Years',
+    title: 'Master Barber · 4 Years',
     image: '/images/chris-hodge-barber-siedels-medina.webp',
     booking: sq('taz4mvu6g9k73n'),
     bio: "Four years behind the chair. Strongest with taper fades — that's the wheelhouse. Off the clock: fishing, riding his motorcycle, hiking, and driving semi-trucks.",
@@ -113,7 +113,7 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Shannon Hadick',
-    title: 'Master Barber · 9 Years',
+    title: 'Master Stylist · 9 Years',
     image: '/images/shannon-hadick-barber-siedels-medina.webp',
     booking: sq('0lh9o00vt6or3u'),
     bio: "Over 9 years of experience. Specializes in men's and women's cuts. Three years in the area, almost two at Siedel's. Managed a shop before coming here. Looks forward to helping you look your very best.",
