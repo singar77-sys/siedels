@@ -680,23 +680,50 @@ body {
   padding: 12px 0 14px;
   border-bottom: 2px solid var(--text);
 }
-.card-back-chip-list {
+.card-back-spec-list {
   display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
+  flex-direction: column;
+  gap: 0;
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.card-back-chip {
-  padding: 4px 9px;
-  background: var(--red);
-  color: #fff;
+.card-back-spec-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px dotted var(--line-strong);
   font-weight: 700;
-  font-size: 10px;
-  letter-spacing: 0.05em;
+  font-size: 12px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  line-height: 1.3;
+  color: var(--text);
+}
+.card-back-spec-row:last-child { border-bottom: 0; }
+.card-back-spec-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--red);
+  flex: 0 0 auto;
+}
+.card-back-spec-name { flex: 1; }
+
+.card-back-stamp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 14px 0 2px;
+  opacity: 0.55;
+}
+.card-back-stamp-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--text-muted);
+  text-transform: uppercase;
 }
 .card-back-bio {
   padding: 12px 0 14px;

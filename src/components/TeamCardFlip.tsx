@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { BaseballCard } from './BaseballCard';
+import { Logo } from './Logo';
 import type { TeamMember } from '@/data/shop';
 import type { Shift } from '@/lib/schedule';
 
@@ -97,10 +98,11 @@ export function TeamCardFlip({ member, idx, shift }: Props) {
             {member.specialties && member.specialties.length > 0 && (
               <div className="card-back-specialties">
                 <p className="card-back-section-label">SPECIALTIES</p>
-                <ul className="card-back-chip-list">
+                <ul className="card-back-spec-list">
                   {member.specialties.map((spec) => (
-                    <li key={spec} className="card-back-chip">
-                      {spec}
+                    <li key={spec} className="card-back-spec-row">
+                      <span className="card-back-spec-dot" aria-hidden />
+                      <span className="card-back-spec-name">{spec}</span>
                     </li>
                   ))}
                 </ul>
@@ -123,6 +125,13 @@ export function TeamCardFlip({ member, idx, shift }: Props) {
             >
               BOOK WITH {firstName}
             </a>
+
+            {/* Siedel's mark at the bottom, acts like a printer's seal
+                on the back of a baseball card */}
+            <div className="card-back-stamp" aria-hidden>
+              <Logo width={110} />
+              <p className="card-back-stamp-label">EST. 2018 · MEDINA, OHIO</p>
+            </div>
           </div>
         </div>
       </button>
