@@ -406,10 +406,14 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   outline: none;
 }
-.card-86:hover,
-.card-86:focus-visible {
+.card-86:not(.card-86-static):hover,
+.card-86:not(.card-86-static):focus-visible {
   transform: translateY(-3px);
   box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+.card-86-static {
+  border: 2px solid var(--text);
+  cursor: default;
 }
 .card-86-ribbon {
   flex: 0 0 auto;
@@ -538,6 +542,44 @@ body {
 .card-86.scheme-red .card-86-badge       { background: var(--text); }
 .card-86.scheme-espresso .card-86-badge  { background: var(--red); }
 .card-86.scheme-khaki .card-86-badge     { background: var(--red); }
+
+/* ── Flip animation: modal card turns from front to back ───── */
+.card-flip-stage {
+  perspective: 1400px;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+}
+.card-flip {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 5 / 7;
+  transform-style: preserve-3d;
+  transform: rotateY(0);
+  transition: transform 1.1s cubic-bezier(0.4, 0.1, 0.3, 1);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+}
+.card-flip.flipped { transform: rotateY(180deg); }
+.card-flip:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
+.card-flip-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.card-flip-back { transform: rotateY(180deg); overflow-y: auto; }
+/* Front face delegates to BaseballCard — make sure the inner
+   card fills the face and doesn't hover-transform inside the flip */
+.card-flip-front .card-86 {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+}
 
 /* ── Card back (modal) — reads like a 1986 Topps card back ──── */
 .card-back {

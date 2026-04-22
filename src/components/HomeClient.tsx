@@ -4,6 +4,7 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SQUARE_BOOKING_URL, PHONE, PHONE_HREF, MAPS_URL, ADDRESS, CITY_STATE_ZIP, team, type TeamMember, type Service } from '@/data/shop';
+import { slugFromName } from '@/lib/utils';
 import { Modal } from './Modal';
 import { ThemeToggle } from './ThemeToggle';
 import { Icon } from './Icon';
@@ -14,6 +15,7 @@ import { HeroPanel } from './HeroPanel';
 import { ServicesPanel } from './ServicesPanel';
 import { GalleryPanel } from './GalleryPanel';
 import { TeamPanel } from './TeamPanel';
+import { TeamCardFlip } from './TeamCardFlip';
 import { ContactPanel } from './ContactPanel';
 import type { Shift } from '@/lib/schedule';
 
@@ -247,79 +249,28 @@ export function HomeClient({
         </div>
       </footer>
 
-      {/* ══ Team Member Modal — styled as the BACK of a baseball card ═════════ */}
-      {selectedMember && (() => {
-        const memberIdx = team.findIndex((m) => m.name === selectedMember.name);
-        const cardNumber = memberIdx >= 0 ? memberIdx + 1 : null;
-        const titleParts = selectedMember.title.split('·').map((p) => p.trim());
-        const role = titleParts[0] || 'Barber';
-        const yearsMatch = titleParts[1]?.match(/(\d+)/);
-        const years = yearsMatch ? yearsMatch[1] : null;
-        const firstName = selectedMember.name.split(' ')[0].toUpperCase();
-        return (
-          <Modal onClose={() => setSelectedMember(null)}>
-            <button
-              onClick={() => setSelectedMember(null)}
-              className="absolute top-3 right-3 z-10 w-9 h-9 flex items-center justify-center text-text-subtle hover:text-text transition-colors"
-              aria-label="Close"
-            >
-              <Icon name="close" className="w-4 h-4" />
-            </button>
-            <div className="card-back">
-              {/* Header bar — name + card number, like a Topps back */}
-              <div className="card-back-header">
-                <div>
-                  <p className="card-back-label">SIEDEL&apos;S BARBERSHOP · MEDINA, OH</p>
-                  <h2 className="card-back-name">{selectedMember.name.toUpperCase()}</h2>
-                  <p className="card-back-role">{role.toUpperCase()}</p>
-                </div>
-                {cardNumber !== null && (
-                  <div className="card-back-number">
-                    <span>NO.</span>
-                    <strong>{cardNumber}</strong>
-                  </div>
-                )}
-              </div>
-
-              {/* Stats strip */}
-              <div className="card-back-stats">
-                {years && (
-                  <div className="card-back-stat">
-                    <span className="card-back-stat-label">YRS</span>
-                    <span className="card-back-stat-value">{years}</span>
-                  </div>
-                )}
-                <div className="card-back-stat">
-                  <span className="card-back-stat-label">POSITION</span>
-                  <span className="card-back-stat-value card-back-stat-text">{role.toUpperCase()}</span>
-                </div>
-                <div className="card-back-stat">
-                  <span className="card-back-stat-label">TEAM</span>
-                  <span className="card-back-stat-value card-back-stat-text">SIEDEL&apos;S</span>
-                </div>
-              </div>
-
-              {/* Bio — career story */}
-              {selectedMember.bio && (
-                <div className="card-back-bio">
-                  <p className="card-back-bio-label">CAREER</p>
-                  <p className="card-back-bio-text">{selectedMember.bio}</p>
-                </div>
-              )}
-
-              {/* Book — stamped like a factory mark */}
-              <a
-                href={selectedMember.booking}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card-back-book"
-              >
-                BOOK WITH {firstName}
-              </a>
-            </div>
-          </Modal>
-        );
-      })()}
+      {/* ══ Team Member Modal — baseball card that flips front→back ══ */}
+      {selectedMember && (
+        <Modal onClose={() => setSelectedMember(null)}>
+          <button
+            onClick={() => setSelectedMember(null)}
+            className="absolute top-3 right-3 z-10 w-9 h-9 flex items-center justify-center text-text-subtle hover:text-text transition-colors"
+            aria-label="Close"
+          >
+            <Icon name="close" className="w-4 h-4" />
+          </button>
+          <div className="p-5 md:p-6">
+            <TeamCardFlip
+              member={selectedMember}
+              idx={Math.max(0, team.findIndex((m) => m.name === selectedMember.name))}
+              shift={todayShifts[slugFromName(selectedMember.name)] ?? null}
+            />
+            <p className="font-label text-[10px] tracking-[0.25em] text-text-subtle text-center mt-4">
+              TAP CARD TO FLIP
+            </p>
+          </div>
+        </Modal>
+      )}
 
       {/* ══ Service Modal ═════════════════════ */}
       {selectedService && (

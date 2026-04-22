@@ -19,7 +19,9 @@ interface Props {
   member: TeamMember;
   idx: number;
   shift: Shift | null;
-  onSelect: (member: TeamMember) => void;
+  onSelect?: (member: TeamMember) => void;
+  /** false inside the flip modal — no click handler, no hover lift */
+  interactive?: boolean;
 }
 
 // Parse "Master Barber · 31 Years" into role + years number.
@@ -35,30 +37,31 @@ function parseTitle(title: string): { role: string; years: number | null } {
 // they respect theme + team mode automatically.
 const SCHEMES = ['scheme-red', 'scheme-espresso', 'scheme-khaki'] as const;
 
-export function BaseballCard({ member, idx, shift, onSelect }: Props) {
+export function BaseballCard({ member, idx, shift, onSelect, interactive = true }: Props) {
   const { role, years } = parseTitle(member.title);
   const scheme = SCHEMES[idx % SCHEMES.length];
   const isWorking = shift?.status === 'working';
   const isOff = shift?.status === 'off';
   const isOffsite = shift?.status === 'offsite';
 
+  const click = () => { if (interactive && onSelect) onSelect(member); };
+
   return (
     <div
-      className={`card-86 ${scheme} group cursor-pointer relative`}
-      onClick={() => onSelect(member)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
+      className={`card-86 ${scheme} relative ${interactive ? 'group cursor-pointer' : 'card-86-static'}`}
+      onClick={click}
+      role={interactive ? 'button' : undefined}
+      tabIndex={interactive ? 0 : undefined}
+      onKeyDown={interactive ? (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          onSelect(member);
+          click();
         }
-      }}
+      } : undefined}
     >
-      {/* Top ribbon: role + Siedel's mark */}
+      {/* Top ribbon: role */}
       <div className="card-86-ribbon">
         <span className="card-86-role">{role.toUpperCase()}</span>
-        <span className="card-86-mark" aria-hidden>S</span>
       </div>
 
       {/* Photo */}
