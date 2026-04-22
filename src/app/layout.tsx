@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/ThemeProvider';
-import { PrideProvider } from '@/components/PrideProvider';
+import { LgbtqEasterEgg } from '@/components/LgbtqEasterEgg';
 import { SacrifixEasterEgg } from '@/components/SacrifixEasterEgg';
 import { ItalyEasterEgg } from '@/components/ItalyEasterEgg';
 import { TeamModeEasterEgg } from '@/components/TeamModeEasterEgg';
@@ -102,19 +102,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content={defaultTheme === 'dark' ? '#0E0E0E' : '#CDC7BB'} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('siedels-theme');var def=document.documentElement.getAttribute('data-default-theme')||'light';var theme=(t==='light'||t==='dark')?t:def;document.documentElement.setAttribute('data-theme',theme);if(localStorage.getItem('siedels-pride')==='true'){document.documentElement.setAttribute('data-pride','true');}document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme==='dark'?'#0E0E0E':'#CDC7BB');})();` }} />
+        <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('siedels-theme');var def=document.documentElement.getAttribute('data-default-theme')||'light';var theme=(t==='light'||t==='dark')?t:def;document.documentElement.setAttribute('data-theme',theme);document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme==='dark'?'#0E0E0E':'#CDC7BB');})();` }} />
       </head>
       <body>
         <a href="#main" className="skip-link">Skip to main content</a>
         <ThemeProvider>
-        <PrideProvider>
         {children}
         <MedinaAmbience />
         <SacrifixEasterEgg />
         <ItalyEasterEgg />
         <TeamModeEasterEgg />
         <PricingPitchEasterEgg />
-        </PrideProvider>
+        <LgbtqEasterEgg />
         </ThemeProvider>
         <Script
           src="https://app.squareup.com/appointments/buyer/widget/xcru7izyf4zhv6/LFCOT5CC7MY0S.js"

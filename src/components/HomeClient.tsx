@@ -7,7 +7,6 @@ import { SQUARE_BOOKING_URL, PHONE, PHONE_HREF, MAPS_URL, ADDRESS, CITY_STATE_ZI
 import { slugFromName } from '@/lib/utils';
 import { Modal } from './Modal';
 import { ThemeToggle } from './ThemeToggle';
-import { PrideToggle } from './PrideToggle';
 import { Icon } from './Icon';
 import { Logo } from './Logo';
 import { SocialIcons } from './SocialIcons';
@@ -147,7 +146,6 @@ export function HomeClient({
             ))}
           </div>
           <ThemeToggle />
-          <PrideToggle />
           <a
             href={SQUARE_BOOKING_URL}
             target="_blank"
@@ -159,7 +157,6 @@ export function HomeClient({
         </nav>
         <div className="md:hidden flex items-center">
           <ThemeToggle />
-          <PrideToggle />
         </div>
       </header>
 
