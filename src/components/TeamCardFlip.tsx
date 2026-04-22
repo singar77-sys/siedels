@@ -40,7 +40,9 @@ export function TeamCardFlip({ member, idx, shift }: Props) {
 
   const { role, years } = parseTitle(member.title);
   const firstName = member.name.split(' ')[0].toUpperCase();
-  const cardNumber = idx + 1;
+  const yearsNum = years ? parseInt(years, 10) : null;
+  const since =
+    yearsNum !== null ? new Date().getFullYear() - yearsNum : null;
 
   return (
     <div className="card-flip-stage">
@@ -60,7 +62,7 @@ export function TeamCardFlip({ member, idx, shift }: Props) {
           />
         </div>
 
-        {/* BACK — stats, bio, book button */}
+        {/* BACK — stats, specialties, bio, book */}
         <div className="card-flip-face card-flip-back">
           <div className="card-back">
             <div className="card-back-header">
@@ -69,36 +71,45 @@ export function TeamCardFlip({ member, idx, shift }: Props) {
                 <h2 className="card-back-name">{member.name.toUpperCase()}</h2>
                 <p className="card-back-role">{role.toUpperCase()}</p>
               </div>
-              <div className="card-back-number">
-                <span>NO.</span>
-                <strong>{cardNumber}</strong>
-              </div>
-            </div>
-
-            <div className="card-back-stats">
-              {years && (
-                <div className="card-back-stat">
-                  <span className="card-back-stat-label">YRS</span>
-                  <span className="card-back-stat-value">{years}</span>
+              {yearsNum !== null && (
+                <div className="card-back-number">
+                  <span>NO.</span>
+                  <strong>{yearsNum}</strong>
                 </div>
               )}
-              <div className="card-back-stat">
-                <span className="card-back-stat-label">POSITION</span>
-                <span className="card-back-stat-value card-back-stat-text">
-                  {role.toUpperCase()}
-                </span>
-              </div>
-              <div className="card-back-stat">
-                <span className="card-back-stat-label">TEAM</span>
-                <span className="card-back-stat-value card-back-stat-text">
-                  SIEDEL&apos;S
-                </span>
-              </div>
             </div>
+
+            <div className="card-back-stats card-back-stats-2">
+              {yearsNum !== null && (
+                <div className="card-back-stat">
+                  <span className="card-back-stat-label">YEARS</span>
+                  <span className="card-back-stat-value">{yearsNum}</span>
+                </div>
+              )}
+              {since !== null && (
+                <div className="card-back-stat">
+                  <span className="card-back-stat-label">SINCE</span>
+                  <span className="card-back-stat-value">{since}</span>
+                </div>
+              )}
+            </div>
+
+            {member.specialties && member.specialties.length > 0 && (
+              <div className="card-back-specialties">
+                <p className="card-back-section-label">SPECIALTIES</p>
+                <ul className="card-back-chip-list">
+                  {member.specialties.map((spec) => (
+                    <li key={spec} className="card-back-chip">
+                      {spec}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {member.bio && (
               <div className="card-back-bio">
-                <p className="card-back-bio-label">CAREER</p>
+                <p className="card-back-section-label">CAREER</p>
                 <p className="card-back-bio-text">{member.bio}</p>
               </div>
             )}

@@ -26,16 +26,13 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
 
   return (
     <section className="min-w-full h-full snap-start grid-bg overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
-      <div className="max-w-screen-2xl mx-auto px-6 md:px-8 py-16 md:py-24 w-full">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10 md:mb-14">
-          <div className="border-l-4 border-red pl-6 md:pl-8">
-            <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">THE CREW</p>
-            <h2 className="font-headline text-4xl md:text-6xl uppercase tracking-tight leading-[0.88]">
-              MEET THE<br /><span className="text-stroke">SPECIALISTS</span>
+      <div className="max-w-screen-2xl mx-auto px-6 md:px-8 py-8 md:py-10 w-full">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-5 md:mb-6">
+          <div className="border-l-4 border-red pl-4 md:pl-6">
+            <p className="font-label text-[10px] tracking-[0.3em] text-red mb-2">THE CREW</p>
+            <h2 className="font-headline text-2xl md:text-4xl uppercase tracking-tight leading-[0.9]">
+              MEET THE <span className="text-stroke">TEAM</span>
             </h2>
-            <p className="font-body text-base md:text-lg text-text-muted max-w-xl mt-4">
-              Every skill level, from fades to full-service shaves.
-            </p>
           </div>
           {scheduleIsCurrent && !scheduleToday.isClosed && scheduleToday.working.length > 0 && (
             <div className="flex items-center gap-3 bg-surface border border-red/40 px-5 py-4">
@@ -54,15 +51,15 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
         </div>
 
         {scheduleIsCurrent && scheduleToday.isClosed && scheduleToday.dayName === 'Sunday' && (
-          <div className="mb-10 md:mb-14 bg-surface border border-line-strong p-5 md:p-6">
-            <p className="font-label text-[11px] tracking-[0.3em] text-text-subtle mb-2">CLOSED TODAY</p>
-            <p className="font-body text-sm text-text-muted">
+          <div className="mb-5 md:mb-6 bg-surface border border-line-strong p-3 md:p-4">
+            <p className="font-label text-[10px] tracking-[0.3em] text-text-subtle mb-1">CLOSED TODAY</p>
+            <p className="font-body text-xs text-text-muted">
               Siedel&apos;s is closed on Sundays. We&apos;ll be back Monday morning.
             </p>
           </div>
         )}
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-3">
           {team.map((member, idx) => (
             <BaseballCard
               key={member.name}
