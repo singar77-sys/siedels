@@ -191,7 +191,7 @@ export function GalleryPanel() {
             onClick={(e) => { e.stopPropagation(); step(-1); }}
             aria-label="Previous photo"
           >
-            <Icon name="arrow_back" className="w-7 h-7" />
+            <Icon name="arrow_forward" className="w-7 h-7 rotate-180" />
           </button>
           <button
             type="button"
