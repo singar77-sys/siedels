@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { BaseballCard } from './BaseballCard';
 import { Logo } from './Logo';
-import type { TeamMember } from '@/data/shop';
+import { getYears, type TeamMember } from '@/data/shop';
 import type { Shift } from '@/lib/schedule';
 
 /**
@@ -16,13 +16,6 @@ interface Props {
   member: TeamMember;
   idx: number;
   shift: Shift | null;
-}
-
-function parseTitle(title: string) {
-  const parts = title.split('·').map((p) => p.trim());
-  const role = parts[0] || 'Barber';
-  const match = parts[1]?.match(/(\d+)/);
-  return { role, years: match ? match[1] : null };
 }
 
 export function TeamCardFlip({ member, idx, shift }: Props) {
@@ -39,11 +32,10 @@ export function TeamCardFlip({ member, idx, shift }: Props) {
     return () => clearTimeout(t);
   }, []);
 
-  const { role, years } = parseTitle(member.title);
+  const role = member.role;
+  const yearsNum = getYears(member);
   const firstName = member.name.split(' ')[0].toUpperCase();
-  const yearsNum = years ? parseInt(years, 10) : null;
-  const since =
-    yearsNum !== null ? new Date().getFullYear() - yearsNum : null;
+  const since = member.startedYear;
 
   return (
     <div className="card-flip-stage">
@@ -72,27 +64,21 @@ export function TeamCardFlip({ member, idx, shift }: Props) {
                 <h2 className="card-back-name">{member.name.toUpperCase()}</h2>
                 <p className="card-back-role">{role.toUpperCase()}</p>
               </div>
-              {yearsNum !== null && (
-                <div className="card-back-number">
-                  <span>NO.</span>
-                  <strong>{yearsNum}</strong>
-                </div>
-              )}
+              <div className="card-back-number">
+                <span>NO.</span>
+                <strong>{yearsNum}</strong>
+              </div>
             </div>
 
             <div className="card-back-stats card-back-stats-2">
-              {yearsNum !== null && (
-                <div className="card-back-stat">
-                  <span className="card-back-stat-label">YEARS</span>
-                  <span className="card-back-stat-value">{yearsNum}</span>
-                </div>
-              )}
-              {since !== null && (
-                <div className="card-back-stat">
-                  <span className="card-back-stat-label">SINCE</span>
-                  <span className="card-back-stat-value">{since}</span>
-                </div>
-              )}
+              <div className="card-back-stat">
+                <span className="card-back-stat-label">YEARS</span>
+                <span className="card-back-stat-value">{yearsNum}</span>
+              </div>
+              <div className="card-back-stat">
+                <span className="card-back-stat-label">SINCE</span>
+                <span className="card-back-stat-value">{since}</span>
+              </div>
             </div>
 
             {member.specialties && member.specialties.length > 0 && (

@@ -14,10 +14,10 @@
 - [ ] Output directory: `.next` (auto-detected)
 - [ ] Install command: `npm install` (auto-detected)
 
-## Environment Variables (if needed)
-- [ ] `NEXT_PUBLIC_SHOP_NAME` = "Siedel's Barbershop"
-- [ ] `NEXT_PUBLIC_CITY` = "Medina"
-- [ ] `NEXT_PUBLIC_STATE` = "Ohio"
+## Environment Variables (optional)
+- [ ] `GOOGLE_SHEET_ID` — override the default team-schedule sheet
+      (see `src/lib/schedule.ts`). A fallback is hardcoded, so this is
+      only needed when pointing at a different sheet.
 
 ## Post-Deployment
 - [ ] Test live site at `<project>.vercel.app`

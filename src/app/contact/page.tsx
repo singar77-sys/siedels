@@ -20,7 +20,7 @@ export default function ContactPage() {
   return (
     <>
       <Nav />
-      <main id="main" className="grid-bg min-h-screen">
+      <main id="main" className="grid-bg min-h-dvh">
         <PageHero
           image="/images/siedels-barbershop-storefront-medina-ohio.webp"
           imageAlt="Siedel's Barbershop storefront on Court Street in Medina, Ohio"

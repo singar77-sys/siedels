@@ -20,7 +20,7 @@ export default function TeamPage() {
   return (
     <>
       <Nav />
-      <main id="main" className="grid-bg min-h-screen">
+      <main id="main" className="grid-bg min-h-dvh">
         <PageHero
           image="/images/barber-stations-siedels-barbershop-medina.webp"
           imageAlt="Barber stations inside Siedel's Barbershop, Medina Ohio"

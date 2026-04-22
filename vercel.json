@@ -2,9 +2,6 @@
   "buildCommand": "next build",
   "outputDirectory": ".next",
   "installCommand": "npm install",
-  "env": {
-    "NEXT_PUBLIC_APP_NAME": "Siedel's Barbershop"
-  },
   "headers": [
     {
       "source": "/(.*)",

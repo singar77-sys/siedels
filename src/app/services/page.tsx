@@ -49,7 +49,7 @@ export default function ServicesPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Nav />
-      <main id="main" className="grid-bg min-h-screen">
+      <main id="main" className="grid-bg min-h-dvh">
         <PageHero
           image="/images/barber-tools-siedels-barbershop-medina.webp"
           imageAlt="Professional barber tools at Siedel's Barbershop in Medina, Ohio"

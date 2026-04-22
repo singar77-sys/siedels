@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import type { TeamMember } from '@/data/shop';
+import { getTitle, getYears, type TeamMember } from '@/data/shop';
 import type { Shift } from '@/lib/schedule';
 
 /**
@@ -24,21 +24,13 @@ interface Props {
   interactive?: boolean;
 }
 
-// Parse "Master Barber · 31 Years" into role + years number.
-function parseTitle(title: string): { role: string; years: number | null } {
-  const parts = title.split('·').map((p) => p.trim());
-  const role = parts[0] || 'Barber';
-  const yearsMatch = parts[1]?.match(/(\d+)/);
-  const years = yearsMatch ? parseInt(yearsMatch[1], 10) : null;
-  return { role, years };
-}
-
 // Three ribbon schemes rotating. All use existing palette tokens so
 // they respect theme + team mode automatically.
 const SCHEMES = ['scheme-red', 'scheme-espresso', 'scheme-khaki'] as const;
 
 export function BaseballCard({ member, idx, shift, onSelect, interactive = true }: Props) {
-  const { role, years } = parseTitle(member.title);
+  const role = member.role;
+  const years = getYears(member);
   const scheme = SCHEMES[idx % SCHEMES.length];
   const isWorking = shift?.status === 'working';
   const isOff = shift?.status === 'off';
@@ -69,7 +61,7 @@ export function BaseballCard({ member, idx, shift, onSelect, interactive = true 
         {member.image ? (
           <Image
             src={member.image}
-            alt={`${member.name}, ${member.title} at Siedel's Barbershop in Medina, Ohio`}
+            alt={`${member.name}, ${getTitle(member)} at Siedel's Barbershop in Medina, Ohio`}
             fill
             sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 20vw"
             className={`object-cover object-top theme-photo group-hover:scale-105 transition-transform duration-700 ${

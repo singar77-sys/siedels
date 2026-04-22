@@ -63,12 +63,11 @@ siedels/
 
 ### Environment Variables
 
-If needed, add these in Vercel Project Settings → Environment Variables:
-- `NEXT_PUBLIC_SHOP_NAME`
-- `NEXT_PUBLIC_CITY`
-- `NEXT_PUBLIC_STATE`
+- `GOOGLE_SHEET_ID` — overrides the default team-schedule sheet ID used
+  by `src/lib/schedule.ts`. Optional; a fallback sheet ID is hardcoded.
 
-See `.env.example` for template.
+No other env vars are required; shop contact info, team, services, and
+hours all live in `src/data/shop.ts`.
 
 ## Build & Local Development
 

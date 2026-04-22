@@ -226,7 +226,9 @@ export function HomeClient({
       </main>
 
       {/* ══ Footer ═════════════════════════════ */}
-      <footer className="relative z-50 flex-none bg-ink px-6 md:px-12 py-4 md:py-0 md:h-[8rem] flex flex-col md:flex-row items-center justify-between gap-3">
+      <footer
+        className="relative z-50 flex-none bg-ink px-6 md:px-12 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] md:py-0 md:h-[8rem] flex flex-col md:flex-row items-center justify-between gap-3"
+      >
         <div className="flex flex-col items-center md:items-start gap-1">
           <p className="font-label text-[13px] tracking-[0.15em] text-text-subtle">
             &copy; {new Date().getFullYear()} SIEDEL&apos;S BARBERSHOP

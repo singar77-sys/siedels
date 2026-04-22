@@ -4,7 +4,7 @@ import { PHONE, PHONE_HREF } from '@/data/shop';
 
 export default function Error({ reset }: { error: Error; reset: () => void }) {
   return (
-    <div className="min-h-screen bg-ink flex items-center justify-center px-8">
+    <div className="min-h-dvh bg-ink flex items-center justify-center px-8">
       <div className="max-w-md w-full text-center">
         <div className="border-l-4 border-red pl-8 text-left mb-10">
           <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">SOMETHING WENT WRONG</p>
