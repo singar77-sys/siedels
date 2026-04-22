@@ -19,7 +19,7 @@ import { TeamCardFlip } from './TeamCardFlip';
 import { ContactPanel } from './ContactPanel';
 import type { Shift } from '@/lib/schedule';
 
-const PANELS = ['HOME', 'TEAM', 'WORK', 'SERVICES', 'CONTACT'] as const;
+const PANELS = ['HOME', 'TEAM', 'SERVICES', 'WORK', 'CONTACT'] as const;
 
 const PANEL_SHORT: Record<string, string> = {
   HOME: 'HOME',
@@ -196,8 +196,8 @@ export function HomeClient({
             scheduleToday={scheduleToday}
             todayShifts={todayShifts}
           />
-          <GalleryPanel />
           <ServicesPanel onSelectService={setSelectedService} />
+          <GalleryPanel />
           <ContactPanel />
         </div>
       </main>

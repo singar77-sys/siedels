@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 import { SacrifixEasterEgg } from '@/components/SacrifixEasterEgg';
 import { ItalyEasterEgg } from '@/components/ItalyEasterEgg';
 import { TeamModeEasterEgg } from '@/components/TeamModeEasterEgg';
+import { PricingPitchEasterEgg } from '@/components/PricingPitchEasterEgg';
 import { MedinaAmbience } from '@/components/MedinaAmbience';
 import { fetchWeather } from '@/lib/weather';
 import { RATING, REVIEW_COUNT } from '@/data/shop';
@@ -54,7 +55,7 @@ const jsonLd = {
   description: "Eleven barbers in Medina, Ohio. Haircuts, fades, beard work, straight razor shaves. Cash only. ATM on site.",
   url: BASE_URL,
   telephone: '+13309520777',
-  priceRange: '$5–$96',
+  priceRange: '$23–$96',
   sameAs: [
     'https://share.google/n7DB5686mE05Db6tK',
     'https://www.facebook.com/siedelsbarbershop',
@@ -110,6 +111,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <SacrifixEasterEgg />
         <ItalyEasterEgg />
         <TeamModeEasterEgg />
+        <PricingPitchEasterEgg />
         </ThemeProvider>
         <Script
           src="https://app.squareup.com/appointments/buyer/widget/xcru7izyf4zhv6/LFCOT5CC7MY0S.js"

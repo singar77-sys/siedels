@@ -298,6 +298,197 @@ body {
   animation-play-state: paused;
 }
 
+/* Contact testimonial — fade each quote in on change */
+.testimonial-fade {
+  animation: testimonial-fade-in 600ms ease-out both;
+}
+@keyframes testimonial-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Pricing pitch — each slide fades + rises in on change */
+.pitch-fade {
+  animation: pitch-fade-in 350ms ease-out both;
+}
+@keyframes pitch-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pitch-fade { animation: none; }
+}
+
+
+/* ══════════════════════════════════════════════════════
+   Tactical Map — storefront photo with HUD/radar overlay
+   ══════════════════════════════════════════════════════ */
+.tac-map {
+  isolation: isolate;
+}
+.tac-map__tile {
+  filter: saturate(0.35) contrast(1.1) brightness(0.55);
+  transition: filter 0.5s ease;
+  z-index: 0;
+}
+.tac-map:hover .tac-map__tile {
+  filter: saturate(0.55) contrast(1.15) brightness(0.68);
+}
+[data-theme="dark"] .tac-map__tile {
+  filter: grayscale(1) contrast(1.15) brightness(0.55);
+}
+[data-theme="dark"] .tac-map:hover .tac-map__tile {
+  filter: grayscale(1) contrast(1.2) brightness(0.7);
+}
+
+/* Scan lines — thin horizontal bands overlayed on the photo */
+.tac-map__scan {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0,
+    transparent 2px,
+    rgba(227, 27, 35, 0.08) 2px,
+    rgba(227, 27, 35, 0.08) 3px
+  );
+  mix-blend-mode: screen;
+}
+
+/* Radar beam — rotating conic sweep, originates from center */
+.tac-map__radar {
+  position: absolute;
+  inset: -40%;
+  z-index: 2;
+  pointer-events: none;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    transparent 70%,
+    rgba(227, 27, 35, 0.0) 80%,
+    rgba(227, 27, 35, 0.35) 92%,
+    rgba(227, 27, 35, 0.6) 100%
+  );
+  mix-blend-mode: screen;
+  animation: tac-radar 7s linear infinite;
+}
+@keyframes tac-radar {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Center crosshair + pulsing target dot */
+.tac-map__crosshair {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 28px; height: 28px;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  pointer-events: none;
+  border: 1px solid rgba(227, 27, 35, 0.85);
+  border-radius: 50%;
+  box-shadow: 0 0 18px rgba(227, 27, 35, 0.35);
+}
+.tac-map__crosshair::before,
+.tac-map__crosshair::after {
+  content: '';
+  position: absolute;
+  background: rgba(227, 27, 35, 0.85);
+}
+.tac-map__crosshair::before {
+  top: 50%; left: -8px; right: -8px; height: 1px;
+  transform: translateY(-50%);
+}
+.tac-map__crosshair::after {
+  left: 50%; top: -8px; bottom: -8px; width: 1px;
+  transform: translateX(-50%);
+}
+.tac-map__pulse {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 8px; height: 8px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #E31B23;
+  box-shadow: 0 0 0 0 rgba(227, 27, 35, 0.7);
+  animation: tac-pulse 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes tac-pulse {
+  0%   { box-shadow: 0 0 0 0   rgba(227, 27, 35, 0.7); }
+  70%  { box-shadow: 0 0 0 18px rgba(227, 27, 35, 0); }
+  100% { box-shadow: 0 0 0 0   rgba(227, 27, 35, 0); }
+}
+
+/* HUD corner brackets — L-shapes at each corner */
+.tac-map__corner {
+  position: absolute;
+  width: 14px; height: 14px;
+  z-index: 5;
+  pointer-events: none;
+  border: 1.5px solid rgba(227, 27, 35, 0.85);
+}
+.tac-map__corner.tl { top: 6px;    left: 6px;   border-right: 0; border-bottom: 0; }
+.tac-map__corner.tr { top: 6px;    right: 6px;  border-left: 0;  border-bottom: 0; }
+.tac-map__corner.bl { bottom: 6px; left: 6px;   border-right: 0; border-top: 0; }
+.tac-map__corner.br { bottom: 6px; right: 6px;  border-left: 0;  border-top: 0; }
+
+/* HUD label chips — LIVE indicator + coordinate readout */
+.tac-map__tag {
+  position: absolute;
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 6px;
+  font-family: 'General Sans', 'Arial', sans-serif;
+  font-size: 8.5px;
+  letter-spacing: 0.15em;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(227, 27, 35, 0.55);
+  pointer-events: none;
+  text-transform: uppercase;
+  backdrop-filter: blur(2px);
+}
+.tac-map__dot {
+  width: 6px; height: 6px;
+  background: #E31B23;
+  border-radius: 50%;
+  animation: tac-blink 1.4s ease-in-out infinite;
+}
+@keyframes tac-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.2; }
+}
+
+/* Bottom identifier strip */
+.tac-map__footer {
+  position: absolute;
+  left: 6px; right: 6px; bottom: 6px;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  font-family: 'General Sans', 'Arial', sans-serif;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.65);
+  border-top: 1px solid rgba(227, 27, 35, 0.5);
+  border-left: 1px solid rgba(227, 27, 35, 0.25);
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tac-map__radar { animation: none; }
+  .tac-map__pulse { animation: none; }
+  .tac-map__dot   { animation: none; }
+}
+
 /* ── Theme Transition (View Transitions API) ─────────── */
 ::view-transition-old(root) {
   animation: none;
@@ -1151,22 +1342,26 @@ body {
   --beam-opacity: 1;
 }
 
-/* Grid fills the wall width edge-to-edge; tiles stay 1:1 square. */
+/* Grid fills the entire wall frame — width AND height.
+   6 cols × 3 rows at lg+ is a perfect 18-cell layout. */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(0, 1fr);
   gap: 2px;
   width: 100%;
+  height: 100%;
 }
-@media (min-width: 768px)  { .gallery-grid { grid-template-columns: repeat(8, 1fr); gap: 3px; } }
+@media (min-width: 640px)  { .gallery-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 1024px) { .gallery-grid { grid-template-columns: repeat(6, 1fr); gap: 3px; } }
 
-/* Tiles are perfect 1:1 squares — they grow with the grid's column width. */
+/* Tiles stretch with the grid cell — no fixed aspect, so they fill the frame. */
 .gallery-tile {
-  aspect-ratio: 1 / 1;
   padding: 0;
   border: 0;
   background: transparent;
   min-width: 0;
+  min-height: 0;
   transform: translateZ(0); /* promote to own layer for clean backdrop-filter */
 }
 .gallery-tile:focus-visible {
