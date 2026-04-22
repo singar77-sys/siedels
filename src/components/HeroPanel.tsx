@@ -87,6 +87,10 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
           >
             CASH ONLY · ATM ON SITE
           </p>
+          {/* Pride mode accent — hidden unless [data-pride="true"] */}
+          <p className="pride-hero-accent font-label text-[13px] tracking-[0.2em] mb-3 md:mb-4" aria-hidden="true">
+            🏳️‍🌈 &nbsp;🦄 &nbsp;🌈 &nbsp;✨
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 hero-stagger-5">
             <a
               href={SQUARE_BOOKING_URL}

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { PHONE_HREF, SQUARE_BOOKING_URL } from '@/data/shop';
 import { ThemeToggle } from './ThemeToggle';
+import { PrideToggle } from './PrideToggle';
 import { Icon } from './Icon';
 import { Logo } from './Logo';
 
@@ -58,6 +59,7 @@ export function Nav() {
       {/* Book Now + Theme + Mobile toggle */}
       <div className="flex items-center gap-2">
         <ThemeToggle />
+        <PrideToggle />
         <a
           href={SQUARE_BOOKING_URL}
           target="_blank"
