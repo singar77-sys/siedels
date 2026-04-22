@@ -15,7 +15,7 @@
 - [ ] Install command: `npm install` (auto-detected)
 
 ## Environment Variables (if needed)
-- [ ] `NEXT_PUBLIC_SHOP_NAME` = "Siedels Barbershop"
+- [ ] `NEXT_PUBLIC_SHOP_NAME` = "Siedel's Barbershop"
 - [ ] `NEXT_PUBLIC_CITY` = "Medina"
 - [ ] `NEXT_PUBLIC_STATE` = "Ohio"
 

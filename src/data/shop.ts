@@ -20,6 +20,11 @@ export const TEAM_COUNT = 11;
 export const RATING = '4.9';
 export const REVIEW_COUNT = '249';
 
+// Canonical shop coordinates — used in Schema.org JSON-LD and in the
+// ContactPanel HUD readout. Keep these in sync with the postal address.
+export const COORDS = { lat: 41.1445, lng: -81.8637 } as const;
+export const COORDS_DISPLAY = `${COORDS.lat.toFixed(4)}° N  ${Math.abs(COORDS.lng).toFixed(4)}° W`;
+
 export interface TeamMember {
   name: string;
   title: string;

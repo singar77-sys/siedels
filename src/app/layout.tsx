@@ -6,7 +6,7 @@ import { ItalyEasterEgg } from '@/components/ItalyEasterEgg';
 import { TeamModeEasterEgg } from '@/components/TeamModeEasterEgg';
 import { MedinaAmbience } from '@/components/MedinaAmbience';
 import { fetchWeather } from '@/lib/weather';
-import { RATING, REVIEW_COUNT } from '@/data/shop';
+import { RATING, REVIEW_COUNT, COORDS } from '@/data/shop';
 import './globals.css';
 
 const BASE_URL = 'https://siedels.vercel.app';
@@ -68,7 +68,7 @@ const jsonLd = {
     postalCode: '44256',
     addressCountry: 'US',
   },
-  geo: { '@type': 'GeoCoordinates', latitude: 41.1445, longitude: -81.8637 },
+  geo: { '@type': 'GeoCoordinates', latitude: COORDS.lat, longitude: COORDS.lng },
   openingHoursSpecification: [
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Monday', opens: '08:00', closes: '20:00' },
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Tuesday', opens: '08:00', closes: '18:00' },

@@ -254,7 +254,7 @@ export function HomeClient({
         <Modal onClose={() => setSelectedMember(null)}>
           <button
             onClick={() => setSelectedMember(null)}
-            className="absolute top-3 right-3 z-10 w-9 h-9 flex items-center justify-center text-text-subtle hover:text-text transition-colors"
+            className="absolute top-3 right-3 z-10 w-11 h-11 flex items-center justify-center text-text-subtle hover:text-text transition-colors"
             aria-label="Close"
           >
             <Icon name="close" className="w-4 h-4" />
