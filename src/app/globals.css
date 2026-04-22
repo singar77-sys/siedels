@@ -581,19 +581,28 @@ body {
   aspect-ratio: auto;
 }
 /* Back face: match the front's size + border exactly so the card
-   reads as two sides of the same object, not two different blocks */
+   reads as two sides of the same object, not two different blocks.
+   Card-back is a flex column — header/stats/specialties/book/stamp
+   stay pinned, ONLY the bio scrolls when content overflows. That
+   way the Siedel's stamp is always visible at the bottom, no matter
+   how long the bio is (looking at you, Will). */
 .card-flip-back .card-back {
   height: 100%;
   box-sizing: border-box;
   border: 2px solid var(--text);
   background: var(--surface);
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
-/* Let the stamp pin to the bottom edge inside the back */
+.card-flip-back .card-back > * { flex: 0 0 auto; }
+.card-flip-back .card-back-bio {
+  flex: 1 1 auto;
+  min-height: 3rem;
+  overflow-y: auto;
+}
 .card-flip-back .card-back-stamp {
-  margin-top: auto;
+  margin-top: 0;
 }
 
 /* ── Card back (modal) — reads like a 1986 Topps card back ──── */
