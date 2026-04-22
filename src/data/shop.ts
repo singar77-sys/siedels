@@ -65,7 +65,7 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Sam Sickle',
-    title: 'Barber · 5 Years',
+    title: 'Stylist · 5 Years',
     image: '/images/sam-sickle-barber-siedels-medina.webp',
     booking: sq('qj4tfubyvaebvj'),
     bio: "Grew up in Litchfield, Ohio. Five years cutting, three of them at Siedel's. Strongest with men's clipper cuts and longer styles that need real shear work. Proud owner of two dogs (Preston and Scout), two cats, and nine hens. Yeah, nine.",
