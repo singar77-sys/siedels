@@ -1478,6 +1478,105 @@ body {
   display: none;
 }
 
+/* ══════════════════════════════════════════════════════
+   Pride Mode — [data-pride="true"]
+   User-togglable. Persisted via localStorage "siedels-pride".
+   Toggle: PrideToggle.tsx → usePride() → PrideProvider.tsx
+   ══════════════════════════════════════════════════════ */
+
+/* ── Token overrides ─────────────────────────────────── */
+[data-pride="true"] {
+  --red:               #c026d3;   /* fuchsia/magenta for text & borders */
+  --red-hover:         #a21caf;
+  --selection-bg:      #c026d3;
+  --hero-eyebrow:      #f0abfc;
+  --hero-cta-bg:       #c026d3;
+  --hero-cta-hover:    #a21caf;
+  --hero-cta-text:     #ffffff;
+  --hero-cta-hover-text: #ffffff;
+  --hero-ghost-border: rgba(240, 171, 252, 0.45);
+  --hero-ghost-text:   #f0abfc;
+}
+
+/* ── Keyframes ───────────────────────────────────────── */
+@keyframes pride-rainbow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes pride-holo {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Animated rainbow gradient — shared definition ───── */
+/* Used on bg-red elements (BOOK NOW, badges) and hero CTA */
+[data-pride="true"] .bg-red,
+[data-pride="true"] .hero-cta-primary {
+  background-image: linear-gradient(135deg,
+    #e40303, #ff8c00, #ffed00, #008026, #004dff, #750787, #e40303);
+  background-size: 300% 300%;
+  animation: pride-rainbow 4s ease infinite;
+  color: #fff !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+/* Hover: brighten, keep gradient */
+[data-pride="true"] .bg-red:hover,
+[data-pride="true"] .hero-cta-primary:hover {
+  filter: brightness(1.12);
+  background-color: transparent;
+}
+
+/* ── Card ribbons — rainbow gradient ─────────────────── */
+/* Needs to beat [data-theme="dark"] .card-86.scheme-status-* specificity */
+[data-pride="true"] .card-86.scheme-status-in .card-86-ribbon,
+[data-pride="true"] .card-86.scheme-status-off .card-86-ribbon {
+  background: linear-gradient(90deg,
+    #e40303, #ff8c00, #ffed00, #008026, #004dff, #750787);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+/* ── Iridescent shimmer overlay on team cards ────────── */
+[data-pride="true"] .card-86::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg,
+    rgba(255, 110, 180, 0.14),
+    rgba(167, 139, 250, 0.14),
+    rgba(56,  189, 248, 0.14),
+    rgba(52,  211, 153, 0.14),
+    rgba(251, 191,  36, 0.14),
+    rgba(248, 113, 113, 0.14),
+    rgba(192, 132, 252, 0.14),
+    rgba(255, 110, 180, 0.14)
+  );
+  background-size: 300% 300%;
+  animation: pride-holo 6s ease infinite;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+/* Status badge floats above the shimmer */
+[data-pride="true"] .card-86-status { z-index: 3; }
+
+/* ── Section left-border accents — rainbow ───────────── */
+[data-pride="true"] .border-l-4.border-red {
+  border-image: linear-gradient(
+    180deg, #e40303, #ff8c00, #ffed00, #008026, #004dff, #750787
+  ) 1;
+}
+
+/* ── Hero pride emoji — hidden until pride mode on ───── */
+.pride-hero-accent { display: none; }
+[data-pride="true"] .pride-hero-accent { display: block; }
+
+/* ── Smooth theme-to-pride cross-fade ────────────────── */
+.card-86-ribbon    { transition: background 0.3s ease, color 0.3s ease; }
+.hero-cta-primary  { transition: background-color 0.3s ease, color 0.3s ease; }
+
 /* ── Reduced Motion ───────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
