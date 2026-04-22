@@ -307,6 +307,18 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Pricing pitch — each slide fades + rises in on change */
+.pitch-fade {
+  animation: pitch-fade-in 350ms ease-out both;
+}
+@keyframes pitch-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pitch-fade { animation: none; }
+}
+
 
 /* ══════════════════════════════════════════════════════
    Tactical Map — storefront photo with HUD/radar overlay
