@@ -113,9 +113,9 @@ export function GalleryPanel() {
   }, []);
 
   return (
-    <section className="min-w-full h-full snap-start grid-bg overflow-hidden flex flex-col">
-      <div className="max-w-screen-2xl mx-auto w-full px-4 md:px-8 pt-5 md:pt-8 pb-3 md:pb-4 flex-none">
-        <div className="flex items-end justify-between gap-4">
+    <section className="min-w-full h-full snap-start grid-bg overflow-hidden">
+      <div className="max-w-screen-2xl mx-auto h-full px-4 md:px-8 py-5 md:py-8 w-full flex flex-col">
+        <div className="flex items-end justify-between gap-4 mb-4 md:mb-5 flex-none">
           <div className="border-l-4 border-red pl-4 md:pl-6">
             <p className="font-label text-[10px] tracking-[0.3em] text-red mb-1">THE WORK</p>
             <h2 className="font-headline text-2xl md:text-4xl uppercase tracking-tight leading-[0.9]">
@@ -132,10 +132,9 @@ export function GalleryPanel() {
             <Icon name="arrow_forward" className="w-4 h-4" />
           </a>
         </div>
-      </div>
 
-      {/* The Wall — grid fills width edge-to-edge, centered vertically */}
-      <div ref={wallRef} className="gallery-wall relative flex-1 min-h-0 w-full overflow-hidden flex items-center">
+        {/* The Wall — fills the remaining frame both ways */}
+        <div ref={wallRef} className="gallery-wall relative flex-1 min-h-0 overflow-hidden">
         <div className="gallery-grid">
           {gallery.map((item, idx) => (
             <button
@@ -162,10 +161,11 @@ export function GalleryPanel() {
           ))}
         </div>
 
-        <div ref={spotRef} className="gallery-spotlight" aria-hidden="true" />
-        <div ref={dimRef} className="gallery-spotlight-dim" aria-hidden="true" />
-        <div className="gallery-beam" aria-hidden="true" />
-        <div className="gallery-ring" aria-hidden="true" />
+          <div ref={spotRef} className="gallery-spotlight" aria-hidden="true" />
+          <div ref={dimRef} className="gallery-spotlight-dim" aria-hidden="true" />
+          <div className="gallery-beam" aria-hidden="true" />
+          <div className="gallery-ring" aria-hidden="true" />
+        </div>
       </div>
 
       {lightbox != null && (
