@@ -1,0 +1,54 @@
+/* ══════════════════════════════════════════════════════
+   Services — program page marquee + row motion
+   ══════════════════════════════════════════════════════ */
+
+/* "IN THE CHAIR TODAY" ticker — slow horizontal scroll */
+.services-ticker-track {
+  animation: services-ticker 42s linear infinite;
+  will-change: transform;
+}
+@keyframes services-ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-25%); }
+}
+
+/* Soft edge fades so text never cuts hard at the container boundary */
+.services-ticker-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  pointer-events: none;
+  z-index: 2;
+}
+.services-ticker-fade--left {
+  left: 0;
+  background: linear-gradient(to right, var(--ink), transparent);
+}
+.services-ticker-fade--right {
+  right: 0;
+  background: linear-gradient(to left, var(--ink), transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-ticker-track { animation: none; }
+}
+
+/* Program-page row — hover slides right and picks up a red left rule */
+.program-row {
+  transition: padding-left 0.2s ease, border-left-color 0.2s ease, background-color 0.2s ease;
+  border-left: 2px solid transparent;
+}
+.program-row:hover,
+.program-row:focus-visible {
+  padding-left: 0.75rem;
+  border-left-color: var(--red);
+}
+.program-row:hover .program-chevron,
+.program-row:focus-visible .program-chevron {
+  transform: translateX(2px);
+  color: var(--red);
+}
+.program-chevron {
+  transition: transform 0.2s ease, color 0.2s ease;
+}

@@ -1,36 +1,121 @@
 'use client';
 
+/**
+ * Services list styled as a program page: numbered lineup in four
+ * sections (CUTS / SHAVES / DETAILS / GROUP), dotted leaders, red
+ * price on the right, chevron that turns-the-page to a modal with
+ * the full description + includes list. Hover slides the row right
+ * and picks up a red left rule (see .program-row in
+ * src/app/styles/services-program.css).
+ *
+ * Optional top ticker — "IN THE CHAIR TODAY · JIM · BILLY · …" —
+ * renders when scheduled barbers are known for today.
+ */
+
 import { useState, useCallback } from 'react';
 import Image from 'next/image';
 import { services, SQUARE_BOOKING_URL, type Service } from '@/data/shop';
 import { FadeIn } from './FadeIn';
 import { Modal } from './Modal';
 import { Icon } from './Icon';
+import { ServicesTicker } from './ServicesTicker';
 
-export function ServicesList() {
+const SECTIONS: { label: string; names: string[] }[] = [
+  {
+    label: 'CUTS',
+    names: [
+      'Haircut',
+      'Razor / Foil Fade',
+      'Haircut + Beard Trim',
+      'Haircut + Face Shave',
+      'Shoulder Length Cut + Rough Dry',
+    ],
+  },
+  {
+    label: 'SHAVES',
+    names: ['Full Service Shave', 'Head Shave'],
+  },
+  {
+    label: 'DETAILS',
+    names: ['Beard Trim', 'Eyebrow / Lip / Chin', 'Shampoo + Style'],
+  },
+  {
+    label: 'GROUP',
+    names: ['Duo Haircut', 'Trio Haircut'],
+  },
+];
+
+interface ServicesListProps {
+  working?: { firstName: string }[];
+  scheduleKnown?: boolean;
+}
+
+export function ServicesList({ working = [], scheduleKnown = false }: ServicesListProps) {
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const closeModal = useCallback(() => setSelectedService(null), []);
 
+  // Flatten into ordered rows with a continuous index for numbering.
+  let counter = 0;
+
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16">
-        {services.map((service, idx) => (
-          <FadeIn key={service.name} delay={idx * 0.03}>
-            <button
-              onClick={() => setSelectedService(service)}
-              className="w-full flex justify-between items-baseline py-5 border-b border-line-strong group text-left cursor-pointer hover:pl-2 transition-all"
-            >
-              <span className="flex items-center gap-3 font-headline text-base md:text-lg font-bold uppercase tracking-tight text-text-muted group-hover:text-text transition-colors">
-                {service.name}
-                <Icon name="add_circle" className="w-4 h-4 text-text-subtle group-hover:text-red transition-colors" />
+      <ServicesTicker working={working} scheduleKnown={scheduleKnown} />
+
+      {SECTIONS.map((section, sIdx) => {
+        const sectionItems = section.names
+          .map((name) => services.find((s) => s.name === name))
+          .filter((s): s is Service => Boolean(s));
+
+        return (
+          <section key={section.label} className={sIdx === 0 ? 'mb-10' : 'mt-6 mb-10'}>
+            <div className="flex items-baseline gap-4 mb-3 pb-2 border-b-2 border-text">
+              <span className="font-headline text-sm font-bold uppercase tracking-[0.25em] text-red">
+                {section.label}
               </span>
-              <span className="font-headline text-xl md:text-2xl font-bold text-red">{service.price}</span>
-            </button>
-          </FadeIn>
-        ))}
-      </div>
+              <span className="flex-1 h-px bg-line-strong translate-y-[-4px]" />
+              <span className="font-label text-[9px] tracking-widest text-text-subtle tabular-nums">
+                {String(sectionItems.length).padStart(2, '0')} ITEMS
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16">
+              {sectionItems.map((service) => {
+                counter += 1;
+                const num = String(counter).padStart(2, '0');
+                return (
+                  <FadeIn key={service.name} delay={(counter - 1) * 0.03}>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedService(service)}
+                      className="program-row w-full flex items-baseline py-4 text-left cursor-pointer group border-b border-line-strong"
+                    >
+                      <span className="font-mono text-[10px] text-text-subtle tabular-nums mr-3 flex-none w-6">
+                        {num}
+                      </span>
+                      <span className="font-headline text-base md:text-lg font-bold uppercase tracking-tight text-text-muted group-hover:text-text transition-colors whitespace-nowrap">
+                        {service.name}
+                      </span>
+                      <span className="flex-1 mx-3 border-b border-dotted border-text-faint translate-y-[-4px] min-w-[12px]" />
+                      <span className="font-headline text-lg md:text-xl font-bold text-red whitespace-nowrap tabular-nums">
+                        {service.price}
+                      </span>
+                      <Icon
+                        name="chevron_right"
+                        className="program-chevron w-4 h-4 text-text-subtle ml-2 flex-none"
+                      />
+                    </button>
+                  </FadeIn>
+                );
+              })}
+            </div>
+          </section>
+        );
+      })}
+
       <FadeIn delay={0.2}>
-        <p className="font-label text-[10px] tracking-widest text-text-subtle mt-6">TAP ANY SERVICE FOR DETAILS</p>
+        <p className="font-label text-[10px] tracking-widest text-text-subtle mt-6">
+          TAP ANY SERVICE FOR DETAILS · CASH ONLY · ATM ON SITE
+        </p>
       </FadeIn>
 
       {selectedService && (

@@ -7,6 +7,10 @@ import { Footer } from '@/components/Footer';
 import { ServicesList } from '@/components/ServicesList';
 import { Icon } from '@/components/Icon';
 import { PHONE, PHONE_HREF, SQUARE_BOOKING_URL, TEAM_COUNT, services } from '@/data/shop';
+import { fetchSchedule, getWorkingToday } from '@/lib/schedule';
+
+// Match the home page — refresh the ticker every 30 minutes.
+export const revalidate = 1800;
 
 const priceOf = (name: string) => services.find((s) => s.name === name)?.price ?? '';
 const PRICE_HAIRCUT = priceOf('Haircut');
@@ -44,7 +48,10 @@ const faqSchema = {
   })),
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const week = await fetchSchedule();
+  const today = getWorkingToday(week);
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
@@ -53,7 +60,7 @@ export default function ServicesPage() {
         <PageHero
           image="/images/barber-tools-siedels-barbershop-medina.webp"
           imageAlt="Professional barber tools at Siedel's Barbershop in Medina, Ohio"
-          label="ELITE CRAFTSMANSHIP"
+          label="TODAY'S PROGRAM"
           title="SERVICES &"
           titleAccent="PRICES"
           subtitle="Straight-up pricing. No surprises. Cash only. ATM on site."
@@ -61,7 +68,10 @@ export default function ServicesPage() {
 
         <section className="py-16 md:py-24">
           <div className="max-w-5xl mx-auto px-8">
-            <ServicesList />
+            <ServicesList
+              working={today.working}
+              scheduleKnown={today.scheduleKnown}
+            />
             <FadeIn delay={0.4}>
               <div className="mt-12 flex flex-col sm:flex-row gap-4">
                 <a
