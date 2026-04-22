@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type PointerEvent as ReactPointerEvent } from 'react';
 import {
   PHONE,
   PHONE_HREF,
@@ -47,6 +47,15 @@ export function ContactPanel() {
     [cursor],
   );
 
+  // Iridescent hover — updates CSS vars so the holo gradient tracks the cursor.
+  const handleIriMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+    const el = e.currentTarget;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`);
+    el.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`);
+  };
+  const iriProps = { onPointerMove: handleIriMove };
+
   return (
     <section className="min-w-full h-full snap-start grid-bg overflow-hidden">
       <div className="max-w-screen-2xl mx-auto h-full px-4 md:px-8 py-5 md:py-8 w-full flex flex-col">
@@ -72,7 +81,7 @@ export function ContactPanel() {
         {/* Three-column body fills the remaining frame */}
         <div className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 overflow-hidden">
           {/* Col 1 — Address, phone, tactical map, CTAs */}
-          <div className="bg-surface border-l-4 border-red p-5 md:p-6 flex flex-col overflow-hidden">
+          <div {...iriProps} className="iri-card bg-surface border-l-4 border-red p-5 md:p-6 flex flex-col overflow-hidden">
             <div className="flex-none mb-4">
               <p className="font-label text-[10px] tracking-widest text-text-subtle mb-1">SHOP</p>
               <p className="font-headline text-base md:text-lg font-bold uppercase tracking-tight text-text">{ADDRESS}</p>
@@ -149,7 +158,7 @@ export function ContactPanel() {
           </div>
 
           {/* Col 2 — Hours */}
-          <div className="bg-surface p-5 md:p-6 flex flex-col overflow-hidden">
+          <div {...iriProps} className="iri-card bg-surface p-5 md:p-6 flex flex-col overflow-hidden">
             <p className="font-label text-[10px] tracking-widest text-text-subtle mb-3 flex-none">OPERATING HOURS</p>
             <div className="flex-1 min-h-0 flex flex-col justify-between">
               {hours.map((h) => (
@@ -167,7 +176,7 @@ export function ContactPanel() {
           </div>
 
           {/* Col 3 — Stacked rotating testimonials + review CTA */}
-          <div className="bg-surface p-5 md:p-6 flex flex-col overflow-hidden">
+          <div {...iriProps} className="iri-card bg-surface p-5 md:p-6 flex flex-col overflow-hidden">
             <div className="flex-none mb-3 flex items-center justify-between">
               <p className="font-label text-[10px] tracking-widest text-red">
                 {RATING} ★ · {REVIEW_COUNT} REVIEWS
