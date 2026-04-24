@@ -78,6 +78,14 @@ interface ProjectionSlide {
   scenarios: { cards: number; freePerYear: number }[];
   note: string;
 }
+interface MemberProjectionSlide {
+  kind: 'memberprojection';
+  eyebrow: string;
+  title: string;
+  monthlyFee: number;
+  scenarios: { members: number }[];
+  note: string;
+}
 interface CloseSlide {
   kind: 'close';
 }
@@ -91,6 +99,7 @@ type Slide =
   | NumberSlide
   | BreakageSlide
   | ProjectionSlide
+  | MemberProjectionSlide
   | CloseSlide;
 
 const SLIDES: Slide[] = [
@@ -217,6 +226,39 @@ const SLIDES: Slide[] = [
       { cards: 50,  freePerYear: 3600 },
     ],
     note: 'Based on 12% breakage, $50 avg card. Father\'s Day, Christmas, and birthdays alone can hit 25+/month.',
+  },
+  // ── Chapter 3: Member Club ─────────────────────────────────────────────────
+  {
+    kind: 'cover',
+    eyebrow: 'CHAPTER 3 · NEXT IDEA',
+    title: 'MEMBER CLUB',
+    subtitle: 'Guaranteed monthly money. No chasing bookings. No slow weeks.',
+  },
+  {
+    kind: 'rule',
+    eyebrow: 'THE MECHANIC',
+    label: '$28 / Month',
+    delta: '1 Cut',
+    subtitle: 'guaranteed. miss a month? you still got paid.',
+    note: "They pay on the 1st. They book whenever. Forget August? You keep $28. That's the gym model — and gyms are one of the most profitable businesses ever built.",
+  },
+  {
+    kind: 'bignumber',
+    number: '25%',
+    label: 'of members skip a month',
+    footnote: "They don't cancel — canceling feels like a decision. Life just happened. You keep the charge. Same math as gift cards, except it resets every single month.",
+  },
+  {
+    kind: 'memberprojection',
+    eyebrow: 'WHAT IT LOOKS LIKE',
+    title: 'GUARANTEED EVERY MONTH',
+    monthlyFee: 28,
+    scenarios: [
+      { members: 50 },
+      { members: 100 },
+      { members: 150 },
+    ],
+    note: 'Before you pick up a single tool. Walk-ins, Booksy bookings, and gift cards all on top of this.',
   },
   // ── Close ──────────────────────────────────────────────────────────────────
   { kind: 'close' },
@@ -478,6 +520,41 @@ export function PricingPitchEasterEgg() {
             </div>
           )}
 
+          {current.kind === 'memberprojection' && (() => {
+            const fee = current.monthlyFee;
+            return (
+              <div>
+                <p className="font-label text-[11px] md:text-[13px] tracking-[0.4em] text-red mb-4 text-center">{current.eyebrow}</p>
+                <h3 className="font-headline uppercase tracking-tight text-3xl md:text-5xl leading-[0.95] text-center mb-8 md:mb-10">
+                  GUARANTEED <span className="text-stroke">EVERY MONTH</span>
+                </h3>
+                <div className="grid grid-cols-3 gap-3 md:gap-5 mb-6 max-w-3xl mx-auto">
+                  {current.scenarios.map((s) => {
+                    const monthly = s.members * fee;
+                    const annual = monthly * 12;
+                    return (
+                      <div key={s.members} className="bg-surface border border-line-strong p-5 md:p-7 text-center flex flex-col items-center">
+                        <p className="font-headline font-bold text-4xl md:text-6xl text-text leading-none mb-1">{s.members}</p>
+                        <p className="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-text-subtle mb-4">MEMBERS</p>
+                        <div className="w-full border-t border-line-strong pt-4 space-y-2">
+                          <div>
+                            <p className="font-headline font-bold text-2xl md:text-3xl text-red">${monthly.toLocaleString()}</p>
+                            <p className="font-label text-[8px] md:text-[9px] tracking-[0.25em] text-red">/ MONTH</p>
+                          </div>
+                          <div>
+                            <p className="font-headline font-bold text-base md:text-lg text-text-muted">${annual.toLocaleString()}</p>
+                            <p className="font-label text-[8px] md:text-[9px] tracking-[0.25em] text-text-subtle">/ YEAR</p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <p className="font-body text-sm md:text-base text-text-muted text-center max-w-2xl mx-auto">{current.note}</p>
+              </div>
+            );
+          })()}
+
           {current.kind === 'close' && (
             <div className="text-center">
               <p className="text-6xl md:text-8xl mb-6">👊</p>
@@ -492,6 +569,10 @@ export function PricingPitchEasterEgg() {
                 <p className="font-body text-base md:text-lg text-text-muted flex items-start gap-3">
                   <span className="font-headline font-bold text-text-subtle flex-none">?</span>
                   Pricing changes are still a proposal. Say the word and we flip it on.
+                </p>
+                <p className="font-body text-base md:text-lg text-text-muted flex items-start gap-3">
+                  <span className="font-headline font-bold text-text-subtle flex-none">?</span>
+                  Member club is on deck. We can build it in a week.
                 </p>
               </div>
               <p className="font-label text-[11px] tracking-[0.3em] text-text-subtle">
