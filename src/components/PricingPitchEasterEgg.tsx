@@ -86,6 +86,20 @@ interface MemberProjectionSlide {
   scenarios: { members: number }[];
   note: string;
 }
+interface MechanicSlide {
+  kind: 'mechanic';
+  eyebrow: string;
+  title: string;
+  today: { headline: string; points: string[] };
+  next: { headline: string; points: string[] };
+}
+interface TiersSlide {
+  kind: 'tiers';
+  eyebrow: string;
+  title: string;
+  plans: { name: string; price: number; includes: string; savesPerVisit: number; savesPerYear: number }[];
+  note: string;
+}
 interface CloseSlide {
   kind: 'close';
 }
@@ -100,6 +114,8 @@ type Slide =
   | BreakageSlide
   | ProjectionSlide
   | MemberProjectionSlide
+  | MechanicSlide
+  | TiersSlide
   | CloseSlide;
 
 const SLIDES: Slide[] = [
@@ -232,33 +248,77 @@ const SLIDES: Slide[] = [
     kind: 'cover',
     eyebrow: 'CHAPTER 3 · NEXT IDEA',
     title: 'MEMBER CLUB',
-    subtitle: 'Guaranteed monthly money. No chasing bookings. No slow weeks.',
+    subtitle: 'A monthly subscription. Regulars pay whether they come or not. You always know what this month looks like.',
   },
   {
-    kind: 'rule',
-    eyebrow: 'THE MECHANIC',
-    label: '$28 / Month',
-    delta: '1 Cut',
-    subtitle: 'guaranteed. miss a month? you still got paid.',
-    note: "They pay on the 1st. They book whenever. Forget August? You keep $28. That's the gym model — and gyms are one of the most profitable businesses ever built.",
+    kind: 'mechanic',
+    eyebrow: 'THE PROBLEM WITH TODAY',
+    title: 'YOU NEVER KNOW WHAT NEXT WEEK LOOKS LIKE',
+    today: {
+      headline: 'How it works now',
+      points: [
+        'Customer comes in when they remember.',
+        'Busy November, dead February — no way to predict it.',
+        'A regular misses a month? You just lost $32.',
+        'You can\'t plan your month on "I think they\'ll come in."',
+      ],
+    },
+    next: {
+      headline: 'How a membership works',
+      points: [
+        'They pay on the 1st. Money\'s in before anyone sits down.',
+        'They book whenever it works for them.',
+        'Skip a month? You still got paid.',
+        'You know your floor revenue before the week even starts.',
+      ],
+    },
+  },
+  {
+    kind: 'tiers',
+    eyebrow: 'THREE PLANS · ONE FOR EVERYONE',
+    title: 'WHAT THEY PAY',
+    plans: [
+      { name: 'SOLO',   price: 28, includes: '1 haircut / month',          savesPerVisit: 7,  savesPerYear: 84  },
+      { name: 'FADE+',  price: 48, includes: '1 cut + beard / month',       savesPerVisit: 12, savesPerYear: 144 },
+      { name: 'FAMILY', price: 55, includes: '2 haircuts / month',          savesPerVisit: 15, savesPerYear: 180 },
+    ],
+    note: 'Compared to the proposed new menu prices ($35 haircut, $60 cut+beard, $70 for two). Members get a real discount. You get guaranteed monthly revenue.',
+  },
+  {
+    kind: 'bignumber',
+    number: '$84',
+    label: 'saved per year for a Solo member',
+    footnote: '$28/month instead of $35 walk-in. That\'s $7 less every visit, $84 less every year. For a regular customer who comes monthly, that\'s an easy yes.',
+  },
+  {
+    kind: 'bignumber',
+    number: '$21',
+    label: 'more per member per year — for Jim',
+    footnote: 'A Solo member pays $336/year ($28×12). With a 25% skip rate, they come in ~9 times. 9×$35 walk-in = $315. Member pays $21 more than a regular customer. Both sides win.',
   },
   {
     kind: 'bignumber',
     number: '25%',
-    label: 'of members skip a month',
-    footnote: "They don't cancel — canceling feels like a decision. Life just happened. You keep the charge. Same math as gift cards, except it resets every single month.",
+    label: 'of members skip at least one month',
+    footnote: "Gym industry benchmark — the same model, proven for 40 years. They don't cancel because canceling feels like a decision. Life just happened. You keep the charge. Every month, it resets.",
   },
   {
     kind: 'memberprojection',
-    eyebrow: 'WHAT IT LOOKS LIKE',
-    title: 'GUARANTEED EVERY MONTH',
+    eyebrow: 'YOUR GUARANTEED FLOOR',
+    title: 'BEFORE ANYONE SITS DOWN',
     monthlyFee: 28,
     scenarios: [
       { members: 50 },
       { members: 100 },
       { members: 150 },
     ],
-    note: 'Before you pick up a single tool. Walk-ins, Booksy bookings, and gift cards all on top of this.',
+    note: 'Walk-ins, Booksy bookings, gift cards, and member upgrades all land on top of this. This is just the floor.',
+  },
+  {
+    kind: 'bignumber',
+    number: '1 in 6',
+    label: 'of your monthly regulars to hit 50 members',
+    footnote: 'Booksy shows 300+ people booking every month. Ask 1 in 6 at the chair. You\'ll hit 50 in the first few weeks. That\'s $1,400/month before you open on a Monday.',
   },
   // ── Close ──────────────────────────────────────────────────────────────────
   { kind: 'close' },
@@ -554,6 +614,65 @@ export function PricingPitchEasterEgg() {
               </div>
             );
           })()}
+
+          {current.kind === 'mechanic' && (
+            <div>
+              <p className="font-label text-[11px] md:text-[13px] tracking-[0.4em] text-red mb-4 text-center">{current.eyebrow}</p>
+              <h3 className="font-headline uppercase tracking-tight text-3xl md:text-5xl leading-[0.95] text-center mb-8 md:mb-10">
+                {current.title.split(' ').slice(0, -3).join(' ')}{' '}
+                <span className="text-stroke">{current.title.split(' ').slice(-3).join(' ')}</span>
+              </h3>
+              <div className="grid grid-cols-2 gap-4 md:gap-8 max-w-4xl mx-auto">
+                <div className="bg-surface border border-line-strong p-6 md:p-8">
+                  <p className="font-label text-[10px] md:text-[11px] tracking-[0.3em] text-text-subtle mb-4">{current.today.headline.toUpperCase()}</p>
+                  <ul className="space-y-3">
+                    {current.today.points.map((pt, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <span className="font-headline font-bold text-text-subtle flex-none mt-0.5">—</span>
+                        <span className="font-body text-sm md:text-base text-text-muted leading-snug">{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-red/10 border border-red p-6 md:p-8">
+                  <p className="font-label text-[10px] md:text-[11px] tracking-[0.3em] text-red mb-4">{current.next.headline.toUpperCase()}</p>
+                  <ul className="space-y-3">
+                    {current.next.points.map((pt, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <span className="font-headline font-bold text-red flex-none mt-0.5">✓</span>
+                        <span className="font-body text-sm md:text-base text-text-muted leading-snug">{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {current.kind === 'tiers' && (
+            <div>
+              <p className="font-label text-[11px] md:text-[13px] tracking-[0.4em] text-red mb-4 text-center">{current.eyebrow}</p>
+              <h3 className="font-headline uppercase tracking-tight text-3xl md:text-5xl leading-[0.95] text-center mb-8 md:mb-10">
+                WHAT THEY <span className="text-stroke">PAY</span>
+              </h3>
+              <div className="grid grid-cols-3 gap-3 md:gap-5 mb-6 max-w-4xl mx-auto">
+                {current.plans.map((plan, i) => (
+                  <div key={plan.name} className={`border p-5 md:p-7 text-center flex flex-col items-center ${i === 0 ? 'bg-red/10 border-red' : 'bg-surface border-line-strong'}`}>
+                    <p className={`font-label text-[10px] md:text-[12px] tracking-[0.3em] mb-3 ${i === 0 ? 'text-red' : 'text-text-subtle'}`}>{plan.name}</p>
+                    <p className={`font-headline font-bold text-5xl md:text-7xl leading-none mb-2 ${i === 0 ? 'text-red' : 'text-text'}`}>${plan.price}</p>
+                    <p className="font-label text-[8px] md:text-[9px] tracking-[0.25em] text-text-subtle mb-4">/ MONTH</p>
+                    <div className="w-full border-t border-line-strong pt-4 space-y-2">
+                      <p className="font-body text-xs md:text-sm text-text-muted">{plan.includes}</p>
+                      <p className={`font-label text-[9px] md:text-[10px] tracking-[0.25em] ${i === 0 ? 'text-red' : 'text-text-subtle'}`}>
+                        SAVES ${plan.savesPerVisit}/VISIT · ${plan.savesPerYear}/YR
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="font-body text-sm md:text-base text-text-muted text-center max-w-2xl mx-auto">{current.note}</p>
+            </div>
+          )}
 
           {current.kind === 'close' && (
             <div className="text-center">
