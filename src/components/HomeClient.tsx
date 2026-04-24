@@ -21,6 +21,14 @@ import type { Shift } from '@/lib/schedule';
 
 const PANELS = ['HOME', 'TEAM', 'SERVICES', 'WORK', 'CONTACT'] as const;
 
+const PANEL_SHORT: Record<string, string> = {
+  HOME: 'HOME',
+  TEAM: 'TEAM',
+  WORK: 'WORK',
+  SERVICES: 'SERV',
+  CONTACT: 'INFO',
+};
+
 interface ScheduleTodayProps {
   shopHours: string | null;
   working: { firstName: string; display: string; raw: string }[];
@@ -42,7 +50,6 @@ export function HomeClient({
 }: HomeClientProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
 
@@ -155,39 +162,9 @@ export function HomeClient({
             BOOK NOW
           </a>
         </nav>
-        <div className="md:hidden flex items-center gap-1">
+        <div className="md:hidden flex items-center">
           <ThemeToggle />
-          <button
-            onClick={() => setMobileMenuOpen(o => !o)}
-            className="p-3 text-text-subtle"
-          aria-label="Toggle menu"
-        >
-          <Icon name={mobileMenuOpen ? 'close' : 'menu'} className="w-6 h-6" />
-          </button>
         </div>
-        {mobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-ink border-t border-line-strong md:hidden z-50">
-            {PANELS.map((label, i) => (
-              <button
-                key={label}
-                onClick={() => { scrollToPanel(i); setMobileMenuOpen(false); }}
-                className={`block w-full text-left px-6 py-4 font-headline text-sm font-bold uppercase tracking-tight border-b border-line transition-colors ${
-                  active === i ? 'text-red' : 'text-text-muted'
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-            <a
-              href={SQUARE_BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block px-6 py-4 bg-red text-white font-headline text-sm font-bold uppercase tracking-tight text-center"
-            >
-              BOOK NOW
-            </a>
-          </div>
-        )}
       </header>
 
       {/* ══ Scroll container ═══════════════════ */}
@@ -232,11 +209,9 @@ export function HomeClient({
         </div>
       </main>
 
-      {/* ══ Footer ═════════════════════════════ */}
-      <footer
-        className="relative z-50 flex-none bg-ink px-6 md:px-12 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] md:py-0 md:h-[8rem] flex flex-col md:flex-row items-center justify-between gap-3"
-      >
-        <div className="flex flex-col items-center md:items-start gap-1">
+      {/* ══ Footer — desktop only (mobile uses bottom nav below) ══ */}
+      <footer className="relative z-50 flex-none bg-ink px-6 md:px-12 py-0 md:h-[8rem] hidden md:flex flex-row items-center justify-between gap-3">
+        <div className="flex flex-col items-start gap-1">
           <p className="font-label text-[13px] tracking-[0.15em] text-text-subtle">
             &copy; {new Date().getFullYear()} SIEDEL&apos;S BARBERSHOP
           </p>
@@ -248,15 +223,46 @@ export function HomeClient({
             </a>
           </p>
         </div>
-        <div className="hidden md:flex items-center gap-8">
+        <div className="flex items-center gap-8">
           <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="font-label text-[13px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">{`${ADDRESS}, ${CITY_STATE_ZIP}`.toUpperCase()}</a>
           <a href={PHONE_HREF} className="font-label text-[13px] tracking-[0.12em] text-text-subtle hover:text-red transition-colors">{PHONE}</a>
           <SocialIcons />
         </div>
-        <div className="md:hidden">
-          <SocialIcons />
-        </div>
       </footer>
+
+      {/* ══ Mobile bottom nav ═══════════════════ */}
+      <nav
+        className="md:hidden flex-none h-14 bg-ink border-t border-line-strong flex"
+        role="navigation"
+        aria-label="Section navigation"
+      >
+        {PANELS.map((label, i) => (
+          <button
+            key={label}
+            onClick={() => scrollToPanel(i)}
+            className={`flex-1 flex flex-col items-center justify-center gap-1 transition-colors ${
+              active === i ? 'text-red' : 'text-text-faint'
+            }`}
+            aria-label={label}
+            aria-current={active === i ? 'true' : undefined}
+          >
+            <div className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${
+              active === i ? 'bg-red scale-125' : 'bg-text-faint'
+            }`} />
+            <span className="font-label text-[8px] tracking-[0.12em]">
+              {PANEL_SHORT[label]}
+            </span>
+          </button>
+        ))}
+        <a
+          href={SQUARE_BOOKING_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 flex items-center justify-center bg-red text-white font-headline font-bold uppercase tracking-tight text-[10px] hover:bg-red-hover transition-colors"
+        >
+          BOOK
+        </a>
+      </nav>
 
       {/* ══ Team Member Modal — baseball card that flips front→back ══ */}
       {selectedMember && (

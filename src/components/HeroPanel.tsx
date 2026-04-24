@@ -40,35 +40,56 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
         </div>
       </div>
 
+      {/* Mobile barber pole accent — right-side reveal, fades left into text area */}
+      <div className="md:hidden absolute inset-0 z-[1] pointer-events-none">
+        <Image
+          src="/images/barber-pole-warm-light-siedels-medina.webp"
+          alt=""
+          aria-hidden="true"
+          fill
+          sizes="50vw"
+          quality={80}
+          className="object-cover object-center"
+          style={{
+            maskImage: 'linear-gradient(to left, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 50%, transparent 75%)',
+            WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 50%, transparent 75%)',
+          }}
+        />
+      </div>
+
       {/* Theme-aware gradient overlay (none in dark, dark scrim in light) */}
       <div
-        className="absolute inset-0 z-[1] pointer-events-none"
+        className="absolute inset-0 z-[2] pointer-events-none"
         style={{ background: 'var(--hero-overlay)' }}
       />
 
-      <div className="relative z-10 w-full px-6 md:px-12 lg:px-16 xl:px-24 pb-16 md:pb-24 pt-20 md:pt-32">
+      <div className="relative z-10 w-full px-6 md:px-12 lg:px-16 xl:px-24 pb-8 md:pb-24 pt-4 md:pt-32">
         <div className="border-l-4 border-red pl-6 md:pl-8 max-w-2xl">
           <p
-            className="font-label text-[11px] tracking-[0.3em] mb-6 hero-stagger-1"
+            className="font-label text-[11px] tracking-[0.3em] mb-3 md:mb-6 hero-stagger-1"
             style={{ color: 'var(--hero-eyebrow)' }}
           >
             IN MEMORY OF CARL SIEDEL
           </p>
-          <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight leading-[0.88] mb-8">
+          <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight leading-[0.88] mb-4 md:mb-8">
             <span className="hero-stagger-2 inline-block" style={{ color: 'var(--hero-h1)' }}>STAY</span><br />
             <span className="hero-stagger-3 inline-block hero-sharp">SHARP</span>
           </h1>
           <p
-            className="font-body text-lg md:text-xl max-w-xl leading-relaxed mb-4 hero-stagger-4"
+            className="font-body text-base md:text-xl max-w-xl leading-relaxed mb-2 md:mb-4 hero-stagger-4"
             style={{ color: 'var(--hero-tagline)' }}
           >
             Haircuts, fades, beard work, and straight razor shaves on Court Street in Medina, Ohio.
           </p>
           <p
-            className="font-label text-[11px] tracking-[0.25em] mb-10 hero-stagger-4"
+            className="font-label text-[11px] tracking-[0.25em] mb-5 md:mb-10 hero-stagger-4"
             style={{ color: 'var(--hero-eyebrow)' }}
           >
             CASH ONLY · ATM ON SITE
+          </p>
+          {/* Pride mode accent — hidden unless [data-pride="true"] */}
+          <p className="pride-hero-accent font-label text-[13px] tracking-[0.2em] mb-3 md:mb-4" aria-hidden="true">
+            🏳️‍🌈 &nbsp;🦄 &nbsp;🌈 &nbsp;✨
           </p>
           <div className="flex flex-col sm:flex-row gap-4 hero-stagger-5">
             <a

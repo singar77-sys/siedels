@@ -74,7 +74,7 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Billy Rodriguez',
-    role: 'Barber',
+    role: 'Master Barber',
     startedYear: 2010,
     image: '/images/billy-rodriguez-barber-siedels-medina.webp',
     booking: sq('e957m1qmqqdevp'),
@@ -83,7 +83,7 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Patrick Muranko',
-    role: 'Barber',
+    role: 'Master Barber',
     startedYear: 2022,
     image: '/images/patrick-muranko-barber-siedels-medina.webp',
     booking: sq('x9bbe05slxw75e'),
@@ -101,7 +101,7 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Sam Sickle',
-    role: 'Barber',
+    role: 'Stylist',
     startedYear: 2021,
     image: '/images/sam-sickle-barber-siedels-medina.webp',
     booking: sq('qj4tfubyvaebvj'),
@@ -110,7 +110,7 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Krista Foecking',
-    role: 'Stylist',
+    role: 'Master Stylist',
     startedYear: 2000,
     image: '/images/krista-foecking-stylist-siedels-medina.webp',
     booking: sq('h3ib29fkvqykvx'),
@@ -128,7 +128,7 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Will Dillon',
-    role: 'Barber',
+    role: 'Master Barber',
     startedYear: 2016,
     image: '/images/will-dillon-barber-siedels-medina.webp',
     booking: sq('licxdz52l4jryx'),
@@ -137,7 +137,7 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Chris Hodge',
-    role: 'Barber',
+    role: 'Master Barber',
     startedYear: 2022,
     image: '/images/chris-hodge-barber-siedels-medina.webp',
     booking: sq('taz4mvu6g9k73n'),
@@ -155,7 +155,7 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Shannon Hadick',
-    role: 'Master Barber',
+    role: 'Master Stylist',
     startedYear: 2017,
     image: '/images/shannon-hadick-barber-siedels-medina.webp',
     booking: sq('0lh9o00vt6or3u'),

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import { LgbtqEasterEgg } from '@/components/LgbtqEasterEgg';
 import { SacrifixEasterEgg } from '@/components/SacrifixEasterEgg';
 import { ItalyEasterEgg } from '@/components/ItalyEasterEgg';
 import { TeamModeEasterEgg } from '@/components/TeamModeEasterEgg';
@@ -114,6 +115,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <TeamModeEasterEgg />
         <PricingPitchEasterEgg />
         <PatriotEasterEgg />
+        <LgbtqEasterEgg />
         </ThemeProvider>
         <Script
           src="https://app.squareup.com/appointments/buyer/widget/xcru7izyf4zhv6/LFCOT5CC7MY0S.js"

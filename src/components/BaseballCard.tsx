@@ -24,17 +24,14 @@ interface Props {
   interactive?: boolean;
 }
 
-// Three ribbon schemes rotating. All use existing palette tokens so
-// they respect theme + team mode automatically.
-const SCHEMES = ['scheme-red', 'scheme-espresso', 'scheme-khaki'] as const;
-
-export function BaseballCard({ member, idx, shift, onSelect, interactive = true }: Props) {
+export function BaseballCard({ member, idx: _idx, shift, onSelect, interactive = true }: Props) {
   const role = member.role;
   const years = getYears(member);
-  const scheme = SCHEMES[idx % SCHEMES.length];
   const isWorking = shift?.status === 'working';
   const isOff = shift?.status === 'off';
   const isOffsite = shift?.status === 'offsite';
+  // Ribbon color = availability status. Light: tan=in, dark-brown=off. Dark: red=in, grey=off.
+  const scheme = (isOff || isOffsite) ? 'scheme-status-off' : 'scheme-status-in';
 
   const click = () => { if (interactive && onSelect) onSelect(member); };
 
