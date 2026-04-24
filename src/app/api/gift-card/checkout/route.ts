@@ -53,9 +53,11 @@ export async function POST(req: NextRequest) {
       },
     ],
     mode: 'payment',
-    application_fee_amount: applicationFeeCents,
-    transfer_data: {
-      destination: process.env.JIMS_STRIPE_ACCOUNT_ID!,
+    payment_intent_data: {
+      application_fee_amount: applicationFeeCents,
+      transfer_data: {
+        destination: process.env.JIMS_STRIPE_ACCOUNT_ID!,
+      },
     },
     metadata: {
       to: to ?? '',

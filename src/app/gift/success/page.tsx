@@ -11,6 +11,12 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+const STEPS = [
+  { num: '01', text: 'Stripe sent a receipt to your email. That email is your gift card.' },
+  { num: '02', text: "Bring the receipt (phone or print) to Siedel\u2019s on Court Street." },
+  { num: '03', text: 'Good for any service, any barber, any visit. No expiration.' },
+];
+
 export default function GiftSuccessPage() {
   return (
     <>
@@ -29,13 +35,9 @@ export default function GiftSuccessPage() {
               <div className="bg-surface border border-line-strong p-6 md:p-8 mb-8 text-left">
                 <p className="font-label text-[10px] tracking-[0.35em] text-text-subtle mb-4">WHAT HAPPENS NEXT</p>
                 <ul className="space-y-4">
-                  {[
-                    { icon: 'mail', text: 'Stripe sent a receipt to your email. That email is your gift card.' },
-                    { icon: 'confirmation_number', text: "Bring the receipt (phone or print) to Siedel\u2019s on Court Street." },
-                    { icon: 'scissors', text: 'Good for any service, any barber, any visit. No expiration.' },
-                  ].map(({ icon, text }) => (
-                    <li key={icon} className="flex items-start gap-4">
-                      <Icon name={icon} className="w-5 h-5 text-red flex-none mt-0.5" />
+                  {STEPS.map(({ num, text }) => (
+                    <li key={num} className="flex items-start gap-4">
+                      <span className="font-headline font-bold text-red text-sm flex-none mt-0.5">{num}</span>
                       <span className="font-body text-sm text-text-muted">{text}</span>
                     </li>
                   ))}
@@ -47,7 +49,7 @@ export default function GiftSuccessPage() {
                   href={PHONE_HREF}
                   className="flex items-center justify-center gap-2 bg-red text-white font-headline font-bold uppercase tracking-tight px-8 py-3 hover:bg-red-hover transition-colors"
                 >
-                  <Icon name="phone" className="w-4 h-4" />
+                  <Icon name="call" className="w-4 h-4" />
                   {PHONE}
                 </a>
                 <Link
@@ -59,7 +61,7 @@ export default function GiftSuccessPage() {
               </div>
 
               <p className="font-body text-xs text-text-subtle">
-                Questions? Call us at {PHONE} — we&apos;ll sort it out.
+                Questions? Call us at {PHONE} &mdash; we&apos;ll sort it out.
               </p>
             </FadeIn>
           </div>
