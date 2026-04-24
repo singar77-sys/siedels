@@ -5,6 +5,7 @@ import { SacrifixEasterEgg } from '@/components/SacrifixEasterEgg';
 import { ItalyEasterEgg } from '@/components/ItalyEasterEgg';
 import { TeamModeEasterEgg } from '@/components/TeamModeEasterEgg';
 import { PricingPitchEasterEgg } from '@/components/PricingPitchEasterEgg';
+import { PatriotEasterEgg } from '@/components/PatriotEasterEgg';
 import { MedinaAmbience } from '@/components/MedinaAmbience';
 import { fetchWeather } from '@/lib/weather';
 import { RATING, REVIEW_COUNT, COORDS, TEAM_COUNT_WORD, IMAGE_ALTS } from '@/data/shop';
@@ -112,6 +113,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <ItalyEasterEgg />
         <TeamModeEasterEgg />
         <PricingPitchEasterEgg />
+        <PatriotEasterEgg />
         </ThemeProvider>
         <Script
           src="https://app.squareup.com/appointments/buyer/widget/xcru7izyf4zhv6/LFCOT5CC7MY0S.js"

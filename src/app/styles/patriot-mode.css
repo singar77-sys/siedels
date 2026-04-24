@@ -1,0 +1,122 @@
+/* ══════════════════════════════════════════════════════
+   Patriot easter egg — keyboard trigger "4547"
+   Red / White / Blue theme override + falling-flag overlay.
+   ══════════════════════════════════════════════════════ */
+
+html.patriot-mode {
+  cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3CforeignObject width='32' height='32'%3E%3Cdiv xmlns='http://www.w3.org/1999/xhtml' style='font-size:26px;line-height:1'%3E🇺🇸%3C/div%3E%3C/foreignObject%3E%3C/svg%3E") 16 16, auto;
+}
+
+/* Three-stripe RWB flag sweep under everything, gently breathing */
+html.patriot-mode::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  background: linear-gradient(to bottom,
+    #BF0A30 0%,   #BF0A30 33.33%,
+    #FFFFFF 33.33%, #FFFFFF 66.66%,
+    #002868 66.66%, #002868 100%);
+  opacity: 0.18;
+  animation: patriot-flag-wave 4s ease-in-out infinite;
+}
+@keyframes patriot-flag-wave {
+  0%, 100% { filter: none; }
+  50%      { filter: brightness(1.15) saturate(1.3); }
+}
+
+/* Palette swap — every surface flips to RWB. Overrides both light and
+   dark theme while patriot-mode is on. */
+html.patriot-mode {
+  --ink:           #FFFFFF;
+  --surface:       #F2F0EC;
+  --surface-raised:#E4DFD6;
+  --surface-high:  #002868;
+  --red:           #BF0A30;
+  --red-hover:     #8E071F;
+  --text:          #0A0F2A;
+  --text-muted:    rgba(10,15,42,0.72);
+  --text-subtle:   rgba(10,15,42,0.52);
+  --text-faint:    rgba(10,15,42,0.36);
+  --line:          rgba(10,15,42,0.10);
+  --line-strong:   rgba(10,15,42,0.20);
+  --stroke-color:  #002868;
+  --selection-bg:  #BF0A30;
+  --selection-text:#FFFFFF;
+  --texture-opacity: 0;
+  --scrim:         rgba(0,40,104,0.65);
+  --hero-overlay:  linear-gradient(to right, rgba(191,10,48,0.45), rgba(255,255,255,0.1), rgba(0,40,104,0.45));
+  --hero-eyebrow:  #BF0A30;
+  --hero-h1:       #FFFFFF;
+  --hero-tagline:  #F2F0EC;
+  --hero-cta-bg:   #FFFFFF;
+  --hero-cta-text: #BF0A30;
+  --hero-cta-hover:#BF0A30;
+  --hero-cta-hover-text: #FFFFFF;
+  --hero-ghost-border: rgba(255,255,255,0.6);
+  --hero-ghost-text: #FFFFFF;
+}
+
+html.patriot-mode .grid-bg::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23002868' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+}
+html.patriot-mode body {
+  background: transparent !important;
+}
+
+/* Emoji rain — flags, eagles, stars, fireworks */
+@keyframes patriot-emoji-fall {
+  0%   { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { transform: translateY(120vh) rotate(var(--rotate-end, 360deg)); opacity: 0; }
+}
+.patriot-emoji-fall {
+  animation-name: patriot-emoji-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* Pop-in floating phrases in flag colors */
+@keyframes patriot-phrase-pop {
+  0%   { opacity: 0; transform: translate(-50%, -50%) rotate(var(--rotate, 0deg)) scale(0.2); }
+  15%  { opacity: 1; transform: translate(-50%, -50%) rotate(var(--rotate, 0deg)) scale(1.2); }
+  25%  { transform: translate(-50%, -50%) rotate(var(--rotate, 0deg)) scale(1); }
+  85%  { opacity: 1; transform: translate(-50%, -50%) rotate(var(--rotate, 0deg)) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) rotate(var(--rotate, 0deg)) scale(1.3); }
+}
+.patriot-phrase {
+  font-family: 'General Sans', 'Arial Black', sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  font-size: clamp(2rem, 5vw, 5rem);
+  text-shadow:
+    3px 3px 0 rgba(0,0,0,0.45),
+    -1px -1px 0 rgba(255,255,255,0.25);
+  animation-name: patriot-phrase-pop;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-out;
+  will-change: transform, opacity;
+}
+
+/* Big top banner */
+@keyframes patriot-banner-in {
+  0%   { opacity: 0; transform: translate(-50%, -120%); }
+  15%  { opacity: 1; transform: translate(-50%, 0); }
+  85%  { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -120%); }
+}
+.patriot-banner {
+  animation: patriot-banner-in 30s ease-out forwards;
+  will-change: transform, opacity;
+}
+.patriot-banner-text {
+  background: linear-gradient(to right, #BF0A30, #FFFFFF, #002868);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
