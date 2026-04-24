@@ -86,15 +86,15 @@ const SLIDES: Slide[] = [
   {
     kind: 'baseline',
     eyebrow: 'WHAT WE KNOW',
-    title: 'APRIL 2026',
+    title: 'TWO YEARS IN BOOKSY',
     stats: [
-      { value: '233', label: 'BOOKED', sub: 'APTS IN APRIL' },
-      { value: '$8,414', label: 'REVENUE', sub: 'THROUGH BOOKSY' },
-      { value: '2,796', label: 'PROJECTED', sub: 'APTS / YEAR' },
-      { value: '~$101K', label: 'PROJECTED', sub: 'REVENUE / YEAR' },
+      { value: '21,406', label: 'BOOKINGS', sub: 'SINCE MAY 2024' },
+      { value: '$761K', label: 'REVENUE', sub: 'THROUGH BOOKSY' },
+      { value: '915', label: 'BOOKINGS', sub: 'PER MONTH AVG' },
+      { value: '~$390K', label: 'ANNUAL', sub: 'RUN-RATE' },
     ],
     footnote:
-      "Every number in this pitch projects from this one real month × 12. Booksy only — walk-ins and phone bookings aren't in here.",
+      "Pulled from your Booksy client list — every booking by every client since you went on Booksy 5/6/24. Doesn't count walk-ins or phone bookings.",
   },
   {
     kind: 'compare',
@@ -104,7 +104,7 @@ const SLIDES: Slide[] = [
     next: '$35',
     delta: '+$3',
     direction: 'up',
-    note: '168 haircuts in April × 12 months × $3 = +$6,048/year. Before any ripple into combos.',
+    note: 'Your most-booked service by a mile — ~7,900 haircuts a year at current volume. A $3 bump there is +$23,700/year.',
   },
   {
     kind: 'compare',
@@ -114,7 +114,7 @@ const SLIDES: Slide[] = [
     next: '$45',
     delta: '+$7',
     direction: 'up',
-    note: 'Priced only $6 over a basic cut today. Fades take more time and more skill. 7 fades booked in April — low volume, so this is about the tier signal more than the dollars.',
+    note: 'Priced only $6 over a basic cut today. Fades take more time and more skill. ~330 fades a year × $7 = +$2,300/year. Small dollars, but the tier signal matters.',
   },
   {
     kind: 'compare',
@@ -124,7 +124,7 @@ const SLIDES: Slide[] = [
     next: '$50',
     delta: '+$8',
     direction: 'up',
-    note: 'Your #2 service — 38 booked in April. Today it\'s 31% off the à-la-carte total ($61). The bump tightens the discount without killing the deal. +$3,648/year at April volume.',
+    note: 'Your #2 service — ~1,800 a year. Today it\'s 31% off the à-la-carte total. +$8 tightens the discount without killing the deal: +$14,300/year.',
   },
   {
     kind: 'compare',
@@ -134,7 +134,7 @@ const SLIDES: Slide[] = [
     next: '$75',
     delta: '+$12',
     direction: 'up',
-    note: 'Only 1 booked in April. Tiny volume — this is a menu-tier signal, not a revenue play.',
+    note: 'Rare booking — barely 50 a year. This isn\'t a revenue play. It\'s a menu ceiling that says "we do premium work when you want it."',
   },
   {
     kind: 'compare',
@@ -144,7 +144,7 @@ const SLIDES: Slide[] = [
     next: '$25',
     delta: '-$4',
     direction: 'down',
-    note: "A real add-on price. 5 standalone beard trims in April — the drop mostly matters because it makes the combo look like a better deal.",
+    note: "A real add-on price. Standalone beard trim volume is small — the drop mostly matters because it makes the cut+beard combo look like a better deal.",
   },
   {
     kind: 'bundle',
@@ -160,7 +160,7 @@ const SLIDES: Slide[] = [
     label: 'Jim & Pierre',
     delta: '+$5',
     subtitle: 'on every service',
-    note: "31 and 23 years behind the chair. Booksy doesn't break revenue by barber so we can't size this exactly — rough upside is ~+$4,000/year if you two do 30% of the book.",
+    note: "31 and 23 years behind the chair. If you two do ~30% of the book (~3,300 services/yr between you), +$5 each = ~+$16,500/year. Booksy doesn't break revenue by barber so this assumes 30% — tighten when we know the real split.",
   },
   {
     kind: 'rule',
@@ -172,10 +172,10 @@ const SLIDES: Slide[] = [
   },
   {
     kind: 'bignumber',
-    number: '+$13,500',
+    number: '+$37K–$53K',
     label: 'extra per year',
     footnote:
-      "Projected strictly from April 2026 × 12 in Booksy. Doesn't count walk-ins, phone bookings, or regulars not in Booksy — real upside is higher, we just can't size it from the data we have.",
+      "+$37K from per-service price moves (haircut, fade, combo, shave, beard-trim). +$53K if the master-tier tier lands too (30% share of Jim+Pierre assumed). Built from 21,406 Booksy bookings since May 2024. Walk-ins and phone bookings aren't in here — real upside is likely higher.",
   },
   { kind: 'close' },
 ];
