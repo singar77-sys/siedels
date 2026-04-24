@@ -156,14 +156,6 @@ const SLIDES: Slide[] = [
   },
   {
     kind: 'rule',
-    eyebrow: 'NEW · MASTER BARBER TIER',
-    label: 'Jim & Pierre',
-    delta: '+$5',
-    subtitle: 'on every service',
-    note: "31 and 23 years behind the chair. If you two do ~30% of the book (~3,300 services/yr between you), +$5 each = ~+$16,500/year. Booksy doesn't break revenue by barber so this assumes 30% — tighten when we know the real split.",
-  },
-  {
-    kind: 'rule',
     eyebrow: 'NEW · SENIORS & VETERANS',
     label: '65+ or Veteran',
     delta: '-$5',
@@ -172,10 +164,10 @@ const SLIDES: Slide[] = [
   },
   {
     kind: 'bignumber',
-    number: '+$37K–$53K',
+    number: '+$37,000',
     label: 'extra per year',
     footnote:
-      "+$37K from per-service price moves (haircut, fade, combo, shave, beard-trim). +$53K if the master-tier tier lands too (30% share of Jim+Pierre assumed). Built from 21,406 Booksy bookings since May 2024. Walk-ins and phone bookings aren't in here — real upside is likely higher.",
+      "Per-service price moves only. Built from 21,406 Booksy bookings since May 2024 (avg 915/month, ~$390K/year). Walk-ins and phone bookings aren't in here — real upside is likely higher.",
   },
   { kind: 'close' },
 ];
