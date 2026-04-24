@@ -63,6 +63,21 @@ interface NumberSlide {
   label: string;
   footnote: string;
 }
+interface BreakageSlide {
+  kind: 'breakage';
+  eyebrow: string;
+  title: string;
+  ghostCount: number;
+  avgCard: number;
+  note: string;
+}
+interface ProjectionSlide {
+  kind: 'projection';
+  eyebrow: string;
+  title: string;
+  scenarios: { cards: number; freePerYear: number }[];
+  note: string;
+}
 interface CloseSlide {
   kind: 'close';
 }
@@ -74,6 +89,8 @@ type Slide =
   | BundleSlide
   | RuleSlide
   | NumberSlide
+  | BreakageSlide
+  | ProjectionSlide
   | CloseSlide;
 
 const SLIDES: Slide[] = [
@@ -169,6 +186,39 @@ const SLIDES: Slide[] = [
     footnote:
       "Per-service price moves only. Built from 21,406 Booksy bookings since May 2024 (avg 915/month, ~$390K/year). Walk-ins and phone bookings aren't in here — real upside is likely higher.",
   },
+  // ── Chapter 2: Gift Cards ──────────────────────────────────────────────────
+  {
+    kind: 'cover',
+    eyebrow: 'CHAPTER 2 · ALREADY LIVE',
+    title: 'GIFT CARDS',
+    subtitle: 'We built it. Anyone can buy right now at siedels.vercel.app/gift. Here\'s the math you need to see.',
+  },
+  {
+    kind: 'bignumber',
+    number: '12%',
+    label: 'of gift cards are never redeemed',
+    footnote: 'Industry standard — tracked across tens of millions of cards. Someone buys a card, never comes in. You keep the money. You did zero work.',
+  },
+  {
+    kind: 'breakage',
+    eyebrow: 'WHAT THAT ACTUALLY MEANS',
+    title: 'FOR EVERY 100 CARDS SOLD',
+    ghostCount: 12,
+    avgCard: 50,
+    note: 'The 12 who ghost aren\'t unhappy — life just happened. They gave you money. You keep it. No scissors, no chair time, no product.',
+  },
+  {
+    kind: 'projection',
+    eyebrow: 'THE VOLUME MATH',
+    title: 'FREE MONEY BY SCENARIO',
+    scenarios: [
+      { cards: 10,  freePerYear:  720 },
+      { cards: 25,  freePerYear: 1800 },
+      { cards: 50,  freePerYear: 3600 },
+    ],
+    note: 'Based on 12% breakage, $50 avg card. Father\'s Day, Christmas, and birthdays alone can hit 25+/month.',
+  },
+  // ── Close ──────────────────────────────────────────────────────────────────
   { kind: 'close' },
 ];
 
@@ -379,15 +429,71 @@ export function PricingPitchEasterEgg() {
             </div>
           )}
 
+          {current.kind === 'breakage' && (
+            <div>
+              <p className="font-label text-[11px] md:text-[13px] tracking-[0.4em] text-red mb-4 text-center">{current.eyebrow}</p>
+              <h3 className="font-headline uppercase tracking-tight text-3xl md:text-5xl leading-[0.95] text-center mb-8 md:mb-10">
+                FOR EVERY <span className="text-stroke">100 CARDS SOLD</span>
+              </h3>
+              <div className="grid grid-cols-2 gap-4 md:gap-8 mb-6 max-w-3xl mx-auto">
+                <div className="bg-surface border border-line-strong p-6 md:p-8 text-center">
+                  <p className="font-headline font-bold text-6xl md:text-8xl text-text leading-none mb-3">{100 - current.ghostCount}</p>
+                  <p className="font-label text-[10px] md:text-[12px] tracking-[0.3em] text-text-subtle mb-4">COME IN · USE THE CARD</p>
+                  <p className="font-body text-sm md:text-base text-text-muted">You cut their hair. You get paid. Normal business.</p>
+                </div>
+                <div className="bg-red/10 border border-red p-6 md:p-8 text-center">
+                  <p className="font-headline font-bold text-6xl md:text-8xl text-red leading-none mb-3">{current.ghostCount}</p>
+                  <p className="font-label text-[10px] md:text-[12px] tracking-[0.3em] text-red mb-4">NEVER SHOW UP</p>
+                  <p className="font-headline font-bold text-3xl md:text-4xl text-red">
+                    +${(current.ghostCount * current.avgCard).toLocaleString()}
+                  </p>
+                  <p className="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-red mt-1">FREE · ZERO WORK</p>
+                </div>
+              </div>
+              <p className="font-body text-sm md:text-base text-text-muted text-center max-w-2xl mx-auto">{current.note}</p>
+            </div>
+          )}
+
+          {current.kind === 'projection' && (
+            <div>
+              <p className="font-label text-[11px] md:text-[13px] tracking-[0.4em] text-red mb-4 text-center">{current.eyebrow}</p>
+              <h3 className="font-headline uppercase tracking-tight text-3xl md:text-5xl leading-[0.95] text-center mb-8 md:mb-10">
+                FREE MONEY <span className="text-stroke">BY SCENARIO</span>
+              </h3>
+              <div className="grid grid-cols-3 gap-3 md:gap-5 mb-6 max-w-3xl mx-auto">
+                {current.scenarios.map((s) => (
+                  <div key={s.cards} className="bg-surface border border-line-strong p-5 md:p-7 text-center flex flex-col items-center">
+                    <p className="font-headline font-bold text-3xl md:text-5xl text-text leading-none mb-2">{s.cards}</p>
+                    <p className="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-text-subtle mb-4">CARDS / MONTH</p>
+                    <div className="w-full border-t border-line-strong pt-4">
+                      <p className="font-headline font-bold text-2xl md:text-4xl text-red">
+                        ${s.freePerYear.toLocaleString()}
+                      </p>
+                      <p className="font-label text-[9px] md:text-[10px] tracking-[0.3em] text-red mt-1">FREE / YEAR</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="font-body text-sm md:text-base text-text-muted text-center max-w-2xl mx-auto">{current.note}</p>
+            </div>
+          )}
+
           {current.kind === 'close' && (
             <div className="text-center">
               <p className="text-6xl md:text-8xl mb-6">👊</p>
               <h3 className="font-headline uppercase tracking-tight text-4xl md:text-6xl leading-[0.95] mb-6">
                 YOUR <span className="text-stroke">CALL</span>
               </h3>
-              <p className="font-body text-lg md:text-2xl text-text-muted max-w-2xl mx-auto mb-8">
-                Nothing above is live yet. Say the word and we flip it on. Say no and we kill it.
-              </p>
+              <div className="space-y-3 max-w-xl mx-auto mb-8 text-left">
+                <p className="font-body text-base md:text-lg text-text-muted flex items-start gap-3">
+                  <span className="font-headline font-bold text-red flex-none">✓</span>
+                  Gift cards are live right now. Share the link and the money starts.
+                </p>
+                <p className="font-body text-base md:text-lg text-text-muted flex items-start gap-3">
+                  <span className="font-headline font-bold text-text-subtle flex-none">?</span>
+                  Pricing changes are still a proposal. Say the word and we flip it on.
+                </p>
+              </div>
               <p className="font-label text-[11px] tracking-[0.3em] text-text-subtle">
                 PRESS ESC TO CLOSE · OR ← TO REVIEW
               </p>
