@@ -37,6 +37,13 @@ interface CoverSlide {
   subtitle: string;
   eyebrow: string;
 }
+interface BaselineSlide {
+  kind: 'baseline';
+  eyebrow: string;
+  title: string;
+  stats: { value: string; label: string; sub: string }[];
+  footnote: string;
+}
 interface BundleSlide {
   kind: 'bundle';
   label: string;
@@ -50,22 +57,11 @@ interface RuleSlide {
   subtitle: string;
   note: string;
 }
-interface MarketSlide {
-  kind: 'market';
-  rows: { label: string; price: string; you?: boolean; emoji: string }[];
-}
 interface NumberSlide {
   kind: 'bignumber';
   number: string;
   label: string;
   footnote: string;
-}
-interface PizzaSlide {
-  kind: 'pizza';
-  eyebrow: string;
-  title: string;
-  cards: { emoji: string; headline: string; line: string; cost: string }[];
-  footer: string;
 }
 interface CloseSlide {
   kind: 'close';
@@ -74,11 +70,10 @@ interface CloseSlide {
 type Slide =
   | ComparisonSlide
   | CoverSlide
+  | BaselineSlide
   | BundleSlide
   | RuleSlide
-  | MarketSlide
   | NumberSlide
-  | PizzaSlide
   | CloseSlide;
 
 const SLIDES: Slide[] = [
@@ -89,6 +84,19 @@ const SLIDES: Slide[] = [
     subtitle: 'Nothing is live yet. Click through. Say yes or no.',
   },
   {
+    kind: 'baseline',
+    eyebrow: 'WHAT WE KNOW',
+    title: 'APRIL 2026',
+    stats: [
+      { value: '233', label: 'BOOKED', sub: 'APTS IN APRIL' },
+      { value: '$8,414', label: 'REVENUE', sub: 'THROUGH BOOKSY' },
+      { value: '2,796', label: 'PROJECTED', sub: 'APTS / YEAR' },
+      { value: '~$101K', label: 'PROJECTED', sub: 'REVENUE / YEAR' },
+    ],
+    footnote:
+      "Every number in this pitch projects from this one real month × 12. Booksy only — walk-ins and phone bookings aren't in here.",
+  },
+  {
     kind: 'compare',
     eyebrow: 'THE BASIC CUT',
     label: 'Haircut',
@@ -96,7 +104,7 @@ const SLIDES: Slide[] = [
     next: '$35',
     delta: '+$3',
     direction: 'up',
-    note: 'A $3 bump. Most regulars won\'t blink.',
+    note: '168 haircuts in April × 12 months × $3 = +$6,048/year. Before any ripple into combos.',
   },
   {
     kind: 'compare',
@@ -106,7 +114,7 @@ const SLIDES: Slide[] = [
     next: '$45',
     delta: '+$7',
     direction: 'up',
-    note: 'Nobody else in Medina posts fade prices. You set the bar.',
+    note: 'Priced only $6 over a basic cut today. Fades take more time and more skill. 7 fades booked in April — low volume, so this is about the tier signal more than the dollars.',
   },
   {
     kind: 'compare',
@@ -116,7 +124,7 @@ const SLIDES: Slide[] = [
     next: '$50',
     delta: '+$8',
     direction: 'up',
-    note: 'Shears & Beards charges $60 for their combo. You\'d be $10 cheaper.',
+    note: 'Your #2 service — 38 booked in April. Today it\'s 31% off the à-la-carte total ($61). The bump tightens the discount without killing the deal. +$3,648/year at April volume.',
   },
   {
     kind: 'compare',
@@ -126,7 +134,7 @@ const SLIDES: Slide[] = [
     next: '$75',
     delta: '+$12',
     direction: 'up',
-    note: 'Matches Studio Fade. That\'s the premium ceiling in the area.',
+    note: 'Only 1 booked in April. Tiny volume — this is a menu-tier signal, not a revenue play.',
   },
   {
     kind: 'compare',
@@ -136,7 +144,7 @@ const SLIDES: Slide[] = [
     next: '$25',
     delta: '-$4',
     direction: 'down',
-    note: 'A real add-on price. Encourages people to just throw it in.',
+    note: "A real add-on price. 5 standalone beard trims in April — the drop mostly matters because it makes the combo look like a better deal.",
   },
   {
     kind: 'bundle',
@@ -152,7 +160,7 @@ const SLIDES: Slide[] = [
     label: 'Jim & Pierre',
     delta: '+$5',
     subtitle: 'on every service',
-    note: 'Nobody else in Medina has a master tier. You two earned it — 31 and 23 years behind the chair.',
+    note: "31 and 23 years behind the chair. Booksy doesn't break revenue by barber so we can't size this exactly — rough upside is ~+$4,000/year if you two do 30% of the book.",
   },
   {
     kind: 'rule',
@@ -160,48 +168,14 @@ const SLIDES: Slide[] = [
     label: '65+ or Veteran',
     delta: '-$5',
     subtitle: 'off any haircut',
-    note: 'You already take care of them. Make it official on the menu.',
-  },
-  {
-    kind: 'market',
-    rows: [
-      { label: 'Great Clips · Hershey\'s', price: '$20', emoji: '✂️' },
-      { label: 'Shears & Beards', price: '$30–35', emoji: '✂️' },
-      { label: 'SIEDEL\'S (you)', price: '$35', you: true, emoji: '🔥' },
-      { label: 'Studio Fade (premium)', price: '$75 combo', emoji: '💎' },
-    ],
-  },
-  {
-    kind: 'pizza',
-    eyebrow: 'HOW MUCH YOU LEAVE ON THE TABLE',
-    title: 'THE PIZZA MATH',
-    cards: [
-      {
-        emoji: '🍕🍕',
-        headline: 'BUY 2, GET ONE HALF-OFF',
-        line: 'Your cut + beard combo is 31% off. No pizzeria gives away that much.',
-        cost: '$29k / year',
-      },
-      {
-        emoji: '🍕 ≠ 🍕🍖🌶️',
-        headline: 'CHEESE ≠ SUPREME',
-        line: 'A fade takes more time + more skill. Today you charge like it\'s a plain cheese.',
-        cost: '$17k / year',
-      },
-      {
-        emoji: '👨‍🍳',
-        headline: 'MASTER CHEF, ROOKIE PAY',
-        line: 'Jim and Pierre charge the same as a 4-year barber. Head chef doesn\'t work for tips.',
-        cost: '$19k / year',
-      },
-    ],
-    footer: "That's about $120,000 walking out the door every year.",
+    note: "You already take care of them. Make it official on the menu.",
   },
   {
     kind: 'bignumber',
-    number: '+$96,000',
+    number: '+$13,500',
     label: 'extra per year',
-    footnote: 'based on 2,000 cuts per month · ~$4 more per ticket',
+    footnote:
+      "Projected strictly from April 2026 × 12 in Booksy. Doesn't count walk-ins, phone bookings, or regulars not in Booksy — real upside is higher, we just can't size it from the data we have.",
   },
   { kind: 'close' },
 ];
@@ -376,56 +350,26 @@ export function PricingPitchEasterEgg() {
             </div>
           )}
 
-          {current.kind === 'market' && (
-            <div>
-              <p className="font-label text-[11px] md:text-[13px] tracking-[0.4em] text-red mb-4 text-center">WHERE YOU SIT</p>
-              <h3 className="font-headline uppercase tracking-tight text-3xl md:text-5xl leading-[0.95] text-center mb-10">
-                IN THE <span className="text-stroke">MEDINA MARKET</span>
-              </h3>
-              <div className="space-y-3 max-w-3xl mx-auto">
-                {current.rows.map((row) => (
-                  <div
-                    key={row.label}
-                    className={`flex items-center justify-between gap-4 p-5 md:p-6 border ${
-                      row.you ? 'bg-red/10 border-red' : 'bg-surface border-line-strong'
-                    }`}
-                  >
-                    <div className="flex items-center gap-4">
-                      <span className="text-3xl md:text-4xl">{row.emoji}</span>
-                      <span className={`font-headline font-bold uppercase tracking-tight text-lg md:text-2xl ${row.you ? 'text-red' : 'text-text'}`}>
-                        {row.label}
-                      </span>
-                    </div>
-                    <span className={`font-headline font-bold text-2xl md:text-4xl ${row.you ? 'text-red' : 'text-text-muted'}`}>
-                      {row.price}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <p className="font-body text-base md:text-lg text-text-muted text-center mt-8 max-w-2xl mx-auto">
-                You&apos;re not the cheap shop. You&apos;re not the fancy shop. You&apos;re the right-in-the-middle shop — and that&apos;s the spot to be.
-              </p>
-            </div>
-          )}
-
-          {current.kind === 'pizza' && (
+          {current.kind === 'baseline' && (
             <div>
               <p className="font-label text-[11px] md:text-[13px] tracking-[0.4em] text-red mb-4 text-center">{current.eyebrow}</p>
               <h3 className="font-headline uppercase tracking-tight text-4xl md:text-6xl leading-[0.95] text-center mb-8 md:mb-10">
-                THE <span className="text-stroke">PIZZA MATH</span>
+                <span className="text-stroke">{current.title}</span>
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5 mb-6 md:mb-8">
-                {current.cards.map((card) => (
-                  <div key={card.headline} className="bg-surface border border-line-strong p-5 md:p-6 flex flex-col items-center text-center">
-                    <span className="text-4xl md:text-5xl mb-3">{card.emoji}</span>
-                    <p className="font-headline font-bold uppercase tracking-tight text-sm md:text-base text-text mb-2">{card.headline}</p>
-                    <p className="font-body text-sm md:text-base text-text-muted leading-snug mb-4 flex-1">{card.line}</p>
-                    <p className="font-headline font-bold text-2xl md:text-3xl text-red">{card.cost}</p>
+              <div className="grid grid-cols-2 gap-3 md:gap-5 mb-6 md:mb-8 max-w-3xl mx-auto">
+                {current.stats.map((s) => (
+                  <div
+                    key={s.value}
+                    className="bg-surface border border-line-strong p-5 md:p-7 flex flex-col items-center text-center"
+                  >
+                    <p className="font-label text-[10px] md:text-[11px] tracking-[0.3em] text-text-subtle mb-2">{s.label}</p>
+                    <p className="font-headline font-bold text-3xl md:text-5xl text-red tabular-nums leading-none mb-2">{s.value}</p>
+                    <p className="font-label text-[9px] md:text-[11px] tracking-[0.3em] text-text-muted">{s.sub}</p>
                   </div>
                 ))}
               </div>
-              <p className="font-headline uppercase tracking-tight text-center text-lg md:text-2xl text-red">
-                {current.footer}
+              <p className="font-body text-sm md:text-base text-text-subtle text-center max-w-2xl mx-auto italic">
+                {current.footnote}
               </p>
             </div>
           )}
