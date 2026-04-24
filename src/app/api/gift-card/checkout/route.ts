@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
 // Fee structure (Jaworski method):
 //   PLATFORM_PCT  → 10% of face value, visible to client as "platform fee"
 //   HANDLING_CENTS → $1.50 flat per transaction, handling overhead (internal)
@@ -15,6 +13,7 @@ const HANDLING_CENTS = 150;
 const VALID_AMOUNTS = new Set([25, 50, 75, 100]);
 
 export async function POST(req: NextRequest) {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
   const body = await req.json().catch(() => null);
   if (!body) return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
 
