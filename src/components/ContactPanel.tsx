@@ -10,6 +10,8 @@ import {
   GOOGLE_BUSINESS_URL,
   ADDRESS,
   CITY_STATE_ZIP,
+  COORDS_DISPLAY,
+  IMAGE_ALTS,
   RATING,
   REVIEW_COUNT,
   hours,
@@ -22,8 +24,6 @@ const REVIEW_POOL = testimonials.slice(1);
 const VISIBLE = 3;
 const ROTATE_MS = 9000;
 
-// Shop coordinates — 982 N Court St, Medina OH. Shown as a HUD readout.
-const COORDS = '41.1387° N  81.8594° W';
 const STOREFRONT = '/images/siedels-barbershop-storefront-medina-ohio.webp';
 
 export function ContactPanel() {
@@ -69,8 +69,9 @@ export function ContactPanel() {
           </a>
         </div>
 
-        {/* Three-column body fills the remaining frame */}
-        <div className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 overflow-hidden">
+        {/* Three-column body fills the remaining frame on desktop;
+            stacks + scrolls vertically on mobile so no column clips. */}
+        <div className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 overflow-y-auto md:overflow-hidden">
           {/* Col 1 — Address, phone, tactical map, CTAs */}
           <div className="bg-surface border-l-4 border-red p-5 md:p-6 flex flex-col overflow-hidden">
             <div className="flex-none mb-4">
@@ -98,7 +99,7 @@ export function ContactPanel() {
             >
               <Image
                 src={STOREFRONT}
-                alt="Exterior of Siedel's Barbershop storefront at 982 N Court Street, Medina Ohio"
+                alt={IMAGE_ALTS.storefront}
                 fill
                 sizes="(max-width: 768px) 90vw, 30vw"
                 className="tac-map__tile object-cover"
@@ -119,7 +120,7 @@ export function ContactPanel() {
                 LIVE
               </span>
               {/* Top-right coordinates */}
-              <span className="tac-map__tag top-2 right-2">{COORDS}</span>
+              <span className="tac-map__tag top-2 right-2">{COORDS_DISPLAY}</span>
               {/* Bottom strip */}
               <span className="tac-map__footer">
                 <span className="text-red font-bold">SIEDEL&apos;S</span>

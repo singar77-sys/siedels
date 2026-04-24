@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { SQUARE_BOOKING_URL, RATING, REVIEW_COUNT, testimonials } from '@/data/shop';
+import { SQUARE_BOOKING_URL, RATING, REVIEW_COUNT, IMAGE_ALTS, testimonials } from '@/data/shop';
 import { Icon } from './Icon';
 
 const HERO_DARK = '/images/siedels-barbershop-medina-ohio.webp';
@@ -18,7 +18,7 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
         <div className="absolute inset-0 hero-img-light">
           <Image
             src={HERO_LIGHT}
-            alt="Barber pole at golden hour outside Siedel's Barbershop, Medina Ohio"
+            alt={IMAGE_ALTS.heroGoldenHour}
             fill
             priority
             sizes="100vw"
@@ -30,7 +30,7 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
         <div className="absolute inset-0 hero-img-dark">
           <Image
             src={HERO_DARK}
-            alt="Barber pole at golden hour outside Siedel's Barbershop, Medina Ohio"
+            alt={IMAGE_ALTS.heroGrayscale}
             fill
             sizes="100vw"
             quality={85}

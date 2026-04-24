@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import { PHONE, PHONE_HREF, MAPS_URL, GOOGLE_BUSINESS_URL } from '@/data/shop';
+import { FOOTER_ROUTES } from '@/data/nav';
 import { SocialIcons } from './SocialIcons';
 import { HunterMark } from './HunterMark';
 import { Logo } from './Logo';
 
 export function Footer() {
   return (
-    <footer className="bg-ink border-t border-line-strong px-6 md:px-12 py-12 md:py-16">
+    <footer className="bg-ink border-t border-line-strong px-6 md:px-12 pt-12 md:pt-16 pb-[max(3rem,env(safe-area-inset-bottom))] md:pb-16">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
         <div className="flex flex-col gap-2">
           <Link href="/" aria-label="Siedel's Barbershop — home" className="flex items-center mb-1">
@@ -25,11 +26,7 @@ export function Footer() {
         </div>
         <div className="flex flex-col items-start md:items-end gap-6">
           <div className="flex flex-wrap gap-8 md:gap-10 md:justify-end">
-            {[
-              { label: 'TEAM', href: '/team' },
-              { label: 'SERVICES', href: '/services' },
-              { label: 'CONTACT', href: '/contact' },
-            ].map((link) => (
+            {FOOTER_ROUTES.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}

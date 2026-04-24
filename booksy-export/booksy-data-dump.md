@@ -1,6 +1,8 @@
 # Siedel's Barbershop — Booksy Data Export
-**Exported:** April 13, 2026
+**First exported:** April 13, 2026
+**Client list refreshed:** April 19, 2026
 **Booksy Business ID:** 1212853
+**Booksy tenure:** May 6, 2024 – present (~2 years)
 
 ---
 
@@ -77,7 +79,48 @@
 
 ---
 
+## LIFETIME SNAPSHOT (5/6/24 – 4/19/26)
+
+**Source:** `client_list (1).xlsx` — per-client booking totals across the full Booksy tenure. This is the authoritative baseline for pricing pitches and strategy.
+
+| Metric | Value |
+|---|---|
+| Window | 5/6/24 → 4/19/26 (~1.95 years) |
+| Total bookings | **21,406** |
+| Total bookings value | **$761,568** |
+| Total clients | 2,528 |
+| No-shows | 228 |
+| Average ticket | $35.58 |
+| **Annualized bookings** | **~10,977/yr** (915/month) |
+| **Annualized revenue** | **~$390,548/yr** |
+| Clients with ≥5 bookings (regulars) | 675 |
+| Clients with ≥10 bookings | 336 |
+| Avg bookings per active client | 9.2 |
+
+### New-client acquisition curve (first-visit count per month)
+
+Launch spike in summer 2024 (Jun–Aug: 111/233/235), steady state since at 75–140/month. Healthy, not declining.
+
+| Month | New | Month | New |
+|---|---|---|---|
+| Jun 2024 | 111 | May 2025 | 118 |
+| Jul 2024 | 233 | Jun 2025 | 107 |
+| Aug 2024 | 235 | Jul 2025 | 98 |
+| Sep 2024 | 156 | Aug 2025 | 138 |
+| Oct 2024 | 142 | Sep 2025 | 79 |
+| Nov 2024 | 91 | Oct 2025 | 89 |
+| Dec 2024 | 116 | Nov 2025 | 76 |
+| Jan 2025 | 97 | Dec 2025 | 79 |
+| Feb 2025 | 80 | Jan 2026 | 80 |
+| Mar 2025 | 87 | Feb 2026 | 88 |
+| Apr 2025 | 77 | Mar 2026 | 85 |
+|  |  | Apr 2026 | 63 |
+
+---
+
 ## APRIL 2026 SNAPSHOT
+
+**Source:** `appointments_list.xlsx` — only month with a per-appointment export. Use this for **service-mix proportions**, NOT for volume projections (see anomaly note below).
 
 | Metric | Value |
 |---|---|
@@ -89,27 +132,55 @@
 | Cancellation value | $2,674 |
 | New clients | 35 (15%) |
 | Returning clients | 191 (85%) |
-| Total client list | 2,540 |
 
 ### Top Services (April 2026)
 
-| Service | Appointments | Revenue |
+| Service | Appointments | Revenue | Share |
+|---|---|---|---|
+| Haircut | 168 | $5,376 | 72.1% |
+| Haircut and Beard Trim | 38 | $1,596 | 16.3% |
+| Duo Haircut | 13 | $832 | 5.6% |
+| Razor/Foil Fade | 7 | $266 | 3.0% |
+| Beard Trim | 5 | $145 | 2.1% |
+| Trio Haircut | 1 | $96 | 0.4% |
+| Haircut and Face Shave | 1 | $63 | 0.4% |
+| Head Shave | 1 | $40 | 0.4% |
+
+### ⚠️ April anomaly — flag
+
+April 2026 showed 233 completed appointments. Lifetime average is ~915/month. April is **~25% of normal** by Booksy volume. Possible explanations (not yet resolved):
+
+- Seasonal slump (post-Easter, tax-season distraction)
+- Gradual migration off Booksy to walk-ins / phone / other channels
+- Export filter mismatch (lifetime client-list may count bookings the per-appointment export excluded)
+
+For pricing projections, use **lifetime numbers**, not April × 12. Service **mix** is safer to apply from April (shape of the menu is unlikely to be seasonal).
+
+### Projected annual volume (April mix × lifetime rate)
+
+| Service | Share | Projected/yr |
 |---|---|---|
-| Haircut | 168 | $5,376 |
-| Haircut and Beard Trim | 38 | $1,596 |
-| Duo Haircut | 13 | $832 |
-| Razor/Foil Fade | 7 | $266 |
-| Beard Trim | 5 | $145 |
-| Trio Haircut | 1 | $96 |
-| Haircut and Face Shave | 1 | $63 |
-| Head Shave | 1 | $40 |
+| Haircut | 72.1% | ~7,900 |
+| Haircut + Beard Trim | 16.3% | ~1,800 |
+| Duo Haircut | 5.6% | ~612 |
+| Razor/Foil Fade | 3.0% | ~330 |
+| Beard Trim | 2.1% | ~236 |
+| Trio Haircut | 0.4% | ~47 |
+| Haircut + Face Shave | 0.4% | ~47 |
+| Head Shave | 0.4% | ~47 |
+
+**These are the numbers the pricing pitch deck (`PricingPitchEasterEgg.tsx`, type "idea") uses.**
 
 ---
 
 ## DOWNLOADED FILES
 
-1. `~/Downloads/client_list.xlsx` — 2,540 clients with names, groups, booking count, no-shows, first/last visit, revenue
-2. `~/Downloads/appointments_list.xlsx` — April 2026 appointments with date, service, client, staffer, status, revenue
+Files live in `~/Downloads/` (PII, not committed to the repo):
+
+1. **`client_list (1).xlsx`** (updated 4/19/26, 165 KB) — 2,528 clients with lifetime booking count, no-shows, first/last visit, revenue. **Primary source for annual volume + revenue.**
+2. **`client_list.xlsx`** (4/13/26, 164 KB) — older snapshot, 2,540 clients. Superseded by the `(1)` version.
+3. **`appointments_list.xlsx`** (4/13/26, 33 KB) — per-appointment detail for **4/1/26–4/30/26 only**. Used for service-mix proportions.
+4. **`service_upload_siedels.csv`** — Square/Booksy service import format reference.
 
 ---
 

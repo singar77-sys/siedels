@@ -33,6 +33,7 @@ interface ScheduleTodayProps {
   shopHours: string | null;
   working: { firstName: string; display: string; raw: string }[];
   isClosed: boolean;
+  scheduleKnown: boolean;
   dayName: string;
 }
 
@@ -104,7 +105,13 @@ export function HomeClient({
 
   return (
     <div className="h-dvh flex flex-col overflow-hidden bg-ink">
-      {/* ══ Header ══════════════════════════════ */}
+      {/* ══ Header ══════════════════════════════
+           This is intentionally NOT the shared <Nav /> component. Inner
+           pages use <Nav /> for traditional top-nav + mobile dropdown.
+           Home uses a horizontal-panel UX with a progress-bar that tracks
+           which panel is active — the rendering + interaction model is
+           different enough that unifying the two adds more complexity
+           than it removes. Keep route labels in sync via PANELS below. */}
       <header className="relative z-50 flex-none h-[6rem] md:h-[8rem] bg-ink flex items-center justify-between px-6 md:px-12">
         <Link
           href="/"
@@ -186,7 +193,7 @@ export function HomeClient({
 
         <div
           ref={scrollRef}
-          className="flex h-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory overscroll-x-contain"
+          className="flex h-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory overscroll-x-contain touch-pan-x"
           style={{ scrollbarWidth: 'none' }}
         >
           <HeroPanel onScrollNext={() => scrollToPanel(1)} />
@@ -202,7 +209,7 @@ export function HomeClient({
         </div>
       </main>
 
-      {/* ══ Footer — desktop only ═══════════════ */}
+      {/* ══ Footer — desktop only (mobile uses bottom nav below) ══ */}
       <footer className="relative z-50 flex-none bg-ink px-6 md:px-12 py-0 md:h-[8rem] hidden md:flex flex-row items-center justify-between gap-3">
         <div className="flex flex-col items-start gap-1">
           <p className="font-label text-[13px] tracking-[0.15em] text-text-subtle">
@@ -262,7 +269,7 @@ export function HomeClient({
         <Modal onClose={() => setSelectedMember(null)}>
           <button
             onClick={() => setSelectedMember(null)}
-            className="absolute top-3 right-3 z-10 w-9 h-9 flex items-center justify-center text-text-subtle hover:text-text transition-colors"
+            className="absolute top-3 right-3 z-10 w-11 h-11 flex items-center justify-center text-text-subtle hover:text-text transition-colors"
             aria-label="Close"
           >
             <Icon name="close" className="w-4 h-4" />

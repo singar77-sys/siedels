@@ -4,7 +4,7 @@ import { PageHero } from '@/components/PageHero';
 import { TeamGrid } from '@/components/TeamGrid';
 import { CTASection } from '@/components/CTASection';
 import { Footer } from '@/components/Footer';
-import { TEAM_COUNT } from '@/data/shop';
+import { TEAM_COUNT, TEAM_COUNT_WORD } from '@/data/shop';
 
 export const metadata: Metadata = {
   title: "Meet the Barbers | Siedel's Barbershop | Medina, Ohio",
@@ -20,14 +20,14 @@ export default function TeamPage() {
   return (
     <>
       <Nav />
-      <main id="main" className="grid-bg min-h-screen">
+      <main id="main" className="grid-bg min-h-dvh">
         <PageHero
           image="/images/barber-stations-siedels-barbershop-medina.webp"
           imageAlt="Barber stations inside Siedel's Barbershop, Medina Ohio"
           label="PERSONNEL DOSSIER"
           title="THE"
           titleAccent="SPECIALISTS"
-          subtitle="Eleven barbers and stylists. Every skill level from fades to full-service shaves."
+          subtitle={`${TEAM_COUNT_WORD} barbers and stylists. Every skill level from fades to full-service shaves.`}
         />
 
         <section className="py-16 md:py-24">

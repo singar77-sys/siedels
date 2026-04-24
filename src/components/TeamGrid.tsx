@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { FadeIn } from './FadeIn';
 import { Modal } from './Modal';
 import { Icon } from './Icon';
-import { team, type TeamMember } from '@/data/shop';
+import { team, getTitle, type TeamMember } from '@/data/shop';
 
 export function TeamGrid() {
   const [selected, setSelected] = useState<TeamMember | null>(null);
@@ -27,7 +27,7 @@ export function TeamGrid() {
                 {member.image ? (
                   <Image
                     src={member.image}
-                    alt={`${member.name}, ${member.title} at Siedel's Barbershop in Medina, Ohio`}
+                    alt={`${member.name}, ${getTitle(member)} at Siedel's Barbershop in Medina, Ohio`}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover object-top theme-photo group-hover:scale-105 transition-transform duration-700"
@@ -41,7 +41,7 @@ export function TeamGrid() {
                 )}
               </div>
               <h3 className="font-headline text-2xl md:text-3xl uppercase tracking-tight mb-1">{member.name}</h3>
-              <p className="font-label text-[10px] tracking-widest text-red mb-6">{member.title.toUpperCase()}</p>
+              <p className="font-label text-[10px] tracking-widest text-red mb-6">{getTitle(member).toUpperCase()}</p>
               <a
                 href={member.booking}
                 target="_blank"
@@ -67,12 +67,12 @@ export function TeamGrid() {
           </button>
           {selected.image && (
             <div className="relative aspect-[4/3] w-full">
-              <Image src={selected.image} alt={`${selected.name}, ${selected.title} at Siedel's Barbershop in Medina, Ohio`} fill sizes="500px" className="object-cover object-top theme-photo" />
+              <Image src={selected.image} alt={`${selected.name}, ${getTitle(selected)} at Siedel's Barbershop in Medina, Ohio`} fill sizes="500px" className="object-cover object-top theme-photo" />
             </div>
           )}
           <div className="p-8">
             <h2 className="font-headline text-2xl md:text-3xl uppercase tracking-tight">{selected.name}</h2>
-            <p className="font-label text-[10px] tracking-widest text-red mt-1 mb-6">{selected.title.toUpperCase()}</p>
+            <p className="font-label text-[10px] tracking-widest text-red mt-1 mb-6">{getTitle(selected).toUpperCase()}</p>
             {selected.bio && <p className="font-body text-sm text-text-muted leading-relaxed mb-8">{selected.bio}</p>}
             <a
               href={selected.booking}

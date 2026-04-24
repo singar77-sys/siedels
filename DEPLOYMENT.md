@@ -31,12 +31,14 @@ siedels/
 
 ## Technology Stack
 
-- **Framework**: Next.js 16.2.0 (App Router)
-- **UI Library**: React 19.2.4
+- **Framework**: Next.js 16 (App Router)
+- **UI Library**: React 19
 - **Styling**: Tailwind CSS 4 with PostCSS
 - **Language**: TypeScript 5
 - **Compiler**: Babel React Compiler for optimization
 - **Linting**: ESLint 9
+
+See `package.json` for exact pinned versions.
 
 ## Deployment to Vercel
 
@@ -63,12 +65,11 @@ siedels/
 
 ### Environment Variables
 
-If needed, add these in Vercel Project Settings → Environment Variables:
-- `NEXT_PUBLIC_SHOP_NAME`
-- `NEXT_PUBLIC_CITY`
-- `NEXT_PUBLIC_STATE`
+- `GOOGLE_SHEET_ID` — overrides the default team-schedule sheet ID used
+  by `src/lib/schedule.ts`. Optional; a fallback sheet ID is hardcoded.
 
-See `.env.example` for template.
+No other env vars are required; shop contact info, team, services, and
+hours all live in `src/data/shop.ts`.
 
 ## Build & Local Development
 

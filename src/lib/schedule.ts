@@ -290,18 +290,23 @@ export interface WorkingMember {
 export function getWorkingToday(week: WeekSchedule): {
   shopHours: string | null;
   working: WorkingMember[];
+  /** True only when we know the shop is closed today (Sunday). A stale
+   *  or missing schedule sheet does NOT count as closed. */
   isClosed: boolean;
+  /** True when the schedule sheet covers today. When false, isClosed
+   *  alone can't be trusted — consumers should gate UI behind this. */
+  scheduleKnown: boolean;
   dayName: string;
 } {
   const today = todayInMedina();
   const day = week.days.find((d) => d.date === today.iso);
 
-  // Sunday (or no match) → closed
   if (!day) {
     return {
       shopHours: null,
       working: [],
-      isClosed: today.dayName === 'Sunday' || !week.isCurrent,
+      isClosed: today.dayName === 'Sunday',
+      scheduleKnown: week.isCurrent,
       dayName: today.dayName,
     };
   }
@@ -317,6 +322,7 @@ export function getWorkingToday(week: WeekSchedule): {
     shopHours: day.shopHours,
     working,
     isClosed: false,
+    scheduleKnown: true,
     dayName: today.dayName,
   };
 }

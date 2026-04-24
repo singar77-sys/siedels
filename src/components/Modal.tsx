@@ -29,7 +29,7 @@ export function Modal({ onClose, children }: ModalProps) {
     >
       <div className="absolute inset-0 backdrop-blur-sm" style={{ background: 'var(--scrim)' }} />
       <div
-        className="relative bg-surface border border-line-strong max-w-lg w-full shadow-2xl max-h-[90vh] overflow-y-auto"
+        className="relative bg-surface border border-line-strong max-w-lg w-full shadow-2xl max-h-[90dvh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
         style={{ scrollbarWidth: 'none' }}
       >

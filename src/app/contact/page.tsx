@@ -3,7 +3,7 @@ import { Nav } from '@/components/Nav';
 import { PageHero } from '@/components/PageHero';
 import { FadeIn } from '@/components/FadeIn';
 import { Footer } from '@/components/Footer';
-import { hours, PHONE, PHONE_HREF, ADDRESS, CITY_STATE_ZIP, MAPS_URL, SQUARE_BOOKING_URL, GOOGLE_BUSINESS_URL } from '@/data/shop';
+import { hours, PHONE, PHONE_HREF, ADDRESS, CITY_STATE_ZIP, MAPS_URL, SQUARE_BOOKING_URL, GOOGLE_BUSINESS_URL, IMAGE_ALTS } from '@/data/shop';
 import { Icon } from '@/components/Icon';
 
 export const metadata: Metadata = {
@@ -32,10 +32,10 @@ export default function ContactPage() {
         </a>
       </div>
 
-      <main id="main" className="grid-bg min-h-screen pb-20 md:pb-0">
+      <main id="main" className="grid-bg min-h-dvh pb-20 md:pb-0">
         <PageHero
           image="/images/siedels-barbershop-storefront-medina-ohio.webp"
-          imageAlt="Siedel's Barbershop storefront on Court Street in Medina, Ohio"
+          imageAlt={IMAGE_ALTS.storefront}
           label="DESTINATION FOUND"
           title="MEDINA"
           titleAccent="CENTRAL"

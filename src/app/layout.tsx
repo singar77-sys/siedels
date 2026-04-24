@@ -6,9 +6,10 @@ import { SacrifixEasterEgg } from '@/components/SacrifixEasterEgg';
 import { ItalyEasterEgg } from '@/components/ItalyEasterEgg';
 import { TeamModeEasterEgg } from '@/components/TeamModeEasterEgg';
 import { PricingPitchEasterEgg } from '@/components/PricingPitchEasterEgg';
+import { PatriotEasterEgg } from '@/components/PatriotEasterEgg';
 import { MedinaAmbience } from '@/components/MedinaAmbience';
 import { fetchWeather } from '@/lib/weather';
-import { RATING, REVIEW_COUNT } from '@/data/shop';
+import { RATING, REVIEW_COUNT, COORDS, TEAM_COUNT_WORD, IMAGE_ALTS } from '@/data/shop';
 import './globals.css';
 
 const BASE_URL = 'https://siedels.vercel.app';
@@ -22,22 +23,22 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: "Siedel's Barbershop | Haircuts & Fades | Medina, Ohio",
-  description: "Eleven barbers in Medina, Ohio. Haircuts, fades, beard work, straight razor shaves. Cash only. ATM on site.",
+  description: `${TEAM_COUNT_WORD} barbers in Medina, Ohio. Haircuts, fades, beard work, straight razor shaves. Cash only. ATM on site.`,
   keywords: ['barbershop', 'Medina Ohio', 'haircuts', 'beard trim', 'barber', 'fades', 'Cleveland', 'Medina County', 'straight razor shave', 'Court Street', 'N Court Street', 'barber shop near me'],
   alternates: { canonical: '/' },
   openGraph: {
     title: "Siedel's Barbershop | Medina, Ohio",
-    description: "Eleven barbers in Medina, Ohio. Cash only. ATM on site.",
+    description: `${TEAM_COUNT_WORD} barbers in Medina, Ohio. Cash only. ATM on site.`,
     url: '/',
     siteName: "Siedel's Barbershop",
     type: 'website',
     locale: 'en_US',
-    images: [{ url: '/images/siedels-barbershop-medina-ohio.webp', width: 1920, height: 1080, alt: "Siedel's Barbershop barber pole at golden hour in Medina, Ohio" }],
+    images: [{ url: '/images/siedels-barbershop-medina-ohio.webp', width: 1920, height: 1080, alt: IMAGE_ALTS.heroGoldenHour }],
   },
   twitter: {
     card: 'summary_large_image',
     title: "Siedel's Barbershop | Medina, Ohio",
-    description: "Eleven barbers in Medina, Ohio. Cash only. ATM on site.",
+    description: `${TEAM_COUNT_WORD} barbers in Medina, Ohio. Cash only. ATM on site.`,
     images: ['/images/siedels-barbershop-medina-ohio.webp'],
   },
   robots: {
@@ -53,7 +54,7 @@ const jsonLd = {
   '@id': `${BASE_URL}/#barbershop`,
   name: "Siedel's Barbershop",
   image: `${BASE_URL}/images/siedels-barbershop-medina-ohio.webp`,
-  description: "Eleven barbers in Medina, Ohio. Haircuts, fades, beard work, straight razor shaves. Cash only. ATM on site.",
+  description: `${TEAM_COUNT_WORD} barbers in Medina, Ohio. Haircuts, fades, beard work, straight razor shaves. Cash only. ATM on site.`,
   url: BASE_URL,
   telephone: '+13309520777',
   priceRange: '$23–$96',
@@ -70,7 +71,7 @@ const jsonLd = {
     postalCode: '44256',
     addressCountry: 'US',
   },
-  geo: { '@type': 'GeoCoordinates', latitude: 41.1445, longitude: -81.8637 },
+  geo: { '@type': 'GeoCoordinates', latitude: COORDS.lat, longitude: COORDS.lng },
   openingHoursSpecification: [
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Monday', opens: '08:00', closes: '20:00' },
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Tuesday', opens: '08:00', closes: '18:00' },
@@ -113,6 +114,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <ItalyEasterEgg />
         <TeamModeEasterEgg />
         <PricingPitchEasterEgg />
+        <PatriotEasterEgg />
         <LgbtqEasterEgg />
         </ThemeProvider>
         <Script

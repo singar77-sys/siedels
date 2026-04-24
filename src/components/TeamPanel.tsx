@@ -7,6 +7,7 @@ interface ScheduleTodayProps {
   shopHours: string | null;
   working: { firstName: string; display: string; raw: string }[];
   isClosed: boolean;
+  scheduleKnown: boolean;
   dayName: string;
 }
 
@@ -76,7 +77,7 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
             <a
               href={PHONE_HREF}
               onClick={(e) => e.stopPropagation()}
-              className="block w-full py-2 border border-white text-white font-headline text-[11px] font-bold uppercase tracking-widest text-center hover:bg-white hover:text-red transition-all duration-300"
+              className="block w-full min-h-11 py-3 border border-white text-white font-headline text-xs font-bold uppercase tracking-widest text-center flex items-center justify-center hover:bg-white hover:text-red transition-all duration-300"
             >
               CALL NOW
             </a>
