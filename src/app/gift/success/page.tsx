@@ -31,7 +31,7 @@ export default function GiftSuccessPage() {
                 <ul className="space-y-4">
                   {[
                     { icon: 'mail', text: 'Stripe sent a receipt to your email. That email is your gift card.' },
-                    { icon: 'confirmation_number', text: 'Bring the receipt (phone or print) to Siedel's on Court Street.' },
+                    { icon: 'confirmation_number', text: "Bring the receipt (phone or print) to Siedel\u2019s on Court Street." },
                     { icon: 'scissors', text: 'Good for any service, any barber, any visit. No expiration.' },
                   ].map(({ icon, text }) => (
                     <li key={icon} className="flex items-start gap-4">
