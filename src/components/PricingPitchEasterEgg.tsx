@@ -292,9 +292,32 @@ const SLIDES: Slide[] = [
   },
   {
     kind: 'bignumber',
-    number: '$21',
-    label: 'more per member per year — for Jim',
-    footnote: 'A Solo member pays $336/year ($28×12). With a 25% skip rate, they come in ~9 times. 9×$35 walk-in = $315. Member pays $21 more than a regular customer. Both sides win.',
+    number: '9.6',
+    label: 'visits per year is Jim\'s break-even',
+    footnote: '$28×12 = $336. At $35/cut, Jim needs them coming fewer than 9.6 times to make more than walk-in. That\'s once every 5.5 weeks or less. A 3-week regular who joins costs Jim $119/year. A 6-week guy who joins earns Jim $31 extra. Pick the right customer.',
+  },
+  {
+    kind: 'mechanic',
+    eyebrow: 'THIS MATTERS — KNOW WHO TO PITCH',
+    title: 'NOT EVERY REGULAR IS THE RIGHT FIT',
+    today: {
+      headline: 'Leave these guys walk-in',
+      points: [
+        'Comes every 3–4 weeks without being asked.',
+        'Already loyal — no risk of drifting.',
+        'At $28/mo and 13 visits/yr, Jim makes $119 less than walk-in.',
+        'Give them a discount for nothing? They were already coming.',
+      ],
+    },
+    next: {
+      headline: 'These are your members',
+      points: [
+        'Means to come monthly, keeps putting it off.',
+        'Goes 6–8 weeks, then feels bad about it.',
+        'Might try a cheaper place next month — $28 keeps him here.',
+        'Subscription replaces the friction of rebooking. He stays.',
+      ],
+    },
   },
   {
     kind: 'bignumber',
