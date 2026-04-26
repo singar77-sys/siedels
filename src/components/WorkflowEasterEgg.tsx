@@ -92,7 +92,7 @@ export function WorkflowEasterEgg() {
 function WorkflowChart() {
   return (
     <svg
-      viewBox="0 0 1240 1150"
+      viewBox="0 0 1240 1430"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
       aria-labelledby="wf-title wf-desc"
@@ -226,6 +226,36 @@ function WorkflowChart() {
       <text x="930" y="1044" textAnchor="middle" fontSize="28" fontWeight="700" fill="var(--text)">$48.25</text>
       <text x="930" y="1068" textAnchor="middle" fontSize="13" fill="var(--text-muted)">Siedel&apos;s Bank</text>
       <text x="930" y="1088" textAnchor="middle" fontSize="11" fontStyle="italic" fill="var(--text-subtle)">Before anyone walks in</text>
+
+      {/* ============ CUSTOMER BALANCE CHECK ============ */}
+      <line x1="40" y1="1158" x2="1195" y2="1158" stroke="var(--line-strong)" strokeWidth="1" />
+
+      <text x="40" y="1196" fontSize="20" fontWeight="700" fill="var(--text)" letterSpacing="-0.01em">
+        CUSTOMER BALANCE CHECK
+      </text>
+      <text x="40" y="1218" fontSize="13" fill="var(--text-subtle)" letterSpacing="0.02em">
+        Customer checks remaining balance anytime — no login, no staff, no friction.
+      </text>
+
+      <StepBox x={40}  y={1243} num="A" title="Email arrives"    line1="Code + balance link"   line2="sent at purchase."    highlight="siedels.com/gift/balance" />
+      <StepBox x={335} y={1243} num="B" title="/gift/balance"    line1="Code pre-filled from"  line2="URL — no typing."     italic="Opens in seconds." />
+      <StepBox x={630} y={1243} num="C" title="Balance shown"    line1="Face value, remaining" line2="balance, and status."  italic="No login required." />
+
+      {/* Arrows A→B, B→C */}
+      <line x1="312" y1="1313" x2="333" y2="1313" stroke="var(--text-muted)" strokeWidth="1.8" markerEnd="url(#wfArrow)" />
+      <line x1="607" y1="1313" x2="628" y2="1313" stroke="var(--text-muted)" strokeWidth="1.8" markerEnd="url(#wfArrow)" />
+
+      {/* Public page callout */}
+      <g>
+        <rect x="925" y="1243" width="270" height="140" rx="14"
+          fill="var(--red)" fillOpacity="0.08"
+          stroke="var(--red)" strokeWidth="1.5"
+        />
+        <text x="945" y="1278" fontSize="15" fontWeight="700" fill="var(--text)">PUBLIC PAGE</text>
+        <text x="945" y="1308" fontSize="13" fill="var(--text-muted)">Read-only. No login needed.</text>
+        <text x="945" y="1328" fontSize="12" fill="var(--text-muted)">Code is the only credential.</text>
+        <text x="945" y="1348" fontSize="12" fill="var(--text-muted)">No personal info ever shown.</text>
+      </g>
     </svg>
   );
 }

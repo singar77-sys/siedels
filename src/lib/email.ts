@@ -65,6 +65,13 @@ export async function sendGiftCardEmail(params: {
       <p class="code">${params.code}</p>
     </div>
 
+    <div style="text-align:center;margin:20px 0 0;">
+      <a href="${process.env.NEXT_PUBLIC_BASE_URL}/gift/balance?code=${params.code}"
+         style="display:inline-block;background:#E31B23;color:#ffffff;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;padding:12px 32px;">
+        CHECK BALANCE ANYTIME →
+      </a>
+    </div>
+
     ${params.giftMessage ? `
     <div class="message-box">
       <p class="message-text">&ldquo;${params.giftMessage}&rdquo;</p>
