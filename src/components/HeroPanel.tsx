@@ -63,15 +63,15 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
         style={{ background: 'var(--hero-overlay)' }}
       />
 
-      <div className="relative z-10 w-full px-6 md:px-12 lg:px-16 xl:px-24 pb-8 md:pb-24 pt-4 md:pt-32">
+      <div className="relative z-10 w-full px-6 md:px-12 lg:px-16 xl:px-24 pt-4 lg:pt-6 xl:pt-8 2xl:pt-20 pb-8 md:pb-10 lg:pb-12 2xl:pb-20">
         <div className="border-l-4 border-red pl-6 md:pl-8 max-w-2xl">
           <p
-            className="font-label text-[11px] tracking-[0.3em] mb-3 md:mb-6 hero-stagger-1"
+            className="font-label text-[11px] tracking-[0.3em] mb-2 md:mb-3 lg:mb-4 2xl:mb-6 hero-stagger-1"
             style={{ color: 'var(--hero-eyebrow)' }}
           >
             IN MEMORY OF CARL SIEDEL
           </p>
-          <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight leading-[0.88] mb-4 md:mb-8">
+          <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl 2xl:text-8xl uppercase tracking-tight leading-[0.88] mb-3 md:mb-4 lg:mb-5 2xl:mb-8">
             <span className="hero-stagger-2 inline-block" style={{ color: 'var(--hero-h1)' }}>STAY</span><br />
             <span className="hero-stagger-3 inline-block hero-sharp">SHARP</span>
           </h1>
@@ -82,7 +82,7 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
             Haircuts, fades, beard work, and straight razor shaves on Court Street in Medina, Ohio.
           </p>
           <p
-            className="font-label text-[11px] tracking-[0.25em] mb-5 md:mb-10 hero-stagger-4"
+            className="font-label text-[11px] tracking-[0.25em] mb-3 md:mb-4 lg:mb-6 2xl:mb-10 hero-stagger-4"
             style={{ color: 'var(--hero-eyebrow)' }}
           >
             CASH ONLY · ATM ON SITE
