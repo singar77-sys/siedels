@@ -56,7 +56,19 @@ export default async function ServicesPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Nav />
-      <main id="main" className="grid-bg min-h-dvh">
+      {/* Mobile sticky BOOK button — sits above footer on mobile */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 p-3 bg-ink/95 backdrop-blur-sm border-t border-line-strong">
+        <a
+          href={SQUARE_BOOKING_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block w-full py-4 bg-red text-white font-headline font-bold uppercase tracking-tight text-sm text-center hover:bg-red-hover transition-colors"
+        >
+          BOOK NOW
+        </a>
+      </div>
+
+      <main id="main" className="grid-bg min-h-dvh pb-20 md:pb-0">
         <PageHero
           image="/images/barber-tools-siedels-barbershop-medina.webp"
           imageAlt="Professional barber tools at Siedel's Barbershop in Medina, Ohio"
@@ -66,8 +78,8 @@ export default async function ServicesPage() {
           subtitle="Straight-up pricing. No surprises. Cash only. ATM on site."
         />
 
-        <section className="py-16 md:py-24">
-          <div className="max-w-5xl mx-auto px-8">
+        <section className="py-8 md:py-24">
+          <div className="max-w-5xl mx-auto px-4 md:px-8">
             <ServicesList
               working={today.working}
               scheduleKnown={today.scheduleKnown}
@@ -78,13 +90,13 @@ export default async function ServicesPage() {
                   href={SQUARE_BOOKING_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-red text-white font-headline font-bold uppercase tracking-tight px-8 py-4 hover:bg-red-hover transition-colors"
+                  className="flex items-center justify-center gap-2 bg-red text-white font-headline font-bold uppercase tracking-tight px-8 py-4 hover:bg-red-hover transition-colors min-h-[44px]"
                 >
                   BOOK NOW
                 </a>
                 <a
                   href={PHONE_HREF}
-                  className="inline-flex items-center justify-center gap-2 border border-line-strong text-text-muted font-headline font-bold uppercase tracking-tight px-8 py-4 hover:text-text hover:border-text transition-colors"
+                  className="flex items-center justify-center gap-2 border border-line-strong text-text-muted font-headline font-bold uppercase tracking-tight px-8 py-4 hover:text-text hover:border-text transition-colors min-h-[44px]"
                 >
                   <Icon name="call" className="w-5 h-5" />
                   {PHONE}
@@ -94,8 +106,8 @@ export default async function ServicesPage() {
           </div>
         </section>
 
-        <section className="py-16 md:py-24 border-t border-line-strong">
-          <div className="max-w-3xl mx-auto px-8">
+        <section className="py-8 md:py-24 border-t border-line-strong">
+          <div className="max-w-3xl mx-auto px-4 md:px-8">
             <FadeIn>
               <div className="border-l-4 border-red pl-8 mb-12">
                 <p className="font-label text-[11px] tracking-[0.3em] text-red mb-4">INTEL</p>
