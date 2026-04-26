@@ -16,16 +16,18 @@ import { ServicesPanel } from './ServicesPanel';
 import { GalleryPanel } from './GalleryPanel';
 import { TeamPanel } from './TeamPanel';
 import { TeamCardFlip } from './TeamCardFlip';
+import { GiftPanel } from './GiftPanel';
 import { ContactPanel } from './ContactPanel';
 import type { Shift } from '@/lib/schedule';
 
-const PANELS = ['HOME', 'TEAM', 'SERVICES', 'WORK', 'CONTACT'] as const;
+const PANELS = ['HOME', 'TEAM', 'SERVICES', 'WORK', 'GIFT', 'CONTACT'] as const;
 
 const PANEL_SHORT: Record<string, string> = {
   HOME: 'HOME',
   TEAM: 'TEAM',
   WORK: 'WORK',
   SERVICES: 'SERV',
+  GIFT: 'GIFT',
   CONTACT: 'INFO',
 };
 
@@ -131,47 +133,26 @@ export function HomeClient({
               className="absolute top-1/2 left-0 h-px bg-red -translate-y-[14px] transition-all duration-500 ease-out"
               style={{ width: `${(active / (PANELS.length - 1)) * 100}%` }}
             />
-            {PANELS.map((label, i) => {
-              const button = (
-                <button
-                  key={label}
-                  onClick={() => scrollToPanel(i)}
-                  className="flex flex-col items-center gap-2 px-4 group relative"
-                >
-                  {/* Dot */}
-                  <div className={`w-2.5 h-2.5 rounded-full border-2 transition-all duration-300 ${
-                    i <= active
-                      ? 'bg-red border-red scale-100'
-                      : 'bg-transparent border-line-strong group-hover:border-text-subtle scale-90'
-                  }`} />
-                  {/* Label */}
-                  <span className={`font-headline text-[13px] font-bold uppercase tracking-tight transition-all duration-300 ${
-                    active === i ? 'text-red' : 'text-text-subtle group-hover:text-text-muted'
-                  }`}>
-                    {label}
-                  </span>
-                </button>
-              );
-              // GIFT is a route, not a panel — render it visually inline
-              // between WORK and CONTACT so it sits in the same row.
-              if (label === 'CONTACT') {
-                return (
-                  <span key="gift-wrapper" className="contents">
-                    <Link
-                      href="/gift"
-                      className="flex flex-col items-center gap-2 px-4 group relative"
-                    >
-                      <div className="w-2.5 h-2.5 rounded-full border-2 bg-transparent border-line-strong group-hover:border-red scale-90 transition-all duration-300" />
-                      <span className="font-headline text-[13px] font-bold uppercase tracking-tight text-text-subtle group-hover:text-red transition-all duration-300">
-                        GIFT
-                      </span>
-                    </Link>
-                    {button}
-                  </span>
-                );
-              }
-              return button;
-            })}
+            {PANELS.map((label, i) => (
+              <button
+                key={label}
+                onClick={() => scrollToPanel(i)}
+                className="flex flex-col items-center gap-2 px-4 group relative"
+              >
+                {/* Dot */}
+                <div className={`w-2.5 h-2.5 rounded-full border-2 transition-all duration-300 ${
+                  i <= active
+                    ? 'bg-red border-red scale-100'
+                    : 'bg-transparent border-line-strong group-hover:border-text-subtle scale-90'
+                }`} />
+                {/* Label */}
+                <span className={`font-headline text-[13px] font-bold uppercase tracking-tight transition-all duration-300 ${
+                  active === i ? 'text-red' : 'text-text-subtle group-hover:text-text-muted'
+                }`}>
+                  {label}
+                </span>
+              </button>
+            ))}
           </div>
           <ThemeToggle />
           <a
@@ -226,6 +207,7 @@ export function HomeClient({
           />
           <ServicesPanel onSelectService={setSelectedService} />
           <GalleryPanel />
+          <GiftPanel />
           <ContactPanel />
         </div>
       </main>
@@ -257,43 +239,24 @@ export function HomeClient({
         role="navigation"
         aria-label="Section navigation"
       >
-        {PANELS.map((label, i) => {
-          const button = (
-            <button
-              key={label}
-              onClick={() => scrollToPanel(i)}
-              className={`flex-1 flex flex-col items-center justify-center gap-1 transition-colors ${
-                active === i ? 'text-red' : 'text-text-faint'
-              }`}
-              aria-label={label}
-              aria-current={active === i ? 'true' : undefined}
-            >
-              <div className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${
-                active === i ? 'bg-red scale-125' : 'bg-text-faint'
-              }`} />
-              <span className="font-label text-[8px] tracking-[0.12em]">
-                {PANEL_SHORT[label]}
-              </span>
-            </button>
-          );
-          // GIFT inserted between WORK and CONTACT to mirror desktop order.
-          if (label === 'CONTACT') {
-            return (
-              <span key="gift-wrapper" className="contents">
-                <Link
-                  href="/gift"
-                  className="flex-1 flex flex-col items-center justify-center gap-1 text-text-faint"
-                  aria-label="Gift cards"
-                >
-                  <div className="w-1.5 h-1.5 rounded-full bg-text-faint" />
-                  <span className="font-label text-[8px] tracking-[0.12em]">GIFT</span>
-                </Link>
-                {button}
-              </span>
-            );
-          }
-          return button;
-        })}
+        {PANELS.map((label, i) => (
+          <button
+            key={label}
+            onClick={() => scrollToPanel(i)}
+            className={`flex-1 flex flex-col items-center justify-center gap-1 transition-colors ${
+              active === i ? 'text-red' : 'text-text-faint'
+            }`}
+            aria-label={label}
+            aria-current={active === i ? 'true' : undefined}
+          >
+            <div className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${
+              active === i ? 'bg-red scale-125' : 'bg-text-faint'
+            }`} />
+            <span className="font-label text-[8px] tracking-[0.12em]">
+              {PANEL_SHORT[label]}
+            </span>
+          </button>
+        ))}
         <a
           href={SQUARE_BOOKING_URL}
           target="_blank"
