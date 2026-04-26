@@ -119,7 +119,7 @@ function WorkflowChart() {
       </defs>
 
       {/* Title */}
-      <text x="40" y="48" fontSize="30" fontWeight="700" fill="var(--ink)" letterSpacing="-0.01em">
+      <text x="40" y="48" fontSize="30" fontWeight="700" fill="var(--text)" letterSpacing="-0.01em">
         GIFT CARD REDEEM — COUNTER FLOW
       </text>
       <text x="40" y="78" fontSize="15" fill="var(--text-subtle)" letterSpacing="0.02em">
@@ -150,7 +150,7 @@ function WorkflowChart() {
         />
         <circle cx="72" cy="357" r="14" fill="var(--red)" />
         <path d="M66 357 L70 361 L78 353" stroke="#ffffff" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-        <text x="95" y="362" fontSize="15" fontWeight="700" fill="var(--ink)">CUSTOMER PRIVACY</text>
+        <text x="95" y="362" fontSize="15" fontWeight="700" fill="var(--text)">CUSTOMER PRIVACY</text>
         <text x="60" y="395" fontSize="13" fill="var(--text-muted)">Only the balance is shown.</text>
         <text x="60" y="418" fontSize="12" fill="var(--text-muted)">No name. No email. No phone.</text>
         <text x="60" y="437" fontSize="12" fill="var(--text-muted)">Nothing personal ever appears.</text>
@@ -172,7 +172,7 @@ function WorkflowChart() {
       <line x1="40" y1="510" x2="1195" y2="510" stroke="var(--line-strong)" strokeWidth="1" />
 
       {/* Section header — uppercase + Siedel headline tracking */}
-      <text x="40" y="548" fontSize="20" fontWeight="700" fill="var(--ink)" letterSpacing="-0.01em">
+      <text x="40" y="548" fontSize="20" fontWeight="700" fill="var(--text)" letterSpacing="-0.01em">
         HOW IT STAYS LOCKED DOWN
       </text>
 
@@ -204,12 +204,12 @@ function StepBox({ x, y, num, title, line1, line2, italic, highlight, subline }:
       <rect x={x} y={y} width={270} height={140} rx={14} fill="var(--surface)" stroke="var(--line-strong)" strokeWidth={1.5} />
       <circle cx={cx} cy={cy} r={16} fill="var(--red)" />
       <text x={cx} y={cy + 6} textAnchor="middle" fontSize={15} fontWeight={700} fill="#ffffff">{num}</text>
-      <text x={cx + 28} y={cy + 6} fontSize={17} fontWeight={700} fill="var(--ink)">{title}</text>
+      <text x={cx + 28} y={cy + 6} fontSize={17} fontWeight={700} fill="var(--text)">{title}</text>
 
       {line1 && <text x={x + 20} y={y + 75} fontSize={13} fill="var(--text-muted)">{line1}</text>}
       {line2 && <text x={x + 20} y={y + 95} fontSize={13} fill="var(--text-muted)">{line2}</text>}
       {highlight && (
-        <text x={x + 20} y={y + (line2 ? 117 : 105)} fontSize={14} fontWeight={600} fill="var(--ink)">{highlight}</text>
+        <text x={x + 20} y={y + (line2 ? 117 : 105)} fontSize={14} fontWeight={600} fill="var(--text)">{highlight}</text>
       )}
       {subline && <text x={x + 20} y={y + 125} fontSize={13} fill="var(--text-muted)">{subline}</text>}
       {italic && (
@@ -234,7 +234,7 @@ function SecCard({ x, y, title, l1, l2, l3, italic }: SecCardProps) {
       <rect x={x} y={y} width={270} height={180} rx={14} fill="var(--surface)" stroke="var(--line-strong)" strokeWidth={1.5} />
       {/* Red top stripe — replaces the original near-black stripe with Siedel red */}
       <rect x={x} y={y} width={270} height={4} rx={2} fill="var(--red)" />
-      <text x={x + 20} y={y + 40} fontSize={16} fontWeight={700} fill="var(--ink)" letterSpacing="0.02em">{title}</text>
+      <text x={x + 20} y={y + 40} fontSize={16} fontWeight={700} fill="var(--text)" letterSpacing="0.02em">{title}</text>
       <text x={x + 20} y={y + 73} fontSize={13} fill="var(--text-muted)">{l1}</text>
       <text x={x + 20} y={y + 93} fontSize={13} fill="var(--text-muted)">{l2}</text>
       {l3 && <text x={x + 20} y={y + 113} fontSize={13} fill="var(--text-muted)">{l3}</text>}
