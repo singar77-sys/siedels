@@ -5,8 +5,6 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { FadeIn } from '@/components/FadeIn';
 import { Icon } from '@/components/Icon';
-import { PageHero } from '@/components/PageHero';
-import { CTASection } from '@/components/CTASection';
 
 const DENOMINATIONS = [25, 50, 75, 100];
 
@@ -39,18 +37,22 @@ export default function GiftCardPage() {
   return (
     <>
       <Nav />
-      <main id="main" className="grid-bg min-h-dvh">
-        <PageHero
-          image="/images/siedels-storefront-summer-angle-medina-ohio.webp"
-          imageAlt="Young client getting a haircut at Siedel's Barbershop in Medina, Ohio"
-          label="THE GIFT FILE"
-          title="THE GIFT"
-          titleAccent="OF A CUT"
-          subtitle="A gift card to Siedel's. Redeemable for any service — cut, fade, shave, the works. No expiration. No fine print."
-        />
-
-        <section className="py-8 md:py-24">
+      <main id="main" className="grid-bg min-h-dvh pt-28 md:pt-32 pb-16 md:pb-24">
+        <section>
           <div className="max-w-2xl mx-auto px-4 md:px-8">
+            <FadeIn>
+              <div className="border-l-4 border-red pl-6 md:pl-8 mb-10 md:mb-14">
+                <p className="font-label text-[11px] tracking-[0.3em] text-red mb-3">GIFT CARDS</p>
+                <h1 className="font-headline text-4xl md:text-6xl uppercase tracking-tight leading-[0.9] mb-4">
+                  GIVE THE GIFT<br />
+                  <span className="text-red">OF A FRESH CUT</span>
+                </h1>
+                <p className="font-body text-base md:text-lg text-text-muted leading-relaxed">
+                  Redeemable for any service — cut, fade, shave, the works. No expiration. No fine print. Sent by email instantly after purchase.
+                </p>
+              </div>
+            </FadeIn>
+
 
             {/* Denomination picker */}
             <FadeIn>
@@ -174,8 +176,6 @@ export default function GiftCardPage() {
             </FadeIn>
           </div>
         </section>
-
-        <CTASection />
       </main>
       <Footer />
     </>
