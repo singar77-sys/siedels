@@ -5,6 +5,8 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { FadeIn } from '@/components/FadeIn';
 import { Icon } from '@/components/Icon';
+import { PageHero } from '@/components/PageHero';
+import { CTASection } from '@/components/CTASection';
 
 const DENOMINATIONS = [25, 50, 75, 100];
 
@@ -37,26 +39,17 @@ export default function GiftCardPage() {
   return (
     <>
       <Nav />
-      <main id="main" className="grid-bg min-h-screen pb-20 md:pb-0">
+      <main id="main" className="grid-bg min-h-dvh">
+        <PageHero
+          image="/images/siedels-storefront-summer-angle-medina-ohio.webp"
+          imageAlt="Young client getting a haircut at Siedel's Barbershop in Medina, Ohio"
+          label="THE GIFT FILE"
+          title="THE GIFT"
+          titleAccent="OF A CUT"
+          subtitle="A gift card to Siedel's. Redeemable for any service — cut, fade, shave, the works. No expiration. No fine print."
+        />
 
-        {/* Hero */}
-        <section className="border-b border-line-strong py-16 md:py-24">
-          <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-            <FadeIn>
-              <p className="font-label text-[11px] tracking-[0.4em] text-red mb-4">SIEDEL&apos;S BARBERSHOP</p>
-              <h1 className="font-headline uppercase tracking-tight leading-[0.9] text-5xl md:text-7xl mb-6">
-                GIVE THE GIFT<br />
-                <span className="text-stroke">OF A GREAT CUT</span>
-              </h1>
-              <p className="font-body text-lg md:text-xl text-text-muted max-w-xl mx-auto">
-                A gift card to Siedel&apos;s. Redeemable for any service — haircut, fade, shave, the works.
-                No expiration. No fine print.
-              </p>
-            </FadeIn>
-          </div>
-        </section>
-
-        <section className="py-12 md:py-20">
+        <section className="py-8 md:py-24">
           <div className="max-w-2xl mx-auto px-4 md:px-8">
 
             {/* Denomination picker */}
@@ -181,6 +174,8 @@ export default function GiftCardPage() {
             </FadeIn>
           </div>
         </section>
+
+        <CTASection />
       </main>
       <Footer />
     </>
