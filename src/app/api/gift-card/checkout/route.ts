@@ -1,71 +1,86 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-// Fee structure (Jaworski method):
-//   PLATFORM_PCT  → 10% of face value, visible to client as "platform fee"
-//   HANDLING_CENTS → $1.50 flat per transaction, handling overhead (internal)
-//   Total application_fee = HANDLING_CENTS + (amount_cents × PLATFORM_PCT)
-//   Connected account (Jim's Stripe) receives: amount_cents − application_fee
+// Fee structure:
+//   Customer pays face value + $1.50 processing fee
+//   $1.50 application_fee routes to Mark's platform account via Stripe Connect
+//   Jim's connected account receives face_value minus Stripe's processing fee
 
-const PLATFORM_PCT = 0.10;
-const HANDLING_CENTS = 150;
+const HANDLING_CENTS = 150; // $1.50 to platform
+const MIN_AMOUNT     = 25;
+const PRESET_AMOUNTS = new Set([25, 50, 100]);
 
-const VALID_AMOUNTS = new Set([25, 50, 75, 100]);
+const baseUrl = () => process.env.NEXT_PUBLIC_BASE_URL ?? 'https://siedels.vercel.app';
 
 export async function POST(req: NextRequest) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-  const body = await req.json().catch(() => null);
+  const body   = await req.json().catch(() => null);
   if (!body) return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
 
-  const { amount, to, from, message } = body as {
-    amount: number;
-    to?: string;
-    from?: string;
-    message?: string;
+  const { amount, to, from, message, buyerEmail } = body as {
+    amount:      number;
+    to?:         string;
+    from?:       string;
+    message?:    string;
+    buyerEmail?: string;
   };
 
-  if (!VALID_AMOUNTS.has(amount)) {
-    return NextResponse.json({ error: 'Invalid amount' }, { status: 400 });
+  if (
+    typeof amount !== 'number' ||
+    !Number.isInteger(amount) ||
+    amount < MIN_AMOUNT ||
+    amount > 10_000
+  ) {
+    return NextResponse.json({ error: `Amount must be a whole dollar value between $${MIN_AMOUNT} and $10,000` }, { status: 400 });
   }
 
   const amountCents = amount * 100;
-  const applicationFeeCents = Math.round(amountCents * PLATFORM_PCT + HANDLING_CENTS);
-
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://siedels.vercel.app';
+  const url         = baseUrl();
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
+    customer_email: buyerEmail || undefined,
     line_items: [
       {
         price_data: {
-          currency: 'usd',
-          unit_amount: amountCents,
+          currency:     'usd',
+          unit_amount:  amountCents,
           product_data: {
             name: `Siedel's Barbershop Gift Card – $${amount}`,
             description: to
-              ? `A gift for ${to} — redeemable for any service at Siedel's in Medina, Ohio.`
-              : 'Redeemable for any service at Siedel\'s Barbershop in Medina, Ohio.',
-            images: [`${baseUrl}/images/siedels-barbershop-storefront-medina-ohio.webp`],
+              ? `A gift for ${to} — good for any service at Siedel's in Medina, Ohio.`
+              : "Good for any service at Siedel's Barbershop in Medina, Ohio.",
+            images: [`${url}/images/siedels-storefront-summer-clouds-medina-ohio.webp`],
           },
+        },
+        quantity: 1,
+      },
+      {
+        price_data: {
+          currency:     'usd',
+          unit_amount:  HANDLING_CENTS,
+          product_data: { name: 'Processing fee' },
         },
         quantity: 1,
       },
     ],
     mode: 'payment',
     payment_intent_data: {
-      application_fee_amount: applicationFeeCents,
+      application_fee_amount: HANDLING_CENTS,
       transfer_data: {
         destination: process.env.JIMS_STRIPE_ACCOUNT_ID!,
       },
     },
     metadata: {
-      to: to ?? '',
-      from: from ?? '',
-      message: message ?? '',
-      amount: String(amount),
+      to:          to      ?? '',
+      from:        from    ?? '',
+      message:     message ?? '',
+      amount:      String(amount),
+      face_value:  String(amountCents),
+      buyer_email: buyerEmail ?? '',
     },
-    success_url: `${baseUrl}/gift/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${baseUrl}/gift`,
+    success_url: `${url}/gift/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url:  `${url}/gift`,
   });
 
   return NextResponse.json({ url: session.url });

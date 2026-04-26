@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 };
 
 const STEPS = [
-  { num: '01', text: 'Stripe sent a receipt to your email. That email is your gift card.' },
-  { num: '02', text: "Bring the receipt (phone or print) to Siedel\u2019s on Court Street." },
-  { num: '03', text: 'Good for any service, any barber, any visit. No expiration.' },
+  { num: '01', text: "Your gift card code was emailed to you \u2014 check your inbox (and spam, just in case)." },
+  { num: '02', text: "Present the code at the counter \u2014 from your phone, printed, or just read it aloud." },
+  { num: '03', text: "Good for any service, any barber, any visit. See terms for dormancy fee details." },
 ];
 
 export default function GiftSuccessPage() {
@@ -32,7 +32,7 @@ export default function GiftSuccessPage() {
                 <span className="text-stroke">GOOD</span>
               </h1>
 
-              <div className="bg-surface border border-line-strong p-6 md:p-8 mb-8 text-left">
+              <div className="bg-surface border border-line-strong p-6 md:p-8 mb-3 text-left">
                 <p className="font-label text-[10px] tracking-[0.35em] text-text-subtle mb-4">WHAT HAPPENS NEXT</p>
                 <ul className="space-y-4">
                   {STEPS.map(({ num, text }) => (
@@ -43,6 +43,11 @@ export default function GiftSuccessPage() {
                   ))}
                 </ul>
               </div>
+              <p className="font-label text-[9px] tracking-widest text-text-faint mb-8">
+                <Link href="/gift/terms" className="underline hover:text-red transition-colors">
+                  GIFT CARD TERMS &amp; DORMANCY FEE POLICY
+                </Link>
+              </p>
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
                 <a

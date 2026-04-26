@@ -92,7 +92,7 @@ export function WorkflowEasterEgg() {
 function WorkflowChart() {
   return (
     <svg
-      viewBox="0 0 1240 780"
+      viewBox="0 0 1240 1150"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
       aria-labelledby="wf-title wf-desc"
@@ -181,6 +181,51 @@ function WorkflowChart() {
       <SecCard x={335} y={572} title="CHANGE PIN = LOGOUT"  l1="Update the PIN and"   l2="every device signs out"   l3="automatically." />
       <SecCard x={630} y={572} title="STATELESS & SIGNED"   l1="HMAC-SHA256 cookie."  l2="No Redis, no DB —"        l3="can't be forged." />
       <SecCard x={925} y={572} title="TWO-LAYER CHECK"      l1="Middleware fast-checks" l2="cookie. Routes do full" l3="HMAC validation." />
+
+      {/* ============ PAYMENT ROUTING ============ */}
+      <line x1="40" y1="797" x2="1195" y2="797" stroke="var(--line-strong)" strokeWidth="1" />
+
+      <text x="40" y="832" fontSize="20" fontWeight="700" fill="var(--text)" letterSpacing="-0.01em">
+        PAYMENT ROUTING — EVERY PURCHASE
+      </text>
+      <text x="40" y="855" fontSize="13" fill="var(--text-subtle)" letterSpacing="0.02em">
+        How $51.50 flows from customer to final destination. Mark&apos;s fee is passed to the customer — zero cost to Siedel&apos;s.
+      </text>
+
+      {/* Customer pays — centered input */}
+      <rect x="445" y="868" width="270" height="76" rx="14" fill="var(--surface)" stroke="var(--red)" strokeWidth="2" />
+      <text x="580" y="898" textAnchor="middle" fontSize="12" fill="var(--text-subtle)" letterSpacing="0.1em">CUSTOMER PAYS</text>
+      <text x="580" y="926" textAnchor="middle" fontSize="26" fontWeight="700" fill="var(--text)">$51.50</text>
+
+      {/* Down arrow */}
+      <line x1="580" y1="944" x2="580" y2="972" stroke="var(--text-muted)" strokeWidth="1.8" markerEnd="url(#wfArrow)" />
+
+      {/* Horizontal split bar */}
+      <line x1="310" y1="974" x2="930" y2="974" stroke="var(--text-muted)" strokeWidth="1.8" />
+      <line x1="310" y1="974" x2="310" y2="996" stroke="var(--text-muted)" strokeWidth="1.8" markerEnd="url(#wfArrow)" />
+      <line x1="620" y1="974" x2="620" y2="996" stroke="var(--text-muted)" strokeWidth="1.8" markerEnd="url(#wfArrow)" />
+      <line x1="930" y1="974" x2="930" y2="996" stroke="var(--text-muted)" strokeWidth="1.8" markerEnd="url(#wfArrow)" />
+
+      {/* Mark's fee */}
+      <rect x="175" y="998" width="270" height="130" rx="14" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
+      <rect x="175" y="998" width="270" height="4" rx="2" fill="var(--red)" />
+      <text x="310" y="1044" textAnchor="middle" fontSize="28" fontWeight="700" fill="var(--text)">$1.50</text>
+      <text x="310" y="1068" textAnchor="middle" fontSize="13" fill="var(--text-muted)">Setup fee → Mark</text>
+      <text x="310" y="1088" textAnchor="middle" fontSize="11" fontStyle="italic" fill="var(--text-subtle)">Baked into customer price</text>
+
+      {/* Stripe */}
+      <rect x="485" y="998" width="270" height="130" rx="14" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
+      <rect x="485" y="998" width="270" height="4" rx="2" fill="var(--red)" />
+      <text x="620" y="1044" textAnchor="middle" fontSize="28" fontWeight="700" fill="var(--text)">$1.75</text>
+      <text x="620" y="1068" textAnchor="middle" fontSize="13" fill="var(--text-muted)">Stripe fee (2.9% + $0.30)</text>
+      <text x="620" y="1088" textAnchor="middle" fontSize="11" fontStyle="italic" fill="var(--text-subtle)">Cost of processing</text>
+
+      {/* Siedel's Bank */}
+      <rect x="795" y="998" width="270" height="130" rx="14" fill="var(--surface)" stroke="var(--red)" strokeWidth="2" />
+      <rect x="795" y="998" width="270" height="4" rx="2" fill="var(--red)" />
+      <text x="930" y="1044" textAnchor="middle" fontSize="28" fontWeight="700" fill="var(--text)">$48.25</text>
+      <text x="930" y="1068" textAnchor="middle" fontSize="13" fill="var(--text-muted)">Siedel&apos;s Bank</text>
+      <text x="930" y="1088" textAnchor="middle" fontSize="11" fontStyle="italic" fill="var(--text-subtle)">Before anyone walks in</text>
     </svg>
   );
 }
