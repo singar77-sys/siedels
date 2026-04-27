@@ -100,8 +100,7 @@ export async function sendGiftCardEmail(params: {
     <hr class="divider" />
 
     <p style="font-size:11px;color:#444;line-height:1.8;">
-      After 12 months of inactivity, a $2.50/month dormancy fee applies.
-      See full terms at <a href="https://siedels.vercel.app/gift/terms" style="color:#666;">siedels.com/gift/terms</a>.
+      This gift card does not expire. After 24 consecutive months of inactivity, a $2.50/month dormancy fee may be deducted from the remaining balance. Any use of the card resets the 24-month clock.
     </p>
   </div>
 

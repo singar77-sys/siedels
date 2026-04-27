@@ -182,7 +182,7 @@ export function GiftPanel() {
             </p>
             <p className="font-body text-[11px] text-text-subtle mt-4 leading-relaxed">
               <span className="font-bold text-text-muted">Card terms:</span>{' '}
-              Gift cards never expire. After 12 consecutive months of inactivity, a $2.50 per month inactivity fee will be deducted from the remaining balance until the card is used or the balance reaches zero. Any redemption resets the 12-month clock.
+              Gift cards never expire. After 24 consecutive months of inactivity, a $2.50/month dormancy fee may be deducted from the remaining balance until the card is used or the balance reaches zero. Any use of the card resets the 24-month clock.
             </p>
 
           </div>

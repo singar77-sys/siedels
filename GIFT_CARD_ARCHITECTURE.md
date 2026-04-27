@@ -178,7 +178,7 @@ The charge UPDATE uses `WHERE balance_cents >= amountCents` in a single statemen
 
 Implemented but **not yet enabled** — requires legal review before the cron is activated (see Future Work above).
 
-Logic: $2.50/month applied to cards with no activity for 12+ consecutive months. Each fee is logged as a `dormancy_fee` transaction. Any redemption or credit resets the 12-month clock (`last_activity_at`).
+Logic: $2.50/month applied to cards with no activity for 24+ consecutive months. Each fee is logged as a `dormancy_fee` transaction. Any redemption or credit resets the 24-month clock (`last_activity_at`).
 
 ---
 

@@ -122,7 +122,7 @@ export async function applyDormancyFees(): Promise<number> {
     SELECT * FROM gift_cards
     WHERE status = 'active'
       AND balance_cents > 0
-      AND last_activity_at < NOW() - INTERVAL '12 months'
+      AND last_activity_at < NOW() - INTERVAL '24 months'
   `;
 
   for (const card of cards) {
