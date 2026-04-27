@@ -30,11 +30,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Missing session data' }, { status: 400 });
   }
 
+  const deliverTo = meta.recipient_email || session.customer_email;
+
   // Idempotency — Stripe retries failed webhooks; re-send email if already fulfilled
   const existing = await lookupCardBySession(session.id);
   if (existing) {
     await sendGiftCardEmail({
-      to:             session.customer_email,
+      to:             deliverTo,
       code:           existing.code,
       faceValueCents: existing.face_value_cents,
       recipientName:  existing.recipient_name  || undefined,
@@ -71,7 +73,7 @@ export async function POST(req: NextRequest) {
   }
 
   await sendGiftCardEmail({
-    to:             session.customer_email,
+    to:             deliverTo,
     code,
     faceValueCents: faceValue,
     recipientName:  meta.to      || undefined,

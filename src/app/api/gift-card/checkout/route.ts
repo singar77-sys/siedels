@@ -17,12 +17,13 @@ export async function POST(req: NextRequest) {
   const body   = await req.json().catch(() => null);
   if (!body) return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
 
-  const { amount, to, from, message, buyerEmail } = body as {
-    amount:      number;
-    to?:         string;
-    from?:       string;
-    message?:    string;
-    buyerEmail?: string;
+  const { amount, to, from, message, buyerEmail, recipientEmail } = body as {
+    amount:          number;
+    to?:             string;
+    from?:           string;
+    message?:        string;
+    buyerEmail?:     string;
+    recipientEmail?: string;
   };
 
   if (
@@ -72,12 +73,13 @@ export async function POST(req: NextRequest) {
       },
     },
     metadata: {
-      to:          to      ?? '',
-      from:        from    ?? '',
-      message:     message ?? '',
-      amount:      String(amount),
-      face_value:  String(amountCents),
-      buyer_email: buyerEmail ?? '',
+      to:              to             ?? '',
+      from:            from           ?? '',
+      message:         message        ?? '',
+      amount:          String(amount),
+      face_value:      String(amountCents),
+      buyer_email:     buyerEmail     ?? '',
+      recipient_email: recipientEmail ?? '',
     },
     success_url: `${url}/gift/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url:  `${url}/gift`,
