@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
-type Screen = 'pin' | 'lookup' | 'charge' | 'confirm' | 'next';
+type Screen = 'pin' | 'lookup' | 'charge' | 'confirm';
 
 interface CardData {
   id:             string;
@@ -22,6 +22,9 @@ function PinScreen({ onAuth }: { onAuth: () => void }) {
   const [pin,     setPin]     = useState('');
   const [error,   setError]   = useState('');
   const [loading, setLoading] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => { inputRef.current?.focus(); }, []);
 
   const submit = async () => {
     if (!pin) return;
@@ -33,32 +36,35 @@ function PinScreen({ onAuth }: { onAuth: () => void }) {
       body:    JSON.stringify({ pin }),
     });
     if (res.ok) {
+      inputRef.current?.blur();
       onAuth();
     } else {
       const data = await res.json().catch(() => ({}));
       setError(data.error ?? 'Incorrect PIN');
       setPin('');
+      inputRef.current?.focus();
     }
     setLoading(false);
   };
 
   return (
     <div className="min-h-dvh bg-ink flex items-center justify-center p-6">
-      <div className="w-full max-w-sm">
+      <div className="w-full max-w-sm sm:max-w-md">
         <p className="font-label text-[10px] tracking-[0.3em] text-red mb-3">SIEDEL&apos;S BARBERSHOP</p>
         <h1 className="font-headline text-4xl uppercase tracking-tight text-text mb-10">STAFF LOGIN</h1>
 
         <div className="mb-5">
           <label className="block font-label text-[10px] tracking-widest text-text-subtle mb-3">SHIFT PIN</label>
           <input
+            ref={inputRef}
             type="password"
             inputMode="numeric"
             value={pin}
             onChange={(e) => setPin(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && submit()}
             placeholder="••••"
-            autoFocus
-            className="w-full bg-surface border border-line-strong px-5 py-4 font-headline text-2xl text-text text-center tracking-[0.4em] placeholder:text-text-faint focus:border-red focus:outline-none transition-colors"
+            autoComplete="current-password"
+            className="w-full bg-surface border border-line-strong px-5 py-5 font-headline text-2xl text-text text-center tracking-[0.4em] placeholder:text-text-faint focus:border-red focus:outline-none transition-colors"
           />
         </div>
 
@@ -68,7 +74,7 @@ function PinScreen({ onAuth }: { onAuth: () => void }) {
           type="button"
           onClick={submit}
           disabled={loading || !pin}
-          className="w-full bg-red text-white font-headline font-bold uppercase tracking-tight py-4 hover:bg-red-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="touch-manipulation w-full bg-red text-white font-headline font-bold uppercase tracking-tight py-5 text-xl hover:bg-red-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {loading ? 'SIGNING IN…' : 'SIGN IN'}
         </button>
@@ -84,6 +90,8 @@ function LookupScreen({ onFound }: { onFound: (card: CardData) => void }) {
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => { inputRef.current?.focus(); }, []);
+
   const lookup = async () => {
     const trimmed = code.trim().toUpperCase();
     if (!trimmed) return;
@@ -96,6 +104,7 @@ function LookupScreen({ onFound }: { onFound: (card: CardData) => void }) {
     });
     if (res.ok) {
       const data = await res.json();
+      inputRef.current?.blur();
       onFound(data);
     } else {
       const data = await res.json().catch(() => ({}));
@@ -108,7 +117,7 @@ function LookupScreen({ onFound }: { onFound: (card: CardData) => void }) {
 
   return (
     <div className="min-h-dvh bg-ink flex items-center justify-center p-6">
-      <div className="w-full max-w-sm">
+      <div className="w-full max-w-sm sm:max-w-md">
         <p className="font-label text-[10px] tracking-[0.3em] text-red mb-3">GIFT CARD REDEMPTION</p>
         <h1 className="font-headline text-4xl uppercase tracking-tight text-text mb-10">LOOK UP CARD</h1>
 
@@ -117,12 +126,16 @@ function LookupScreen({ onFound }: { onFound: (card: CardData) => void }) {
           <input
             ref={inputRef}
             type="text"
+            inputMode="text"
             value={code}
             onChange={(e) => setCode(e.target.value.toUpperCase())}
             onKeyDown={(e) => e.key === 'Enter' && lookup()}
             placeholder="SIED-XXXX-XXXX-XXXX"
-            autoFocus
-            className="w-full bg-surface border border-line-strong px-5 py-4 font-headline text-lg text-text text-center tracking-[0.12em] placeholder:text-text-faint focus:border-red focus:outline-none transition-colors"
+            autoCapitalize="characters"
+            autoCorrect="off"
+            autoComplete="off"
+            spellCheck={false}
+            className="w-full bg-surface border border-line-strong px-5 py-5 font-headline text-lg text-text text-center tracking-[0.12em] placeholder:text-text-faint focus:border-red focus:outline-none transition-colors"
           />
         </div>
 
@@ -132,7 +145,7 @@ function LookupScreen({ onFound }: { onFound: (card: CardData) => void }) {
           type="button"
           onClick={lookup}
           disabled={loading || !code.trim()}
-          className="w-full bg-red text-white font-headline font-bold uppercase tracking-tight py-4 hover:bg-red-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="touch-manipulation w-full bg-red text-white font-headline font-bold uppercase tracking-tight py-5 text-xl hover:bg-red-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {loading ? 'LOOKING UP…' : 'LOOK UP BALANCE'}
         </button>
@@ -154,6 +167,9 @@ function ChargeScreen({
   const [dollars, setDollars] = useState('');
   const [error,   setError]   = useState('');
   const [loading, setLoading] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => { inputRef.current?.focus(); }, []);
 
   const amountCents = Math.round(parseFloat(dollars || '0') * 100);
   const valid = amountCents > 0 && amountCents <= card.balanceCents;
@@ -169,6 +185,7 @@ function ChargeScreen({
     });
     if (res.ok) {
       const data = await res.json();
+      inputRef.current?.blur();
       onCharged(data.newBalanceCents, amountCents);
     } else {
       const data = await res.json().catch(() => ({}));
@@ -179,24 +196,26 @@ function ChargeScreen({
 
   return (
     <div className="min-h-dvh bg-ink flex items-center justify-center p-6">
-      <div className="w-full max-w-sm">
+      <div className="w-full max-w-sm sm:max-w-md">
         <p className="font-label text-[10px] tracking-[0.3em] text-red mb-3">GIFT CARD</p>
         <p className="font-headline text-xl tracking-[0.12em] text-text-subtle mb-1">{card.code}</p>
         {card.recipientName && (
           <p className="font-body text-sm text-text-muted mb-1">For {card.recipientName}</p>
         )}
 
-        <div className="bg-surface border border-line-strong px-6 py-5 my-6 text-center">
+        <div className="bg-surface border border-line-strong px-6 py-6 my-6 text-center">
           <p className="font-label text-[10px] tracking-[0.3em] text-text-subtle mb-2">CURRENT BALANCE</p>
-          <p className="font-headline text-5xl font-bold text-text">{fmt(card.balanceCents)}</p>
+          <p className="font-headline text-6xl font-bold text-text">{fmt(card.balanceCents)}</p>
         </div>
 
         <div className="mb-5">
           <label className="block font-label text-[10px] tracking-widest text-text-subtle mb-3">CHARGE AMOUNT</label>
           <div className="relative">
-            <span className="absolute left-5 top-1/2 -translate-y-1/2 font-headline text-2xl text-text-muted">$</span>
+            <span className="absolute left-5 top-1/2 -translate-y-1/2 font-headline text-3xl text-text-muted">$</span>
             <input
+              ref={inputRef}
               type="number"
+              inputMode="decimal"
               min="0.01"
               step="0.01"
               max={card.balanceCents / 100}
@@ -204,8 +223,8 @@ function ChargeScreen({
               onChange={(e) => setDollars(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && charge()}
               placeholder="0.00"
-              autoFocus
-              className="w-full bg-surface border border-line-strong pl-10 pr-5 py-4 font-headline text-3xl text-text placeholder:text-text-faint focus:border-red focus:outline-none transition-colors"
+              autoComplete="off"
+              className="w-full bg-surface border border-line-strong pl-12 pr-5 py-5 font-headline text-4xl text-text placeholder:text-text-faint focus:border-red focus:outline-none transition-colors"
             />
           </div>
           {dollars && !valid && amountCents > 0 && (
@@ -223,7 +242,7 @@ function ChargeScreen({
           type="button"
           onClick={charge}
           disabled={loading || !valid}
-          className="w-full bg-red text-white font-headline font-bold uppercase tracking-tight py-5 text-xl hover:bg-red-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors mb-3"
+          className="touch-manipulation w-full bg-red text-white font-headline font-bold uppercase tracking-tight py-6 text-2xl hover:bg-red-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors mb-3"
         >
           {loading ? 'CHARGING…' : valid ? `CHARGE ${fmt(amountCents)}` : 'ENTER AMOUNT'}
         </button>
@@ -231,7 +250,7 @@ function ChargeScreen({
         <button
           type="button"
           onClick={onBack}
-          className="w-full border border-line-strong text-text-subtle font-headline font-bold uppercase tracking-tight py-3 hover:border-text hover:text-text transition-colors"
+          className="touch-manipulation w-full border border-line-strong text-text-subtle font-headline font-bold uppercase tracking-tight py-4 hover:border-text hover:text-text transition-colors"
         >
           ← BACK
         </button>
@@ -254,23 +273,23 @@ function ConfirmScreen({
 }) {
   return (
     <div className="min-h-dvh bg-ink flex items-center justify-center p-6">
-      <div className="w-full max-w-sm text-center">
-        <p className="text-5xl mb-6">✓</p>
-        <p className="font-label text-[10px] tracking-[0.3em] text-red mb-3">CHARGED!</p>
-        <p className="font-headline text-5xl font-bold text-text mb-8">{fmt(charged)}</p>
+      <div className="w-full max-w-sm sm:max-w-md text-center">
+        <p className="text-9xl font-bold text-green-400 mb-4 leading-none">✓</p>
+        <p className="font-label text-[11px] tracking-[0.35em] text-green-400 mb-4">CHARGED!</p>
+        <p className="font-headline text-7xl font-bold text-text mb-10">{fmt(charged)}</p>
 
-        <div className="bg-surface border border-line-strong px-6 py-5 mb-8">
+        <div className="bg-surface border border-line-strong px-6 py-6 mb-8">
           <p className="font-label text-[10px] tracking-[0.3em] text-text-subtle mb-2">NEW BALANCE</p>
-          <p className="font-headline text-4xl font-bold text-text">
+          <p className="font-headline text-5xl font-bold text-text">
             {newBalance === 0 ? <span className="text-text-subtle">DEPLETED</span> : fmt(newBalance)}
           </p>
-          <p className="font-label text-[10px] tracking-widest text-text-faint mt-2">{code}</p>
+          <p className="font-label text-[10px] tracking-widest text-text-faint mt-3">{code}</p>
         </div>
 
         <button
           type="button"
           onClick={onNext}
-          className="w-full bg-red text-white font-headline font-bold uppercase tracking-tight py-4 hover:bg-red-hover transition-colors"
+          className="touch-manipulation w-full bg-red text-white font-headline font-bold uppercase tracking-tight py-5 text-xl hover:bg-red-hover transition-colors"
         >
           NEXT CARD →
         </button>
