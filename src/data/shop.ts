@@ -177,7 +177,7 @@ export interface Service {
 export const services: Service[] = [
   {
     name: 'Haircut',
-    price: '$32',
+    price: '$34',
     tagline: 'The Siedel\'s signature cut',
     description:
       "A precision men's haircut from a master barber. Consultation, shampoo, and a tailored cut using clippers, shears, or a combination — scissor-over-comb, tapers, fades, classic side parts, or whatever shape you need. Finished with a hot towel, styling, and a neck shave.",
@@ -187,7 +187,7 @@ export const services: Service[] = [
   },
   {
     name: 'Razor / Foil Fade',
-    price: '$38',
+    price: '$40',
     tagline: 'Zero-gap precision',
     description:
       "Our sharpest fade work. Built with foil shavers and a straight razor for a crisp, skin-tight blend and a razor-defined lineup. Ideal for bald fades, skin fades, and anyone who wants the cleanest edge in Medina.",
@@ -197,7 +197,7 @@ export const services: Service[] = [
   },
   {
     name: 'Haircut + Beard Trim',
-    price: '$42',
+    price: '$44',
     tagline: 'Full overhaul',
     description:
       "Our most popular combo. A complete haircut paired with a full beard shape-up — cheek and neck lines defined, length balanced, and the whole thing finished with hot towel and beard oil. Walk out looking like a different man.",
@@ -207,7 +207,7 @@ export const services: Service[] = [
   },
   {
     name: 'Haircut + Face Shave',
-    price: '$63',
+    price: '$65',
     tagline: 'The full treatment, head to jaw',
     description:
       "A complete haircut paired with a full straight razor face shave. Hot towels, lather, two passes, cold towel finish — the works. Walk out with a fresh cut and the smoothest shave in Medina.",
@@ -217,7 +217,7 @@ export const services: Service[] = [
   },
   {
     name: 'Full Service Shave',
-    price: '$44',
+    price: '$46',
     tagline: 'The classic straight razor shave',
     description:
       "The full old-school treatment. Warm lather, hot towels, and a straight razor shave done the way barbers have done it for a century. Pre-shave oil, two passes, cold towel finish, and aftershave balm. Worth booking just for the ritual.",
@@ -227,7 +227,7 @@ export const services: Service[] = [
   },
   {
     name: 'Head Shave',
-    price: '$40',
+    price: '$42',
     tagline: 'Skin-smooth, start to finish',
     description:
       "A full head shave with hot towels and a straight razor. Whether you're maintaining a bald look or going for it for the first time, you'll walk out smooth, conditioned, and comfortable. Includes scalp treatment.",
@@ -237,7 +237,7 @@ export const services: Service[] = [
   },
   {
     name: 'Beard Trim',
-    price: '$29',
+    price: '$31',
     tagline: 'Shape, define, finish',
     description:
       "Beard shape-up with clean cheek and neck lines, length balancing, and detailing. Finished with hot towel and beard oil. Book this on its own or add it to any haircut.",
@@ -247,7 +247,7 @@ export const services: Service[] = [
   },
   {
     name: 'Eyebrow / Lip / Chin',
-    price: '$23',
+    price: '$25',
     tagline: 'Detail work',
     description:
       "Precision trimming and shape-up on the eyebrows, upper lip, or chin. Clean, quick, and a huge difference in how your grooming reads. Add it to any other service.",
@@ -257,7 +257,7 @@ export const services: Service[] = [
   },
   {
     name: 'Shoulder Length Cut + Rough Dry',
-    price: '$38',
+    price: '$40',
     tagline: 'Longer styles, dialed in',
     description:
       "Longer men's styles need real shear work. Shampoo, precision cut with scissors, and a rough dry so you can see the shape before you walk out. Ideal for shoulder-length and flow cuts.",
@@ -267,7 +267,7 @@ export const services: Service[] = [
   },
   {
     name: 'Shampoo + Style',
-    price: '$25',
+    price: '$27',
     tagline: 'Wash, dry, style',
     description:
       "Full shampoo, blow dry, and style — no cut. Perfect for a special event, a date night, or anytime you want to look your best without a full trim.",
@@ -277,7 +277,7 @@ export const services: Service[] = [
   },
   {
     name: 'Duo Haircut',
-    price: '$64',
+    price: '$66',
     tagline: 'Father + son, or two buddies',
     description:
       "Two haircuts booked together, back-to-back in the same chair or in adjacent chairs. Popular for dads with kids, brothers, or anyone who wants to make a trip of it.",
@@ -287,7 +287,7 @@ export const services: Service[] = [
   },
   {
     name: 'Trio Haircut',
-    price: '$96',
+    price: '$98',
     tagline: 'Three at once',
     description:
       "Three haircuts booked together. Great for families with multiple kids, groomsmen before a wedding, or any group that wants to come in together.",
