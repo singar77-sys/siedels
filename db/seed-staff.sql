@@ -1,0 +1,28 @@
+-- Seed staff members for the gift card POS system.
+-- Run this after schema.sql (or after M003 migration on existing databases).
+--
+-- PIN is stored as SHA256(pin) — never plaintext in the database.
+-- Requires pgcrypto extension (already enabled by schema.sql).
+--
+-- Usage:
+--   Replace 'their-pin' with the actual PIN for each barber.
+--   PINs can be any length — numeric is recommended for tablet use.
+--
+-- Example: add Jim with PIN 8421
+-- INSERT INTO staff (name, pin_hash)
+-- VALUES ('Jim', encode(digest('8421', 'sha256'), 'hex'));
+--
+-- To deactivate a staff member (invalidates their session immediately):
+-- UPDATE staff SET active = FALSE WHERE name = 'Jim';
+--
+-- To change a PIN (also immediately invalidates their current session):
+-- UPDATE staff SET pin_hash = encode(digest('new-pin', 'sha256'), 'hex')
+-- WHERE name = 'Jim';
+--
+-- To see all staff:
+-- SELECT id, name, active, created_at FROM staff ORDER BY created_at;
+
+-- ── Add your barbers below ───────────────────────────────────────────────────
+
+-- INSERT INTO staff (name, pin_hash)
+-- VALUES ('Jim', encode(digest('REPLACE_WITH_JIM_PIN', 'sha256'), 'hex'));

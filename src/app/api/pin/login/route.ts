@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createAuthToken, isLockedOut, recordAttempt, COOKIE_NAME } from '@/lib/pin-auth';
+import { findStaffByPin, createAuthToken, isLockedOut, recordAttempt, COOKIE_NAME } from '@/lib/pin-auth';
 
 export async function POST(req: NextRequest) {
   const ip   = req.headers.get('x-forwarded-for')?.split(',')[0].trim() ?? 'unknown';
@@ -15,15 +15,15 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const correct = pin === process.env.GIFT_CARD_PIN;
-  await recordAttempt(ip, correct);
+  const staff = await findStaffByPin(pin);
+  await recordAttempt(ip, !!staff);
 
-  if (!correct) {
+  if (!staff) {
     return NextResponse.json({ error: 'Incorrect PIN' }, { status: 401 });
   }
 
-  const token = createAuthToken();
-  const res   = NextResponse.json({ ok: true });
+  const token = createAuthToken(staff.id, staff.name, staff.pinHash);
+  const res   = NextResponse.json({ ok: true, staffName: staff.name });
   res.cookies.set(COOKIE_NAME, token, {
     httpOnly: true,
     secure:   true,

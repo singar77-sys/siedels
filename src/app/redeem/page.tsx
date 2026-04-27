@@ -18,7 +18,7 @@ function fmt(cents: number): string {
 }
 
 // ── PIN screen ────────────────────────────────────────────────────────────────
-function PinScreen({ onAuth }: { onAuth: () => void }) {
+function PinScreen({ onAuth }: { onAuth: (staffName: string) => void }) {
   const [pin,     setPin]     = useState('');
   const [error,   setError]   = useState('');
   const [loading, setLoading] = useState(false);
@@ -36,8 +36,9 @@ function PinScreen({ onAuth }: { onAuth: () => void }) {
       body:    JSON.stringify({ pin }),
     });
     if (res.ok) {
+      const data = await res.json();
       inputRef.current?.blur();
-      onAuth();
+      onAuth(data.staffName ?? 'Staff');
     } else {
       const data = await res.json().catch(() => ({}));
       setError(data.error ?? 'Incorrect PIN');
@@ -84,7 +85,13 @@ function PinScreen({ onAuth }: { onAuth: () => void }) {
 }
 
 // ── Lookup screen ─────────────────────────────────────────────────────────────
-function LookupScreen({ onFound }: { onFound: (card: CardData) => void }) {
+function LookupScreen({
+  staffName,
+  onFound,
+}: {
+  staffName: string;
+  onFound:   (card: CardData) => void;
+}) {
   const [code,    setCode]    = useState('');
   const [error,   setError]   = useState('');
   const [loading, setLoading] = useState(false);
@@ -118,7 +125,10 @@ function LookupScreen({ onFound }: { onFound: (card: CardData) => void }) {
   return (
     <div className="min-h-dvh bg-ink flex items-center justify-center p-6">
       <div className="w-full max-w-sm sm:max-w-md">
-        <p className="font-label text-[10px] tracking-[0.3em] text-red mb-3">GIFT CARD REDEMPTION</p>
+        <div className="flex items-baseline justify-between mb-3">
+          <p className="font-label text-[10px] tracking-[0.3em] text-red">GIFT CARD REDEMPTION</p>
+          <p className="font-label text-[10px] tracking-widest text-text-subtle">{staffName.toUpperCase()}</p>
+        </div>
         <h1 className="font-headline text-4xl uppercase tracking-tight text-text mb-10">LOOK UP CARD</h1>
 
         <div className="mb-5">
@@ -157,11 +167,13 @@ function LookupScreen({ onFound }: { onFound: (card: CardData) => void }) {
 // ── Charge screen ─────────────────────────────────────────────────────────────
 function ChargeScreen({
   card,
+  staffName,
   sessionId,
   onCharged,
   onBack,
 }: {
   card:      CardData;
+  staffName: string;
   sessionId: string;
   onCharged: (newBalance: number, charged: number) => void;
   onBack:    () => void;
@@ -199,7 +211,10 @@ function ChargeScreen({
   return (
     <div className="min-h-dvh bg-ink flex items-center justify-center p-6">
       <div className="w-full max-w-sm sm:max-w-md">
-        <p className="font-label text-[10px] tracking-[0.3em] text-red mb-3">GIFT CARD</p>
+        <div className="flex items-baseline justify-between mb-1">
+          <p className="font-label text-[10px] tracking-[0.3em] text-red">GIFT CARD</p>
+          <p className="font-label text-[10px] tracking-widest text-text-subtle">{staffName.toUpperCase()}</p>
+        </div>
         <p className="font-headline text-xl tracking-[0.12em] text-text-subtle mb-1">{card.code}</p>
         {card.recipientName && (
           <p className="font-body text-sm text-text-muted mb-1">For {card.recipientName}</p>
@@ -307,12 +322,14 @@ export default function RedeemPage() {
   const [newBalance, setNewBalance] = useState(0);
   const [charged,    setCharged]    = useState(0);
   const [sessionId,  setSessionId]  = useState('');
+  const [staffName,  setStaffName]  = useState('');
 
   if (screen === 'pin') {
-    return <PinScreen onAuth={() => {
+    return <PinScreen onAuth={(name) => {
       const alpha = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
       const rand8 = Array.from({ length: 8 }, () => alpha[Math.floor(Math.random() * alpha.length)]).join('');
       setSessionId(`POS-${rand8}`);
+      setStaffName(name);
       setScreen('lookup');
     }} />;
   }
@@ -320,6 +337,7 @@ export default function RedeemPage() {
   if (screen === 'lookup') {
     return (
       <LookupScreen
+        staffName={staffName}
         onFound={(c) => { setCard(c); setScreen('charge'); }}
       />
     );
@@ -329,6 +347,7 @@ export default function RedeemPage() {
     return (
       <ChargeScreen
         card={card}
+        staffName={staffName}
         sessionId={sessionId}
         onCharged={(nb, ch) => { setNewBalance(nb); setCharged(ch); setScreen('confirm'); }}
         onBack={() => setScreen('lookup')}

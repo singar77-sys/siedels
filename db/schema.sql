@@ -40,6 +40,18 @@ CREATE TABLE pin_attempts (
   attempted_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+-- ── Staff (per-employee PINs) ────────────────────────────────────────────────
+-- PIN is stored as SHA256(pin) — never plaintext.
+-- To add a barber: INSERT INTO staff (name, pin_hash)
+--   VALUES ('Jim', encode(digest('their-pin', 'sha256'), 'hex'));
+CREATE TABLE staff (
+  id         UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name       TEXT        NOT NULL,
+  pin_hash   TEXT        NOT NULL UNIQUE,
+  active     BOOLEAN     NOT NULL DEFAULT TRUE,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
 -- ── Rate limit hits ──────────────────────────────────────────────────────────
 -- General-purpose sliding-window rate limiter. key = "{endpoint}:{ip}".
 -- Old rows can be pruned periodically: DELETE FROM rate_limit_hits WHERE hit_at < NOW() - INTERVAL '1 hour';
@@ -57,6 +69,8 @@ CREATE INDEX idx_transactions_card_id     ON gift_card_transactions(card_id);
 CREATE INDEX idx_transactions_created_at  ON gift_card_transactions(created_at);
 CREATE INDEX idx_pin_attempts_ip_time     ON pin_attempts(ip, attempted_at);
 CREATE INDEX idx_rate_limit_hits          ON rate_limit_hits(key, hit_at);
+CREATE INDEX idx_staff_pin_hash           ON staff(pin_hash);
+CREATE INDEX idx_staff_active             ON staff(active);
 
 -- ── Migrations (run against existing databases) ───────────────────────────────
 -- M001: dormancy double-charge guard
@@ -64,3 +78,10 @@ CREATE INDEX idx_rate_limit_hits          ON rate_limit_hits(key, hit_at);
 --
 -- M002: rate_limit_hits table (if schema was initialized before this was added)
 -- CREATE TABLE IF NOT EXISTS rate_limit_hits ( ... see above ... );
+--
+-- M003: per-staff PINs (if schema was initialized before this was added)
+-- CREATE TABLE IF NOT EXISTS staff ( ... see above ... );
+-- CREATE INDEX IF NOT EXISTS idx_staff_pin_hash ON staff(pin_hash);
+-- CREATE INDEX IF NOT EXISTS idx_staff_active   ON staff(active);
+-- After running: INSERT INTO staff (name, pin_hash)
+--   VALUES ('Jim', encode(digest('your-pin-here', 'sha256'), 'hex'));

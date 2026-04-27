@@ -4,7 +4,8 @@ import { lookupCard } from '@/lib/gift-cards';
 
 export async function POST(req: NextRequest) {
   const token = req.cookies.get(COOKIE_NAME)?.value ?? '';
-  if (!verifyAuthToken(token)) {
+  const auth  = await verifyAuthToken(token);
+  if (!auth) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -16,11 +17,11 @@ export async function POST(req: NextRequest) {
   if (!card) return NextResponse.json({ error: 'Card not found' }, { status: 404 });
 
   return NextResponse.json({
-    id:            card.id,
-    code:          card.code,
-    balanceCents:  card.balance_cents,
+    id:             card.id,
+    code:           card.code,
+    balanceCents:   card.balance_cents,
     faceValueCents: card.face_value_cents,
-    status:        card.status,
-    recipientName: card.recipient_name,
+    status:         card.status,
+    recipientName:  card.recipient_name,
   });
 }

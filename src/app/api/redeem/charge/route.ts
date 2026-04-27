@@ -4,7 +4,8 @@ import { chargeCard } from '@/lib/gift-cards';
 
 export async function POST(req: NextRequest) {
   const token = req.cookies.get(COOKIE_NAME)?.value ?? '';
-  if (!verifyAuthToken(token)) {
+  const auth  = await verifyAuthToken(token);
+  if (!auth) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -16,8 +17,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'cardId and amountCents required' }, { status: 400 });
   }
 
+  // Append staff name to POS session note for full attribution
+  const baseNote = body?.note as string | undefined;
+  const note     = baseNote ? `${baseNote} / ${auth.staffName}` : auth.staffName;
+
   try {
-    const newBalance = await chargeCard(cardId, amountCents, body?.note);
+    const newBalance = await chargeCard(cardId, amountCents, note);
     return NextResponse.json({ ok: true, newBalanceCents: newBalance });
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : 'Charge failed';

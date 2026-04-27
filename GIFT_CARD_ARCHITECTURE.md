@@ -49,8 +49,19 @@ Stripe processing fee on the face value (2.9% + $0.30) is absorbed by Jim's acco
 | `type` | TEXT | `purchase` / `redemption` / `credit` / `dormancy_fee` |
 | `amount_cents` | INT | Positive = credit, negative = debit |
 | `balance_after_cents` | INT | Running balance snapshot |
-| `note` | TEXT | e.g. `POS pos-1abc2d3e` for redemptions |
+| `note` | TEXT | e.g. `POS-XXXXXXXX / Jim` for redemptions |
 | `created_at` | TIMESTAMP | |
+
+### `staff`
+| Column | Type | Notes |
+|---|---|---|
+| `id` | UUID | Primary key |
+| `name` | TEXT | Display name (e.g. `Jim`) |
+| `pin_hash` | TEXT | `SHA256(pin)` — never stored plaintext |
+| `active` | BOOL | Set `FALSE` to immediately invalidate sessions |
+| `created_at` | TIMESTAMP | |
+
+Managed via `db/seed-staff.sql`. To change a PIN or deactivate a barber, update the row directly in Neon — the session token embeds the PIN hash and is validated against the DB on every request, so the change takes effect immediately.
 
 ### `pin_attempts`
 | Column | Type | Notes |
@@ -100,7 +111,7 @@ Customer visits /gift/balance
     │  { code }
     ▼
 balance/route.ts
-    │  Rate limit: 10 requests/min per IP (in-memory)
+    │  Rate limit: 10 requests/min per IP (DB-backed)
     │  lookupCard(code) — read-only
     └► Returns { code, balanceCents, faceValueCents, status, recipientName, lastActivityAt }
 ```
@@ -117,17 +128,21 @@ Barber visits /redeem
 PIN Screen
     │  POST /api/pin/login { pin }
     │  IP lockout: 5 failures in 15 min → locked 15 min
+    │  Looks up staff row by SHA256(pin) WHERE active = TRUE
     │  Correct PIN → HMAC-signed session token, httpOnly cookie (8hr TTL)
-    │  sessionId generated: pos-{timestamp.toString(36)}
+    │  Returns { ok, staffName } — UI shows name on all subsequent screens
+    │  sessionId generated client-side: POS-XXXXXXXX (safe alphabet, 8 chars)
     ▼
 Lookup Screen
     │  POST /api/redeem/lookup { code }
     │  Requires valid gc_auth cookie
+    │  verifyAuthToken: checks HMAC + TTL + staff.active + pin_hash match
     └► Returns card id, balance, status, recipientName
     ▼
 Charge Screen
-    │  POST /api/redeem/charge { cardId, amountCents, note: "POS pos-1abc2d3e" }
+    │  POST /api/redeem/charge { cardId, amountCents, note: "POS-XXXXXXXX" }
     │  Requires valid gc_auth cookie
+    │  note is augmented server-side: "POS-XXXXXXXX / Jim"
     │  ATOMIC: UPDATE WHERE balance_cents >= amount (no race condition)
     └► Returns { ok, newBalanceCents }
     ▼
@@ -148,7 +163,7 @@ Confirm Screen — shows charged amount + new balance
 | `POST /api/pin/login` | IP lockout after 5 failures |
 
 ### Session token
-HMAC-SHA256 signed, base64url encoded. Payload: `{ ts, ph }` where `ph` = SHA256 of current PIN. Changing the PIN in env immediately invalidates all sessions. 8-hour TTL, `httpOnly`/`secure`/`sameSite=lax`.
+HMAC-SHA256 signed, base64url encoded. Payload: `{ ts, sid, sn, ph }` where `sid` = staff UUID, `sn` = staff name, `ph` = SHA256 of their PIN. On every request `verifyAuthToken` fetches the staff row and checks both `active = TRUE` and that `pin_hash` still matches `ph`. Changing a PIN or deactivating a barber takes effect on the next API call — no waiting for TTL expiry. 8-hour TTL, `httpOnly`/`secure`/`sameSite=lax`.
 
 ### Atomic charge
 The charge UPDATE uses `WHERE balance_cents >= amountCents` in a single statement. Two simultaneous charges on the same card — only one wins. No SELECT-then-UPDATE pattern.
@@ -163,8 +178,7 @@ All rate limiting is DB-backed via the `rate_limit_hits` table — persistent ac
 | PIN login | 5 failures/15min per IP (via `pin_attempts`) |
 
 ### Known limitations
-- Shared PIN for all staff — no per-employee accountability (POS session ID `POS-XXXXXXXX` in transaction note provides partial attribution)
-- No PIN change audit log — who changed the PIN and when is not recorded (future: `pin_history` table)
+- No PIN change audit log — who changed a PIN and when is not recorded (future: `pin_history` table)
 - No short-lived signed URLs for balance links (acceptable for current scale)
 
 ---
@@ -173,9 +187,9 @@ All rate limiting is DB-backed via the `rate_limit_hits` table — persistent ac
 
 | Item | Priority | Notes |
 |---|---|---|
-| Per-staff PINs or logins | **High** | Replace single `GIFT_CARD_PIN` env var with a staff table; each employee gets their own credential; transactions become fully attributed |
+| Per-staff PINs or logins | ~~High~~ **Done** | `staff` table with SHA256'd PINs. Each barber has their own credential. Transactions note `POS-XXXXXXXX / Name`. Deactivating or changing a PIN takes effect immediately. |
 | Admin audit log | High | Log PIN changes, manual credits, any admin action with timestamp + IP |
-| PIN change history | Medium | Add `pin_history` table: changed_at, changed_by_ip. Answers "who changed the PIN last month?" |
+| PIN change history | Medium | Add `pin_history` table: changed_at, changed_by_ip. Answers "who changed Jim's PIN last month?" |
 | Dormancy fee legal review | Blocker | **Do not enable the cron job until verified against Ohio gift card law and applicable federal regs.** |
 
 ---
@@ -219,7 +233,8 @@ Customer returns, spends $5 → balance:  $5.00  (clock resets — no more fees 
 | `src/app/api/redeem/charge/route.ts` | PIN-gated charge |
 | `src/app/api/pin/login/route.ts` | PIN auth + session cookie |
 | `src/lib/gift-cards.ts` | DB operations (create, charge, credit, dormancy, ledger) |
-| `src/lib/pin-auth.ts` | Token create/verify, lockout logic |
+| `src/lib/pin-auth.ts` | `findStaffByPin`, token create/verify (async), lockout logic |
+| `db/seed-staff.sql` | Template for adding barbers to the `staff` table |
 | `src/lib/rate-limit.ts` | DB-backed sliding-window rate limiter |
 | `src/lib/email.ts` | Gift card email, buyer receipt, shop notification |
 | `db/schema.sql` | Full DB schema + migration comments |
