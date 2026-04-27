@@ -18,6 +18,7 @@ import {
   testimonials,
 } from '@/data/shop';
 import { Icon } from './Icon';
+import { CountUp } from './CountUp';
 
 // Pool skips index 0 — that testimonial is already featured on the hero panel.
 const REVIEW_POOL = testimonials.slice(1);
@@ -172,7 +173,7 @@ export function ContactPanel() {
           <div className="bg-surface p-5 md:p-6 flex flex-col overflow-hidden">
             <div className="flex-none mb-3 flex items-center justify-between">
               <p className="font-label text-[10px] tracking-widest text-red">
-                {RATING} ★ · {REVIEW_COUNT} REVIEWS
+                <CountUp end={parseFloat(RATING)} decimals={1} duration={1000} /> ★ · <CountUp end={parseInt(REVIEW_COUNT)} duration={1400} /> REVIEWS
               </p>
               <div className="flex gap-1">
                 {REVIEW_POOL.map((_, i) => (
