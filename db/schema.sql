@@ -29,7 +29,8 @@ CREATE TABLE gift_card_transactions (
   amount_cents         INTEGER     NOT NULL,   -- negative = debit
   balance_after_cents  INTEGER     NOT NULL,
   created_at           TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  note                 TEXT
+  note                 TEXT,
+  idempotency_key      TEXT        UNIQUE      -- prevents double-charge on network retry
 );
 
 -- ── PIN lockout tracking ─────────────────────────────────────────────────────
@@ -83,5 +84,7 @@ CREATE INDEX idx_staff_active             ON staff(active);
 -- CREATE TABLE IF NOT EXISTS staff ( ... see above ... );
 -- CREATE INDEX IF NOT EXISTS idx_staff_pin_hash ON staff(pin_hash);
 -- CREATE INDEX IF NOT EXISTS idx_staff_active   ON staff(active);
--- After running: INSERT INTO staff (name, pin_hash)
---   VALUES ('Jim', encode(digest('your-pin-here', 'sha256'), 'hex'));
+-- After running: use scripts/hash-pin.mjs to generate bcrypt hashes, then INSERT.
+--
+-- M004: redemption idempotency key
+-- ALTER TABLE gift_card_transactions ADD COLUMN IF NOT EXISTS idempotency_key TEXT UNIQUE;

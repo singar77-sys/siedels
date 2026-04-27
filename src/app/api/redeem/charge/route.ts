@@ -9,9 +9,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const body        = await req.json().catch(() => null);
-  const cardId      = body?.cardId as string | undefined;
-  const amountCents = body?.amountCents as number | undefined;
+  const body           = await req.json().catch(() => null);
+  const cardId         = body?.cardId as string | undefined;
+  const amountCents    = body?.amountCents as number | undefined;
+  const idempotencyKey = body?.idempotencyKey as string | undefined;
 
   if (!cardId || typeof amountCents !== 'number' || amountCents <= 0) {
     return NextResponse.json({ error: 'cardId and amountCents required' }, { status: 400 });
@@ -22,7 +23,7 @@ export async function POST(req: NextRequest) {
   const note     = baseNote ? `${baseNote} / ${auth.staffName}` : auth.staffName;
 
   try {
-    const newBalance = await chargeCard(cardId, amountCents, note);
+    const newBalance = await chargeCard(cardId, amountCents, note, idempotencyKey);
     return NextResponse.json({ ok: true, newBalanceCents: newBalance });
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : 'Charge failed';

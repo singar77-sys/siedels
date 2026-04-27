@@ -80,9 +80,19 @@ export async function lookupCard(code: string) {
 export async function chargeCard(
   cardId: string,
   amountCents: number,
-  note?: string
+  note?: string,
+  idempotencyKey?: string
 ) {
   const sql = getDb();
+
+  // Idempotency: if we've already processed this key, return the recorded balance.
+  if (idempotencyKey) {
+    const [existing] = await sql`
+      SELECT balance_after_cents FROM gift_card_transactions
+      WHERE idempotency_key = ${idempotencyKey}
+    `;
+    if (existing) return existing.balance_after_cents as number;
+  }
 
   // Atomic: balance check + subtract in one statement — prevents double-spend race.
   const [updated] = await sql`
@@ -107,11 +117,13 @@ export async function chargeCard(
 
   await sql`
     INSERT INTO gift_card_transactions
-      (card_id, type, amount_cents, balance_after_cents, note)
+      (card_id, type, amount_cents, balance_after_cents, note, idempotency_key)
     VALUES
-      (${cardId}, 'redemption', ${-amountCents}, ${updated.balance_cents}, ${note ?? null})
+      (${cardId}, 'redemption', ${-amountCents}, ${updated.balance_cents},
+       ${note ?? null}, ${idempotencyKey ?? null})
+    ON CONFLICT (idempotency_key) DO NOTHING
   `;
-  return updated.balance_cents;
+  return updated.balance_cents as number;
 }
 
 export async function applyDormancyFees(): Promise<number> {

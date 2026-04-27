@@ -181,7 +181,8 @@ function ChargeScreen({
   const [dollars, setDollars] = useState('');
   const [error,   setError]   = useState('');
   const [loading, setLoading] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef       = useRef<HTMLInputElement>(null);
+  const idempotencyKey = useRef(`${sessionId}-${Math.random().toString(36).slice(2, 8)}`);
 
   useEffect(() => { inputRef.current?.focus(); }, []);
 
@@ -195,7 +196,12 @@ function ChargeScreen({
     const res = await fetch('/api/redeem/charge', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ cardId: card.id, amountCents, note: `POS ${sessionId}` }),
+      body:    JSON.stringify({
+        cardId:         card.id,
+        amountCents,
+        note:           `POS ${sessionId}`,
+        idempotencyKey: idempotencyKey.current,
+      }),
     });
     if (res.ok) {
       const data = await res.json();

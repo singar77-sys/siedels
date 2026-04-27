@@ -1,14 +1,13 @@
-import { createHmac, createHash, timingSafeEqual } from 'crypto';
+import { createHmac, timingSafeEqual } from 'crypto';
+import bcrypt from 'bcryptjs';
 import { getDb } from './db';
 
-export const COOKIE_NAME = 'gc_auth';
-const SESSION_MS  = 8 * 60 * 60 * 1000; // 8 hours
+export const COOKIE_NAME  = 'gc_auth';
+const SESSION_MS   = 8 * 60 * 60 * 1000; // 8 hours
 const MAX_ATTEMPTS = 5;
 const LOCKOUT_MS   = 15 * 60 * 1000; // 15 minutes
 
-function hashPin(pin: string): string {
-  return createHash('sha256').update(pin).digest('hex');
-}
+export const BCRYPT_ROUNDS = 10;
 
 function hmac(data: string, secret: string): string {
   return createHmac('sha256', secret).update(data).digest('hex');
@@ -17,13 +16,14 @@ function hmac(data: string, secret: string): string {
 export async function findStaffByPin(
   pin: string
 ): Promise<{ id: string; name: string; pinHash: string } | null> {
-  const sql = getDb();
-  const ph  = hashPin(pin);
-  const [staff] = await sql`
-    SELECT id, name, pin_hash FROM staff
-    WHERE pin_hash = ${ph} AND active = TRUE
-  `;
-  return staff ? { id: staff.id, name: staff.name, pinHash: staff.pin_hash } : null;
+  const sql   = getDb();
+  const staff = await sql`SELECT id, name, pin_hash FROM staff WHERE active = TRUE`;
+  for (const member of staff) {
+    if (await bcrypt.compare(pin, member.pin_hash)) {
+      return { id: member.id, name: member.name, pinHash: member.pin_hash };
+    }
+  }
+  return null;
 }
 
 export function createAuthToken(
@@ -52,7 +52,7 @@ export async function verifyAuthToken(
     if (!timingSafeEqual(Buffer.from(sig, 'hex'), Buffer.from(expected, 'hex'))) return null;
     const data = JSON.parse(Buffer.from(payload, 'base64url').toString());
     if (Date.now() - data.ts > SESSION_MS) return null;
-    // Verify staff is still active and their PIN hasn't changed
+    // Verify staff is still active and their PIN hash hasn't changed
     const sql = getDb();
     const [staff] = await sql`
       SELECT id, name, pin_hash FROM staff WHERE id = ${data.sid} AND active = TRUE
