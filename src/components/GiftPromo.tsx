@@ -5,12 +5,12 @@ import { Icon } from './Icon';
 
 const STORAGE_KEY = 'siedels-promo-dismissed-fathersday26';
 
-// Only surface during the Father's Day run-up: May 15 – June 21
+// Gate: April 26 – June 21 (Father's Day run-up + preview window)
 function isInSeason(): boolean {
   const d = new Date();
   const m = d.getMonth(); // 0-indexed
   const day = d.getDate();
-  return (m === 4 && day >= 15) || (m === 5 && day <= 21);
+  return (m === 3 && day >= 26) || (m === 4) || (m === 5 && day <= 21);
 }
 
 interface GiftPromoProps {
@@ -47,7 +47,7 @@ export function GiftPromo({ onNavigate }: GiftPromoProps) {
     <div
       role="dialog"
       aria-label="Father's Day gift card promotion"
-      className={`fixed bottom-20 md:bottom-10 right-4 md:right-6 z-50 w-64 transform transition-all duration-500 ease-out ${
+      className={`fixed bottom-20 right-4 md:bottom-10 md:left-8 md:right-auto z-50 w-64 transform transition-all duration-500 ease-out ${
         visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0 pointer-events-none'
       }`}
     >
