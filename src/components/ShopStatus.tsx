@@ -94,7 +94,11 @@ export function ShopStatus({ shopHours, isClosed, scheduleKnown, dayName }: Shop
         setLabel(`OPEN · CLOSES ${fmt12(range.close)}`);
       } else {
         setOpen(false);
-        setLabel(`CLOSED · ${nextOpening(day)}`);
+        if (now < range.open * 60) {
+          setLabel(`CLOSED · OPENS ${day.slice(0, 3).toUpperCase()} ${fmt12(range.open)}`);
+        } else {
+          setLabel(`CLOSED · ${nextOpening(day)}`);
+        }
       }
     }
 
