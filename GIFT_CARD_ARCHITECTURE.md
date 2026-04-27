@@ -180,6 +180,18 @@ Implemented but **not yet enabled** — requires legal review before the cron is
 
 Logic: $2.50/month applied to cards with no activity for 24+ consecutive months. Each fee is logged as a `dormancy_fee` transaction. Any redemption or credit resets the 24-month clock (`last_activity_at`).
 
+**Important:** the fee is charged once per cron run. The cron must be scheduled monthly — if run daily, a dormant card would lose $2.50/day until depleted. Verify the schedule before enabling.
+
+**Example lifecycle:**
+```
+Purchase $50       → balance: $50.00
+Spend $35          → balance: $15.00  (clock resets)
+24 months pass
+Month 1 fee        → balance: $12.50
+Month 2 fee        → balance: $10.00
+Customer returns, spends $5 → balance:  $5.00  (clock resets — no more fees for 24 months)
+```
+
 ---
 
 ## Code Format
