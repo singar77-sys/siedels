@@ -75,23 +75,6 @@ export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate, sho
         </div>
       </div>
 
-      {/* Mobile barber pole accent — right-side reveal, fades left into text area */}
-      <div className="md:hidden absolute inset-0 z-[1] pointer-events-none">
-        <Image
-          src="/images/barber-pole-warm-light-siedels-medina.webp"
-          alt=""
-          aria-hidden="true"
-          fill
-          sizes="50vw"
-          quality={80}
-          className="object-cover object-center"
-          style={{
-            maskImage: 'linear-gradient(to left, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 50%, transparent 75%)',
-            WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 50%, transparent 75%)',
-          }}
-        />
-      </div>
-
       {/* Theme-aware gradient overlay (none in dark, dark scrim in light) */}
       <div
         className="absolute inset-0 z-[2] pointer-events-none"
