@@ -83,25 +83,35 @@ export async function chargeCard(
   note?: string
 ) {
   const sql = getDb();
-  const [card] = await sql`SELECT * FROM gift_cards WHERE id = ${cardId}`;
-  if (!card) throw new Error('Card not found');
-  if (card.balance_cents < amountCents) throw new Error('Insufficient balance');
 
-  const newBalance = card.balance_cents - amountCents;
-  const status = newBalance === 0 ? 'depleted' : 'active';
-
-  await sql`
+  // Atomic: balance check + subtract in one statement — prevents double-spend race.
+  const [updated] = await sql`
     UPDATE gift_cards
-    SET balance_cents = ${newBalance}, last_activity_at = NOW(), status = ${status}
+    SET
+      balance_cents    = balance_cents - ${amountCents},
+      last_activity_at = NOW(),
+      status           = CASE
+                           WHEN balance_cents - ${amountCents} = 0 THEN 'depleted'
+                           ELSE 'active'
+                         END
     WHERE id = ${cardId}
+      AND balance_cents >= ${amountCents}
+      AND status = 'active'
+    RETURNING id, balance_cents
   `;
+
+  if (!updated) {
+    const [card] = await sql`SELECT id FROM gift_cards WHERE id = ${cardId}`;
+    throw new Error(card ? 'Insufficient balance' : 'Card not found');
+  }
+
   await sql`
     INSERT INTO gift_card_transactions
       (card_id, type, amount_cents, balance_after_cents, note)
     VALUES
-      (${cardId}, 'redemption', ${-amountCents}, ${newBalance}, ${note ?? null})
+      (${cardId}, 'redemption', ${-amountCents}, ${updated.balance_cents}, ${note ?? null})
   `;
-  return newBalance;
+  return updated.balance_cents;
 }
 
 export async function applyDormancyFees(): Promise<number> {

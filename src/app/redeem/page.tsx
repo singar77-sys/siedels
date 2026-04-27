@@ -157,10 +157,12 @@ function LookupScreen({ onFound }: { onFound: (card: CardData) => void }) {
 // ── Charge screen ─────────────────────────────────────────────────────────────
 function ChargeScreen({
   card,
+  sessionId,
   onCharged,
   onBack,
 }: {
   card:      CardData;
+  sessionId: string;
   onCharged: (newBalance: number, charged: number) => void;
   onBack:    () => void;
 }) {
@@ -181,7 +183,7 @@ function ChargeScreen({
     const res = await fetch('/api/redeem/charge', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ cardId: card.id, amountCents }),
+      body:    JSON.stringify({ cardId: card.id, amountCents, note: `POS ${sessionId}` }),
     });
     if (res.ok) {
       const data = await res.json();
@@ -304,9 +306,13 @@ export default function RedeemPage() {
   const [card,       setCard]       = useState<CardData | null>(null);
   const [newBalance, setNewBalance] = useState(0);
   const [charged,    setCharged]    = useState(0);
+  const [sessionId,  setSessionId]  = useState('');
 
   if (screen === 'pin') {
-    return <PinScreen onAuth={() => setScreen('lookup')} />;
+    return <PinScreen onAuth={() => {
+      setSessionId(`pos-${Date.now().toString(36)}`);
+      setScreen('lookup');
+    }} />;
   }
 
   if (screen === 'lookup') {
@@ -321,6 +327,7 @@ export default function RedeemPage() {
     return (
       <ChargeScreen
         card={card}
+        sessionId={sessionId}
         onCharged={(nb, ch) => { setNewBalance(nb); setCharged(ch); setScreen('confirm'); }}
         onBack={() => setScreen('lookup')}
       />
