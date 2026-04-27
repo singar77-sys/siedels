@@ -78,7 +78,8 @@ export function GalleryLightbox({ items, index, onClose, onStep }: Props) {
         onClick={(e) => e.stopPropagation()}
       >
         <div
-          className="relative"
+          key={index}
+          className="relative animate-lb-in"
           style={{ width: 'min(92vw, calc(80vh * 3 / 2))', aspectRatio: '3 / 2' }}
         >
           <Image
