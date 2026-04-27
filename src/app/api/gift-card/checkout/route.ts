@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { isRateLimited, recordHit } from '@/lib/rate-limit';
 
 // Fee structure:
 //   Customer pays face value + $1.50 processing fee
@@ -12,19 +13,11 @@ const PRESET_AMOUNTS = new Set([25, 50, 100]);
 
 const baseUrl = () => process.env.NEXT_PUBLIC_BASE_URL ?? 'https://siedels.vercel.app';
 
-const rl = new Map<string, { count: number; resetAt: number }>();
-function isLimited(ip: string): boolean {
-  const now = Date.now();
-  const e = rl.get(ip);
-  if (!e || now > e.resetAt) { rl.set(ip, { count: 1, resetAt: now + 60_000 }); return false; }
-  if (e.count >= 5) return true;
-  e.count++;
-  return false;
-}
-
 export async function POST(req: NextRequest) {
-  const ip = req.headers.get('x-forwarded-for')?.split(',')[0].trim() ?? 'unknown';
-  if (isLimited(ip)) return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  const ip  = req.headers.get('x-forwarded-for')?.split(',')[0].trim() ?? 'unknown';
+  const key = `checkout:${ip}`;
+  if (await isRateLimited(key, 5, 60_000)) return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  await recordHit(key);
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
   const body   = await req.json().catch(() => null);

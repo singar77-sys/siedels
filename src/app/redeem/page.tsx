@@ -310,7 +310,9 @@ export default function RedeemPage() {
 
   if (screen === 'pin') {
     return <PinScreen onAuth={() => {
-      setSessionId(`pos-${Date.now().toString(36)}`);
+      const alpha = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      const rand8 = Array.from({ length: 8 }, () => alpha[Math.floor(Math.random() * alpha.length)]).join('');
+      setSessionId(`POS-${rand8}`);
       setScreen('lookup');
     }} />;
   }

@@ -40,6 +40,15 @@ CREATE TABLE pin_attempts (
   attempted_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+-- ── Rate limit hits ──────────────────────────────────────────────────────────
+-- General-purpose sliding-window rate limiter. key = "{endpoint}:{ip}".
+-- Old rows can be pruned periodically: DELETE FROM rate_limit_hits WHERE hit_at < NOW() - INTERVAL '1 hour';
+CREATE TABLE rate_limit_hits (
+  id     UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
+  key    TEXT        NOT NULL,
+  hit_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
 -- ── Indexes ──────────────────────────────────────────────────────────────────
 CREATE INDEX idx_gift_cards_code          ON gift_cards(code);
 CREATE INDEX idx_gift_cards_status        ON gift_cards(status);
@@ -47,3 +56,11 @@ CREATE INDEX idx_gift_cards_last_activity ON gift_cards(last_activity_at);
 CREATE INDEX idx_transactions_card_id     ON gift_card_transactions(card_id);
 CREATE INDEX idx_transactions_created_at  ON gift_card_transactions(created_at);
 CREATE INDEX idx_pin_attempts_ip_time     ON pin_attempts(ip, attempted_at);
+CREATE INDEX idx_rate_limit_hits          ON rate_limit_hits(key, hit_at);
+
+-- ── Migrations (run against existing databases) ───────────────────────────────
+-- M001: dormancy double-charge guard
+-- ALTER TABLE gift_cards ADD COLUMN IF NOT EXISTS last_dormancy_fee_at TIMESTAMPTZ;
+--
+-- M002: rate_limit_hits table (if schema was initialized before this was added)
+-- CREATE TABLE IF NOT EXISTS rate_limit_hits ( ... see above ... );

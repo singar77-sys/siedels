@@ -154,12 +154,17 @@ HMAC-SHA256 signed, base64url encoded. Payload: `{ ts, ph }` where `ph` = SHA256
 The charge UPDATE uses `WHERE balance_cents >= amountCents` in a single statement. Two simultaneous charges on the same card — only one wins. No SELECT-then-UPDATE pattern.
 
 ### Rate limiting
-- PIN login: DB-backed (`pin_attempts` table), 5 failures/15min per IP
-- Balance check: in-memory Map, 10 requests/60s per IP
+All rate limiting is DB-backed via the `rate_limit_hits` table — persistent across Vercel cold starts and edge node restarts.
+
+| Endpoint | Limit |
+|---|---|
+| Balance check | 10 req/min per IP |
+| Checkout | 5 req/min per IP |
+| PIN login | 5 failures/15min per IP (via `pin_attempts`) |
 
 ### Known limitations
-- Shared PIN for all staff — no per-employee accountability (POS session ID in transaction note provides partial attribution)
-- In-memory balance rate limiter resets on Vercel cold starts — upgrade path is DB or Redis-backed (same pattern as `pin_attempts`)
+- Shared PIN for all staff — no per-employee accountability (POS session ID `POS-XXXXXXXX` in transaction note provides partial attribution)
+- No PIN change audit log — who changed the PIN and when is not recorded (future: `pin_history` table)
 - No short-lived signed URLs for balance links (acceptable for current scale)
 
 ---
@@ -168,9 +173,10 @@ The charge UPDATE uses `WHERE balance_cents >= amountCents` in a single statemen
 
 | Item | Priority | Notes |
 |---|---|---|
-| Per-staff PINs or logins | Medium | Replace single `GIFT_CARD_PIN` env var with a staff table; each employee gets their own credential; transactions become fully attributed |
-| DB/Redis-backed balance rate limit | Low | Current in-memory limiter is sufficient for this traffic; migrate to `pin_attempts`-style DB table or Redis if abuse becomes a concern |
-| Dormancy fee legal review | Blocker | **Do not enable the cron job until verified against Ohio gift card law and any applicable federal regs.** The $2.50/month fee and 12-month window are implemented but must be confirmed as permissible before going live. |
+| Per-staff PINs or logins | **High** | Replace single `GIFT_CARD_PIN` env var with a staff table; each employee gets their own credential; transactions become fully attributed |
+| Admin audit log | High | Log PIN changes, manual credits, any admin action with timestamp + IP |
+| PIN change history | Medium | Add `pin_history` table: changed_at, changed_by_ip. Answers "who changed the PIN last month?" |
+| Dormancy fee legal review | Blocker | **Do not enable the cron job until verified against Ohio gift card law and applicable federal regs.** |
 
 ---
 
@@ -214,3 +220,6 @@ Customer returns, spends $5 → balance:  $5.00  (clock resets — no more fees 
 | `src/app/api/pin/login/route.ts` | PIN auth + session cookie |
 | `src/lib/gift-cards.ts` | DB operations (create, charge, credit, dormancy, ledger) |
 | `src/lib/pin-auth.ts` | Token create/verify, lockout logic |
+| `src/lib/rate-limit.ts` | DB-backed sliding-window rate limiter |
+| `src/lib/email.ts` | Gift card email, buyer receipt, shop notification |
+| `db/schema.sql` | Full DB schema + migration comments |

@@ -123,6 +123,7 @@ export async function applyDormancyFees(): Promise<number> {
     WHERE status = 'active'
       AND balance_cents > 0
       AND last_activity_at < NOW() - INTERVAL '24 months'
+      AND (last_dormancy_fee_at IS NULL OR last_dormancy_fee_at < NOW() - INTERVAL '28 days')
   `;
 
   for (const card of cards) {
@@ -132,7 +133,7 @@ export async function applyDormancyFees(): Promise<number> {
 
     await sql`
       UPDATE gift_cards
-      SET balance_cents = ${newBalance}, status = ${status}
+      SET balance_cents = ${newBalance}, status = ${status}, last_dormancy_fee_at = NOW()
       WHERE id = ${card.id}
     `;
     await sql`
