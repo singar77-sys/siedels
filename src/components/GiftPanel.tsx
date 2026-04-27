@@ -51,7 +51,7 @@ export function GiftPanel() {
           <p className="font-label text-[10px] tracking-[0.3em] text-red mb-1">GIFT CARDS</p>
           <h2 className="font-headline text-2xl md:text-4xl uppercase tracking-tight leading-[0.9]">
             GIVE THE GIFT<br />
-            <span className="text-red">OF A FRESH CUT</span>
+            <span className="text-stroke">OF A FRESH CUT</span>
           </h2>
         </div>
 
