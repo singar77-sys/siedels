@@ -33,7 +33,7 @@ export function GalleryLightbox({ items, index, onClose, onStep }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 touch-none overscroll-contain"
       onClick={onClose}
       onTouchStart={(e) => {
         touchStartX.current = e.touches[0].clientX;
