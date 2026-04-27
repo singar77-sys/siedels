@@ -100,8 +100,19 @@ export default function LedgerPage() {
 
   const loadData = async () => {
     setLoading(true);
-    const res = await fetch('/api/admin/ledger');
-    if (res.ok) setData(await res.json());
+    try {
+      const res = await fetch('/api/admin/ledger');
+      if (res.ok) {
+        setData(await res.json());
+      } else {
+        const d = await res.json().catch(() => ({}));
+        setError(d.error ?? `Server error (${res.status})`);
+        setAuthed(false);
+      }
+    } catch {
+      setError('Network error — check your connection.');
+      setAuthed(false);
+    }
     setLoading(false);
   };
 
