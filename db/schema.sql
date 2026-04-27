@@ -25,7 +25,7 @@ CREATE TABLE gift_card_transactions (
   id                   UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
   card_id              UUID        NOT NULL REFERENCES gift_cards(id),
   type                 TEXT        NOT NULL
-    CHECK (type IN ('purchase', 'redemption', 'dormancy_fee')),
+    CHECK (type IN ('purchase', 'redemption', 'dormancy_fee', 'credit')),
   amount_cents         INTEGER     NOT NULL,   -- negative = debit
   balance_after_cents  INTEGER     NOT NULL,
   created_at           TIMESTAMPTZ NOT NULL DEFAULT NOW(),

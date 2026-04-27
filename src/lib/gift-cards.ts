@@ -10,6 +10,34 @@ export function generateCode(): string {
   return `SIED-${seg()}-${seg()}-${seg()}`;
 }
 
+export async function lookupCardBySession(stripeSessionId: string) {
+  const sql = getDb();
+  const [card] = await sql`
+    SELECT * FROM gift_cards WHERE stripe_session_id = ${stripeSessionId}
+  `;
+  return card ?? null;
+}
+
+export async function creditCard(cardId: string, amountCents: number, note?: string) {
+  const sql = getDb();
+  const [card] = await sql`SELECT * FROM gift_cards WHERE id = ${cardId}`;
+  if (!card) throw new Error('Card not found');
+
+  const newBalance = card.balance_cents + amountCents;
+  await sql`
+    UPDATE gift_cards
+    SET balance_cents = ${newBalance}, last_activity_at = NOW(), status = 'active'
+    WHERE id = ${cardId}
+  `;
+  await sql`
+    INSERT INTO gift_card_transactions
+      (card_id, type, amount_cents, balance_after_cents, note)
+    VALUES
+      (${cardId}, 'credit', ${amountCents}, ${newBalance}, ${note ?? 'Credit applied'})
+  `;
+  return newBalance;
+}
+
 export async function createGiftCard(params: {
   code: string;
   faceValueCents: number;
@@ -17,7 +45,7 @@ export async function createGiftCard(params: {
   recipientName?: string;
   senderName?: string;
   giftMessage?: string;
-  stripeSessionId: string;
+  stripeSessionId?: string;
 }) {
   const sql = getDb();
   const [card] = await sql`

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { generateCode, createGiftCard } from '@/lib/gift-cards';
+import { generateCode, createGiftCard, lookupCardBySession } from '@/lib/gift-cards';
 import { sendGiftCardEmail } from '@/lib/email';
 
 export const runtime = 'nodejs';
@@ -28,6 +28,20 @@ export async function POST(req: NextRequest) {
 
   if (!faceValue || !session.customer_email) {
     return NextResponse.json({ error: 'Missing session data' }, { status: 400 });
+  }
+
+  // Idempotency — Stripe retries failed webhooks; re-send email if already fulfilled
+  const existing = await lookupCardBySession(session.id);
+  if (existing) {
+    await sendGiftCardEmail({
+      to:             session.customer_email,
+      code:           existing.code,
+      faceValueCents: existing.face_value_cents,
+      recipientName:  existing.recipient_name  || undefined,
+      senderName:     existing.sender_name     || undefined,
+      giftMessage:    existing.gift_message    || undefined,
+    });
+    return NextResponse.json({ received: true });
   }
 
   // Generate a unique code (retry on collision)
