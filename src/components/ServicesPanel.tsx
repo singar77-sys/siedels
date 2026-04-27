@@ -42,15 +42,15 @@ export function ServicesPanel({ onSelectService }: ServicesPanelProps) {
                     <button
                       key={service.name}
                       onClick={() => onSelectService(service)}
-                      className="w-full flex items-start gap-4 md:gap-6 px-4 md:px-6 py-3 md:py-0 md:flex-1 group text-left hover:bg-surface-raised/50 transition-colors duration-150"
+                      className="w-full flex items-center gap-4 md:gap-6 px-4 md:px-6 py-3 md:py-0 md:flex-1 group text-left hover:bg-surface-raised/50 transition-colors duration-150"
                     >
                       {/* Price — left anchor */}
-                      <span className="font-headline text-xl md:text-2xl font-bold text-red whitespace-nowrap w-12 md:w-16 shrink-0 leading-none pt-0.5 group-hover:text-red-hover transition-colors">
+                      <span className="font-headline text-xl md:text-2xl font-bold text-red whitespace-nowrap w-12 md:w-16 shrink-0 leading-none group-hover:text-red-hover transition-colors">
                         {service.price}
                       </span>
 
                       {/* Name + tagline */}
-                      <span className="flex-1 min-w-0 self-center">
+                      <span className="flex-1 min-w-0">
                         <span className="block font-headline text-sm md:text-[15px] font-bold uppercase tracking-tight text-text group-hover:text-red transition-colors duration-150 leading-snug">
                           {service.name}
                         </span>
@@ -60,7 +60,7 @@ export function ServicesPanel({ onSelectService }: ServicesPanelProps) {
                       </span>
 
                       {/* Duration + expand icon */}
-                      <span className="shrink-0 flex flex-col items-end gap-1.5 self-center">
+                      <span className="shrink-0 flex flex-col items-end gap-1.5">
                         <span className="font-label text-[9px] md:text-[10px] tracking-widest text-text-subtle uppercase">
                           {service.duration}
                         </span>
