@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react';
 
 export type Theme = 'dark' | 'light';
 
@@ -21,14 +21,15 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  // Inline script in layout.tsx <head> sets data-theme before hydration,
-  // so we read it from the DOM on first render. No useEffect sync needed.
-  const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof document !== 'undefined') {
-      return (document.documentElement.getAttribute('data-theme') as Theme) || 'light';
-    }
-    return 'light';
-  });
+  // SSR always renders with 'light'; the inline <head> script sets data-theme
+  // from localStorage before React hydrates. A useEffect snaps React state to
+  // match the DOM after mount so the toggle computes the right next value.
+  const [theme, setThemeState] = useState<Theme>('light');
+
+  useEffect(() => {
+    const domTheme = (document.documentElement.getAttribute('data-theme') as Theme) || 'light';
+    setThemeState(domTheme);
+  }, []);
 
   const setTheme = useCallback((t: Theme) => {
     setThemeState(t);

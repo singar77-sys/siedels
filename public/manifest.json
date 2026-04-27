@@ -8,9 +8,14 @@
   "theme_color": "#0E0E0E",
   "icons": [
     {
-      "src": "/favicon.ico",
-      "sizes": "any",
-      "type": "image/x-icon"
+      "src": "/logos/siedels-logo-color-400.webp",
+      "sizes": "400x400",
+      "type": "image/webp"
+    },
+    {
+      "src": "/logos/siedels-logo-color-800.webp",
+      "sizes": "800x800",
+      "type": "image/webp"
     }
   ]
 }
