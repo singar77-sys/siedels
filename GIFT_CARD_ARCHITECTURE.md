@@ -154,25 +154,37 @@ HMAC-SHA256 signed, base64url encoded. Payload: `{ ts, ph }` where `ph` = SHA256
 The charge UPDATE uses `WHERE balance_cents >= amountCents` in a single statement. Two simultaneous charges on the same card — only one wins. No SELECT-then-UPDATE pattern.
 
 ### Rate limiting
-- PIN login: DB-backed, 5 attempts/15min per IP
-- Balance check: in-memory, 10 requests/60s per IP (resets on cold start — acceptable for this traffic level)
+- PIN login: DB-backed (`pin_attempts` table), 5 failures/15min per IP
+- Balance check: in-memory Map, 10 requests/60s per IP
 
 ### Known limitations
-- Shared PIN for all staff — no per-employee accountability (session ID in transaction note provides partial attribution)
-- In-memory balance rate limiter doesn't persist across Vercel cold starts
+- Shared PIN for all staff — no per-employee accountability (POS session ID in transaction note provides partial attribution)
+- In-memory balance rate limiter resets on Vercel cold starts — upgrade path is DB or Redis-backed (same pattern as `pin_attempts`)
 - No short-lived signed URLs for balance links (acceptable for current scale)
+
+---
+
+## Future Work
+
+| Item | Priority | Notes |
+|---|---|---|
+| Per-staff PINs or logins | Medium | Replace single `GIFT_CARD_PIN` env var with a staff table; each employee gets their own credential; transactions become fully attributed |
+| DB/Redis-backed balance rate limit | Low | Current in-memory limiter is sufficient for this traffic; migrate to `pin_attempts`-style DB table or Redis if abuse becomes a concern |
+| Dormancy fee legal review | Blocker | **Do not enable the cron job until verified against Ohio gift card law and any applicable federal regs.** The $2.50/month fee and 12-month window are implemented but must be confirmed as permissible before going live. |
 
 ---
 
 ## Dormancy Fee
 
-Runs via scheduled job (cron). Applies $2.50/month to cards with no activity for 12+ consecutive months. Each fee is logged as a `dormancy_fee` transaction. Any redemption or credit resets the 12-month clock (`last_activity_at`).
+Implemented but **not yet enabled** — requires legal review before the cron is activated (see Future Work above).
+
+Logic: $2.50/month applied to cards with no activity for 12+ consecutive months. Each fee is logged as a `dormancy_fee` transaction. Any redemption or credit resets the 12-month clock (`last_activity_at`).
 
 ---
 
 ## Code Format
 
-`SIED-XXXX-XXXX-XXXX` — 12 characters from `ABCDEFGHJKLMNPQRSTUVWXYZ23456789` (no 0, 1, I, O to avoid visual ambiguity). ~5.7 trillion combinations.
+`SIED-XXXX-XXXX-XXXX` — 12 characters from `ABCDEFGHJKLMNPQRSTUVWXYZ23456789` (no 0, 1, I, O to avoid visual ambiguity). 32 characters × 12 positions = 32¹² ≈ **1.15 quintillion** combinations.
 
 ---
 
