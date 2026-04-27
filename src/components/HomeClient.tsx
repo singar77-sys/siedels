@@ -17,7 +17,6 @@ import { GalleryPanel } from './GalleryPanel';
 import { TeamPanel } from './TeamPanel';
 import { TeamCardFlip } from './TeamCardFlip';
 import { GiftPanel } from './GiftPanel';
-import { GiftPromo } from './GiftPromo';
 import { ContactPanel } from './ContactPanel';
 import type { Shift } from '@/lib/schedule';
 
@@ -199,7 +198,11 @@ export function HomeClient({
           className="flex h-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory overscroll-x-contain touch-pan-x"
           style={{ scrollbarWidth: 'none' }}
         >
-          <HeroPanel onScrollNext={() => scrollToPanel(1)} onExploreServices={() => scrollToPanel(2)} />
+          <HeroPanel
+            onScrollNext={() => scrollToPanel(1)}
+            onExploreServices={() => scrollToPanel(2)}
+            onGiftNavigate={() => scrollToPanel(4)}
+          />
           <TeamPanel
             onSelectMember={setSelectedMember}
             scheduleIsCurrent={scheduleIsCurrent}
@@ -267,9 +270,6 @@ export function HomeClient({
           BOOK
         </a>
       </nav>
-
-      {/* ══ Seasonal gift card promo — slide-in, date-gated, session-dismissed ══ */}
-      <GiftPromo onNavigate={() => scrollToPanel(4)} />
 
       {/* ══ Team Member Modal — baseball card that flips front→back ══ */}
       {selectedMember && (
