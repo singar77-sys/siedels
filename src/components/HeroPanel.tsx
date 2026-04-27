@@ -116,13 +116,13 @@ export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate, sho
           >
             Haircuts, fades, beard work, and straight razor shaves on Court Street in Medina, Ohio.
           </p>
-          <p
-            className="font-label text-[11px] tracking-[0.25em] mb-3 md:mb-4 lg:mb-6 2xl:mb-10 hero-stagger-4"
-            style={{ color: 'var(--hero-eyebrow)' }}
-          >
-            CASH ONLY · ATM ON SITE
-          </p>
-          <div className="mb-3 md:mb-4 lg:mb-6 hero-stagger-4">
+          <div className="flex flex-col gap-2 mb-4 md:mb-6 lg:mb-8 2xl:mb-10 hero-stagger-4">
+            <p
+              className="font-label text-[11px] tracking-[0.25em]"
+              style={{ color: 'var(--hero-eyebrow)' }}
+            >
+              CASH ONLY · ATM ON SITE
+            </p>
             <ShopStatus
               shopHours={shopHours}
               isClosed={isClosed}
