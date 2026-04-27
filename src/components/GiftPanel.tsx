@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Icon } from './Icon';
 
 const PRESET = [25, 50, 100] as const;
-const CARD_PHOTO = '/images/siedels-barbershop-medina-ohio.webp';
+const CARD_PHOTO = '/images/siedels-barbershop-storefront-medina-ohio.webp';
 
 export function GiftPanel() {
   const [amount, setAmount] = useState<number | 'custom'>(50);
