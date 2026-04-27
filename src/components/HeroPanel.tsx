@@ -155,7 +155,7 @@ export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate, sho
       {/* Father's Day promo — right-side negative space, desktop only */}
       {promoMounted && (
         <div
-          className={`hidden lg:block absolute top-[38%] -translate-y-1/2 right-10 xl:right-20 z-10 max-w-[210px] transition-all duration-700 ease-out ${
+          className={`hidden md:block absolute top-[38%] -translate-y-1/2 right-10 xl:right-20 z-10 max-w-[210px] transition-all duration-700 ease-out ${
             promoAnimate ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
           }`}
         >
