@@ -73,7 +73,7 @@ export function ShopStatus({ shopHours, isClosed, scheduleKnown, dayName }: Shop
   useEffect(() => {
     function compute() {
       const { hour, minute, dayName: liveDay } = getMedinaTime();
-      const day = dayName || liveDay;
+      const day = liveDay;
 
       // Always use the static hours table — sheet shopHours is for barber
       // shifts only and can be blank/wrong without reflecting true open hours.
