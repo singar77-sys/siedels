@@ -121,8 +121,8 @@ export function HomeClient({
           aria-label="Siedel's Barbershop — home"
           className="flex items-center"
         >
-          <Logo width={180} priority className="md:hidden" />
-          <Logo width={240} priority className="hidden md:block" />
+          <Logo width={180} priority className="md:hidden animate-logo-slam" />
+          <Logo width={240} priority className="hidden md:block animate-logo-slam" />
         </Link>
         <nav className="hidden md:flex items-center gap-6">
           <div className="flex items-center gap-0 relative">
