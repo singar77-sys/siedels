@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { generateCode, createGiftCard, lookupCardBySession } from '@/lib/gift-cards';
-import { sendGiftCardEmail } from '@/lib/email';
+import { sendGiftCardEmail, sendBuyerReceiptEmail, sendShopNotificationEmail } from '@/lib/email';
 
 export const runtime = 'nodejs';
 
@@ -79,6 +79,25 @@ export async function POST(req: NextRequest) {
     recipientName:  meta.to      || undefined,
     senderName:     meta.from    || undefined,
     giftMessage:    meta.message || undefined,
+  });
+
+  // Buyer receipt — only when card was sent to someone else
+  if (meta.recipient_email && meta.recipient_email !== session.customer_email) {
+    await sendBuyerReceiptEmail({
+      to:             session.customer_email,
+      code,
+      faceValueCents: faceValue,
+      recipientEmail: meta.recipient_email,
+      senderName:     meta.from || undefined,
+    });
+  }
+
+  // Shop notification
+  await sendShopNotificationEmail({
+    faceValueCents: faceValue,
+    buyerName:      meta.from          || undefined,
+    buyerEmail:     session.customer_email,
+    recipientEmail: meta.recipient_email || undefined,
   });
 
   return NextResponse.json({ received: true });
