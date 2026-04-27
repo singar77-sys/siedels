@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifyAuthToken, COOKIE_NAME } from '@/lib/pin-auth';
+import { verifyAdminToken, ADMIN_COOKIE } from '@/lib/admin-auth';
 import { generateCode, createGiftCard } from '@/lib/gift-cards';
 import { sendGiftCardEmail } from '@/lib/email';
 
 export async function POST(req: NextRequest) {
-  const token = req.cookies.get(COOKIE_NAME)?.value ?? '';
-  if (!verifyAuthToken(token)) {
+  const token = req.cookies.get(ADMIN_COOKIE)?.value ?? '';
+  if (!verifyAdminToken(token)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

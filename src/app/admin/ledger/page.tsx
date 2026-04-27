@@ -83,17 +83,17 @@ export default function LedgerPage() {
   const login = async () => {
     setLoading(true);
     setError('');
-    const res = await fetch('/api/pin/login', {
+    const res = await fetch('/api/admin/login', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ pin }),
+      body:    JSON.stringify({ secret: pin }),
     });
     if (res.ok) {
       setAuthed(true);
       loadData();
     } else {
       const d = await res.json().catch(() => ({}));
-      setError(d.error ?? 'Incorrect PIN');
+      setError(d.error ?? 'Incorrect password');
     }
     setLoading(false);
   };
@@ -188,7 +188,7 @@ export default function LedgerPage() {
           <p className="font-label text-[10px] tracking-[0.3em] text-red mb-3">ADMIN</p>
           <h1 className="font-headline text-4xl uppercase tracking-tight text-text mb-10">LEDGER</h1>
           <div className="mb-5">
-            <label className="block font-label text-[10px] tracking-widest text-text-subtle mb-3">PIN</label>
+            <label className="block font-label text-[10px] tracking-widest text-text-subtle mb-3">ADMIN PASSWORD</label>
             <input
               type="password"
               value={pin}
