@@ -106,19 +106,13 @@ export function ShopStatus({ shopHours, isClosed, scheduleKnown, dayName }: Shop
 
   if (open === null) return null;
 
+  const [statusWord, ...rest] = label.split(' · ');
+  const detail = rest.join(' · ');
+
   return (
-    <div className="flex items-center gap-2">
-      <span
-        className={`inline-block w-1.5 h-1.5 rounded-full flex-none ${
-          open ? 'bg-green-500 animate-pulse' : 'bg-red'
-        }`}
-      />
-      <span
-        className="font-label text-[11px] tracking-[0.2em]"
-        style={{ color: 'var(--hero-eyebrow)' }}
-      >
-        {label}
-      </span>
-    </div>
+    <p className="font-label text-[11px] tracking-[0.25em]" style={{ color: 'var(--hero-eyebrow)' }}>
+      <span className={open ? 'text-green-500' : 'text-red'}>{statusWord}</span>
+      {detail ? ` · ${detail}` : ''}
+    </p>
   );
 }
