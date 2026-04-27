@@ -75,10 +75,9 @@ export function ShopStatus({ shopHours, isClosed, scheduleKnown, dayName }: Shop
       const { hour, minute, dayName: liveDay } = getMedinaTime();
       const day = dayName || liveDay;
 
-      const rawHours =
-        scheduleKnown && shopHours
-          ? shopHours
-          : hours.find((h) => h.day === day)?.time ?? null;
+      // Always use the static hours table — sheet shopHours is for barber
+      // shifts only and can be blank/wrong without reflecting true open hours.
+      const rawHours = hours.find((h) => h.day === day)?.time ?? null;
 
       if (!rawHours || rawHours === 'Closed' || isClosed) {
         setOpen(false);
