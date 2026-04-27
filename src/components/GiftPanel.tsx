@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Icon } from './Icon';
 
-const DENOMINATIONS = [25, 50, 75, 100];
+const DENOMINATIONS = [25, 50, 100];
 
 export function GiftPanel() {
   const [amount, setAmount] = useState(50);
@@ -49,7 +49,7 @@ export function GiftPanel() {
             {/* Denominations */}
             <div className="mb-6 md:mb-8">
               <p className="font-label text-[10px] tracking-[0.35em] text-text-subtle mb-3">CHOOSE AN AMOUNT</p>
-              <div className="grid grid-cols-4 gap-2 md:gap-3">
+              <div className="grid grid-cols-3 gap-2 md:gap-3">
                 {DENOMINATIONS.map((d) => (
                   <button
                     key={d}
