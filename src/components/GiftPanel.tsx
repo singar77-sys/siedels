@@ -53,7 +53,7 @@ export function GiftPanel() {
         <div className="border-l-4 border-red pl-4 md:pl-6 mb-4 md:mb-5 flex-none">
           <p className="font-label text-[10px] tracking-[0.3em] text-red mb-1">GIFT CARDS</p>
           <h2 className="font-headline text-2xl md:text-4xl uppercase tracking-tight leading-[0.9]">
-            GIVE SOMEONE <span className="text-stroke">A FRESH CUT</span>
+            A FRESH CUT, <span className="text-stroke">GIFTED</span>
           </h2>
         </div>
 
