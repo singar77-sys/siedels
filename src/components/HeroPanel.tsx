@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { SQUARE_BOOKING_URL, RATING, REVIEW_COUNT, IMAGE_ALTS, testimonials } from '@/data/shop';
 import { Icon } from './Icon';
+import { ShopStatus } from './ShopStatus';
 
 const HERO_DARK = '/images/siedels-barbershop-medina-ohio.webp';
 const HERO_LIGHT = '/images/siedels-barbershop-golden-hour-medina-ohio.webp';
@@ -21,9 +22,13 @@ interface HeroPanelProps {
   onScrollNext: () => void;
   onExploreServices: () => void;
   onGiftNavigate: () => void;
+  shopHours: string | null;
+  isClosed: boolean;
+  scheduleKnown: boolean;
+  dayName: string;
 }
 
-export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate }: HeroPanelProps) {
+export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate, shopHours, isClosed, scheduleKnown, dayName }: HeroPanelProps) {
   const [promoMounted, setPromoMounted] = useState(false);
   const [promoAnimate, setPromoAnimate] = useState(false);
 
@@ -117,6 +122,14 @@ export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate }: H
           >
             CASH ONLY · ATM ON SITE
           </p>
+          <div className="mb-3 md:mb-4 lg:mb-6 hero-stagger-4">
+            <ShopStatus
+              shopHours={shopHours}
+              isClosed={isClosed}
+              scheduleKnown={scheduleKnown}
+              dayName={dayName}
+            />
+          </div>
           {/* Pride mode accent — hidden unless [data-pride="true"] */}
           <p className="pride-hero-accent font-label text-[13px] tracking-[0.2em] mb-3 md:mb-4" aria-hidden="true">
             🏳️‍🌈 &nbsp;🦄 &nbsp;🌈 &nbsp;✨

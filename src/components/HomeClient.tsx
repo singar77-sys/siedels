@@ -202,6 +202,10 @@ export function HomeClient({
             onScrollNext={() => scrollToPanel(1)}
             onExploreServices={() => scrollToPanel(2)}
             onGiftNavigate={() => scrollToPanel(4)}
+            shopHours={scheduleToday.shopHours}
+            isClosed={scheduleToday.isClosed}
+            scheduleKnown={scheduleToday.scheduleKnown}
+            dayName={scheduleToday.dayName}
           />
           <TeamPanel
             onSelectMember={setSelectedMember}
