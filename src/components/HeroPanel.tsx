@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { SQUARE_BOOKING_URL, RATING, REVIEW_COUNT, IMAGE_ALTS, testimonials } from '@/data/shop';
 import { Icon } from './Icon';
 
@@ -8,9 +7,10 @@ const HERO_LIGHT = '/images/siedels-barbershop-golden-hour-medina-ohio.webp';
 
 interface HeroPanelProps {
   onScrollNext: () => void;
+  onExploreServices: () => void;
 }
 
-export function HeroPanel({ onScrollNext }: HeroPanelProps) {
+export function HeroPanel({ onScrollNext, onExploreServices }: HeroPanelProps) {
   return (
     <section className="min-w-full h-full snap-start relative flex items-end overflow-hidden">
       {/* Background image — both themes render, CSS hides the inactive one */}
@@ -100,12 +100,12 @@ export function HeroPanel({ onScrollNext }: HeroPanelProps) {
             >
               BOOK NOW
             </a>
-            <Link
-              href="/services"
+            <button
+              onClick={onExploreServices}
               className="hero-cta-ghost inline-flex items-center justify-center gap-2 border font-headline font-bold uppercase tracking-tight px-8 py-4 transition-colors duration-300"
             >
               EXPLORE SERVICES
-            </Link>
+            </button>
           </div>
         </div>
       </div>

@@ -198,7 +198,7 @@ export function HomeClient({
           className="flex h-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory overscroll-x-contain touch-pan-x"
           style={{ scrollbarWidth: 'none' }}
         >
-          <HeroPanel onScrollNext={() => scrollToPanel(1)} />
+          <HeroPanel onScrollNext={() => scrollToPanel(1)} onExploreServices={() => scrollToPanel(2)} />
           <TeamPanel
             onSelectMember={setSelectedMember}
             scheduleIsCurrent={scheduleIsCurrent}
