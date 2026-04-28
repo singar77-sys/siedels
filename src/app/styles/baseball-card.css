@@ -153,6 +153,7 @@
 /* ── Flip animation: modal card turns from front to back ───── */
 .card-flip-stage {
   perspective: 1400px;
+  -webkit-perspective: 1400px;
   width: 100%;
   max-width: 440px;
   margin: 0 auto;
@@ -162,24 +163,40 @@
   display: block;
   width: 100%;
   aspect-ratio: 5 / 7;
+  -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
-  transform: rotateY(0);
-  transition: transform 1.1s cubic-bezier(0.4, 0.1, 0.3, 1);
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+  transition: transform 1.1s cubic-bezier(0.4, 0.1, 0.3, 1),
+              -webkit-transform 1.1s cubic-bezier(0.4, 0.1, 0.3, 1);
   background: transparent;
   border: 0;
   padding: 0;
   cursor: pointer;
   outline: none;
 }
-.card-flip.flipped { transform: rotateY(180deg); }
+.card-flip.flipped {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
 .card-flip:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
 .card-flip-face {
   position: absolute;
   inset: 0;
-  backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
-.card-flip-back { transform: rotateY(180deg); }
+/* translateZ(1px) forces each face onto its own compositing layer —
+   required on iOS Safari to prevent the front badge/numbers bleeding
+   through the back when backface-visibility alone is not honoured. */
+.card-flip-front {
+  -webkit-transform: translateZ(1px);
+  transform: translateZ(1px);
+}
+.card-flip-back {
+  -webkit-transform: rotateY(180deg) translateZ(1px);
+  transform: rotateY(180deg) translateZ(1px);
+}
 /* Front face delegates to BaseballCard — make sure the inner
    card fills the face and doesn't hover-transform inside the flip */
 .card-flip-front .card-86 {
