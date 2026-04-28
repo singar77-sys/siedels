@@ -232,7 +232,7 @@ export const services: Service[] = [
     description:
       "A full head shave with hot towels and a straight razor. Whether you're maintaining a bald look or going for it for the first time, you'll walk out smooth, conditioned, and comfortable. Includes scalp treatment.",
     includes: ['Hot towel prep', 'Straight razor head shave', 'Scalp treatment', 'Aftershave balm'],
-    duration: '40 min',
+    duration: '35 min',
     image: '/images/straight-razor-shave-hot-towel-siedels-medina.webp',
   },
   {
