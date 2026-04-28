@@ -97,7 +97,7 @@ export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate, sho
             className="font-body text-base md:text-xl max-w-xl leading-relaxed mb-2 md:mb-4 hero-stagger-4"
             style={{ color: 'var(--hero-tagline)' }}
           >
-            Haircuts, fades, beard work, and straight razor shaves on Court Street in Medina, Ohio.
+            Welcome to Siedel&apos;s. Haircuts, fades, beard work, and straight razor shaves on Court Street in Medina, Ohio.
           </p>
           <div className="flex flex-col gap-2 mb-4 md:mb-6 lg:mb-8 2xl:mb-10 hero-stagger-4">
             <p
