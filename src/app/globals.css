@@ -253,6 +253,12 @@ body {
   animation: lb-in 0.22s ease-out both;
 }
 
+/* ── Hero h1 fluid size — smooth scaling, no hard jump at 2xl ── */
+.hero-h1-size { font-size: 3rem; }
+@media (min-width: 640px)  { .hero-h1-size { font-size: 3.75rem; } }
+@media (min-width: 768px)  { .hero-h1-size { font-size: 4.5rem; } }
+@media (min-width: 1536px) { .hero-h1-size { font-size: clamp(4.5rem, 5vw, 5.5rem); } }
+
 /* ── Hero SHARP — outlined white in both themes ──────── */
 .hero-sharp {
   color: transparent;
