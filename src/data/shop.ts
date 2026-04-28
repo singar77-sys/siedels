@@ -180,8 +180,8 @@ export const services: Service[] = [
     price: '$34',
     tagline: 'The Siedel\'s signature cut',
     description:
-      "A precision men's haircut from a master barber. Consultation and a tailored cut using clippers, shears, or a combination — scissor-over-comb, tapers, fades, classic side parts, or whatever shape you need. Finished with a hot towel, styling, and a neck shave.",
-    includes: ['Consultation', 'Precision cut', 'Hot towel finish', 'Neck clean-up', 'Styling'],
+      "A precision men's haircut from a master barber. Consultation and a tailored cut using clippers, shears, or a combination — scissor-over-comb, tapers, fades, classic side parts, or whatever shape you need. Finished with a neck shave.",
+    includes: ['Consultation', 'Precision cut', 'Neck clean-up'],
     duration: '30 min',
     image: '/images/mens-haircut-scissors-siedels-medina.webp',
   },
@@ -191,8 +191,8 @@ export const services: Service[] = [
     tagline: 'Zero-gap precision',
     description:
       "Our sharpest fade work. Built with foil shavers and a straight razor for a crisp, skin-tight blend and a razor-defined lineup. Ideal for bald fades, skin fades, and anyone who wants the cleanest edge in Medina.",
-    includes: ['Detailed fade', 'Foil shaver blend', 'Straight razor lineup', 'Styling'],
-    duration: '45 min',
+    includes: ['Detailed fade', 'Foil shaver blend', 'Straight razor lineup'],
+    duration: '30 min',
     image: '/images/fade-haircut-razor-lineup-siedels-medina.webp',
   },
   {
@@ -200,8 +200,8 @@ export const services: Service[] = [
     price: '$44',
     tagline: 'Full overhaul',
     description:
-      "Our most popular combo. A complete haircut paired with a full beard shape-up — cheek and neck lines defined, length balanced, and the whole thing finished with hot towel and beard oil. Walk out looking like a different man.",
-    includes: ['Full haircut', 'Beard shape + trim', 'Line work', 'Hot towel', 'Beard oil'],
+      "Our most popular combo. A complete haircut paired with a full beard shape-up — cheek and neck lines defined, length balanced, and the whole thing finished with beard oil. Walk out looking like a different man.",
+    includes: ['Full haircut', 'Beard shape + trim', 'Line work', 'Beard oil'],
     duration: '50 min',
     image: '/images/beard-trim-clippers-siedels-medina.webp',
   },
@@ -212,7 +212,7 @@ export const services: Service[] = [
     description:
       "A complete haircut paired with a full straight razor face shave. Hot towels, lather, two passes, cold towel finish — the works. Walk out with a fresh cut and the smoothest shave in Medina.",
     includes: ['Full haircut', 'Hot towel prep', 'Straight razor face shave', 'Cold towel finish', 'Aftershave balm'],
-    duration: '75 min',
+    duration: '55 min',
     image: '/images/straight-razor-shave-hot-towel-siedels-medina.webp',
   },
   {
@@ -222,7 +222,7 @@ export const services: Service[] = [
     description:
       "The full old-school treatment. Warm lather, hot towels, and a straight razor shave done the way barbers have done it for a century. Pre-shave oil, two passes, cold towel finish, and aftershave balm. Worth booking just for the ritual.",
     includes: ['Pre-shave oil', 'Hot towel prep', 'Straight razor — two passes', 'Cold towel finish', 'Aftershave balm'],
-    duration: '45 min',
+    duration: '30 min',
     image: '/images/full-service-straight-razor-shave-siedels-medina.webp',
   },
   {
@@ -240,8 +240,8 @@ export const services: Service[] = [
     price: '$31',
     tagline: 'Shape, define, finish',
     description:
-      "Beard shape-up with clean cheek and neck lines, length balancing, and detailing. Finished with hot towel and beard oil. Book this on its own or add it to any haircut.",
-    includes: ['Beard shape', 'Cheek + neck lines', 'Length balance', 'Hot towel', 'Beard oil'],
+      "Beard shape-up with clean cheek and neck lines, length balancing, and detailing. Finished with beard oil. Book this on its own or add it to any haircut.",
+    includes: ['Beard shape', 'Cheek + neck lines', 'Length balance', 'Beard oil'],
     duration: '20 min',
     image: '/images/beard-trim-scissors-siedels-medina.webp',
   },
@@ -251,8 +251,8 @@ export const services: Service[] = [
     tagline: 'Longer styles, dialed in',
     description:
       "Longer men's styles need real shear work. Precision cut with scissors and a rough dry so you can see the shape before you walk out. Ideal for shoulder-length and flow cuts.",
-    includes: ['Shear cut', 'Rough dry', 'Styling'],
-    duration: '40 min',
+    includes: ['Shear cut', 'Rough dry'],
+    duration: '30 min',
     image: '/images/shoulder-length-haircut-siedels-medina.webp',
   },
   {
