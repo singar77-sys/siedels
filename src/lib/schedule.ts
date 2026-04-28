@@ -182,6 +182,9 @@ export async function fetchSchedule(): Promise<WeekSchedule> {
     const res = await fetch(CSV_URL, {
       next: { revalidate: 1800 }, // 30 min ISR cache
       redirect: 'follow',
+      // Abort after 8 s — prevents the Vercel static-generation worker
+      // from hanging the full 60 s when Sheets is slow at build time.
+      signal: AbortSignal.timeout(8000),
     });
     if (!res.ok) throw new Error(`status ${res.status}`);
     text = await res.text();
