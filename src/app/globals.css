@@ -902,18 +902,19 @@ body {
    Panel entrance animations
    ══════════════════════════════════════════════════════ */
 @keyframes panel-rise {
-  from { opacity: 0; transform: translateY(14px); }
+  from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  section[data-entered] > div > :nth-child(1) {
-    animation: panel-rise 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  /* Scoped to grid-bg panels only — HeroPanel has its own hero-stagger animations */
+  section.grid-bg[data-entered] > div > :nth-child(1) {
+    animation: panel-rise 0.5s 0.12s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
-  section[data-entered] > div > :nth-child(2) {
-    animation: panel-rise 0.5s 0.07s cubic-bezier(0.16, 1, 0.3, 1) both;
+  section.grid-bg[data-entered] > div > :nth-child(2) {
+    animation: panel-rise 0.55s 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
-  section[data-entered] > div > :nth-child(3) {
-    animation: panel-rise 0.5s 0.14s cubic-bezier(0.16, 1, 0.3, 1) both;
+  section.grid-bg[data-entered] > div > :nth-child(3) {
+    animation: panel-rise 0.55s 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 }

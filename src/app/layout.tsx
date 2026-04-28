@@ -42,6 +42,15 @@ export const metadata: Metadata = {
     description: `${TEAM_COUNT_WORD} barbers in Medina, Ohio. Cash only. ATM on site.`,
     images: ['/images/siedels-barbershop-medina-ohio.webp'],
   },
+  icons: {
+    icon: [
+      { url: '/logos/siedels-favicon-16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/logos/siedels-favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logos/siedels-favicon-192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: [{ url: '/logos/siedels-favicon-180.png', sizes: '180x180', type: 'image/png' }],
+    shortcut: '/logos/siedels-favicon-32.png',
+  },
   robots: {
     index: true,
     follow: true,
