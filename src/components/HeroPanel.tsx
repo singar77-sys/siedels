@@ -196,14 +196,21 @@ export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate, sho
         </div>
       </aside>
 
+      {/* First-paint discoverability cue — points along the actual scroll axis.
+          Mobile: bottom-centered "SWIPE →". Desktop: bottom-right "SCROLL →"
+          beside an animated chevron, in eyebrow color so it reads against
+          both light and dark heroes. The animate-scroll-cue keyframe pulses
+          opacity + nudges the arrow rightward on a 2s loop. */}
       <button
         onClick={onScrollNext}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 text-text-subtle hover:text-red transition-colors animate-pulse"
-        aria-label="Next panel"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 md:left-auto md:right-8 md:translate-x-0 z-10 flex items-center gap-2 transition-colors hover:text-red animate-scroll-cue"
+        style={{ color: 'var(--hero-eyebrow)' }}
+        aria-label="Continue to next panel"
       >
         <Icon name="swipe_right" className="w-6 h-6 md:hidden" />
-        <span className="font-label text-[10px] tracking-widest md:hidden">SWIPE</span>
-        <Icon name="chevron_right" className="w-7 h-7 rotate-90 hidden md:inline-block" />
+        <span className="font-label text-[10px] tracking-[0.3em] md:hidden">SWIPE &rarr;</span>
+        <span className="font-label text-[11px] tracking-[0.3em] hidden md:inline-block">SCROLL</span>
+        <Icon name="chevron_right" className="w-6 h-6 hidden md:inline-block animate-scroll-cue-arrow" />
       </button>
     </section>
   );

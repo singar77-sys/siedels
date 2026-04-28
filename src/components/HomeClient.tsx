@@ -312,15 +312,18 @@ export function HomeClient({
         </Modal>
       )}
 
-      {/* ══ Service Modal ═════════════════════ */}
+      {/* ══ Service Modal ═════════════════════
+           Close button matches the team-modal style for consistency:
+           same position (top-3 right-3), same size, same color tokens —
+           so the user learns one close-control grammar across modals. */}
       {selectedService && (
         <Modal onClose={() => setSelectedService(null)}>
           <button
             onClick={() => setSelectedService(null)}
-            className="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center bg-ink/60 text-white hover:bg-red transition-colors"
+            className="absolute top-3 right-3 z-10 w-11 h-11 flex items-center justify-center text-text-subtle hover:text-text transition-colors"
             aria-label="Close"
           >
-            <Icon name="close" className="w-5 h-5" />
+            <Icon name="close" className="w-4 h-4" />
           </button>
           {selectedService.image && (
             <div className="relative aspect-[16/9] w-full bg-surface-raised">

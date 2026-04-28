@@ -325,6 +325,24 @@ body {
 .hero-stagger-4 { animation: hero-rise 0.5s ease-out 0.9s both; }
 .hero-stagger-5 { animation: hero-rise 0.4s ease-out 1.1s both; }
 
+/* ── Scroll discoverability cue — first-paint affordance for the
+   horizontal-scroll layout. Container pulses opacity, arrow nudges
+   right. Disabled by reduced-motion. */
+@keyframes scroll-cue-pulse {
+  0%, 100% { opacity: 0.6; }
+  50%      { opacity: 1; }
+}
+@keyframes scroll-cue-arrow {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(6px); }
+}
+.animate-scroll-cue       { animation: scroll-cue-pulse 2s ease-in-out infinite; }
+.animate-scroll-cue-arrow { animation: scroll-cue-arrow 2s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll-cue,
+  .animate-scroll-cue-arrow { animation: none; }
+}
+
 /* ── Review Ticker ───────────────────────────────────── */
 @keyframes ticker {
   0%   { transform: translateX(0); }
@@ -533,6 +551,34 @@ body {
   animation: team-banner-in 30s ease-out forwards;
   will-change: transform, opacity;
 }
+
+/* ── Team mode dark/light invariance ───────────────────
+   Sport-mode palettes are inherently light (tribe, price) or dark
+   (cavs, browns). The user's data-theme toggle still fires the
+   image-swap and theme-photo rules above, which causes a mismatch
+   (e.g. tribe's light navy palette + dark hero photo). These
+   overrides force imagery to match the team palette regardless of
+   the data-theme value. Specificity beats [data-theme="dark"] .x
+   because we lead with [data-team-mode] (same specificity, later
+   in source). */
+
+/* Tribe & Price are LIGHT-equivalent — show light imagery, no grayscale */
+[data-team-mode="tribe"] .hero-img-light,
+[data-team-mode="price"] .hero-img-light { display: block; }
+[data-team-mode="tribe"] .hero-img-dark,
+[data-team-mode="price"] .hero-img-dark  { display: none; }
+[data-team-mode="tribe"] .theme-photo,
+[data-team-mode="price"] .theme-photo    { filter: none; }
+
+/* Cavs & Browns are DARK-equivalent — show dark imagery, allow grayscale
+   to read against the dark palette (matches default dark behavior) */
+[data-team-mode="cavs"]   .hero-img-light,
+[data-team-mode="browns"] .hero-img-light { display: none; }
+[data-team-mode="cavs"]   .hero-img-dark,
+[data-team-mode="browns"] .hero-img-dark  { display: block; }
+/* Photos stay color in team modes — team palette + grayscale is muddy */
+[data-team-mode="cavs"]   .theme-photo,
+[data-team-mode="browns"] .theme-photo    { filter: none; }
 
 /* ── Italy easter egg — keyboard trigger "italy" ─────── */
 .italy-mode {
