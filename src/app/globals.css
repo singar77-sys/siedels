@@ -14,6 +14,46 @@
    Siedel's Barbershop — Multi-Theme Design System
    ══════════════════════════════════════════════════════ */
 
+/* ══════════════════════════════════════════════════════
+   Euclidean & Mathematical Foundation
+   ──────────────────────────────────────────────────────
+   All spatial and proportional values on this site derive
+   from a small set of exact mathematical constants.
+
+   HEXAGONAL GRID  (pointy-top regular hexagon, r = 16px)
+     Circumradius  r = 16          → tile height = 3r = 48px  (exact)
+     Tile width    ≈ r√3 = 27.712  → tiled at 28px            (≈ exact)
+     Top vertex    (14, 0)         → 14 = ½·28, 0 = 0         (exact)
+     Side vertex x 14 ± r·sin60°  → 14 ± 8√3 ≈ 27.856 / 0.144
+     Side vertex y 16 ± r·cos60°  → 16 ± 8 = 8 / 24          (exact)
+     Bottom vertex (14, 32)        → 32 = 2r                  (exact)
+
+   TYPE SCALE  (harmonic series on base 3rem — just intonation)
+     3rem              → base
+     3rem × 5/4 = 3.75rem  major third  (interval ratio 5:4)
+     3rem × 6/4 = 4.50rem  perfect fifth (ratio 3:2)
+     3rem × 8/4 = 6.00rem  octave        (ratio 2:1)
+
+   SPACING  (Tailwind 4px base unit — power-of-2 progression)
+     4·n px where n ∈ {1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24}
+
+   CARD PROPORTION  5:7 aspect ratio (classical trading card)
+   ══════════════════════════════════════════════════════ */
+
+/* Dimensionless Euclidean constants — usable in calc() expressions.
+   e.g. calc(1rem * var(--phi)) = 1 golden-ratio rem              */
+:root {
+  --phi:   1.6180339887;  /* φ  golden ratio   (1+√5)/2           */
+  --phi-c: 0.6180339887;  /* φ⁻¹ conjugate     1/φ = φ−1          */
+  --rt2:   1.4142135624;  /* √2  unit diagonal                    */
+  --rt3:   1.7320508076;  /* √3  equilateral-triangle altitude     */
+  --rt5:   2.2360679775;  /* √5  1×2 rectangle diagonal           */
+  --pi:    3.1415926536;  /* π   circumference / diameter          */
+  --tau:   6.2831853072;  /* τ   full turn in radians (2π)         */
+  /* Hex circumradius — all honeycomb geometry flows from this */
+  --hex-r: 16;            /* px — vertex-to-center                 */
+}
+
 /* ── Light Theme (default — shop palette) ─────────────
    Four warm tans + brand red. #938884 grey and the very
    low-saturation #C0BBB8 have both been dropped; surfaces
@@ -172,12 +212,12 @@ body {
   inset: 0;
   pointer-events: none;
   z-index: -1;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23362D1E' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23362D1E' stroke-width='1'%3E%3Cpolygon points='14,0 27.856,8 27.856,24 14,32 0.144,24 0.144,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 28px 48px;
   animation: honeycomb-breathe 9s ease-in-out infinite;
 }
 [data-theme="dark"] .grid-bg::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23E31B23' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23E31B23' stroke-width='1'%3E%3Cpolygon points='14,0 27.856,8 27.856,24 14,32 0.144,24 0.144,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
 }
 @keyframes honeycomb-breathe {
   0%, 100% { opacity: 0.035; }
@@ -432,7 +472,7 @@ body {
   --team-logo-color:   #E50022;
 }
 [data-team-mode="tribe"] .grid-bg::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%2300385D' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%2300385D' stroke-width='1'%3E%3Cpolygon points='14,0 27.856,8 27.856,24 14,32 0.144,24 0.144,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* Cleveland Cavaliers — wine, navy, gold */
@@ -467,7 +507,7 @@ body {
   --team-logo-color:   #FDBB30;
 }
 [data-team-mode="cavs"] .grid-bg::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FDBB30' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FDBB30' stroke-width='1'%3E%3Cpolygon points='14,0 27.856,8 27.856,24 14,32 0.144,24 0.144,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* Price-era Cavs ('89 retro) — powder blue, orange, near-black */
@@ -502,7 +542,7 @@ body {
   --team-logo-color:   #E35205;
 }
 [data-team-mode="price"] .grid-bg::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%2327251F' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%2327251F' stroke-width='1'%3E%3Cpolygon points='14,0 27.856,8 27.856,24 14,32 0.144,24 0.144,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* Cleveland Browns — deep brown, orange, white */
@@ -537,7 +577,7 @@ body {
   --team-logo-color:   #FF3C00;
 }
 [data-team-mode="browns"] .grid-bg::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FF3C00' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FF3C00' stroke-width='1'%3E%3Cpolygon points='14,0 27.856,8 27.856,24 14,32 0.144,24 0.144,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* Banner animation for all team modes — drops from top, holds, fades */
@@ -716,16 +756,16 @@ body {
 
 /* Night-uniform honeycomb strokes — match each night palette's accent */
 [data-theme="dark"][data-team-mode="tribe"] .grid-bg::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FF1A3D' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FF1A3D' stroke-width='1'%3E%3Cpolygon points='14,0 27.856,8 27.856,24 14,32 0.144,24 0.144,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
 }
 [data-theme="dark"][data-team-mode="cavs"] .grid-bg::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FDBB30' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FDBB30' stroke-width='1'%3E%3Cpolygon points='14,0 27.856,8 27.856,24 14,32 0.144,24 0.144,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
 }
 [data-theme="dark"][data-team-mode="price"] .grid-bg::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FF6A1A' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FF6A1A' stroke-width='1'%3E%3Cpolygon points='14,0 27.856,8 27.856,24 14,32 0.144,24 0.144,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
 }
 [data-theme="dark"][data-team-mode="browns"] .grid-bg::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FF6A1A' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FF6A1A' stroke-width='1'%3E%3Cpolygon points='14,0 27.856,8 27.856,24 14,32 0.144,24 0.144,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* Re-enable honeycomb visibility in night mode for team palettes —
@@ -802,7 +842,7 @@ body {
 }
 /* Swap the honeycomb layer to green lines so the ambient mesh matches */
 .italy-mode .grid-bg::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23009246' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23009246' stroke-width='1'%3E%3Cpolygon points='14,0 27.856,8 27.856,24 14,32 0.144,24 0.144,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
 }
 /* Transparent body so the flag stripes underneath show through */
 .italy-mode body {
