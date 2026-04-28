@@ -180,8 +180,8 @@ export const services: Service[] = [
     price: '$34',
     tagline: 'The Siedel\'s signature cut',
     description:
-      "A precision men's haircut from a master barber. Consultation, shampoo, and a tailored cut using clippers, shears, or a combination — scissor-over-comb, tapers, fades, classic side parts, or whatever shape you need. Finished with a hot towel, styling, and a neck shave.",
-    includes: ['Consultation', 'Shampoo', 'Precision cut', 'Hot towel finish', 'Neck clean-up', 'Styling'],
+      "A precision men's haircut from a master barber. Consultation and a tailored cut using clippers, shears, or a combination — scissor-over-comb, tapers, fades, classic side parts, or whatever shape you need. Finished with a hot towel, styling, and a neck shave.",
+    includes: ['Consultation', 'Precision cut', 'Hot towel finish', 'Neck clean-up', 'Styling'],
     duration: '30 min',
     image: '/images/mens-haircut-scissors-siedels-medina.webp',
   },
@@ -191,7 +191,7 @@ export const services: Service[] = [
     tagline: 'Zero-gap precision',
     description:
       "Our sharpest fade work. Built with foil shavers and a straight razor for a crisp, skin-tight blend and a razor-defined lineup. Ideal for bald fades, skin fades, and anyone who wants the cleanest edge in Medina.",
-    includes: ['Detailed fade', 'Foil shaver blend', 'Straight razor lineup', 'Shampoo', 'Styling'],
+    includes: ['Detailed fade', 'Foil shaver blend', 'Straight razor lineup', 'Styling'],
     duration: '45 min',
     image: '/images/fade-haircut-razor-lineup-siedels-medina.webp',
   },
@@ -250,8 +250,8 @@ export const services: Service[] = [
     price: '$40',
     tagline: 'Longer styles, dialed in',
     description:
-      "Longer men's styles need real shear work. Shampoo, precision cut with scissors, and a rough dry so you can see the shape before you walk out. Ideal for shoulder-length and flow cuts.",
-    includes: ['Shampoo', 'Shear cut', 'Rough dry', 'Styling'],
+      "Longer men's styles need real shear work. Precision cut with scissors and a rough dry so you can see the shape before you walk out. Ideal for shoulder-length and flow cuts.",
+    includes: ['Shear cut', 'Rough dry', 'Styling'],
     duration: '40 min',
     image: '/images/shoulder-length-haircut-siedels-medina.webp',
   },
