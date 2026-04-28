@@ -202,7 +202,7 @@ export const services: Service[] = [
     description:
       "Our most popular combo. A complete haircut paired with a full beard shape-up — cheek and neck lines defined, length balanced, and the whole thing finished with hot towel and beard oil. Walk out looking like a different man.",
     includes: ['Full haircut', 'Beard shape + trim', 'Line work', 'Hot towel', 'Beard oil'],
-    duration: '45 min',
+    duration: '50 min',
     image: '/images/beard-trim-clippers-siedels-medina.webp',
   },
   {
@@ -212,7 +212,7 @@ export const services: Service[] = [
     description:
       "A complete haircut paired with a full straight razor face shave. Hot towels, lather, two passes, cold towel finish — the works. Walk out with a fresh cut and the smoothest shave in Medina.",
     includes: ['Full haircut', 'Hot towel prep', 'Straight razor face shave', 'Cold towel finish', 'Aftershave balm'],
-    duration: '60 min',
+    duration: '75 min',
     image: '/images/straight-razor-shave-hot-towel-siedels-medina.webp',
   },
   {
