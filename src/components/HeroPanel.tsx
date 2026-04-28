@@ -89,7 +89,7 @@ export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate, sho
           >
             IN MEMORY OF CARL SIEDEL
           </p>
-          <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl 2xl:text-8xl uppercase tracking-tight leading-[0.88] mb-3 md:mb-4 lg:mb-5 2xl:mb-8">
+          <h1 className="font-headline hero-h1-size uppercase tracking-tight leading-[0.88] mb-3 md:mb-4 lg:mb-5 2xl:mb-8">
             <span className="hero-stagger-2 inline-block" style={{ color: 'var(--hero-h1)' }}>STAY</span><br />
             <span className="hero-stagger-3 inline-block hero-sharp">SHARP</span>
           </h1>
@@ -138,7 +138,7 @@ export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate, sho
       {/* Father's Day promo — right-side negative space, desktop only */}
       {promoMounted && (
         <div
-          className={`hidden md:block absolute top-[38%] -translate-y-1/2 right-10 xl:right-20 z-10 max-w-[210px] transition-all duration-700 ease-out ${
+          className={`hidden md:block absolute top-[38%] -translate-y-1/2 right-[3%] xl:right-[5%] 2xl:right-[8%] z-10 max-w-[210px] transition-all duration-700 ease-out ${
             promoAnimate ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
           }`}
         >
@@ -175,7 +175,7 @@ export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate, sho
       )}
 
       {/* Featured testimonial — bottom right, desktop only */}
-      <aside className="hidden lg:block absolute bottom-10 right-10 z-10 max-w-sm hero-stagger-5">
+      <aside className="hidden lg:block absolute bottom-10 right-[3%] xl:right-[5%] 2xl:right-[8%] z-10 max-w-sm hero-stagger-5">
         <div className="border-l-2 border-red pl-5 py-2">
           <div className="flex items-center gap-1 mb-2">
             {Array.from({ length: 5 }).map((_, i) => (

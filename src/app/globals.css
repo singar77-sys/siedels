@@ -253,11 +253,10 @@ body {
   animation: lb-in 0.22s ease-out both;
 }
 
-/* ── Hero h1 fluid size — caps at 76px on large screens ── */
+/* ── Hero h1 fluid size — continuous scale, no hard jumps ── */
 .hero-h1-size { font-size: 3rem; }
-@media (min-width: 640px)  { .hero-h1-size { font-size: 3.75rem; } }
-@media (min-width: 768px)  { .hero-h1-size { font-size: 4.5rem; } }
-@media (min-width: 1280px) { .hero-h1-size { font-size: 4.75rem; } }
+@media (min-width: 640px) { .hero-h1-size { font-size: 3.75rem; } }
+@media (min-width: 768px) { .hero-h1-size { font-size: clamp(4.5rem, 5.5vw, 5rem); } }
 
 /* ── Hero SHARP — outlined white in both themes ──────── */
 .hero-sharp {
