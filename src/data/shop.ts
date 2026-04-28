@@ -257,7 +257,7 @@ export const services: Service[] = [
   },
   {
     name: 'Duo Haircut',
-    price: '$66',
+    price: '$64',
     tagline: 'Father + son, or two buddies',
     description:
       "Two haircuts booked together, back-to-back in the same chair or in adjacent chairs. Popular for dads with kids, brothers, or anyone who wants to make a trip of it.",
@@ -267,7 +267,7 @@ export const services: Service[] = [
   },
   {
     name: 'Trio Haircut',
-    price: '$98',
+    price: '$90',
     tagline: 'Three at once',
     description:
       "Three haircuts booked together. Great for families with multiple kids, groomsmen before a wedding, or any group that wants to come in together.",
