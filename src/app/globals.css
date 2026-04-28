@@ -552,33 +552,190 @@ body {
   will-change: transform, opacity;
 }
 
-/* ── Team mode dark/light invariance ───────────────────
-   Sport-mode palettes are inherently light (tribe, price) or dark
-   (cavs, browns). The user's data-theme toggle still fires the
-   image-swap and theme-photo rules above, which causes a mismatch
-   (e.g. tribe's light navy palette + dark hero photo). These
-   overrides force imagery to match the team palette regardless of
-   the data-theme value. Specificity beats [data-theme="dark"] .x
-   because we lead with [data-team-mode] (same specificity, later
-   in source). */
+/* ── Team mode imagery — light/dark theme awareness ─────
+   Each team has a daytime (light theme) and night (dark theme) feel.
+   Imagery follows: tribe/price use the light hero photo in day mode,
+   the dark hero in night mode; cavs/browns use the dark hero in both.
+   Photos stay in color across all team modes — team palette plus
+   grayscale was muddy. Selectors with two attributes hit specificity
+   (0,2,0,0), beating the base data-theme rules. */
 
-/* Tribe & Price are LIGHT-equivalent — show light imagery, no grayscale */
-[data-team-mode="tribe"] .hero-img-light,
-[data-team-mode="price"] .hero-img-light { display: block; }
-[data-team-mode="tribe"] .hero-img-dark,
-[data-team-mode="price"] .hero-img-dark  { display: none; }
-[data-team-mode="tribe"] .theme-photo,
-[data-team-mode="price"] .theme-photo    { filter: none; }
+/* Day mode (light theme + team mode): light-team daytime imagery */
+[data-theme="light"][data-team-mode="tribe"] .hero-img-light,
+[data-theme="light"][data-team-mode="price"] .hero-img-light { display: block; }
+[data-theme="light"][data-team-mode="tribe"] .hero-img-dark,
+[data-theme="light"][data-team-mode="price"] .hero-img-dark  { display: none; }
 
-/* Cavs & Browns are DARK-equivalent — show dark imagery, allow grayscale
-   to read against the dark palette (matches default dark behavior) */
+/* Cavs/Browns are inherently dark — use the dark hero in both themes */
 [data-team-mode="cavs"]   .hero-img-light,
-[data-team-mode="browns"] .hero-img-light { display: none; }
+[data-team-mode="browns"] .hero-img-light { display: none !important; }
 [data-team-mode="cavs"]   .hero-img-dark,
-[data-team-mode="browns"] .hero-img-dark  { display: block; }
-/* Photos stay color in team modes — team palette + grayscale is muddy */
-[data-team-mode="cavs"]   .theme-photo,
-[data-team-mode="browns"] .theme-photo    { filter: none; }
+[data-team-mode="browns"] .hero-img-dark  { display: block !important; }
+
+/* Night mode (dark theme + light-team mode): switch to dark hero
+   so it matches the night palette below */
+[data-theme="dark"][data-team-mode="tribe"] .hero-img-light,
+[data-theme="dark"][data-team-mode="price"] .hero-img-light { display: none; }
+[data-theme="dark"][data-team-mode="tribe"] .hero-img-dark,
+[data-theme="dark"][data-team-mode="price"] .hero-img-dark  { display: block; }
+
+/* Photos stay color in every team mode regardless of theme */
+[data-team-mode] .theme-photo { filter: none !important; }
+
+/* ── Team mode "night uniforms" — dark variants ─────────
+   When a sport mode is active AND the user toggles dark theme, swap
+   to a darker, dramatic version of that team's palette. The double-
+   attribute selector beats the single [data-team-mode="X"] block
+   above. Each team gets a different night character. */
+
+/* Tribe night — Guardians primetime broadcast feel: deep navy
+   surface, white text, red accents pop hard. Inverts the daytime
+   navy-on-gray to white-on-navy. */
+[data-theme="dark"][data-team-mode="tribe"] {
+  --ink:           #00121F;
+  --surface:       #001A2E;
+  --surface-raised:#002848;
+  --surface-high:  #E50022;
+  --red:           #FF1A3D;
+  --red-hover:     #E50022;
+  --text:          #FFFFFF;
+  --text-muted:    rgba(255,255,255,0.78);
+  --text-subtle:   rgba(255,255,255,0.55);
+  --text-faint:    rgba(255,255,255,0.40);
+  --line:          rgba(255,26,61,0.15);
+  --line-strong:   rgba(255,26,61,0.32);
+  --stroke-color:  #FF1A3D;
+  --selection-bg:  #FF1A3D;
+  --selection-text:#FFFFFF;
+  --scrim:         rgba(0,18,32,0.88);
+  --hero-overlay:  linear-gradient(to right, rgba(0,18,32,0.85), rgba(0,40,72,0.4), transparent);
+  --hero-eyebrow:  #FF1A3D;
+  --hero-h1:       #FFFFFF;
+  --hero-tagline:  rgba(255,255,255,0.85);
+  --hero-cta-bg:   #FF1A3D;
+  --hero-cta-text: #FFFFFF;
+  --hero-cta-hover:#FFFFFF;
+  --hero-cta-hover-text: #00385D;
+  --hero-ghost-border: rgba(255,255,255,0.55);
+  --hero-ghost-text:   #FFFFFF;
+  --team-logo-color:   #FF1A3D;
+}
+
+/* Cavs night — late-game darkness. Already dark in day mode; night
+   pushes deeper black with wine + gold accents punching harder. */
+[data-theme="dark"][data-team-mode="cavs"] {
+  --ink:           #000000;
+  --surface:       #03101F;
+  --surface-raised:#0A1E3A;
+  --surface-high:  #B8004D;
+  --red:           #B8004D;
+  --red-hover:     #860038;
+  --text:          #FFFFFF;
+  --text-muted:    rgba(255,255,255,0.82);
+  --text-subtle:   rgba(255,255,255,0.60);
+  --text-faint:    rgba(255,255,255,0.42);
+  --line:          rgba(253,187,48,0.18);
+  --line-strong:   rgba(253,187,48,0.36);
+  --stroke-color:  #FDBB30;
+  --scrim:         rgba(0,0,0,0.92);
+  --hero-overlay:  linear-gradient(to right, rgba(0,0,0,0.9), rgba(134,0,56,0.35), transparent);
+  --hero-eyebrow:  #FDBB30;
+  --hero-h1:       #FDBB30;
+  --hero-tagline:  rgba(255,255,255,0.88);
+  --hero-cta-bg:   #FDBB30;
+  --hero-cta-text: #000000;
+  --hero-cta-hover:#B8004D;
+  --hero-cta-hover-text: #FFFFFF;
+  --hero-ghost-border: rgba(253,187,48,0.6);
+  --hero-ghost-text:   #FDBB30;
+  --team-logo-color:   #FDBB30;
+}
+
+/* Price night — '89 retro after-hours / arcade vibe. Powder-blue
+   day flips to inky blue-black with neon orange + powder-blue glow. */
+[data-theme="dark"][data-team-mode="price"] {
+  --ink:           #0A0F1A;
+  --surface:       #141C2E;
+  --surface-raised:#1F2A42;
+  --surface-high:  #FF6A1A;
+  --red:           #FF6A1A;
+  --red-hover:     #E35205;
+  --text:          #B8D0F0;
+  --text-muted:    rgba(184,208,240,0.78);
+  --text-subtle:   rgba(184,208,240,0.55);
+  --text-faint:    rgba(184,208,240,0.38);
+  --line:          rgba(255,106,26,0.18);
+  --line-strong:   rgba(255,106,26,0.36);
+  --stroke-color:  #5C88DA;
+  --selection-bg:  #FF6A1A;
+  --selection-text:#0A0F1A;
+  --scrim:         rgba(10,15,26,0.90);
+  --hero-overlay:  linear-gradient(to right, rgba(10,15,26,0.88), rgba(92,136,218,0.22), transparent);
+  --hero-eyebrow:  #FF6A1A;
+  --hero-h1:       #5C88DA;
+  --hero-tagline:  rgba(184,208,240,0.88);
+  --hero-cta-bg:   #FF6A1A;
+  --hero-cta-text: #0A0F1A;
+  --hero-cta-hover:#5C88DA;
+  --hero-cta-hover-text: #0A0F1A;
+  --hero-ghost-border: rgba(92,136,218,0.6);
+  --hero-ghost-text:   #5C88DA;
+  --team-logo-color:   #FF6A1A;
+}
+
+/* Browns night — Dawg Pound under the lights. Day's medium brown
+   sinks into near-black brown; orange bleeds harder for stadium-light
+   energy. */
+[data-theme="dark"][data-team-mode="browns"] {
+  --ink:           #14080E;
+  --surface:       #1F1208;
+  --surface-raised:#2E1B0C;
+  --surface-high:  #FF6A1A;
+  --red:           #FF6A1A;
+  --red-hover:     #FF3C00;
+  --text:          #FFFFFF;
+  --text-muted:    rgba(255,255,255,0.82);
+  --text-subtle:   rgba(255,255,255,0.62);
+  --text-faint:    rgba(255,255,255,0.45);
+  --line:          rgba(255,106,26,0.20);
+  --line-strong:   rgba(255,106,26,0.40);
+  --stroke-color:  #FF6A1A;
+  --scrim:         rgba(20,8,14,0.92);
+  --hero-overlay:  linear-gradient(to right, rgba(20,8,14,0.9), rgba(255,60,0,0.22), transparent);
+  --hero-eyebrow:  #FF6A1A;
+  --hero-h1:       #FF6A1A;
+  --hero-tagline:  rgba(255,255,255,0.88);
+  --hero-cta-bg:   #FF6A1A;
+  --hero-cta-text: #14080E;
+  --hero-cta-hover:#FFFFFF;
+  --hero-cta-hover-text: #FF3C00;
+  --hero-ghost-border: rgba(255,106,26,0.6);
+  --hero-ghost-text:   #FFFFFF;
+  --team-logo-color:   #FF6A1A;
+}
+
+/* Night-uniform honeycomb strokes — match each night palette's accent */
+[data-theme="dark"][data-team-mode="tribe"] .grid-bg::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FF1A3D' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+}
+[data-theme="dark"][data-team-mode="cavs"] .grid-bg::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FDBB30' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+}
+[data-theme="dark"][data-team-mode="price"] .grid-bg::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FF6A1A' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+}
+[data-theme="dark"][data-team-mode="browns"] .grid-bg::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FF6A1A' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Re-enable honeycomb visibility in night mode for team palettes —
+   the daytime team blocks set --texture-opacity: 0; nights bring it back */
+[data-theme="dark"][data-team-mode="tribe"],
+[data-theme="dark"][data-team-mode="cavs"],
+[data-theme="dark"][data-team-mode="price"],
+[data-theme="dark"][data-team-mode="browns"] {
+  --texture-opacity: 0.06;
+}
 
 /* ── Italy easter egg — keyboard trigger "italy" ─────── */
 .italy-mode {
@@ -621,188 +778,4 @@ body {
   --red:           #CE2B37;              /* italian red */
   --red-hover:     #A01D27;
   --text:          #0F0F0F;
-  --text-muted:    rgba(0,0,0,0.72);
-  --text-subtle:   rgba(0,0,0,0.52);
-  --text-faint:    rgba(0,0,0,0.36);
-  --line:          rgba(0,0,0,0.10);
-  --line-strong:   rgba(0,0,0,0.20);
-  --stroke-color:  #009246;              /* STAY/SHARP outlines go green */
-  --selection-bg:  #009246;
-  --selection-text:#FFFFFF;
-  --texture-opacity: 0;                  /* mute the noise overlay */
-  --scrim:         rgba(206,43,55,0.6);  /* red modal backdrop */
-  --hero-overlay:  linear-gradient(to right, rgba(0,146,70,0.45), rgba(241,242,241,0.1), rgba(206,43,55,0.45));
-  --hero-eyebrow:  #009246;              /* green eyebrow */
-  --hero-h1:       #FFFFFF;              /* white STAY */
-  --hero-tagline:  #F1F2F1;
-  --hero-cta-bg:   #FFFFFF;
-  --hero-cta-text: #CE2B37;              /* red text on white BOOK NOW */
-  --hero-cta-hover:#CE2B37;
-  --hero-cta-hover-text: #FFFFFF;
-  --hero-ghost-border: rgba(255,255,255,0.6);
-  --hero-ghost-text: #FFFFFF;
-  --team-logo-color: #009246;             /* green Siedel's logo */
-}
-/* Swap the honeycomb layer to green lines so the ambient mesh matches */
-.italy-mode .grid-bg::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23009246' stroke-width='1'%3E%3Cpolygon points='14,0 28,8 28,24 14,32 0,24 0,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
-}
-/* Transparent body so the flag stripes underneath show through */
-.italy-mode body {
-  background: transparent !important;
-}
-
-/* Emoji rain */
-@keyframes italy-emoji-fall {
-  0%   { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-  5%   { opacity: 1; }
-  95%  { opacity: 1; }
-  100% { transform: translateY(120vh) rotate(var(--rotate-end, 360deg)); opacity: 0; }
-}
-.italy-emoji-fall {
-  animation-name: italy-emoji-fall;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  will-change: transform;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-}
-
-/* Pop-in floating phrases */
-@keyframes italy-phrase-pop {
-  0%   { opacity: 0; transform: translate(-50%, -50%) rotate(var(--rotate, 0deg)) scale(0.2); }
-  15%  { opacity: 1; transform: translate(-50%, -50%) rotate(var(--rotate, 0deg)) scale(1.2); }
-  25%  { transform: translate(-50%, -50%) rotate(var(--rotate, 0deg)) scale(1); }
-  85%  { opacity: 1; transform: translate(-50%, -50%) rotate(var(--rotate, 0deg)) scale(1); }
-  100% { opacity: 0; transform: translate(-50%, -50%) rotate(var(--rotate, 0deg)) scale(1.3); }
-}
-.italy-phrase {
-  font-family: 'Lobster', 'Brush Script MT', 'Georgia', cursive;
-  font-size: clamp(2rem, 5vw, 5rem);
-  font-weight: 700;
-  text-shadow:
-    2px 2px 0 rgba(0,0,0,0.4),
-    -1px -1px 0 rgba(0,0,0,0.2);
-  animation-name: italy-phrase-pop;
-  animation-duration: 4s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-out;
-  will-change: transform, opacity;
-}
-
-/* Big top banner */
-@keyframes italy-banner-in {
-  0%   { opacity: 0; transform: translate(-50%, -120%); }
-  15%  { opacity: 1; transform: translate(-50%, 0); }
-  85%  { opacity: 1; transform: translate(-50%, 0); }
-  100% { opacity: 0; transform: translate(-50%, -120%); }
-}
-.italy-banner {
-  animation: italy-banner-in 30s ease-out forwards;
-  will-change: transform, opacity;
-}
-.italy-banner-text {
-  font-family: 'Lobster', 'Brush Script MT', cursive !important;
-  background: linear-gradient(to right, #009246, #FFFFFF, #CE2B37);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* ── Sacrifix easter egg — keyboard trigger "sacrifix" ── */
-@keyframes sacrifix-lightning {
-  0%   { opacity: 0; }
-  1%   { opacity: 0.95; }
-  3%   { opacity: 0.2; }
-  4%   { opacity: 0.9; }
-  6%   { opacity: 0; }
-  14%  { opacity: 0; }
-  15%  { opacity: 0.8; }
-  17%  { opacity: 0.15; }
-  18%  { opacity: 0.7; }
-  20%  { opacity: 0; }
-  45%  { opacity: 0; }
-  46%  { opacity: 0.6; }
-  48%  { opacity: 0.1; }
-  49%  { opacity: 0.5; }
-  51%  { opacity: 0; }
-  75%  { opacity: 0; }
-  76%  { opacity: 0.7; }
-  78%  { opacity: 0.15; }
-  79%  { opacity: 0.55; }
-  82%  { opacity: 0; }
-  100% { opacity: 0; }
-}
-.sacrifix-lightning {
-  animation: sacrifix-lightning 30s linear forwards;
-  mix-blend-mode: screen;
-  pointer-events: none;
-}
-
-@keyframes sacrifix-smoke {
-  0%   { opacity: 0; transform: translateY(30%); }
-  15%  { opacity: 0.55; transform: translateY(0); }
-  100% { opacity: 0.75; transform: translateY(-10%); }
-}
-.sacrifix-smoke {
-  background:
-    radial-gradient(ellipse at 30% 110%, rgba(0,0,0,0.9) 0%, transparent 55%),
-    radial-gradient(ellipse at 70% 120%, rgba(0,0,0,0.85) 0%, transparent 60%),
-    linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 70%);
-  animation: sacrifix-smoke 30s ease-out forwards;
-  pointer-events: none;
-}
-
-@keyframes sacrifix-rain {
-  0%   { transform: translateY(-10vh); }
-  100% { transform: translateY(120vh); }
-}
-.sacrifix-rain {
-  animation-name: sacrifix-rain;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-@keyframes sacrifix-emoji {
-  0%   { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-  5%   { opacity: 1; }
-  95%  { opacity: 1; }
-  100% { transform: translateY(120vh) rotate(var(--rotate-end, 360deg)); opacity: 0; }
-}
-.sacrifix-emoji {
-  animation-name: sacrifix-emoji;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  will-change: transform;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-}
-
-/* ── Reduced Motion ───────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* ══════════════════════════════════════════════════════
-   Panel entrance animations
-   ══════════════════════════════════════════════════════ */
-@keyframes panel-rise {
-  from { opacity: 0; transform: translateY(28px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  /* Scoped to grid-bg panels only — HeroPanel has its own hero-stagger animations */
-  section.grid-bg[data-entered] > div > :nth-child(1) {
-    animation: panel-rise 0.5s 0.12s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-  section.grid-bg[data-entered] > div > :nth-child(2) {
-    animation: panel-rise 0.55s 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-  section.grid-bg[data-entered] > div > :nth-child(3) {
-    animation: panel-rise 0.55s 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-}
+  --text-mu
