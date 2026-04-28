@@ -70,10 +70,18 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
               onSelect={onSelectMember}
             />
           ))}
-          {/* CTA slot — same aspect as a card so the grid stays tidy */}
-          <div className="card-86 scheme-red flex flex-col items-center justify-center text-center p-4 bg-red border-red">
+          {/* CTA slot — same aspect as a card so the grid stays tidy.
+              Inline style for bg/border because .card-86 (in baseball-card.css,
+              imported after Tailwind) sets background:var(--surface) and a
+              text-colored border, which would otherwise beat bg-red/border-red
+              utilities at the same specificity. Inline wins everywhere and
+              follows the active --red token through every theme/team palette. */}
+          <div
+            className="card-86 scheme-red flex flex-col items-center justify-center text-center p-4"
+            style={{ background: 'var(--red)', borderColor: 'var(--red)' }}
+          >
             <p className="font-headline text-base md:text-lg uppercase tracking-tight text-white mb-1 leading-tight">YOUR CHAIR<br />IS WAITING</p>
-            <p className="font-body text-[10px] text-white/70 mb-3">Call to reserve</p>
+            <p className="font-body text-[11px] text-white/85 mb-3">Call to reserve</p>
             <a
               href={PHONE_HREF}
               onClick={(e) => e.stopPropagation()}
