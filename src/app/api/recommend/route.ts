@@ -26,7 +26,8 @@ Response format: {"name":"exact service name","reason":"one short sentence expla
       messages: [{ role: 'user', content: query }],
     });
 
-    const text = message.content[0].type === 'text' ? message.content[0].text.trim() : '';
+    const raw  = message.content[0].type === 'text' ? message.content[0].text.trim() : '';
+    const text = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();
     const parsed = JSON.parse(text);
     const match = services.find((s) => s.name === parsed.name);
     if (!match) return NextResponse.json({ error: 'No match' }, { status: 422 });
