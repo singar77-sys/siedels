@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useLayoutEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SQUARE_BOOKING_URL, PHONE, PHONE_HREF, MAPS_URL, ADDRESS, CITY_STATE_ZIP, team, type TeamMember, type Service } from '@/data/shop';
@@ -81,6 +81,20 @@ export function HomeClient({
     Array.from(container.children).forEach((child) => observer.observe(child));
     return () => observer.disconnect();
   }, []);
+
+  // Mark first panel entered before paint so it's never invisible
+  useLayoutEffect(() => {
+    const panel = scrollRef.current?.children[0] as HTMLElement | undefined;
+    panel?.setAttribute('data-entered', '1');
+  }, []);
+
+  // Mark each panel entered on first visit (one-way — don't reset so no re-flash)
+  useEffect(() => {
+    const panel = scrollRef.current?.children[active] as HTMLElement | undefined;
+    if (panel && !panel.hasAttribute('data-entered')) {
+      panel.setAttribute('data-entered', '1');
+    }
+  }, [active]);
 
   // Arrow key navigation
   useEffect(() => {
