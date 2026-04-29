@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Siedel's Barbershop | Medina, Ohio",
     description: `${TEAM_COUNT_WORD} barbers in Medina, Ohio. Cash only. ATM on site.`,
-    images: ['/images/siedels-barbershop-medina-ohio.webp'],
+    images: [{ url: '/images/siedels-barbershop-medina-ohio.webp', alt: IMAGE_ALTS.heroGoldenHour }],
   },
   icons: {
     icon: [
@@ -87,7 +87,6 @@ const jsonLd = {
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Thursday', opens: '08:00', closes: '20:00' },
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '08:00', closes: '18:00' },
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '08:00', closes: '15:00' },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '00:00', closes: '00:00' },
   ],
   aggregateRating: { '@type': 'AggregateRating', ratingValue: RATING, reviewCount: REVIEW_COUNT, bestRating: '5' },
 };

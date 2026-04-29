@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Contact & Hours | Siedel's Barbershop",
     description: "982 N Court Street, Medina Ohio. Open Monday through Saturday. Cash only. ATM on site.",
+    url: '/contact',
+    images: [{ url: '/images/siedels-barbershop-storefront-medina-ohio.webp', width: 1920, height: 1080, alt: IMAGE_ALTS.storefront }],
   },
 };
 

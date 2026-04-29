@@ -12,8 +12,9 @@ export const metadata: Metadata = {
   alternates: { canonical: '/gallery' },
   openGraph: {
     title: "Gallery | Siedel's Barbershop",
-    description:
-      "Cuts, fades, designs, and shop scenes from Siedel's Barbershop.",
+    description: "Cuts, fades, designs, and shop scenes from Siedel's Barbershop.",
+    url: '/gallery',
+    images: [{ url: '/images/siedels-barber-stations-empty-medina.webp', width: 1920, height: 1080, alt: "Empty barber stations at Siedel's Barbershop in Medina, Ohio" }],
   },
 };
 

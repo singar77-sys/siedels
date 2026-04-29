@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Meet the Barbers | Siedel's Barbershop",
     description: `${TEAM_COUNT} barbers and stylists. Book online with your favorite barber.`,
+    url: '/team',
+    images: [{ url: '/images/barber-stations-siedels-barbershop-medina.webp', width: 1920, height: 1080, alt: "Barber stations inside Siedel's Barbershop, Medina Ohio" }],
   },
 };
 
@@ -44,6 +46,7 @@ export default function TeamPage() {
 
         <section className="py-8 md:py-24">
           <div className="max-w-7xl mx-auto px-4 md:px-8">
+            <h2 className="sr-only">Our Barbers</h2>
             <TeamGrid />
           </div>
         </section>

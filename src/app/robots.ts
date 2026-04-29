@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/gift', '/gift/'],
+      disallow: ['/redeem', '/admin'],
     },
     sitemap: 'https://siedels.vercel.app/sitemap.xml',
   };
