@@ -10,6 +10,7 @@ import {
   GOOGLE_BUSINESS_URL,
   ADDRESS,
   CITY_STATE_ZIP,
+  COORDS_DISPLAY,
   IMAGE_ALTS,
   RATING,
   REVIEW_COUNT,
@@ -17,380 +18,445 @@ import {
   testimonials,
 } from '@/data/shop';
 import { Icon } from './Icon';
-import { ShopStatus } from './ShopStatus';
+import { CountUp } from './CountUp';
 
-/* ── ContactPanel — Storefront concept ─────────────────────
-   Replaces the 3-column "info cards" layout + tactical-radar
-   gimmick with a tighter "you're standing on Court Street" feel.
-
-   Hierarchy of attention:
-     1. OPEN NOW status (pulse + closes-at)
-     2. Phone number — hero scale, single tap to call
-     3. Storefront photo (right side, no dashboard chrome)
-     4. Address / Rating cards
-     5. Book Online primary CTA
-     6. 7-day hours strip with today highlighted
-     7. Rotating review marquee at the bottom
-
-   Receives scheduleToday from HomeClient so OPEN NOW is real,
-   not approximated. Mobile mirrors the same hierarchy in one
-   column. */
-
-interface ScheduleTodayProps {
-  shopHours: string | null;
-  working: { firstName: string; display: string; raw: string }[];
-  isClosed: boolean;
-  scheduleKnown: boolean;
-  dayName: string;
-}
-
-interface ContactPanelProps {
-  scheduleToday: ScheduleTodayProps;
-}
-
+const REVIEW_POOL = testimonials.slice(1);
+const ROTATE_MS = 9000;
 const STOREFRONT = '/images/siedels-barbershop-storefront-medina-ohio.webp';
-const ROTATE_MS = 6000;
 
-// "8 AM – 8 PM" → "8A–8P" — fits the hours strip cells
-function compactRange(t: string): string {
-  if (t.toLowerCase() === 'closed') return '—';
-  return t
-    .replace(/\s+AM/gi, 'A')
-    .replace(/\s+PM/gi, 'P')
-    .replace(/\s*[–—-]\s*/g, '–');
+const HOURS_LEFT  = hours.slice(0, 3); // Mon – Wed
+const HOURS_RIGHT = hours.slice(3);    // Thu – Sun
+
+/** JS getDay() → hours-array index. JS: 0=Sun…6=Sat. Array: 0=Mon…6=Sun. */
+const jsDayToIdx = (d: number) => (d + 6) % 7;
+
+function formatClock(d: Date) {
+  return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
 }
 
-export function ContactPanel({ scheduleToday }: ContactPanelProps) {
-  const [cursor, setCursor] = useState(0);
-  const reviews = testimonials.slice(0, 8);
+export function ContactPanel() {
+  const [cursor,   setCursor]   = useState(0);
+  const [todayIdx, setTodayIdx] = useState<number | null>(null);
+  const [clock,    setClock]    = useState('');
 
+  // Mobile review carousel
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce || reviews.length <= 1) return;
-    const id = setInterval(() => setCursor((c) => (c + 1) % reviews.length), ROTATE_MS);
+    const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduce) return;
+    const id = setInterval(() => setCursor((c) => (c + 1) % REVIEW_POOL.length), ROTATE_MS);
     return () => clearInterval(id);
-  }, [reviews.length]);
+  }, []);
 
-  const r = reviews[cursor];
+  // Live clock + today highlight — client-only so no hydration mismatch
+  useEffect(() => {
+    const now = new Date();
+    setTodayIdx(jsDayToIdx(now.getDay()));
+    setClock(formatClock(now));
+    const id = setInterval(() => {
+      const n = new Date();
+      setTodayIdx(jsDayToIdx(n.getDay()));
+      setClock(formatClock(n));
+    }, 30_000);
+    return () => clearInterval(id);
+  }, []);
+
+  const mobileReview = REVIEW_POOL[cursor % REVIEW_POOL.length];
 
   return (
-    <section className="min-w-full h-full snap-start grid-bg overflow-hidden flex flex-col">
-      {/* ── HEADER ── */}
-      <div className="max-w-screen-2xl mx-auto w-full px-4 md:px-8 pt-5 md:pt-8 flex items-end justify-between gap-4 flex-none">
-        <div className="border-l-4 border-red pl-4 md:pl-6">
-          <p className="font-label text-[10px] tracking-[0.3em] text-red mb-1">FIND THE SHOP</p>
-          <h2 className="font-headline text-2xl md:text-4xl uppercase tracking-tight leading-[0.9]">
-            982 N COURT <span className="text-stroke">/ MEDINA</span>
-          </h2>
-        </div>
-        <a
-          href={MAPS_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:inline-flex font-label text-[11px] tracking-[0.3em] text-red hover:text-red-hover transition-colors whitespace-nowrap items-center gap-2"
-        >
-          GET DIRECTIONS <Icon name="arrow_forward" className="w-4 h-4" />
-        </a>
-      </div>
+    <section className="w-full flex-none h-full snap-start grid-bg overflow-hidden">
+      <div className="max-w-screen-2xl mx-auto h-full px-4 md:px-8 py-5 md:py-8 w-full flex flex-col">
 
-      {/* ── BODY ── */}
-      <div className="max-w-screen-2xl mx-auto w-full px-4 md:px-8 py-4 md:py-6 flex-1 min-h-0 flex flex-col gap-3 md:gap-4">
-
-        {/* ══════════════════════════════════════════════
-            DESKTOP — left CTA stack / right photo+hours
-            ══════════════════════════════════════════════ */}
-        <div className="hidden md:grid md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-5 flex-1 min-h-0">
-
-          {/* LEFT — call-to-action stack */}
-          <div className="flex flex-col gap-3 overflow-hidden">
-            <ShopStatus {...scheduleToday} />
-
-            {/* Phone — the hero */}
-            <a
-              href={PHONE_HREF}
-              className="group block bg-surface border-l-4 border-red px-5 py-5 hover:bg-surface-raised transition-colors"
-            >
-              <p className="font-label text-[10px] tracking-[0.3em] text-text-subtle mb-1">CALL THE SHOP</p>
-              <p className="font-headline text-4xl lg:text-5xl xl:text-6xl font-bold text-red leading-[0.95] group-hover:text-red-hover transition-colors">
-                {PHONE}
-              </p>
-              <p className="font-label text-[10px] tracking-[0.25em] text-text-muted mt-2">
-                CASH ONLY · ATM ON SITE
-              </p>
-            </a>
-
-            {/* Address + Rating side-by-side */}
-            <div className="grid grid-cols-2 gap-3">
-              <a
-                href={MAPS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-surface px-4 py-3 hover:bg-surface-raised transition-colors group block"
-              >
-                <p className="font-label text-[9px] tracking-widest text-text-subtle mb-0.5">ADDRESS</p>
-                <p className="font-headline text-[13px] font-bold uppercase text-text leading-tight">{ADDRESS}</p>
-                <p className="font-body text-xs text-text-subtle">{CITY_STATE_ZIP}</p>
-                <p className="font-label text-[9px] tracking-widest text-red mt-1.5 group-hover:text-red-hover">
-                  DIRECTIONS &rarr;
-                </p>
-              </a>
-              <a
-                href={GOOGLE_BUSINESS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-surface px-4 py-3 hover:bg-surface-raised transition-colors group block"
-              >
-                <p className="font-label text-[9px] tracking-widest text-text-subtle mb-0.5">RATING</p>
-                <p className="font-headline text-2xl font-bold text-red leading-none">
-                  {RATING}<span className="text-base align-super">&#9733;</span>
-                </p>
-                <p className="font-body text-xs text-text-subtle">{REVIEW_COUNT} reviews</p>
-                <p className="font-label text-[9px] tracking-widest text-red mt-1.5 group-hover:text-red-hover">
-                  LEAVE A REVIEW &rarr;
-                </p>
-              </a>
+        {/* ── HEADER — matches ServicesPanel / TeamPanel exactly ── */}
+        <div className="flex-none mb-4 md:mb-5">
+          <div className="flex items-end justify-between gap-4">
+            <div className="border-l-4 border-red pl-4 md:pl-6">
+              <p className="font-label text-[10px] tracking-[0.3em] text-red mb-1">FIND THE SHOP</p>
+              <h2 className="font-headline text-2xl md:text-4xl uppercase tracking-tight leading-[0.9]">
+                982 N COURT <span className="text-stroke">/ MEDINA</span>
+              </h2>
             </div>
-
             <a
-              href={SQUARE_BOOKING_URL}
+              href={MAPS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full bg-red text-white font-headline text-sm font-bold uppercase tracking-tight px-5 py-4 hover:bg-red-hover transition-colors flex-none"
+              className="hidden md:inline-flex font-label text-[11px] tracking-[0.3em] text-red hover:text-red-hover transition-colors whitespace-nowrap items-center gap-2"
             >
-              BOOK ONLINE <Icon name="arrow_forward" className="w-4 h-4" />
+              GET DIRECTIONS
+              <Icon name="arrow_forward" className="w-4 h-4" />
             </a>
           </div>
+        </div>
 
-          {/* RIGHT — storefront photo + hours strip */}
-          <div className="flex flex-col gap-3 overflow-hidden">
+        {/* ── BODY — flex-1 min-h-0, same as other panels ── */}
+        <div className="flex-1 min-h-0 overflow-hidden">
+
+          {/* ══════════════════════════════════════════════
+              MOBILE layout
+              ══════════════════════════════════════════════ */}
+          <div className="md:hidden h-full overflow-y-auto flex flex-col gap-3 pb-2" style={{ scrollbarWidth: 'none' }}>
+
+            {/* Badge card */}
+            <div className="bg-surface border border-line-strong flex items-center gap-4 px-4 py-4">
+              <Image
+                src="/logos/siedels-barbershop-logo-light-diamond.png"
+                alt={IMAGE_ALTS.logos.lightDiamond}
+                width={64}
+                height={64}
+                className="contact-badge-light shrink-0"
+              />
+              <Image
+                src="/logos/siedels-barbershop-logo-dark-diamond.png"
+                alt={IMAGE_ALTS.logos.darkDiamond}
+                width={64}
+                height={64}
+                className="contact-badge-dark shrink-0"
+                style={{ filter: 'drop-shadow(0 0 12px rgba(227,27,35,0.5))' }}
+              />
+              <div className="min-w-0">
+                <p className="font-headline text-base font-black uppercase tracking-tight text-text leading-tight">
+                  SIEDEL&apos;S<br />BARBERSHOP
+                </p>
+                <a href={PHONE_HREF} className="block mt-1">
+                  <span className="font-headline text-lg font-bold text-red leading-tight">{PHONE}</span>
+                </a>
+                <p className="font-label text-[8px] tracking-widest text-text-subtle mt-0.5">
+                  CASH ONLY · ATM ON SITE
+                </p>
+              </div>
+            </div>
+
+            {/* Tactical map */}
             <a
               href={MAPS_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Open Siedel's Barbershop in Google Maps"
-              className="relative flex-1 min-h-0 overflow-hidden border border-line-strong bg-black group"
+              className="tac-map relative h-36 border border-red/60 bg-black overflow-hidden"
             >
               <Image
                 src={STOREFRONT}
                 alt={IMAGE_ALTS.storefront}
                 fill
-                sizes="60vw"
-                className="object-cover theme-photo group-hover:scale-105 transition-transform duration-700"
+                sizes="90vw"
+                className="tac-map__tile object-cover"
+                style={{ objectPosition: '30% center' }}
               />
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)',
-                }}
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between gap-4">
-                <div>
-                  <p className="font-label text-[10px] tracking-[0.3em] text-white/70 mb-1">
-                    DOWNTOWN MEDINA, OHIO
-                  </p>
-                  <p className="font-headline text-xl md:text-2xl font-bold text-white uppercase tracking-tight">
-                    982 N COURT ST
-                  </p>
-                </div>
-                <span className="font-label text-[11px] tracking-[0.3em] text-white border border-white/60 px-3 py-1.5 group-hover:bg-red group-hover:border-red transition-colors whitespace-nowrap">
-                  OPEN IN MAPS &uarr;&rarr;
-                </span>
-              </div>
+              <span className="tac-map__scan" aria-hidden="true" />
+              <span className="tac-map__radar" aria-hidden="true" />
+              <span className="tac-map__corner tl" aria-hidden="true" />
+              <span className="tac-map__corner tr" aria-hidden="true" />
+              <span className="tac-map__corner bl" aria-hidden="true" />
+              <span className="tac-map__corner br" aria-hidden="true" />
+              <span className="tac-map__tag top-2 left-2">
+                <span className="tac-map__dot" />LIVE
+              </span>
+              <span className="tac-map__tag top-2 right-2">{COORDS_DISPLAY}</span>
+              <span className="tac-map__footer">
+                <span className="text-red font-bold">SIEDEL&apos;S</span>
+                <span className="opacity-70">/ TAP FOR DIRECTIONS</span>
+                <span className="opacity-60 ml-auto">↗</span>
+              </span>
             </a>
 
-            {/* 7-day hours strip — today highlighted */}
-            <div className="flex-none grid grid-cols-7 gap-px bg-line-strong border border-line-strong">
-              {hours.map((h) => {
-                const isToday = h.day === scheduleToday.dayName;
-                const isClosedDay = h.time.toLowerCase() === 'closed';
-                return (
-                  <div
-                    key={h.day}
-                    className={`px-2 py-2.5 text-center ${
-                      isToday ? 'bg-red' : 'bg-surface'
-                    }`}
-                  >
-                    <p
-                      className={`font-label text-[9px] tracking-[0.2em] mb-0.5 ${
-                        isToday
-                          ? 'text-white/80'
-                          : isClosedDay
-                          ? 'text-text-faint'
-                          : 'text-text-subtle'
-                      }`}
+            {/* Hours — 2-column grid */}
+            <div className="bg-surface border border-line-strong px-4 py-3">
+              <p className="font-label text-[9px] tracking-widest text-text-subtle mb-2">OPERATING HOURS</p>
+              <div className="flex gap-4">
+                <div className="flex-1">
+                  {HOURS_LEFT.map((h, idx) => (
+                    <div
+                      key={h.day}
+                      className="hours-row flex justify-between items-baseline py-1.5 border-b border-line-strong font-headline text-[11px] uppercase tracking-tight"
+                      style={{ animationDelay: `${idx * 55}ms` }}
                     >
-                      {h.day.slice(0, 3).toUpperCase()}
-                    </p>
-                    <p
-                      className={`font-headline text-[11px] font-bold whitespace-nowrap ${
-                        isToday
-                          ? 'text-white'
-                          : isClosedDay
-                          ? 'text-text-subtle'
-                          : 'text-text'
-                      }`}
+                      <span className={`flex items-center gap-1 ${todayIdx === idx ? 'text-red' : 'text-text-subtle'}`}>
+                        {todayIdx === idx && <span className="inline-block w-1 h-1 rounded-full bg-red animate-pulse flex-none" />}
+                        {h.day.slice(0, 3)}
+                      </span>
+                      <span className={`font-bold ${todayIdx === idx ? 'text-red' : 'text-text'}`}>{h.time}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex-1">
+                  {HOURS_RIGHT.map((h, idx) => (
+                    <div
+                      key={h.day}
+                      className="hours-row flex justify-between items-baseline py-1.5 border-b border-line-strong last:border-0 font-headline text-[11px] uppercase tracking-tight"
+                      style={{ animationDelay: `${(idx + 3) * 55}ms` }}
                     >
-                      {compactRange(h.time)}
-                    </p>
-                  </div>
-                );
-              })}
+                      <span className={`flex items-center gap-1 ${todayIdx === idx + 3 ? 'text-red' : 'text-text-subtle'}`}>
+                        {todayIdx === idx + 3 && <span className="inline-block w-1 h-1 rounded-full bg-red animate-pulse flex-none" />}
+                        {h.day.slice(0, 3)}
+                      </span>
+                      <span className={`font-bold ${todayIdx === idx + 3 ? 'text-red' : 'text-text'}`}>{h.time}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        {/* ── DESKTOP — review marquee at bottom ── */}
-        <div className="hidden md:flex flex-none items-center gap-4 overflow-hidden border-t border-line py-3">
-          <span className="font-label text-[10px] tracking-[0.3em] text-red flex-none">
-            WHAT THE CHAIRS SAY
-          </span>
-          <div className="flex-1 overflow-hidden">
-            <div className="testimonial-fade flex items-center gap-3" key={cursor}>
-              <span className="text-red text-[11px] flex-none tracking-widest">
-                {'★'.repeat(r.rating)}
-              </span>
-              <p className="font-body text-sm text-text-muted italic truncate min-w-0">
-                &ldquo;{r.text}&rdquo;
+            {/* 1 rotating review */}
+            <div className="bg-surface border border-line-strong px-4 py-3">
+              <p className="font-label text-[9px] tracking-widest text-red mb-2">
+                {RATING} ★ · {REVIEW_COUNT} REVIEWS
               </p>
-              <span className="font-label text-[10px] tracking-widest text-text-subtle whitespace-nowrap flex-none">
-                &mdash; {r.name.toUpperCase()}
-                {r.barber && (
-                  <span className="text-red"> / W/ {r.barber.split(' ')[0].toUpperCase()}</span>
-                )}
-              </span>
-            </div>
-          </div>
-          <div className="flex gap-1 flex-none">
-            {reviews.map((_, i) => (
-              <span
-                key={i}
-                aria-hidden="true"
-                className={`h-[2px] w-3 transition-colors duration-500 ${
-                  i === cursor ? 'bg-red' : 'bg-line-strong'
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* ══════════════════════════════════════════════
-            MOBILE — stacked, same hierarchy, denser
-            ══════════════════════════════════════════════ */}
-        <div className="md:hidden flex-1 overflow-y-auto flex flex-col gap-3 pb-4">
-          <ShopStatus {...scheduleToday} />
-
-          {/* Phone */}
-          <a
-            href={PHONE_HREF}
-            className="bg-surface border-l-4 border-red px-4 py-4 block"
-          >
-            <p className="font-label text-[9px] tracking-widest text-text-subtle mb-0.5">CALL</p>
-            <p className="font-headline text-3xl font-bold text-red leading-none">{PHONE}</p>
-            <p className="font-label text-[9px] tracking-[0.25em] text-text-muted mt-2">
-              CASH ONLY · ATM ON SITE
-            </p>
-          </a>
-
-          {/* Storefront */}
-          <a
-            href={MAPS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Open Siedel's Barbershop in Google Maps"
-            className="relative h-44 border border-line-strong bg-black overflow-hidden block"
-          >
-            <Image
-              src={STOREFRONT}
-              alt={IMAGE_ALTS.storefront}
-              fill
-              sizes="90vw"
-              className="object-cover theme-photo"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)',
-              }}
-            />
-            <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-3">
-              <div>
-                <p className="font-label text-[9px] tracking-[0.25em] text-white/70 mb-0.5">
-                  982 N COURT ST
+              <blockquote className="border-l-2 border-red/40 pl-3">
+                <p className="font-body text-xs text-text-muted leading-relaxed italic">
+                  &ldquo;{mobileReview.text}&rdquo;
                 </p>
-                <p className="font-headline text-sm font-bold text-white uppercase">MEDINA, OH</p>
-              </div>
-              <span className="font-label text-[10px] tracking-widest text-white border border-white/60 px-2 py-1 whitespace-nowrap">
-                MAPS &uarr;&rarr;
-              </span>
+                <footer className="mt-1.5 flex items-center gap-2">
+                  <span className="font-headline text-[10px] font-bold uppercase text-text">
+                    {mobileReview.name}
+                  </span>
+                  {mobileReview.barber && (
+                    <span className="font-label text-[9px] text-text-subtle">
+                      w/ <span className="text-red">{mobileReview.barber.split(' ')[0].toUpperCase()}</span>
+                    </span>
+                  )}
+                  <span className="ml-auto text-red text-[10px]">
+                    {'★'.repeat(mobileReview.rating)}
+                  </span>
+                </footer>
+              </blockquote>
             </div>
-          </a>
 
-          {/* Hours strip */}
-          <div className="grid grid-cols-7 gap-px bg-line-strong border border-line-strong">
-            {hours.map((h) => {
-              const isToday = h.day === scheduleToday.dayName;
-              const isClosedDay = h.time.toLowerCase() === 'closed';
-              return (
-                <div
-                  key={h.day}
-                  className={`px-1 py-2 text-center ${isToday ? 'bg-red' : 'bg-surface'}`}
-                >
-                  <p
-                    className={`font-label text-[8px] tracking-[0.15em] ${
-                      isToday ? 'text-white/80' : 'text-text-subtle'
-                    }`}
-                  >
-                    {h.day.slice(0, 1).toUpperCase()}
-                  </p>
-                  <p
-                    className={`font-headline text-[9px] font-bold mt-0.5 whitespace-nowrap ${
-                      isToday ? 'text-white' : isClosedDay ? 'text-text-subtle' : 'text-text'
-                    }`}
-                  >
-                    {compactRange(h.time)}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* CTAs */}
-          <div className="grid grid-cols-2 gap-2">
-            <a
-              href={SQUARE_BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-1.5 bg-red text-white font-headline text-xs font-bold uppercase tracking-tight px-3 py-3 hover:bg-red-hover transition-colors"
-            >
-              BOOK <Icon name="arrow_forward" className="w-3.5 h-3.5" />
-            </a>
+            {/* CTAs */}
+            <div className="grid grid-cols-2 gap-2">
+              <a
+                href={SQUARE_BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-1.5 bg-red text-white font-headline text-xs font-bold uppercase tracking-tight px-4 py-3 hover:bg-red-hover transition-colors"
+              >
+                BOOK ONLINE <Icon name="arrow_forward" className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href={MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-1.5 border border-line-strong text-text font-headline text-xs font-bold uppercase tracking-tight px-4 py-3 hover:border-text transition-colors"
+              >
+                DIRECTIONS
+              </a>
+            </div>
             <a
               href={GOOGLE_BUSINESS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-1.5 border border-red text-red font-headline text-xs font-bold uppercase tracking-tight px-3 py-3 hover:bg-red hover:text-white transition-colors"
+              className="inline-flex items-center justify-center gap-2 border border-red text-red font-headline text-xs font-bold uppercase tracking-tight px-4 py-3 hover:bg-red hover:text-white transition-colors"
             >
-              REVIEW <Icon name="star" className="w-3.5 h-3.5" />
+              LEAVE A REVIEW <Icon name="star" className="w-3.5 h-3.5" />
             </a>
           </div>
 
-          {/* Single rotating review */}
-          <div className="bg-surface px-4 py-3 border-l-2 border-red/50">
-            <p className="font-label text-[9px] tracking-[0.3em] text-red mb-2">
-              {RATING} &#9733; · {REVIEW_COUNT} REVIEWS
-            </p>
-            <p className="font-body text-xs text-text-muted leading-relaxed italic">
-              &ldquo;{r.text}&rdquo;
-            </p>
-            <p className="mt-2 font-label text-[10px] tracking-widest text-text-subtle">
-              &mdash; {r.name.toUpperCase()}
-              {r.barber && (
-                <span className="text-red"> / W/ {r.barber.split(' ')[0].toUpperCase()}</span>
-              )}
-            </p>
+          {/* ══════════════════════════════════════════════
+              DESKTOP layout — 3 columns inside the contained body
+              ══════════════════════════════════════════════ */}
+          <div className="hidden md:grid md:grid-cols-3 md:grid-rows-1 h-full gap-3">
+
+            {/* Col 1 — Badge + contact */}
+            <div className="bg-surface-high border border-line-strong relative flex flex-col items-center justify-center gap-5 p-6 overflow-hidden min-h-0">
+
+              {/* Carl Siedel — ghosted portrait behind the badge */}
+              <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+                <Image
+                  src="/images/siedels-family-archive-portrait.webp"
+                  alt=""
+                  fill
+                  sizes="33vw"
+                  className="object-cover object-top grayscale opacity-[0.13]"
+                />
+              </div>
+
+              {/* All visible content sits above the ghost */}
+              <div className="relative z-10 flex flex-col items-center gap-5 w-full">
+
+                {/* Badge — light/dark swap */}
+                <div className="shrink-0">
+                  <Image
+                    src="/logos/siedels-barbershop-logo-light-diamond.png"
+                    alt={IMAGE_ALTS.logos.lightDiamond}
+                    width={180}
+                    height={180}
+                    className="contact-badge-light"
+                  />
+                  <Image
+                    src="/logos/siedels-barbershop-logo-dark-diamond.png"
+                    alt={IMAGE_ALTS.logos.darkDiamond}
+                    width={180}
+                    height={180}
+                    className="contact-badge-dark"
+                    style={{ filter: 'drop-shadow(0 0 32px rgba(227,27,35,0.45))' }}
+                  />
+                </div>
+
+                <div className="text-center">
+                  <p className="font-headline text-lg font-black uppercase tracking-tight text-text leading-none">
+                    SIEDEL&apos;S BARBERSHOP
+                  </p>
+                  <p className="font-label text-[9px] tracking-[0.25em] text-red mt-2">
+                    {ADDRESS} · {CITY_STATE_ZIP}
+                  </p>
+                </div>
+
+                <a
+                  href={PHONE_HREF}
+                  className="font-headline text-2xl font-bold text-red hover:text-red-hover transition-colors"
+                >
+                  {PHONE}
+                </a>
+
+                <p className="font-label text-[8px] tracking-widest text-text-subtle">
+                  CASH ONLY · ATM ON SITE
+                </p>
+
+                <div className="flex flex-col gap-2 w-full">
+                  <a
+                    href={SQUARE_BOOKING_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full bg-red text-white font-headline text-sm font-bold uppercase tracking-tight px-5 py-3 hover:bg-red-hover transition-colors"
+                  >
+                    BOOK ONLINE <Icon name="arrow_forward" className="w-4 h-4" />
+                  </a>
+                  <a
+                    href={MAPS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full border border-line-strong text-text-muted font-headline text-sm font-bold uppercase tracking-tight px-5 py-3 hover:border-text hover:text-text transition-colors"
+                  >
+                    GET DIRECTIONS <Icon name="arrow_forward" className="w-4 h-4" />
+                  </a>
+                </div>
+
+              </div>
+            </div>
+
+            {/* Col 2 — Hours + tactical map */}
+            <div className="bg-surface border border-line flex flex-col p-5 overflow-hidden min-h-0">
+
+              {/* Hours header with live clock */}
+              <div className="flex items-center justify-between mb-3 flex-none">
+                <p className="font-label text-[10px] tracking-widest text-text-subtle">
+                  OPERATING HOURS
+                </p>
+                {clock && (
+                  <p className="font-label text-[9px] tracking-widest text-red flex items-center gap-1.5">
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-red animate-pulse" />
+                    {clock}
+                  </p>
+                )}
+              </div>
+
+              {/* Hours rows — staggered slide-in, today highlighted */}
+              <div className="flex-none">
+                {hours.map((h, idx) => (
+                  <div
+                    key={h.day}
+                    className={`hours-row flex justify-between py-2 border-b border-line-strong last:border-b-0 font-headline text-xs uppercase tracking-tight ${
+                      h.day === 'Sunday' && todayIdx !== idx ? 'opacity-50' : ''
+                    }`}
+                    style={{ animationDelay: `${idx * 55}ms` }}
+                  >
+                    <span className={`flex items-center gap-2 ${todayIdx === idx ? 'text-red' : 'text-text-subtle'}`}>
+                      {todayIdx === idx && (
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-red animate-pulse flex-none" />
+                      )}
+                      {h.day}
+                    </span>
+                    <span className={`font-bold ${todayIdx === idx ? 'text-red' : 'text-text'}`}>
+                      {h.time}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Tactical map fills remaining height */}
+              <a
+                href={MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open Siedel's Barbershop in Google Maps"
+                className="tac-map relative flex-1 min-h-[80px] mt-4 border border-red/60 bg-black overflow-hidden group"
+              >
+                <Image
+                  src={STOREFRONT}
+                  alt={IMAGE_ALTS.storefront}
+                  fill
+                  sizes="(max-width: 768px) 90vw, 33vw"
+                  className="tac-map__tile object-cover"
+                  style={{ objectPosition: '30% center' }}
+                />
+                <span className="tac-map__scan" aria-hidden="true" />
+                <span className="tac-map__radar" aria-hidden="true" />
+                <span className="tac-map__corner tl" aria-hidden="true" />
+                <span className="tac-map__corner tr" aria-hidden="true" />
+                <span className="tac-map__corner bl" aria-hidden="true" />
+                <span className="tac-map__corner br" aria-hidden="true" />
+                <span className="tac-map__tag top-2 left-2">
+                  <span className="tac-map__dot" />LIVE
+                </span>
+                <span className="tac-map__tag top-2 right-2">{COORDS_DISPLAY}</span>
+                <span className="tac-map__footer">
+                  <span className="text-red font-bold">SIEDEL&apos;S</span>
+                  <span className="opacity-70">/ CLICK FOR DIRECTIONS</span>
+                  <span className="opacity-60 ml-auto">↗</span>
+                </span>
+              </a>
+            </div>
+
+            {/* Col 3 — Scrollable testimonials + review CTA */}
+            <div className="bg-surface border border-line flex flex-col p-5 overflow-hidden min-h-0">
+              <div className="flex-none mb-4 flex items-center justify-between">
+                <p className="font-label text-[10px] tracking-widest text-red">
+                  <CountUp end={parseFloat(RATING)} decimals={1} duration={1000} /> ★ ·{' '}
+                  <CountUp end={parseInt(REVIEW_COUNT)} duration={1400} /> REVIEWS
+                </p>
+              </div>
+
+              {/* Scroll wrapper — absolute inset gives a definite height unconditionally,
+                  bypassing the flex-1/grid-track chain that some browsers don't treat
+                  as definite enough to trigger overflow-y: auto. */}
+              <div className="flex-1 min-h-0 relative">
+                <div className="absolute inset-0 overflow-y-auto flex flex-col gap-5" style={{ scrollbarWidth: 'none' }}>
+                  {REVIEW_POOL.map((t, i) => (
+                    <blockquote
+                      key={t.name}
+                      className="testimonial-fade border-l-2 border-red/40 pl-3 flex-none"
+                      style={{ animationDelay: `${i * 80}ms` }}
+                    >
+                      <p className="font-body text-sm text-text-muted leading-relaxed italic">
+                        &ldquo;{t.text}&rdquo;
+                      </p>
+                      <footer className="mt-2 flex items-center gap-2 flex-wrap">
+                        <span className="font-headline text-[11px] font-bold uppercase tracking-tight text-text">
+                          {t.name}
+                        </span>
+                        {t.barber && (
+                          <span className="font-label text-[9px] tracking-widest text-text-subtle">
+                            w/ <span className="text-red">{t.barber.split(' ')[0].toUpperCase()}</span>
+                          </span>
+                        )}
+                        <span className="ml-auto text-red text-[10px] tracking-widest">
+                          {'★'.repeat(t.rating)}
+                        </span>
+                      </footer>
+                    </blockquote>
+                  ))}
+                </div>
+              </div>
+
+              <a
+                href={GOOGLE_BUSINESS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center justify-center gap-2 border border-red text-red font-headline text-sm font-bold uppercase tracking-tight px-5 py-3 hover:bg-red hover:text-white transition-colors whitespace-nowrap flex-none"
+              >
+                LEAVE A REVIEW
+                <Icon name="star" className="w-4 h-4" />
+              </a>
+            </div>
+
           </div>
         </div>
 
