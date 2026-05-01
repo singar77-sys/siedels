@@ -1,5 +1,5 @@
 const SQUARE_BASE = 'https://app.squareup.com/appointments/buyer/widget';
-const LOCATION = 'LFCOT5CC7MY0S';
+const LOCATION = 'LFC0T5CC7MY0S';
 const sq = (id: string) => `${SQUARE_BASE}/${id}/${LOCATION}`;
 
 export const SQUARE_BOOKING_URL = `${SQUARE_BASE}/xcru7izyf4zhv6/${LOCATION}`;

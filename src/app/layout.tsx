@@ -125,7 +125,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <PatriotEasterEgg />
         </ThemeProvider>
         <Script
-          src="https://app.squareup.com/appointments/buyer/widget/xcru7izyf4zhv6/LFCOT5CC7MY0S.js"
+          src="https://app.squareup.com/appointments/buyer/widget/xcru7izyf4zhv6/LFC0T5CC7MY0S.js"
           strategy="lazyOnload"
         />
       </body>
