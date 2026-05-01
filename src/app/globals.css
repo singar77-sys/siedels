@@ -1007,66 +1007,78 @@ body {
 
 /* ══════════════════════════════════════════════════════
    Logo intro — first-visit splash screen
-   Diamond badge slams in, then the black overlay retracts
-   via a diamond-shaped clip-path (all four corners pull
-   inward toward center), revealing the site underneath.
-   Plays once per session. Click anywhere to skip.
+   Diamond badge logo slams down onto a black overlay,
+   then the screen splits — top half flies up, bottom
+   half flies down — like a blade opening, revealing the
+   site. Once per session. Click or tap anywhere to skip.
    ══════════════════════════════════════════════════════ */
 
 .logo-intro {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #0E0E0E;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  gap: 1.5rem;
   cursor: pointer;
-  /* Cover the full viewport as a huge diamond */
-  clip-path: polygon(50% -200%, 300% 50%, 50% 300%, -200% 50%);
-  will-change: clip-path;
-  /* Block any scroll/interaction on the site behind it */
   user-select: none;
+  pointer-events: auto;
 }
 
-/* Collapse: all four diamond corners retract to the center point.
-   The timing function eases in hard — it hesitates, then snaps shut. */
-.logo-intro[data-phase="collapse"] {
-  clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
-  transition: clip-path 0.95s cubic-bezier(0.55, 0, 0.8, 0.45);
+/* Two black panels that cover the full viewport */
+.logo-intro__panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: #0E0E0E;
+  will-change: transform;
+  transition: transform 0.65s cubic-bezier(0.55, 0, 0.45, 1);
 }
 
-/* Badge: drops in from above and snaps to position with a slight bounce */
+.logo-intro__panel--top    { top: 0;    transform: translateY(0); }
+.logo-intro__panel--bottom { bottom: 0; transform: translateY(0); }
+
+/* Split phase: panels fly apart like a blade opening */
+.logo-intro[data-phase="split"] .logo-intro__panel--top    { transform: translateY(-100%); }
+.logo-intro[data-phase="split"] .logo-intro__panel--bottom { transform: translateY(100%); }
+
+/* Red flash — fires briefly on badge impact */
+.logo-intro__flash {
+  position: absolute;
+  inset: 0;
+  background: #E31B23;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  animation: intro-flash 0.4s 0.55s ease-out both;
+}
+
+@keyframes intro-flash {
+  0%   { opacity: 0; }
+  25%  { opacity: 0.22; }
+  100% { opacity: 0; }
+}
+
+/* Badge — floats above both panels, drops in with a snap on impact */
 .logo-intro__badge {
+  position: relative;
+  z-index: 2;
   animation: intro-badge-slam 0.55s cubic-bezier(0.22, 1.2, 0.36, 1) 0.1s both;
   filter: drop-shadow(0 8px 32px rgba(227, 27, 35, 0.5));
+  transition: opacity 0.25s ease;
 }
+
+/* Badge fades out as the panels split */
+.logo-intro[data-phase="split"] .logo-intro__badge { opacity: 0; }
 
 @keyframes intro-badge-slam {
   from {
-    transform: translateY(-80px) scale(0.55);
+    transform: translateY(-120px) scale(0.5);
     opacity: 0;
   }
   to {
     transform: translateY(0) scale(1);
     opacity: 1;
   }
-}
-
-/* Subtle "tap to skip" hint — fades in late so it doesn't distract */
-.logo-intro__skip {
-  font-family: var(--font-sans, 'General Sans', sans-serif);
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.35);
-  animation: intro-skip-fade 0.4s 0.7s both;
-  pointer-events: none;
-}
-
-@keyframes intro-skip-fade {
-  from { opacity: 0; }
-  to   { opacity: 1; }
 }

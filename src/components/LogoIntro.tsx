@@ -4,18 +4,18 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { IMAGE_ALTS } from '@/data/shop';
 
-type Phase = 'enter' | 'collapse' | 'done';
+type Phase = 'enter' | 'split' | 'done';
 
 const STORAGE_KEY = 'siedels-intro-seen';
 
 /**
- * First-visit splash screen. The diamond badge logo slams down onto a black
- * overlay, holds briefly, then the overlay retracts via a diamond-shaped
- * clip-path — all four corners pulling inward simultaneously — revealing the
- * site underneath. Plays once per browser session. Click or tap to skip.
+ * First-visit splash screen. Diamond badge logo slams down onto a black
+ * overlay, then the screen splits — top half flies up, bottom half flies
+ * down — like a blade opening, revealing the site. Once per session.
+ * Click or tap anywhere to skip.
  */
 export function LogoIntro() {
-  const [phase, setPhase] = useState<Phase>('done'); // hidden on SSR / returning visits
+  const [phase, setPhase] = useState<Phase>('done');
 
   useEffect(() => {
     if (sessionStorage.getItem(STORAGE_KEY)) return;
@@ -26,13 +26,13 @@ export function LogoIntro() {
 
     setPhase('enter');
 
-    const tCollapse = setTimeout(() => setPhase('collapse'), 900);  // slam + hold
-    const tDone     = setTimeout(() => {
+    const tSplit = setTimeout(() => setPhase('split'), 950);
+    const tDone  = setTimeout(() => {
       setPhase('done');
       sessionStorage.setItem(STORAGE_KEY, '1');
-    }, 1850); // collapse takes 950 ms
+    }, 1700);
 
-    return () => { clearTimeout(tCollapse); clearTimeout(tDone); };
+    return () => { clearTimeout(tSplit); clearTimeout(tDone); };
   }, []);
 
   const skip = () => {
@@ -51,16 +51,23 @@ export function LogoIntro() {
       role="presentation"
       aria-hidden="true"
     >
+      {/* Two panels that fly apart on split */}
+      <div className="logo-intro__panel logo-intro__panel--top" />
+      <div className="logo-intro__panel logo-intro__panel--bottom" />
+
+      {/* Red flash that fires on badge impact */}
+      <div className="logo-intro__flash" />
+
+      {/* Badge — sits above both panels */}
       <div className="logo-intro__badge">
         <Image
           src="/logos/siedels-barbershop-logo-dark-diamond.png"
           alt={IMAGE_ALTS.logos.darkDiamond}
-          width={280}
-          height={280}
+          width={380}
+          height={380}
           priority
         />
       </div>
-      <span className="logo-intro__skip">tap to skip</span>
     </div>
   );
 }
