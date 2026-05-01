@@ -63,7 +63,7 @@ export function ContactPanel() {
   const mobileReview = REVIEW_POOL[cursor % REVIEW_POOL.length];
 
   return (
-    <section className="min-w-full h-full snap-start grid-bg overflow-hidden">
+    <section className="w-full flex-none h-full snap-start grid-bg overflow-hidden">
       <div className="max-w-screen-2xl mx-auto h-full px-4 md:px-8 py-5 md:py-8 w-full flex flex-col">
 
         {/* ── HEADER — matches ServicesPanel / TeamPanel exactly ── */}

@@ -47,7 +47,7 @@ export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate, sho
     sessionStorage.setItem(PROMO_KEY, '1');
   };
   return (
-    <section className="min-w-full h-full snap-start relative flex items-end overflow-hidden">
+    <section className="w-full flex-none h-full snap-start relative flex items-end overflow-hidden">
       {/* Background image — both themes render, CSS hides the inactive one */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 hero-img-light">

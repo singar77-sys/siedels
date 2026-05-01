@@ -119,7 +119,7 @@ function Recommender({ onSelectService }: { onSelectService: (s: Service) => voi
 
 export function ServicesPanel({ onSelectService }: ServicesPanelProps) {
   return (
-    <section className="min-w-full h-full snap-start grid-bg overflow-hidden">
+    <section className="w-full flex-none h-full snap-start grid-bg overflow-hidden">
       <div className="max-w-screen-2xl mx-auto h-full px-4 md:px-8 py-5 md:py-8 w-full flex flex-col">
 
         <div className="flex items-end justify-between gap-4 mb-4 md:mb-5 flex-none">

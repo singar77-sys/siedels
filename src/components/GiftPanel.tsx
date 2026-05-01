@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Icon } from './Icon';
 
 const PRESET = [25, 50, 100] as const;
-const CARD_PHOTO = '/images/siedels-barbershop-storefront-medina-ohio.webp';
+const CARD_PHOTO = '/images/siedels-window-stay-sharp-medina.webp';
 
 export function GiftPanel() {
   const [amount, setAmount] = useState<number | 'custom'>(50);
@@ -47,7 +47,7 @@ export function GiftPanel() {
   };
 
   return (
-    <section className="min-w-full h-full snap-start grid-bg overflow-hidden">
+    <section className="w-full flex-none h-full snap-start snap-always grid-bg overflow-hidden">
       <div className="max-w-screen-2xl mx-auto h-full px-4 md:px-8 py-5 md:py-8 w-full flex flex-col">
 
         <div className="border-l-4 border-red pl-4 md:pl-6 mb-4 md:mb-5 flex-none">
