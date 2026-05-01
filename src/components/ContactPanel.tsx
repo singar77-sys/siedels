@@ -255,7 +255,7 @@ export function ContactPanel() {
           <div className="hidden md:grid md:grid-cols-3 md:grid-rows-1 h-full gap-3">
 
             {/* Col 1 — Badge + contact */}
-            <div className="bg-surface-high border border-line-strong relative flex flex-col items-center justify-center gap-5 p-6 overflow-hidden">
+            <div className="bg-surface-high border border-line-strong relative flex flex-col items-center justify-center gap-5 p-6 overflow-hidden min-h-0">
 
               {/* Carl Siedel — ghosted portrait behind the badge */}
               <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
@@ -333,7 +333,7 @@ export function ContactPanel() {
             </div>
 
             {/* Col 2 — Hours + tactical map */}
-            <div className="bg-surface border border-line flex flex-col p-5 overflow-hidden">
+            <div className="bg-surface border border-line flex flex-col p-5 overflow-hidden min-h-0">
 
               {/* Hours header with live clock */}
               <div className="flex items-center justify-between mb-3 flex-none">
@@ -406,7 +406,7 @@ export function ContactPanel() {
             </div>
 
             {/* Col 3 — Scrollable testimonials + review CTA */}
-            <div className="bg-surface border border-line flex flex-col p-5 overflow-hidden">
+            <div className="bg-surface border border-line flex flex-col p-5 overflow-hidden min-h-0">
               <div className="flex-none mb-4 flex items-center justify-between">
                 <p className="font-label text-[10px] tracking-widest text-red">
                   <CountUp end={parseFloat(RATING)} decimals={1} duration={1000} /> ★ ·{' '}
