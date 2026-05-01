@@ -347,3 +347,23 @@ export function getTodayShiftsRecord(
   });
   return out;
 }
+
+/**
+ * Serialize the full week's shifts into a plain, JSON-safe nested record so
+ * it can cross the server→client boundary and be threaded into barber modals.
+ * Returns { [lowercaseFirstName]: { [dayName]: Shift } }
+ * Only populated when the week is current; empty otherwise.
+ */
+export function getWeekShiftsRecord(
+  week: WeekSchedule
+): Record<string, Record<string, Shift>> {
+  const out: Record<string, Record<string, Shift>> = {};
+  if (!week.isCurrent) return out;
+  for (const day of week.days) {
+    day.shifts.forEach((shift, firstName) => {
+      if (!out[firstName]) out[firstName] = {};
+      out[firstName][day.dayName] = shift;
+    });
+  }
+  return out;
+}

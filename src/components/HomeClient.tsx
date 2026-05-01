@@ -43,12 +43,14 @@ interface HomeClientProps {
   scheduleToday: ScheduleTodayProps;
   todayShifts: Record<string, Shift>;
   scheduleIsCurrent: boolean;
+  weekShifts: Record<string, Record<string, Shift>>;
 }
 
 export function HomeClient({
   scheduleToday,
   todayShifts,
   scheduleIsCurrent,
+  weekShifts,
 }: HomeClientProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
@@ -304,6 +306,8 @@ export function HomeClient({
               member={selectedMember}
               idx={Math.max(0, team.findIndex((m) => m.name === selectedMember.name))}
               shift={todayShifts[slugFromName(selectedMember.name)] ?? null}
+              weekShifts={weekShifts[slugFromName(selectedMember.name)] ?? {}}
+              scheduleIsCurrent={scheduleIsCurrent}
             />
             <p className="font-label text-[10px] tracking-[0.25em] text-text-subtle text-center mt-4">
               TAP CARD TO FLIP

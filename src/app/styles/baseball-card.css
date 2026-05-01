@@ -405,3 +405,44 @@
   transition: background-color 0.2s ease;
 }
 .card-back-book:hover { background: var(--red-hover); }
+
+/* ── Week schedule on card back ─────────────────────── */
+.card-back-schedule {
+  padding: 10px 0 12px;
+  border-bottom: 2px solid var(--text);
+}
+.card-back-schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2px;
+  margin-top: 8px;
+}
+.card-back-sched-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 2px;
+}
+.card-back-sched-label {
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.card-back-sched-val {
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.02em;
+  text-align: center;
+  line-height: 1.2;
+}
+.card-back-sched-val.is-off {
+  color: var(--text-faint);
+  font-weight: 500;
+}
+/* Today column: label + working hours go red */
+.card-back-sched-col.is-today .card-back-sched-label { color: var(--red); }
+.card-back-sched-col.is-today .card-back-sched-val.is-working { color: var(--red); }
