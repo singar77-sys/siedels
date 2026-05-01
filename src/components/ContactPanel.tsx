@@ -264,64 +264,80 @@ export function ContactPanel() {
           <div className="hidden md:grid md:grid-cols-3 h-full gap-3">
 
             {/* Col 1 — Badge + contact */}
-            <div className="bg-surface-high border border-line-strong flex flex-col items-center justify-center gap-5 p-6 overflow-hidden">
+            <div className="bg-surface-high border border-line-strong relative flex flex-col items-center justify-center gap-5 p-6 overflow-hidden">
 
-              {/* Badge — light/dark swap */}
-              <div className="relative shrink-0">
+              {/* Carl Siedel — ghosted portrait behind the badge */}
+              <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
                 <Image
-                  src="/logos/siedels-barbershop-logo-light-diamond.png"
-                  alt={IMAGE_ALTS.logos.lightDiamond}
-                  width={180}
-                  height={180}
-                  className="contact-badge-light"
-                />
-                <Image
-                  src="/logos/siedels-barbershop-logo-dark-diamond.png"
-                  alt={IMAGE_ALTS.logos.darkDiamond}
-                  width={180}
-                  height={180}
-                  className="contact-badge-dark"
-                  style={{ filter: 'drop-shadow(0 0 32px rgba(227,27,35,0.45))' }}
+                  src="/images/siedels-family-archive-portrait.webp"
+                  alt=""
+                  fill
+                  sizes="33vw"
+                  className="object-cover object-top grayscale opacity-[0.13]"
                 />
               </div>
 
-              <div className="text-center">
-                <p className="font-headline text-lg font-black uppercase tracking-tight text-text leading-none">
-                  SIEDEL&apos;S BARBERSHOP
-                </p>
-                <p className="font-label text-[9px] tracking-[0.25em] text-red mt-2">
-                  {ADDRESS} · {CITY_STATE_ZIP}
-                </p>
-              </div>
+              {/* All visible content sits above the ghost */}
+              <div className="relative z-10 flex flex-col items-center gap-5 w-full">
 
-              <a
-                href={PHONE_HREF}
-                className="font-headline text-2xl font-bold text-red hover:text-red-hover transition-colors"
-              >
-                {PHONE}
-              </a>
+                {/* Badge — light/dark swap */}
+                <div className="shrink-0">
+                  <Image
+                    src="/logos/siedels-barbershop-logo-light-diamond.png"
+                    alt={IMAGE_ALTS.logos.lightDiamond}
+                    width={180}
+                    height={180}
+                    className="contact-badge-light"
+                  />
+                  <Image
+                    src="/logos/siedels-barbershop-logo-dark-diamond.png"
+                    alt={IMAGE_ALTS.logos.darkDiamond}
+                    width={180}
+                    height={180}
+                    className="contact-badge-dark"
+                    style={{ filter: 'drop-shadow(0 0 32px rgba(227,27,35,0.45))' }}
+                  />
+                </div>
 
-              <p className="font-label text-[8px] tracking-widest text-text-subtle">
-                CASH ONLY · ATM ON SITE
-              </p>
+                <div className="text-center">
+                  <p className="font-headline text-lg font-black uppercase tracking-tight text-text leading-none">
+                    SIEDEL&apos;S BARBERSHOP
+                  </p>
+                  <p className="font-label text-[9px] tracking-[0.25em] text-red mt-2">
+                    {ADDRESS} · {CITY_STATE_ZIP}
+                  </p>
+                </div>
 
-              <div className="flex flex-col gap-2 w-full">
                 <a
-                  href={SQUARE_BOOKING_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 w-full bg-red text-white font-headline text-sm font-bold uppercase tracking-tight px-5 py-3 hover:bg-red-hover transition-colors"
+                  href={PHONE_HREF}
+                  className="font-headline text-2xl font-bold text-red hover:text-red-hover transition-colors"
                 >
-                  BOOK ONLINE <Icon name="arrow_forward" className="w-4 h-4" />
+                  {PHONE}
                 </a>
-                <a
-                  href={MAPS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 w-full border border-line-strong text-text-muted font-headline text-sm font-bold uppercase tracking-tight px-5 py-3 hover:border-text hover:text-text transition-colors"
-                >
-                  GET DIRECTIONS <Icon name="arrow_forward" className="w-4 h-4" />
-                </a>
+
+                <p className="font-label text-[8px] tracking-widest text-text-subtle">
+                  CASH ONLY · ATM ON SITE
+                </p>
+
+                <div className="flex flex-col gap-2 w-full">
+                  <a
+                    href={SQUARE_BOOKING_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full bg-red text-white font-headline text-sm font-bold uppercase tracking-tight px-5 py-3 hover:bg-red-hover transition-colors"
+                  >
+                    BOOK ONLINE <Icon name="arrow_forward" className="w-4 h-4" />
+                  </a>
+                  <a
+                    href={MAPS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full border border-line-strong text-text-muted font-headline text-sm font-bold uppercase tracking-tight px-5 py-3 hover:border-text hover:text-text transition-colors"
+                  >
+                    GET DIRECTIONS <Icon name="arrow_forward" className="w-4 h-4" />
+                  </a>
+                </div>
+
               </div>
             </div>
 
