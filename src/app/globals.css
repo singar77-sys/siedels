@@ -1082,3 +1082,26 @@ body {
     opacity: 1;
   }
 }
+
+/* ══════════════════════════════════════════════════════
+   Contact panel — badge image light/dark switching
+   Same pattern as .logo-light / .logo-dark on the Logo component.
+   ══════════════════════════════════════════════════════ */
+.contact-badge-dark { display: none; }
+[data-theme="dark"] .contact-badge-light { display: none; }
+[data-theme="dark"] .contact-badge-dark  { display: block; }
+
+/* ══════════════════════════════════════════════════════
+   Contact panel — operating hours rows
+   Staggered slide-in; today's row gets a live indicator.
+   ══════════════════════════════════════════════════════ */
+@keyframes hours-slide-in {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.hours-row {
+  animation: hours-slide-in 0.32s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hours-row { animation: none; }
+}

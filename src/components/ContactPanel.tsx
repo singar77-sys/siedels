@@ -28,13 +28,36 @@ const STOREFRONT = '/images/siedels-barbershop-storefront-medina-ohio.webp';
 const HOURS_LEFT = hours.slice(0, 3);  // Mon – Wed
 const HOURS_RIGHT = hours.slice(3);    // Thu – Sun
 
-export function ContactPanel() {
-  const [cursor, setCursor] = useState(0);
+/** JS getDay() → hours-array index. JS: 0=Sun…6=Sat. Array: 0=Mon…6=Sun. */
+const jsDayToIdx = (d: number) => (d + 6) % 7;
 
+function formatClock(d: Date) {
+  return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+}
+
+export function ContactPanel() {
+  const [cursor,   setCursor]   = useState(0);
+  const [todayIdx, setTodayIdx] = useState<number | null>(null);
+  const [clock,    setClock]    = useState('');
+
+  // Review carousel
   useEffect(() => {
     const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduce || REVIEW_POOL.length <= VISIBLE) return;
     const id = setInterval(() => setCursor((c) => (c + 1) % REVIEW_POOL.length), ROTATE_MS);
+    return () => clearInterval(id);
+  }, []);
+
+  // Live clock + today highlight — client-only so no hydration mismatch
+  useEffect(() => {
+    const now = new Date();
+    setTodayIdx(jsDayToIdx(now.getDay()));
+    setClock(formatClock(now));
+    const id = setInterval(() => {
+      const n = new Date();
+      setTodayIdx(jsDayToIdx(n.getDay()));
+      setClock(formatClock(n));
+    }, 30_000);
     return () => clearInterval(id);
   }, []);
 
@@ -51,23 +74,25 @@ export function ContactPanel() {
   return (
     <section className="min-w-full h-full snap-start grid-bg overflow-hidden flex flex-col">
 
-      {/* ── HEADER ── */}
-      <div className="flex-none px-4 md:px-8 pt-5 md:pt-8 pb-4 md:pb-5 flex items-end justify-between gap-4">
-        <div className="border-l-4 border-red pl-4 md:pl-6">
-          <p className="font-label text-[10px] tracking-[0.3em] text-red mb-1">FIND THE SHOP</p>
-          <h2 className="font-headline text-2xl md:text-4xl uppercase tracking-tight leading-[0.9]">
-            982 N COURT <span className="text-stroke">/ MEDINA</span>
-          </h2>
+      {/* ── HEADER — same structure/spacing as every other panel ── */}
+      <div className="flex-none px-4 md:px-8 pt-5 md:pt-8 pb-4 md:pb-5">
+        <div className="max-w-screen-2xl mx-auto flex items-end justify-between gap-4">
+          <div className="border-l-4 border-red pl-4 md:pl-6">
+            <p className="font-label text-[10px] tracking-[0.3em] text-red mb-1">FIND THE SHOP</p>
+            <h2 className="font-headline text-2xl md:text-4xl uppercase tracking-tight leading-[0.9]">
+              982 N COURT <span className="text-stroke">/ MEDINA</span>
+            </h2>
+          </div>
+          <a
+            href={MAPS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:inline-flex font-label text-[11px] tracking-[0.3em] text-red hover:text-red-hover transition-colors whitespace-nowrap items-center gap-2"
+          >
+            GET DIRECTIONS
+            <Icon name="arrow_forward" className="w-4 h-4" />
+          </a>
         </div>
-        <a
-          href={MAPS_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:inline-flex font-label text-[11px] tracking-[0.3em] text-red hover:text-red-hover transition-colors whitespace-nowrap items-center gap-2"
-        >
-          GET DIRECTIONS
-          <Icon name="arrow_forward" className="w-4 h-4" />
-        </a>
       </div>
 
       {/* ══════════════════════════════════════════════
@@ -75,24 +100,33 @@ export function ContactPanel() {
           ══════════════════════════════════════════════ */}
       <div className="md:hidden flex-1 overflow-y-auto flex flex-col gap-3 px-4 pb-4">
 
-        {/* Badge card — dark shop-sign feel */}
-        <div className="bg-[#0E0E0E] flex items-center gap-4 px-4 py-4">
+        {/* Badge card — theme-aware ink background */}
+        <div className="bg-ink flex items-center gap-4 px-4 py-4 border border-line-strong">
+          {/* Light-mode badge (dark palette badge on light surface) */}
+          <Image
+            src="/logos/siedels-barbershop-logo-light-diamond.png"
+            alt={IMAGE_ALTS.logos.lightDiamond}
+            width={64}
+            height={64}
+            className="contact-badge-light shrink-0"
+          />
+          {/* Dark-mode badge (red palette badge on dark surface) */}
           <Image
             src="/logos/siedels-barbershop-logo-dark-diamond.png"
             alt={IMAGE_ALTS.logos.darkDiamond}
-            width={72}
-            height={72}
-            className="shrink-0"
-            style={{ filter: 'drop-shadow(0 0 14px rgba(227,27,35,0.55))' }}
+            width={64}
+            height={64}
+            className="contact-badge-dark shrink-0"
+            style={{ filter: 'drop-shadow(0 0 12px rgba(227,27,35,0.5))' }}
           />
           <div className="min-w-0">
-            <p className="font-headline text-base font-black uppercase tracking-tight text-white leading-tight">
+            <p className="font-headline text-base font-black uppercase tracking-tight text-text leading-tight">
               SIEDEL&apos;S<br />BARBERSHOP
             </p>
             <a href={PHONE_HREF} className="block mt-1">
-              <span className="font-headline text-lg font-bold text-[#E31B23] leading-tight">{PHONE}</span>
+              <span className="font-headline text-lg font-bold text-red leading-tight">{PHONE}</span>
             </a>
-            <p className="font-label text-[8px] tracking-widest text-white/40 mt-0.5">
+            <p className="font-label text-[8px] tracking-widest text-text-subtle mt-0.5">
               CASH ONLY · ATM ON SITE
             </p>
           </div>
@@ -136,26 +170,34 @@ export function ContactPanel() {
           <p className="font-label text-[9px] tracking-widest text-text-subtle mb-2">OPERATING HOURS</p>
           <div className="flex gap-4">
             <div className="flex-1">
-              {HOURS_LEFT.map((h) => (
+              {HOURS_LEFT.map((h, idx) => (
                 <div
                   key={h.day}
-                  className="flex justify-between items-baseline py-1.5 border-b border-line-strong font-headline text-[11px] uppercase tracking-tight text-text"
+                  className={`hours-row flex justify-between items-baseline py-1.5 border-b border-line-strong font-headline text-[11px] uppercase tracking-tight text-text`}
+                  style={{ animationDelay: `${idx * 55}ms` }}
                 >
-                  <span className="text-text-subtle">{h.day.slice(0, 3)}</span>
-                  <span className="font-bold">{h.time}</span>
+                  <span className={`flex items-center gap-1 ${todayIdx === idx ? 'text-red' : 'text-text-subtle'}`}>
+                    {todayIdx === idx && <span className="inline-block w-1 h-1 rounded-full bg-red animate-pulse flex-none" />}
+                    {h.day.slice(0, 3)}
+                  </span>
+                  <span className={`font-bold ${todayIdx === idx ? 'text-red' : ''}`}>{h.time}</span>
                 </div>
               ))}
             </div>
             <div className="flex-1">
-              {HOURS_RIGHT.map((h) => (
+              {HOURS_RIGHT.map((h, idx) => (
                 <div
                   key={h.day}
-                  className={`flex justify-between items-baseline py-1.5 border-b border-line-strong last:border-0 font-headline text-[11px] uppercase tracking-tight ${
-                    h.day === 'Sunday' ? 'text-text-subtle' : 'text-text'
+                  className={`hours-row flex justify-between items-baseline py-1.5 border-b border-line-strong last:border-0 font-headline text-[11px] uppercase tracking-tight ${
+                    h.day === 'Sunday' && todayIdx !== idx + 3 ? 'text-text-subtle' : 'text-text'
                   }`}
+                  style={{ animationDelay: `${(idx + 3) * 55}ms` }}
                 >
-                  <span className="text-text-subtle">{h.day.slice(0, 3)}</span>
-                  <span className="font-bold">{h.time}</span>
+                  <span className={`flex items-center gap-1 ${todayIdx === idx + 3 ? 'text-red' : 'text-text-subtle'}`}>
+                    {todayIdx === idx + 3 && <span className="inline-block w-1 h-1 rounded-full bg-red animate-pulse flex-none" />}
+                    {h.day.slice(0, 3)}
+                  </span>
+                  <span className={`font-bold ${todayIdx === idx + 3 ? 'text-red' : ''}`}>{h.time}</span>
                 </div>
               ))}
             </div>
@@ -217,38 +259,51 @@ export function ContactPanel() {
       </div>
 
       {/* ══════════════════════════════════════════════
-          DESKTOP layout — 3 columns
+          DESKTOP layout — 3 columns, full width
           ══════════════════════════════════════════════ */}
       <div className="hidden md:grid md:grid-cols-3 flex-1 min-h-0 overflow-hidden">
 
-        {/* Col 1 — Badge + contact (dark shop-sign) */}
-        <div className="bg-[#0E0E0E] flex flex-col items-center justify-center gap-5 p-8 border-r border-white/10 overflow-hidden">
-          <Image
-            src="/logos/siedels-barbershop-logo-dark-diamond.png"
-            alt={IMAGE_ALTS.logos.darkDiamond}
-            width={200}
-            height={200}
-            className="shrink-0"
-            style={{ filter: 'drop-shadow(0 0 36px rgba(227,27,35,0.5))' }}
-          />
+        {/* Col 1 — Badge + contact. bg-ink follows the site's ink token:
+            near-black in dark mode, warm tan in light mode, theme-specific
+            in sports/easter-egg modes. All text uses theme variables. */}
+        <div className="bg-ink flex flex-col items-center justify-center gap-5 p-8 border-r border-line-strong overflow-hidden">
+
+          {/* Badge — light variant for light surfaces, dark for dark */}
+          <div className="relative shrink-0">
+            <Image
+              src="/logos/siedels-barbershop-logo-light-diamond.png"
+              alt={IMAGE_ALTS.logos.lightDiamond}
+              width={200}
+              height={200}
+              className="contact-badge-light"
+            />
+            <Image
+              src="/logos/siedels-barbershop-logo-dark-diamond.png"
+              alt={IMAGE_ALTS.logos.darkDiamond}
+              width={200}
+              height={200}
+              className="contact-badge-dark"
+              style={{ filter: 'drop-shadow(0 0 36px rgba(227,27,35,0.5))' }}
+            />
+          </div>
 
           <div className="text-center">
-            <p className="font-headline text-xl font-black uppercase tracking-tight text-white leading-none">
+            <p className="font-headline text-xl font-black uppercase tracking-tight text-text leading-none">
               SIEDEL&apos;S BARBERSHOP
             </p>
-            <p className="font-label text-[9px] tracking-[0.25em] text-[#E31B23] mt-2">
+            <p className="font-label text-[9px] tracking-[0.25em] text-red mt-2">
               {ADDRESS} · {CITY_STATE_ZIP}
             </p>
           </div>
 
           <a
             href={PHONE_HREF}
-            className="font-headline text-3xl font-bold text-[#E31B23] hover:text-[#c0141c] transition-colors"
+            className="font-headline text-3xl font-bold text-red hover:text-red-hover transition-colors"
           >
             {PHONE}
           </a>
 
-          <p className="font-label text-[8px] tracking-widest text-white/35">
+          <p className="font-label text-[8px] tracking-widest text-text-subtle">
             CASH ONLY · ATM ON SITE
           </p>
 
@@ -257,7 +312,7 @@ export function ContactPanel() {
               href={SQUARE_BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full bg-[#E31B23] text-white font-headline text-sm font-bold uppercase tracking-tight px-5 py-3 hover:bg-[#c0141c] transition-colors"
+              className="inline-flex items-center justify-center gap-2 w-full bg-red text-white font-headline text-sm font-bold uppercase tracking-tight px-5 py-3 hover:bg-red-hover transition-colors"
             >
               BOOK ONLINE <Icon name="arrow_forward" className="w-4 h-4" />
             </a>
@@ -265,7 +320,7 @@ export function ContactPanel() {
               href={MAPS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full border border-white/20 text-white/70 font-headline text-sm font-bold uppercase tracking-tight px-5 py-3 hover:border-white/50 hover:text-white transition-colors"
+              className="inline-flex items-center justify-center gap-2 w-full border border-line-strong text-text-muted font-headline text-sm font-bold uppercase tracking-tight px-5 py-3 hover:border-text hover:text-text transition-colors"
             >
               GET DIRECTIONS <Icon name="arrow_forward" className="w-4 h-4" />
             </a>
@@ -274,24 +329,44 @@ export function ContactPanel() {
 
         {/* Col 2 — Hours + tactical map */}
         <div className="bg-surface p-5 flex flex-col overflow-hidden border-r border-line">
-          <p className="font-label text-[10px] tracking-widest text-text-subtle mb-4 flex-none">
-            OPERATING HOURS
-          </p>
+
+          {/* Hours header with live clock */}
+          <div className="flex items-center justify-between mb-4 flex-none">
+            <p className="font-label text-[10px] tracking-widest text-text-subtle">
+              OPERATING HOURS
+            </p>
+            {clock && (
+              <p className="font-label text-[9px] tracking-widest text-red flex items-center gap-1.5">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-red animate-pulse" />
+                {clock}
+              </p>
+            )}
+          </div>
+
+          {/* Hours rows — staggered slide-in, today highlighted */}
           <div className="flex-none">
-            {hours.map((h) => (
+            {hours.map((h, idx) => (
               <div
                 key={h.day}
-                className={`flex justify-between py-2.5 border-b border-line-strong last:border-b-0 font-headline text-sm uppercase tracking-tight ${
-                  h.day === 'Sunday' ? 'text-text-subtle' : 'text-text'
+                className={`hours-row flex justify-between py-2.5 border-b border-line-strong last:border-b-0 font-headline text-sm uppercase tracking-tight ${
+                  h.day === 'Sunday' && todayIdx !== idx ? 'text-text-subtle' : 'text-text'
                 }`}
+                style={{ animationDelay: `${idx * 55}ms` }}
               >
-                <span>{h.day}</span>
-                <span className="font-bold">{h.time}</span>
+                <span className={`flex items-center gap-2 ${todayIdx === idx ? 'text-red' : ''}`}>
+                  {todayIdx === idx && (
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-red animate-pulse flex-none" />
+                  )}
+                  {h.day}
+                </span>
+                <span className={`font-bold ${todayIdx === idx ? 'text-red' : ''}`}>
+                  {h.time}
+                </span>
               </div>
             ))}
           </div>
 
-          {/* Tactical map fills remaining space */}
+          {/* Tactical map fills remaining height */}
           <a
             href={MAPS_URL}
             target="_blank"
