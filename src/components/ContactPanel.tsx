@@ -414,32 +414,36 @@ export function ContactPanel() {
                 </p>
               </div>
 
-              {/* All reviews — natural height, scroll when content overflows */}
-              <div className="flex-1 min-h-0 overflow-y-auto flex flex-col gap-5" style={{ scrollbarWidth: 'none' }}>
-                {REVIEW_POOL.map((t, i) => (
-                  <blockquote
-                    key={t.name}
-                    className="testimonial-fade border-l-2 border-red/40 pl-3 flex-none"
-                    style={{ animationDelay: `${i * 80}ms` }}
-                  >
-                    <p className="font-body text-sm text-text-muted leading-relaxed italic">
-                      &ldquo;{t.text}&rdquo;
-                    </p>
-                    <footer className="mt-2 flex items-center gap-2 flex-wrap">
-                      <span className="font-headline text-[11px] font-bold uppercase tracking-tight text-text">
-                        {t.name}
-                      </span>
-                      {t.barber && (
-                        <span className="font-label text-[9px] tracking-widest text-text-subtle">
-                          w/ <span className="text-red">{t.barber.split(' ')[0].toUpperCase()}</span>
+              {/* Scroll wrapper — absolute inset gives a definite height unconditionally,
+                  bypassing the flex-1/grid-track chain that some browsers don't treat
+                  as definite enough to trigger overflow-y: auto. */}
+              <div className="flex-1 min-h-0 relative">
+                <div className="absolute inset-0 overflow-y-auto flex flex-col gap-5" style={{ scrollbarWidth: 'none' }}>
+                  {REVIEW_POOL.map((t, i) => (
+                    <blockquote
+                      key={t.name}
+                      className="testimonial-fade border-l-2 border-red/40 pl-3 flex-none"
+                      style={{ animationDelay: `${i * 80}ms` }}
+                    >
+                      <p className="font-body text-sm text-text-muted leading-relaxed italic">
+                        &ldquo;{t.text}&rdquo;
+                      </p>
+                      <footer className="mt-2 flex items-center gap-2 flex-wrap">
+                        <span className="font-headline text-[11px] font-bold uppercase tracking-tight text-text">
+                          {t.name}
                         </span>
-                      )}
-                      <span className="ml-auto text-red text-[10px] tracking-widest">
-                        {'★'.repeat(t.rating)}
-                      </span>
-                    </footer>
-                  </blockquote>
-                ))}
+                        {t.barber && (
+                          <span className="font-label text-[9px] tracking-widest text-text-subtle">
+                            w/ <span className="text-red">{t.barber.split(' ')[0].toUpperCase()}</span>
+                          </span>
+                        )}
+                        <span className="ml-auto text-red text-[10px] tracking-widest">
+                          {'★'.repeat(t.rating)}
+                        </span>
+                      </footer>
+                    </blockquote>
+                  ))}
+                </div>
               </div>
 
               <a
