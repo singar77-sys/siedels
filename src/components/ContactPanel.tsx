@@ -88,7 +88,7 @@ export function ContactPanel() {
         </div>
 
         {/* ── BODY — flex-1 min-h-0, same as other panels ── */}
-        <div className="flex-1 min-h-0">
+        <div className="flex-1 min-h-0 overflow-hidden">
 
           {/* ══════════════════════════════════════════════
               MOBILE layout
@@ -252,7 +252,7 @@ export function ContactPanel() {
           {/* ══════════════════════════════════════════════
               DESKTOP layout — 3 columns inside the contained body
               ══════════════════════════════════════════════ */}
-          <div className="hidden md:grid md:grid-cols-3 h-full gap-3">
+          <div className="hidden md:grid md:grid-cols-3 md:grid-rows-1 h-full gap-3">
 
             {/* Col 1 — Badge + contact */}
             <div className="bg-surface-high border border-line-strong relative flex flex-col items-center justify-center gap-5 p-6 overflow-hidden">
