@@ -1003,3 +1003,105 @@ body {
     animation: panel-rise 0.55s 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 }
+
+
+/* ══════════════════════════════════════════════════════
+   Logo intro — first-visit splash screen
+   Diamond badge logo slams down onto a black overlay,
+   then the screen splits — top half flies up, bottom
+   half flies down — like a blade opening, revealing the
+   site. Once per session. Click or tap anywhere to skip.
+   ══════════════════════════════════════════════════════ */
+
+.logo-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  pointer-events: auto;
+}
+
+/* Two black panels that cover the full viewport */
+.logo-intro__panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: #0E0E0E;
+  will-change: transform;
+  transition: transform 0.65s cubic-bezier(0.55, 0, 0.45, 1);
+}
+
+.logo-intro__panel--top    { top: 0;    transform: translateY(0); }
+.logo-intro__panel--bottom { bottom: 0; transform: translateY(0); }
+
+/* Split phase: panels fly apart like a blade opening */
+.logo-intro[data-phase="split"] .logo-intro__panel--top    { transform: translateY(-100%); }
+.logo-intro[data-phase="split"] .logo-intro__panel--bottom { transform: translateY(100%); }
+
+/* Red flash — fires briefly on badge impact */
+.logo-intro__flash {
+  position: absolute;
+  inset: 0;
+  background: #E31B23;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  animation: intro-flash 0.4s 0.55s ease-out both;
+}
+
+@keyframes intro-flash {
+  0%   { opacity: 0; }
+  25%  { opacity: 0.22; }
+  100% { opacity: 0; }
+}
+
+/* Badge — floats above both panels, drops in with a snap on impact */
+.logo-intro__badge {
+  position: relative;
+  z-index: 2;
+  animation: intro-badge-slam 0.55s cubic-bezier(0.22, 1.2, 0.36, 1) 0.1s both;
+  filter: drop-shadow(0 8px 32px rgba(227, 27, 35, 0.5));
+  transition: opacity 0.25s ease;
+}
+
+/* Badge fades out as the panels split */
+.logo-intro[data-phase="split"] .logo-intro__badge { opacity: 0; }
+
+@keyframes intro-badge-slam {
+  from {
+    transform: translateY(-120px) scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   Contact panel — badge image light/dark switching
+   Same pattern as .logo-light / .logo-dark on the Logo component.
+   ══════════════════════════════════════════════════════ */
+.contact-badge-dark { display: none; }
+[data-theme="dark"] .contact-badge-light { display: none; }
+[data-theme="dark"] .contact-badge-dark  { display: block; }
+
+/* ══════════════════════════════════════════════════════
+   Contact panel — operating hours rows
+   Staggered slide-in; today's row gets a live indicator.
+   ══════════════════════════════════════════════════════ */
+@keyframes hours-slide-in {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.hours-row {
+  animation: hours-slide-in 0.32s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hours-row { animation: none; }
+}

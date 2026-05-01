@@ -6,6 +6,13 @@ import { Footer } from '@/components/Footer';
 export const metadata: Metadata = {
   title: "Gift Card Terms | Siedel's Barbershop",
   description: "Terms and conditions for Siedel's Barbershop gift cards, including dormancy fees and redemption policy.",
+  alternates: { canonical: '/gift/terms' },
+  openGraph: {
+    title: "Gift Card Terms | Siedel's Barbershop",
+    description: "Terms and conditions for Siedel's Barbershop gift cards, including dormancy fees and redemption policy.",
+    url: '/gift/terms',
+    images: [{ url: '/images/siedels-barbershop-medina-ohio.webp', width: 1920, height: 1080, alt: "Siedel's Barbershop in Medina, Ohio" }],
+  },
 };
 
 const SECTIONS = [

@@ -3,6 +3,7 @@ import {
   fetchSchedule,
   getWorkingToday,
   getTodayShiftsRecord,
+  getWeekShiftsRecord,
 } from '@/lib/schedule';
 
 // Revalidate every 30 minutes so IN TODAY badges pick up sheet edits
@@ -13,11 +14,13 @@ export default async function Home() {
   const week = await fetchSchedule();
   const today = getWorkingToday(week);
   const todayShifts = getTodayShiftsRecord(week);
+  const weekShifts = getWeekShiftsRecord(week);
   return (
     <HomeClient
       scheduleToday={today}
       todayShifts={todayShifts}
       scheduleIsCurrent={week.isCurrent}
+      weekShifts={weekShifts}
     />
   );
 }

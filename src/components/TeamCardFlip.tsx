@@ -12,14 +12,27 @@ import type { Shift } from '@/lib/schedule';
  * rotation; this component wires up state + auto-flip timer.
  */
 
+const DAY_ABBREVS = [
+  { name: 'Monday',    abbr: 'MON' },
+  { name: 'Tuesday',   abbr: 'TUE' },
+  { name: 'Wednesday', abbr: 'WED' },
+  { name: 'Thursday',  abbr: 'THU' },
+  { name: 'Friday',    abbr: 'FRI' },
+  { name: 'Saturday',  abbr: 'SAT' },
+] as const;
+
 interface Props {
   member: TeamMember;
   idx: number;
   shift: Shift | null;
+  /** { [dayName]: Shift } for the current week. Empty object when schedule not available. */
+  weekShifts: Record<string, Shift>;
+  scheduleIsCurrent: boolean;
 }
 
-export function TeamCardFlip({ member, idx, shift }: Props) {
+export function TeamCardFlip({ member, idx, shift, weekShifts, scheduleIsCurrent }: Props) {
   const [flipped, setFlipped] = useState(false);
+  const [todayName, setTodayName] = useState('');
 
   // Auto-flip to the back ~700ms after open so the user sees the
   // front first, then the card turns over in front of them.
@@ -30,6 +43,13 @@ export function TeamCardFlip({ member, idx, shift }: Props) {
     const delay = reduced ? 0 : 700;
     const t = setTimeout(() => setFlipped(true), delay);
     return () => clearTimeout(t);
+  }, []);
+
+  // Detect today's day name client-side (avoids hydration mismatch)
+  useEffect(() => {
+    setTodayName(
+      new Date().toLocaleDateString('en-US', { weekday: 'long', timeZone: 'America/New_York' })
+    );
   }, []);
 
   const role = member.role;
@@ -80,6 +100,33 @@ export function TeamCardFlip({ member, idx, shift }: Props) {
                 <span className="card-back-stat-value">{since}</span>
               </div>
             </div>
+
+            {/* Week schedule — only shown when the sheet covers this week */}
+            {scheduleIsCurrent && Object.keys(weekShifts).length > 0 && (
+              <div className="card-back-schedule">
+                <p className="card-back-section-label">SCHEDULE THIS WEEK</p>
+                <div className="card-back-schedule-grid">
+                  {DAY_ABBREVS.map(({ name, abbr }) => {
+                    const s = weekShifts[name] ?? null;
+                    const isToday = !!todayName && name === todayName;
+                    const isWorking = s?.status === 'working';
+                    const isOff = !s || s.status === 'off';
+                    return (
+                      <div key={name} className={`card-back-sched-col${isToday ? ' is-today' : ''}`}>
+                        <span className="card-back-sched-label">{abbr}</span>
+                        <span className={`card-back-sched-val${isWorking ? ' is-working' : isOff ? ' is-off' : ''}`}>
+                          {isWorking
+                            ? (s.display || s.raw)
+                            : s?.status === 'offsite'
+                            ? 'OUT'
+                            : '—'}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             {member.specialties && member.specialties.length > 0 && (
               <div className="card-back-specialties">

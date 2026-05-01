@@ -98,7 +98,7 @@ export function GalleryPanel() {
   }, []);
 
   return (
-    <section className="min-w-full h-full snap-start grid-bg overflow-hidden">
+    <section className="w-full flex-none h-full snap-start snap-always grid-bg overflow-hidden">
       <div className="max-w-screen-2xl mx-auto h-full px-4 md:px-8 py-5 md:py-8 w-full flex flex-col">
         <div className="flex items-end justify-between gap-4 mb-4 md:mb-5 flex-none">
           <div className="border-l-4 border-red pl-4 md:pl-6">
@@ -119,7 +119,7 @@ export function GalleryPanel() {
         </div>
 
         {/* The Wall — fills the remaining frame both ways */}
-        <div ref={wallRef} className="gallery-wall relative flex-1 min-h-0 overflow-hidden">
+        <div ref={wallRef} className="gallery-wall relative flex-1 min-h-0 overflow-hidden touch-pan-x">
         <div className="gallery-grid">
           {gallery.map((item, idx) => (
             <button

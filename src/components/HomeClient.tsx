@@ -43,12 +43,14 @@ interface HomeClientProps {
   scheduleToday: ScheduleTodayProps;
   todayShifts: Record<string, Shift>;
   scheduleIsCurrent: boolean;
+  weekShifts: Record<string, Record<string, Shift>>;
 }
 
 export function HomeClient({
   scheduleToday,
   todayShifts,
   scheduleIsCurrent,
+  weekShifts,
 }: HomeClientProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
@@ -294,16 +296,18 @@ export function HomeClient({
         <Modal onClose={() => setSelectedMember(null)}>
           <button
             onClick={() => setSelectedMember(null)}
-            className="absolute top-3 right-3 z-10 w-11 h-11 flex items-center justify-center text-text-subtle hover:text-text transition-colors"
+            className="absolute top-2 right-2 z-20 w-8 h-8 flex items-center justify-center bg-surface border border-line text-text-muted hover:text-text hover:border-text-muted transition-colors"
             aria-label="Close"
           >
-            <Icon name="close" className="w-4 h-4" />
+            <Icon name="close" className="w-3 h-3" />
           </button>
           <div className="p-5 md:p-6">
             <TeamCardFlip
               member={selectedMember}
               idx={Math.max(0, team.findIndex((m) => m.name === selectedMember.name))}
               shift={todayShifts[slugFromName(selectedMember.name)] ?? null}
+              weekShifts={weekShifts[slugFromName(selectedMember.name)] ?? {}}
+              scheduleIsCurrent={scheduleIsCurrent}
             />
             <p className="font-label text-[10px] tracking-[0.25em] text-text-subtle text-center mt-4">
               TAP CARD TO FLIP
@@ -314,16 +318,16 @@ export function HomeClient({
 
       {/* ══ Service Modal ═════════════════════
            Close button matches the team-modal style for consistency:
-           same position (top-3 right-3), same size, same color tokens —
+           same position (top-2 right-2), same size, same color tokens —
            so the user learns one close-control grammar across modals. */}
       {selectedService && (
         <Modal onClose={() => setSelectedService(null)}>
           <button
             onClick={() => setSelectedService(null)}
-            className="absolute top-3 right-3 z-10 w-11 h-11 flex items-center justify-center text-text-subtle hover:text-text transition-colors"
+            className="absolute top-2 right-2 z-20 w-8 h-8 flex items-center justify-center bg-surface border border-line text-text-muted hover:text-text hover:border-text-muted transition-colors"
             aria-label="Close"
           >
-            <Icon name="close" className="w-4 h-4" />
+            <Icon name="close" className="w-3 h-3" />
           </button>
           {selectedService.image && (
             <div className="relative aspect-[16/9] w-full bg-surface-raised">

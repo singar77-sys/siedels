@@ -32,6 +32,37 @@ export const IMAGE_ALTS = {
   heroGoldenHour:
     "Barber pole at golden hour outside Siedel's Barbershop, Medina Ohio",
   heroGrayscale: "Barber pole at Siedel's Barbershop, Medina Ohio",
+
+  // Badge logos — circle (01) and diamond (02) shapes, dark/light palette variants.
+  // "dark" = vivid red badge background; "light" = charcoal badge background.
+  // Team variants match each sport-mode palette (day = light, night = dark).
+  logos: {
+    // Siedel's brand
+    darkCircle:   "Siedel's Barbershop logo — red circle badge with crossed scissors and straight razor, Stay Sharp",
+    darkDiamond:  "Siedel's Barbershop logo — red diamond badge with crossed scissors and straight razor, Stay Sharp",
+    lightCircle:  "Siedel's Barbershop logo — dark circle badge with red crossed scissors and straight razor, Stay Sharp",
+    lightDiamond: "Siedel's Barbershop logo — dark diamond badge with red crossed scissors and straight razor, Stay Sharp",
+    // Cleveland Browns edition
+    brownsDarkCircle:   "Siedel's Barbershop Cleveland Browns edition logo — dark brown circle badge with orange scissors",
+    brownsDarkDiamond:  "Siedel's Barbershop Cleveland Browns edition logo — dark brown diamond badge with orange scissors",
+    brownsLightCircle:  "Siedel's Barbershop Cleveland Browns edition logo — brown circle badge with orange scissors",
+    brownsLightDiamond: "Siedel's Barbershop Cleveland Browns edition logo — brown diamond badge with orange scissors",
+    // Cleveland Cavaliers edition
+    cavsDarkCircle:   "Siedel's Barbershop Cleveland Cavaliers edition logo — navy circle badge with gold scissors",
+    cavsDarkDiamond:  "Siedel's Barbershop Cleveland Cavaliers edition logo — navy diamond badge with gold scissors",
+    cavsLightCircle:  "Siedel's Barbershop Cleveland Cavaliers edition logo — wine circle badge with gold scissors",
+    cavsLightDiamond: "Siedel's Barbershop Cleveland Cavaliers edition logo — wine diamond badge with gold scissors",
+    // Price-era Cavaliers (retro) edition
+    priceDarkCircle:   "Siedel's Barbershop retro Cavaliers edition logo — navy circle badge with orange scissors, 1989 throwback",
+    priceDarkDiamond:  "Siedel's Barbershop retro Cavaliers edition logo — navy diamond badge with orange scissors, 1989 throwback",
+    priceLightCircle:  "Siedel's Barbershop retro Cavaliers edition logo — powder blue circle badge with orange scissors, 1989 throwback",
+    priceLightDiamond: "Siedel's Barbershop retro Cavaliers edition logo — powder blue diamond badge with orange scissors, 1989 throwback",
+    // Cleveland Guardians edition
+    tribeDarkCircle:   "Siedel's Barbershop Cleveland Guardians edition logo — deep navy circle badge with red scissors",
+    tribeDarkDiamond:  "Siedel's Barbershop Cleveland Guardians edition logo — deep navy diamond badge with red scissors",
+    tribeLightCircle:  "Siedel's Barbershop Cleveland Guardians edition logo — navy circle badge with red scissors",
+    tribeLightDiamond: "Siedel's Barbershop Cleveland Guardians edition logo — navy diamond badge with red scissors",
+  },
 } as const;
 
 // Canonical shop coordinates — used in Schema.org JSON-LD and in the

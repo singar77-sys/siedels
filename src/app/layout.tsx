@@ -6,9 +6,10 @@ import { ItalyEasterEgg } from '@/components/ItalyEasterEgg';
 import { TeamModeEasterEgg } from '@/components/TeamModeEasterEgg';
 import { PatriotEasterEgg } from '@/components/PatriotEasterEgg';
 import { MedinaAmbience } from '@/components/MedinaAmbience';
+import { LogoIntro } from '@/components/LogoIntro';
 import { fetchWeather } from '@/lib/weather';
 import { getSportsModeForDate } from '@/lib/sports-mode';
-import { RATING, REVIEW_COUNT, COORDS, TEAM_COUNT_WORD, IMAGE_ALTS } from '@/data/shop';
+import { RATING, REVIEW_COUNT, COORDS, TEAM_COUNT_WORD, IMAGE_ALTS, services } from '@/data/shop';
 import './globals.css';
 
 const BASE_URL = 'https://siedels.vercel.app';
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Siedel's Barbershop | Medina, Ohio",
     description: `${TEAM_COUNT_WORD} barbers in Medina, Ohio. Cash only. ATM on site.`,
-    images: ['/images/siedels-barbershop-medina-ohio.webp'],
+    images: [{ url: '/images/siedels-barbershop-medina-ohio.webp', alt: IMAGE_ALTS.heroGoldenHour }],
   },
   icons: {
     icon: [
@@ -87,9 +88,35 @@ const jsonLd = {
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Thursday', opens: '08:00', closes: '20:00' },
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '08:00', closes: '18:00' },
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '08:00', closes: '15:00' },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '00:00', closes: '00:00' },
   ],
   aggregateRating: { '@type': 'AggregateRating', ratingValue: RATING, reviewCount: REVIEW_COUNT, bestRating: '5' },
+  areaServed: [
+    { '@type': 'City', name: 'Medina',    addressRegion: 'OH', addressCountry: 'US' },
+    { '@type': 'City', name: 'Brunswick', addressRegion: 'OH', addressCountry: 'US' },
+    { '@type': 'City', name: 'Wadsworth', addressRegion: 'OH', addressCountry: 'US' },
+    { '@type': 'City', name: 'Montville', addressRegion: 'OH', addressCountry: 'US' },
+    { '@type': 'City', name: 'Hinckley',  addressRegion: 'OH', addressCountry: 'US' },
+  ],
+  founder: {
+    '@type': 'Person',
+    name: 'Jim LaMarca',
+    jobTitle: 'Master Barber & Owner',
+    description: "Master barber since 1995. Owner of Siedel's Barbershop in Medina, Ohio.",
+    worksFor: { '@id': `${BASE_URL}/#barbershop` },
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: "Siedel's Barbershop Services",
+    itemListElement: services.map((s) => ({
+      '@type': 'Offer',
+      name: s.name,
+      description: s.description,
+      price: s.price.replace('$', ''),
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      itemOffered: { '@type': 'Service', name: s.name },
+    })),
+  },
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -116,6 +143,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <a href="#main" className="skip-link">Skip to main content</a>
+        <LogoIntro />
         <ThemeProvider>
         {children}
         <MedinaAmbience />

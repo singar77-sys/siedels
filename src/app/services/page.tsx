@@ -29,6 +29,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Services & Prices | Siedel's Barbershop",
     description: `Haircuts ${PRICE_HAIRCUT}, Fades ${PRICE_RAZOR_FADE}, Haircut + Beard ${PRICE_HAIRCUT_BEARD}. Full list with prices.`,
+    url: '/services',
+    images: [{ url: '/images/barber-tools-siedels-barbershop-medina.webp', width: 1920, height: 1080, alt: "Professional barber tools at Siedel's Barbershop in Medina, Ohio" }],
   },
 };
 

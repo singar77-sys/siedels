@@ -325,7 +325,7 @@
   letter-spacing: 0.06em;
 }
 .card-back-specialties {
-  padding: 12px 0 14px;
+  padding: 10px 0 12px;
   border-bottom: 2px solid var(--text);
 }
 .card-back-spec-list {
@@ -340,10 +340,10 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 7px 0;
+  padding: 5px 0;
   border-bottom: 1px dotted var(--line-strong);
   font-weight: 700;
-  font-size: 12px;
+  font-size: 10px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text);
@@ -386,7 +386,7 @@
   text-transform: uppercase;
 }
 .card-back-bio-text {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.55;
   color: var(--text-muted);
 }
@@ -405,3 +405,44 @@
   transition: background-color 0.2s ease;
 }
 .card-back-book:hover { background: var(--red-hover); }
+
+/* ── Week schedule on card back ─────────────────────── */
+.card-back-schedule {
+  padding: 10px 0 12px;
+  border-bottom: 2px solid var(--text);
+}
+.card-back-schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2px;
+  margin-top: 8px;
+}
+.card-back-sched-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 2px;
+}
+.card-back-sched-label {
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.card-back-sched-val {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.02em;
+  text-align: center;
+  line-height: 1.2;
+}
+.card-back-sched-val.is-off {
+  color: var(--text-faint);
+  font-weight: 500;
+}
+/* Today column: label + working hours go red */
+.card-back-sched-col.is-today .card-back-sched-label { color: var(--red); }
+.card-back-sched-col.is-today .card-back-sched-val.is-working { color: var(--red); }
