@@ -41,7 +41,7 @@ Read these before reaching for the actual files — most questions are answered 
 
 ## `src/data/shop.ts`
 
-352-line constants file — single source of truth for all shop data. **Read this instead of asking about any shop facts.**
+Single source of truth for all shop data. **Read this instead of asking about any shop facts.**
 
 **Key constants:**
 - `TEAM_COUNT = 11`
@@ -62,6 +62,34 @@ Read these before reaching for the actual files — most questions are answered 
 - `GALLERY_ITEMS` — 18 items with image path + caption
 
 **Square booking:** Each team member has their own booking URL. The generic "book now" CTA uses the shop's base Square URL.
+
+**`IMAGE_ALTS`** — canonical alt-text for all reused images. Has a `logos` sub-object with 20 entries covering every badge logo variant. Use `IMAGE_ALTS.logos.darkCircle` etc. — do not write alt text inline.
+
+---
+
+## `public/logos/`
+
+All brand logo assets live here.
+
+**Existing WebP logos** (used by `Logo.tsx` component):
+- `siedels-logo-color-{400,800,1600}.webp` — full-color logo (red+black), light theme
+- `siedels-logo-white-{400,800,1600}.webp` — white logo, dark theme + team mode mask source
+
+**Favicons:** `siedels-favicon-{16,32,180,192}.png`
+
+**Badge logos** — 20 PNGs added 2026-05-01. Circle (01→circle) and diamond (02→diamond) shapes, each in a dark-palette and light-palette variant. All 1200×1200px.
+
+Naming: `siedels-barbershop-logo-{team?}-{dark|light}-{circle|diamond}.png`
+
+| Prefix | Team mode |
+|---|---|
+| *(none)* | Siedel's base brand |
+| `browns-` | Cleveland Browns |
+| `cavs-` | Cleveland Cavaliers |
+| `price-` | Price-era Cavs (retro, 1989) |
+| `tribe-` | Cleveland Guardians |
+
+Use `IMAGE_ALTS.logos.*` for alt text on all badge logos.
 
 ---
 
