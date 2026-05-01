@@ -296,10 +296,10 @@ export function HomeClient({
         <Modal onClose={() => setSelectedMember(null)}>
           <button
             onClick={() => setSelectedMember(null)}
-            className="absolute top-3 right-3 z-10 w-11 h-11 flex items-center justify-center text-text-subtle hover:text-text transition-colors"
+            className="absolute top-2 right-2 z-20 w-8 h-8 flex items-center justify-center bg-surface border border-line text-text-muted hover:text-text hover:border-text-muted transition-colors"
             aria-label="Close"
           >
-            <Icon name="close" className="w-4 h-4" />
+            <Icon name="close" className="w-3 h-3" />
           </button>
           <div className="p-5 md:p-6">
             <TeamCardFlip
@@ -318,16 +318,16 @@ export function HomeClient({
 
       {/* ══ Service Modal ═════════════════════
            Close button matches the team-modal style for consistency:
-           same position (top-3 right-3), same size, same color tokens —
+           same position (top-2 right-2), same size, same color tokens —
            so the user learns one close-control grammar across modals. */}
       {selectedService && (
         <Modal onClose={() => setSelectedService(null)}>
           <button
             onClick={() => setSelectedService(null)}
-            className="absolute top-3 right-3 z-10 w-11 h-11 flex items-center justify-center text-text-subtle hover:text-text transition-colors"
+            className="absolute top-2 right-2 z-20 w-8 h-8 flex items-center justify-center bg-surface border border-line text-text-muted hover:text-text hover:border-text-muted transition-colors"
             aria-label="Close"
           >
-            <Icon name="close" className="w-4 h-4" />
+            <Icon name="close" className="w-3 h-3" />
           </button>
           {selectedService.image && (
             <div className="relative aspect-[16/9] w-full bg-surface-raised">
