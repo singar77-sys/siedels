@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   PHONE,
   PHONE_HREF,
@@ -21,7 +21,6 @@ import { Icon } from './Icon';
 import { CountUp } from './CountUp';
 
 const REVIEW_POOL = testimonials.slice(1);
-const VISIBLE = 3;
 const ROTATE_MS = 9000;
 const STOREFRONT = '/images/siedels-barbershop-storefront-medina-ohio.webp';
 
@@ -40,10 +39,10 @@ export function ContactPanel() {
   const [todayIdx, setTodayIdx] = useState<number | null>(null);
   const [clock,    setClock]    = useState('');
 
-  // Review carousel
+  // Mobile review carousel
   useEffect(() => {
     const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduce || REVIEW_POOL.length <= VISIBLE) return;
+    if (prefersReduce) return;
     const id = setInterval(() => setCursor((c) => (c + 1) % REVIEW_POOL.length), ROTATE_MS);
     return () => clearInterval(id);
   }, []);
@@ -60,14 +59,6 @@ export function ContactPanel() {
     }, 30_000);
     return () => clearInterval(id);
   }, []);
-
-  const visible = useMemo(
-    () =>
-      Array.from({ length: Math.min(VISIBLE, REVIEW_POOL.length) }, (_, k) =>
-        REVIEW_POOL[(cursor + k) % REVIEW_POOL.length],
-      ),
-    [cursor],
-  );
 
   const mobileReview = REVIEW_POOL[cursor % REVIEW_POOL.length];
 
@@ -414,36 +405,27 @@ export function ContactPanel() {
               </a>
             </div>
 
-            {/* Col 3 — Rotating testimonials + review CTA */}
+            {/* Col 3 — Scrollable testimonials + review CTA */}
             <div className="bg-surface border border-line flex flex-col p-5 overflow-hidden">
               <div className="flex-none mb-4 flex items-center justify-between">
                 <p className="font-label text-[10px] tracking-widest text-red">
                   <CountUp end={parseFloat(RATING)} decimals={1} duration={1000} /> ★ ·{' '}
                   <CountUp end={parseInt(REVIEW_COUNT)} duration={1400} /> REVIEWS
                 </p>
-                <div className="flex gap-1">
-                  {REVIEW_POOL.map((_, i) => (
-                    <span
-                      key={i}
-                      aria-hidden="true"
-                      className={`h-[2px] w-2 transition-colors duration-500 ${
-                        i === cursor ? 'bg-red' : 'bg-line-strong'
-                      }`}
-                    />
-                  ))}
-                </div>
               </div>
-              <div className="flex-1 min-h-0 flex flex-col gap-4 overflow-hidden">
-                {visible.map((t, i) => (
+
+              {/* All reviews — natural height, scroll when content overflows */}
+              <div className="flex-1 min-h-0 overflow-y-auto flex flex-col gap-5" style={{ scrollbarWidth: 'none' }}>
+                {REVIEW_POOL.map((t, i) => (
                   <blockquote
-                    key={`${cursor}-${i}-${t.name}`}
-                    className="testimonial-fade flex-1 min-h-0 border-l-2 border-red/40 pl-3 flex flex-col overflow-hidden"
-                    style={{ animationDelay: `${i * 120}ms` }}
+                    key={t.name}
+                    className="testimonial-fade border-l-2 border-red/40 pl-3 flex-none"
+                    style={{ animationDelay: `${i * 80}ms` }}
                   >
-                    <p className="font-body text-[13px] md:text-sm text-text-muted leading-relaxed italic overflow-hidden flex-1 min-h-0">
+                    <p className="font-body text-sm text-text-muted leading-relaxed italic">
                       &ldquo;{t.text}&rdquo;
                     </p>
-                    <footer className="mt-2 flex items-center gap-2 flex-none flex-wrap">
+                    <footer className="mt-2 flex items-center gap-2 flex-wrap">
                       <span className="font-headline text-[11px] font-bold uppercase tracking-tight text-text">
                         {t.name}
                       </span>
@@ -459,6 +441,7 @@ export function ContactPanel() {
                   </blockquote>
                 ))}
               </div>
+
               <a
                 href={GOOGLE_BUSINESS_URL}
                 target="_blank"
