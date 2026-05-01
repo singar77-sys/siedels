@@ -6,6 +6,7 @@ import { ItalyEasterEgg } from '@/components/ItalyEasterEgg';
 import { TeamModeEasterEgg } from '@/components/TeamModeEasterEgg';
 import { PatriotEasterEgg } from '@/components/PatriotEasterEgg';
 import { MedinaAmbience } from '@/components/MedinaAmbience';
+import { LogoIntro } from '@/components/LogoIntro';
 import { fetchWeather } from '@/lib/weather';
 import { getSportsModeForDate } from '@/lib/sports-mode';
 import { RATING, REVIEW_COUNT, COORDS, TEAM_COUNT_WORD, IMAGE_ALTS, services } from '@/data/shop';
@@ -142,6 +143,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <a href="#main" className="skip-link">Skip to main content</a>
+        <LogoIntro />
         <ThemeProvider>
         {children}
         <MedinaAmbience />
