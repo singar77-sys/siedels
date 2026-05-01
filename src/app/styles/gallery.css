@@ -34,6 +34,7 @@
   min-width: 0;
   min-height: 0;
   transform: translateZ(0); /* promote to own layer for clean backdrop-filter */
+  touch-action: pan-x; /* let horizontal swipes reach the panel scroll container */
 }
 .gallery-tile:focus-visible {
   outline: 2px solid rgba(227, 27, 35, 0.9);

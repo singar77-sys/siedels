@@ -119,7 +119,7 @@ export function GalleryPanel() {
         </div>
 
         {/* The Wall — fills the remaining frame both ways */}
-        <div ref={wallRef} className="gallery-wall relative flex-1 min-h-0 overflow-hidden">
+        <div ref={wallRef} className="gallery-wall relative flex-1 min-h-0 overflow-hidden touch-pan-x">
         <div className="gallery-grid">
           {gallery.map((item, idx) => (
             <button

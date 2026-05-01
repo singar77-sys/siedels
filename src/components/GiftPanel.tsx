@@ -247,8 +247,32 @@ export function GiftPanel() {
                 )}
               </div>
 
-              {/* Spacer — pushes CTA to bottom on desktop */}
-              <div className="hidden md:block md:flex-1" />
+              {/* ── Desktop gap — occasion tags + perks ── */}
+              <div className="hidden md:flex flex-1 flex-col justify-center gap-6 py-5 mt-3 border-t border-line">
+                <div>
+                  <p className="font-label text-[9px] tracking-[0.3em] text-text-subtle mb-3">PERFECT FOR</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {["Father's Day", 'Birthdays', 'Graduations', 'Holidays', 'Just Because'].map((occ) => (
+                      <span key={occ} className="font-label text-[9px] tracking-widest text-text-subtle border border-line-strong px-2.5 py-1 uppercase">
+                        {occ}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex flex-col gap-2.5">
+                  {[
+                    'Good for any service · any barber',
+                    'Emailed instantly after payment',
+                    'Never expires',
+                    'Redeemable in-shop at checkout',
+                  ].map((perk) => (
+                    <div key={perk} className="flex items-center gap-2.5">
+                      <span className="text-red text-xs font-bold shrink-0">✓</span>
+                      <span className="font-label text-[10px] tracking-widest text-text-muted uppercase">{perk}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
               {error && <p className="font-body text-sm text-red mb-3">{error}</p>}
 
@@ -274,6 +298,18 @@ export function GiftPanel() {
               <p className="font-body text-[11px] text-text-subtle text-center mt-3 leading-relaxed">
                 Secure checkout by Stripe. Your card is emailed instantly after payment.
               </p>
+
+              {/* Tip disclaimer */}
+              <div className="mt-4 border border-line-strong bg-surface-raised px-4 py-3">
+                <p className="font-label text-[9px] tracking-[0.3em] text-red mb-2">HEADS UP</p>
+                <p className="font-headline text-[13px] font-bold uppercase tracking-tight text-text mb-1.5">
+                  The card covers the cut. Tips are a different edge.
+                </p>
+                <p className="font-body text-xs text-text-muted leading-relaxed">
+                  Gift cards are good for any service at full price — gratuity isn&apos;t included. Your barber brings razor-sharp skill to every visit, and a little something extra is always appreciated.
+                </p>
+              </div>
+
               <p className="font-body text-[11px] text-text-subtle mt-3 leading-relaxed">
                 <span className="font-bold text-text-muted">Card terms:</span>{' '}
                 Gift cards never expire. After 24 consecutive months of inactivity, a $2.50/month dormancy fee may be deducted from the remaining balance until the card is used or the balance reaches zero. Any use of the card resets the 24-month clock.
