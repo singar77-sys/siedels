@@ -339,23 +339,23 @@
 .card-back-spec-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   padding: 5px 0;
-  border-bottom: 1px dotted var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
   font-weight: 700;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text);
 }
 .card-back-spec-row:last-child { border-bottom: 0; }
 .card-back-spec-dot {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   background: var(--red);
   flex: 0 0 auto;
 }
-.card-back-spec-name { flex: 1; }
+.card-back-spec-name { flex: 1; text-align: left; }
 
 .card-back-stamp {
   display: flex;
