@@ -21,7 +21,7 @@ function isPromoSeason(): boolean {
 interface HeroPanelProps {
   onScrollNext: () => void;
   onExploreServices: () => void;
-  onGiftNavigate: () => void;
+  onGiftNavigate?: () => void; // re-enable when gift card panel is restored
   shopHours: string | null;
   isClosed: boolean;
   scheduleKnown: boolean;
@@ -132,7 +132,7 @@ export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate, sho
         </div>
       </div>
       {/* Father's Day promo — right-side negative space, desktop only */}
-      {promoMounted && (
+      {promoMounted && onGiftNavigate && (
         <div
           className={`hidden md:block absolute top-[38%] -translate-y-1/2 right-[3%] xl:right-[5%] 2xl:right-[8%] z-10 max-w-[210px] transition-all duration-700 ease-out ${
             promoAnimate ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'

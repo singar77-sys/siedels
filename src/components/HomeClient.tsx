@@ -16,18 +16,18 @@ import { ServicesPanel } from './ServicesPanel';
 import { GalleryPanel } from './GalleryPanel';
 import { TeamPanel } from './TeamPanel';
 import { TeamCardFlip } from './TeamCardFlip';
-import { GiftPanel } from './GiftPanel';
+// import { GiftPanel } from './GiftPanel'; // re-enable with gift card panel
 import { ContactPanel } from './ContactPanel';
 import type { Shift } from '@/lib/schedule';
 
-const PANELS = ['HOME', 'TEAM', 'SERVICES', 'WORK', 'GIFT', 'CONTACT'] as const;
+const PANELS = ['HOME', 'TEAM', 'SERVICES', 'WORK', /* 'GIFT', */ 'CONTACT'] as const; // restore 'GIFT' when ready
 
 const PANEL_SHORT: Record<string, string> = {
   HOME: 'HOME',
   TEAM: 'TEAM',
   WORK: 'WORK',
   SERVICES: 'SERV',
-  GIFT: 'GIFT',
+  // GIFT: 'GIFT', // restore with gift card panel
   CONTACT: 'INFO',
 };
 
@@ -213,10 +213,10 @@ export function HomeClient({
           ref={scrollRef}
           className="no-scrollbar flex h-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory overscroll-x-contain touch-pan-x"
         >
+          {/* To restore gift cards: add onGiftNavigate={() => scrollToPanel(4)} below */}
           <HeroPanel
             onScrollNext={() => scrollToPanel(1)}
             onExploreServices={() => scrollToPanel(2)}
-            onGiftNavigate={() => scrollToPanel(4)}
             shopHours={scheduleToday.shopHours}
             isClosed={scheduleToday.isClosed}
             scheduleKnown={scheduleToday.scheduleKnown}
@@ -230,7 +230,7 @@ export function HomeClient({
           />
           <ServicesPanel onSelectService={setSelectedService} />
           <GalleryPanel />
-          <GiftPanel />
+          {/* <GiftPanel /> — disabled pending accountant review; restore import + PANELS entry to re-enable */}
           <ContactPanel />
         </div>
       </main>
