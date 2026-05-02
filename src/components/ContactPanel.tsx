@@ -406,7 +406,20 @@ export function ContactPanel() {
             </div>
 
             {/* Col 3 — Auto-rotating testimonial + review CTA */}
-            <div className="bg-surface border border-line flex flex-col p-5 overflow-hidden min-h-0">
+            <div className="bg-surface border border-line relative flex flex-col p-5 overflow-hidden min-h-0">
+
+              {/* Ghost: lounge seating at 5% */}
+              <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+                <Image
+                  src="/images/siedels-lounge-seating-medina.webp"
+                  alt=""
+                  fill
+                  sizes="33vw"
+                  className="object-cover grayscale opacity-[0.05]"
+                />
+              </div>
+
+              <div className="relative z-10 flex flex-col flex-1 min-h-0">
               <div className="flex-none mb-4 flex items-center justify-between">
                 <p className="font-label text-[10px] tracking-widest text-red">
                   <CountUp end={parseFloat(RATING)} decimals={1} duration={1000} /> ★ ·{' '}
@@ -465,6 +478,7 @@ export function ContactPanel() {
                 LEAVE A REVIEW
                 <Icon name="star" className="w-4 h-4" />
               </a>
+              </div>{/* end z-10 wrapper */}
             </div>
 
           </div>
