@@ -1,8 +1,7 @@
-const SQUARE_BASE = 'https://app.squareup.com/appointments/buyer/widget';
-const LOCATION = 'LFCOT5CC7MY0S';
-const sq = (id: string) => `${SQUARE_BASE}/${id}/${LOCATION}`;
+const LOCATION = 'LFC0T5CC7MY0S';
+const sq = (id: string) => `https://book.squareup.com/appointments/${id}/location/${LOCATION}/services`;
 
-export const SQUARE_BOOKING_URL = `${SQUARE_BASE}/xcru7izyf4zhv6/${LOCATION}`;
+export const SQUARE_BOOKING_URL = sq('xcru7izyf4zhv6');
 export const PHONE = '(330) 952-0777';
 export const PHONE_HREF = 'tel:+13309520777';
 export const ADDRESS = '982 N Court Street';
