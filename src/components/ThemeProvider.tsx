@@ -4,11 +4,7 @@ import { createContext, useContext, useState, useEffect, useCallback, type React
 
 export type Theme = 'dark' | 'light';
 
-declare global {
-  interface Document {
-    startViewTransition?(callback: () => void): { ready: Promise<void>; finished: Promise<void> };
-  }
-}
+// startViewTransition is in lib.dom.d.ts (TypeScript 5.4+) — no augmentation needed.
 
 interface ThemeContextValue {
   theme: Theme;
