@@ -149,8 +149,6 @@ export function TeamCardFlip({ member, shift, weekShifts, scheduleIsCurrent }: P
 
             <a
               href={member.booking}
-              target="_blank"
-              rel="noopener noreferrer"
               className="card-back-book"
               onClick={(e) => e.stopPropagation()}
             >

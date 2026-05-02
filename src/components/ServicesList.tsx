@@ -168,8 +168,6 @@ export function ServicesList({ working = [], scheduleKnown = false }: ServicesLi
             </div>
             <a
               href={SQUARE_BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
               className="block w-full py-4 bg-red text-white font-headline text-sm font-bold uppercase tracking-widest text-center hover:bg-red-hover transition-colors"
             >
               BOOK {selectedService.name.toUpperCase()}

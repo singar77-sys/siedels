@@ -173,8 +173,6 @@ export function HomeClient({
           <ThemeToggle />
           <a
             href={SQUARE_BOOKING_URL}
-            target="_blank"
-            rel="noopener noreferrer"
             className="bg-red text-white px-8 py-3 font-headline text-[15px] font-bold uppercase tracking-tight hover:bg-red-hover transition-colors"
           >
             BOOK NOW
@@ -282,8 +280,6 @@ export function HomeClient({
         ))}
         <a
           href={SQUARE_BOOKING_URL}
-          target="_blank"
-          rel="noopener noreferrer"
           className="flex-1 flex items-center justify-center bg-red text-white font-headline font-bold uppercase tracking-tight text-[10px] hover:bg-red-hover transition-colors"
         >
           BOOK
@@ -360,8 +356,6 @@ export function HomeClient({
             </div>
             <a
               href={SQUARE_BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
               className="block w-full py-4 bg-red text-white font-headline text-sm font-bold uppercase tracking-widest text-center hover:bg-red-hover transition-colors"
             >
               BOOK {selectedService.name.toUpperCase()}
