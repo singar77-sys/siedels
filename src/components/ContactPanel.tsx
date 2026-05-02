@@ -417,29 +417,34 @@ export function ContactPanel() {
                 </span>
               </div>
 
-              {/* Single rotating review — key change remounts and re-fires testimonial-fade */}
-              <div className="flex-1 flex flex-col justify-center min-h-0 py-4">
-                <blockquote
-                  key={cursor}
-                  className="testimonial-fade border-l-2 border-red/40 pl-4"
-                >
-                  <p className="font-body text-base text-text-muted leading-relaxed italic">
-                    &ldquo;{mobileReview.text}&rdquo;
-                  </p>
-                  <footer className="mt-4 flex items-center gap-2 flex-wrap">
-                    <span className="font-headline text-[11px] font-bold uppercase tracking-tight text-text">
-                      {mobileReview.name}
-                    </span>
-                    {mobileReview.barber && (
-                      <span className="font-label text-[9px] tracking-widest text-text-subtle">
-                        w/ <span className="text-red">{mobileReview.barber.split(' ')[0].toUpperCase()}</span>
-                      </span>
-                    )}
-                    <span className="ml-auto text-red text-[10px] tracking-widest">
-                      {'★'.repeat(mobileReview.rating)}
-                    </span>
-                  </footer>
-                </blockquote>
+              {/* 3 rotating reviews — key on container remounts all, re-fires testimonial-fade */}
+              <div key={cursor} className="testimonial-fade flex-1 min-h-0 flex flex-col gap-3 overflow-hidden">
+                {[0, 1, 2].map((offset) => {
+                  const r = REVIEW_POOL[(cursor + offset) % REVIEW_POOL.length];
+                  return (
+                    <blockquote
+                      key={offset}
+                      className="flex-1 border-l-2 border-red/40 pl-4 py-2 flex flex-col justify-center min-h-0"
+                    >
+                      <p className="font-body text-sm text-text-muted leading-relaxed italic line-clamp-3">
+                        &ldquo;{r.text}&rdquo;
+                      </p>
+                      <footer className="mt-2 flex items-center gap-2 flex-wrap">
+                        <span className="font-headline text-[11px] font-bold uppercase tracking-tight text-text">
+                          {r.name}
+                        </span>
+                        {r.barber && (
+                          <span className="font-label text-[9px] tracking-widest text-text-subtle">
+                            w/ <span className="text-red">{r.barber.split(' ')[0].toUpperCase()}</span>
+                          </span>
+                        )}
+                        <span className="ml-auto text-red text-[10px] tracking-widest">
+                          {'★'.repeat(r.rating)}
+                        </span>
+                      </footer>
+                    </blockquote>
+                  );
+                })}
               </div>
 
               {/* Progress bar — key on cursor resets the fill animation each rotation */}
