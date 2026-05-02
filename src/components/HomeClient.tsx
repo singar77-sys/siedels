@@ -232,7 +232,7 @@ export function HomeClient({
           <ServicesPanel onSelectService={setSelectedService} />
           <GalleryPanel />
           <GiftPanel />
-          <ContactPanel scheduleToday={scheduleToday} />
+          <ContactPanel />
         </div>
       </main>
 
