@@ -439,19 +439,19 @@ export function ContactPanel() {
                       key={offset}
                       className="flex-1 border-l-2 border-red/40 pl-4 py-2 flex flex-col justify-center min-h-0"
                     >
-                      <p className="font-body text-sm text-text-muted leading-relaxed italic line-clamp-3">
+                      <p className="font-body text-base md:text-lg text-text-muted leading-relaxed italic line-clamp-5">
                         &ldquo;{r.text}&rdquo;
                       </p>
-                      <footer className="mt-2 flex items-center gap-2 flex-wrap">
-                        <span className="font-headline text-[11px] font-bold uppercase tracking-tight text-text">
+                      <footer className="mt-3 flex items-center gap-2 flex-wrap">
+                        <span className="font-headline text-xs font-bold uppercase tracking-tight text-text">
                           {r.name}
                         </span>
                         {r.barber && (
-                          <span className="font-label text-[9px] tracking-widest text-text-subtle">
+                          <span className="font-label text-[10px] tracking-widest text-text-subtle">
                             w/ <span className="text-red">{r.barber.split(' ')[0].toUpperCase()}</span>
                           </span>
                         )}
-                        <span className="ml-auto text-red text-[10px] tracking-widest">
+                        <span className="ml-auto text-red text-xs tracking-widest">
                           {'★'.repeat(r.rating)}
                         </span>
                       </footer>
