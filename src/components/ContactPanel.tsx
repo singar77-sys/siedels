@@ -405,52 +405,57 @@ export function ContactPanel() {
               </a>
             </div>
 
-            {/* Col 3 — Scrollable testimonials + review CTA */}
+            {/* Col 3 — Auto-rotating testimonial + review CTA */}
             <div className="bg-surface border border-line flex flex-col p-5 overflow-hidden min-h-0">
               <div className="flex-none mb-4 flex items-center justify-between">
                 <p className="font-label text-[10px] tracking-widest text-red">
                   <CountUp end={parseFloat(RATING)} decimals={1} duration={1000} /> ★ ·{' '}
                   <CountUp end={parseInt(REVIEW_COUNT)} duration={1400} /> REVIEWS
                 </p>
+                <span className="font-label text-[9px] tracking-widest text-text-subtle tabular-nums">
+                  {(cursor % REVIEW_POOL.length) + 1} / {REVIEW_POOL.length}
+                </span>
               </div>
 
-              {/* Scroll wrapper — absolute inset gives a definite height unconditionally,
-                  bypassing the flex-1/grid-track chain that some browsers don't treat
-                  as definite enough to trigger overflow-y: auto. */}
-              <div className="flex-1 min-h-0 relative">
-                <div className="no-scrollbar absolute inset-0 overflow-y-auto flex flex-col gap-5">
-                  {REVIEW_POOL.map((t, i) => (
-                    <blockquote
-                      key={t.name}
-                      className="testimonial-fade border-l-2 border-red/40 pl-3 flex-none"
-                      style={{ animationDelay: `${i * 80}ms` }}
-                    >
-                      <p className="font-body text-sm text-text-muted leading-relaxed italic">
-                        &ldquo;{t.text}&rdquo;
-                      </p>
-                      <footer className="mt-2 flex items-center gap-2 flex-wrap">
-                        <span className="font-headline text-[11px] font-bold uppercase tracking-tight text-text">
-                          {t.name}
-                        </span>
-                        {t.barber && (
-                          <span className="font-label text-[9px] tracking-widest text-text-subtle">
-                            w/ <span className="text-red">{t.barber.split(' ')[0].toUpperCase()}</span>
-                          </span>
-                        )}
-                        <span className="ml-auto text-red text-[10px] tracking-widest">
-                          {'★'.repeat(t.rating)}
-                        </span>
-                      </footer>
-                    </blockquote>
-                  ))}
-                </div>
+              {/* Single rotating review — key change remounts and re-fires testimonial-fade */}
+              <div className="flex-1 flex flex-col justify-center min-h-0 py-4">
+                <blockquote
+                  key={cursor}
+                  className="testimonial-fade border-l-2 border-red/40 pl-4"
+                >
+                  <p className="font-body text-base text-text-muted leading-relaxed italic">
+                    &ldquo;{mobileReview.text}&rdquo;
+                  </p>
+                  <footer className="mt-4 flex items-center gap-2 flex-wrap">
+                    <span className="font-headline text-[11px] font-bold uppercase tracking-tight text-text">
+                      {mobileReview.name}
+                    </span>
+                    {mobileReview.barber && (
+                      <span className="font-label text-[9px] tracking-widest text-text-subtle">
+                        w/ <span className="text-red">{mobileReview.barber.split(' ')[0].toUpperCase()}</span>
+                      </span>
+                    )}
+                    <span className="ml-auto text-red text-[10px] tracking-widest">
+                      {'★'.repeat(mobileReview.rating)}
+                    </span>
+                  </footer>
+                </blockquote>
+              </div>
+
+              {/* Progress bar — key on cursor resets the fill animation each rotation */}
+              <div className="flex-none h-px bg-line-strong overflow-hidden mb-4">
+                <div
+                  key={cursor}
+                  className="review-progress-bar h-full bg-red"
+                  style={{ animationDuration: `${ROTATE_MS}ms` }}
+                />
               </div>
 
               <a
                 href={GOOGLE_BUSINESS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center justify-center gap-2 border border-red text-red font-headline text-sm font-bold uppercase tracking-tight px-5 py-3 hover:bg-red hover:text-white transition-colors whitespace-nowrap flex-none"
+                className="inline-flex items-center justify-center gap-2 border border-red text-red font-headline text-sm font-bold uppercase tracking-tight px-5 py-3 hover:bg-red hover:text-white transition-colors whitespace-nowrap flex-none"
               >
                 LEAVE A REVIEW
                 <Icon name="star" className="w-4 h-4" />

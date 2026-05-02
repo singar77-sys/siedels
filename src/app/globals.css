@@ -406,6 +406,16 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Review rotation progress bar — fills left-to-right over ROTATE_MS */
+.review-progress-bar {
+  transform-origin: left;
+  animation: review-progress linear forwards;
+}
+@keyframes review-progress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
 /* Pricing pitch — each slide fades + rises in on change */
 .pitch-fade {
   animation: pitch-fade-in 350ms ease-out both;
