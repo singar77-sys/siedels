@@ -23,14 +23,13 @@ const DAY_ABBREVS = [
 
 interface Props {
   member: TeamMember;
-  idx: number;
   shift: Shift | null;
   /** { [dayName]: Shift } for the current week. Empty object when schedule not available. */
   weekShifts: Record<string, Shift>;
   scheduleIsCurrent: boolean;
 }
 
-export function TeamCardFlip({ member, idx, shift, weekShifts, scheduleIsCurrent }: Props) {
+export function TeamCardFlip({ member, shift, weekShifts, scheduleIsCurrent }: Props) {
   const [flipped, setFlipped] = useState(false);
   const [todayName, setTodayName] = useState('');
 
@@ -69,7 +68,6 @@ export function TeamCardFlip({ member, idx, shift, weekShifts, scheduleIsCurrent
         <div className="card-flip-face card-flip-front">
           <BaseballCard
             member={member}
-            idx={idx}
             shift={shift}
             interactive={false}
           />

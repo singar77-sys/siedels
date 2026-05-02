@@ -76,7 +76,7 @@ export function GiftPanel() {
               className="absolute inset-0 pointer-events-none"
               style={{
                 backgroundImage:
-                  'linear-gradient(rgba(227,27,35,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(227,27,35,0.06) 1px, transparent 1px)',
+                  'linear-gradient(color-mix(in srgb, var(--red) 6%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--red) 6%, transparent) 1px, transparent 1px)',
                 backgroundSize: '28px 28px',
               }}
             />
@@ -134,7 +134,7 @@ export function GiftPanel() {
           </div>
 
           {/* ── RIGHT: Form ── */}
-          <div className="flex-1 min-h-0 overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
+          <div className="no-scrollbar flex-1 min-h-0 overflow-y-auto">
             {/* On desktop: h-full flex-col so CTA pins to bottom */}
             <div className="md:h-full md:flex md:flex-col pb-2">
 

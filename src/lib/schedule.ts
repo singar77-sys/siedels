@@ -113,8 +113,12 @@ function classify(raw: string): Shift {
     return { status: 'off', raw: trimmed, display: '' };
   }
 
-  // Time-range pattern: e.g. "8am-6pm", "8a-6p", "noon-8pm", "10am-noon"
-  if (/\d/.test(trimmed) || /noon|midnight/i.test(trimmed)) {
+  // Time-range pattern: "8am-6pm", "8a-6p", "noon-8pm", "10am-noon", "8:30am-6pm".
+  // Requires a recognised time token on BOTH sides of the separator so stray
+  // digits (dates, room numbers, etc.) don't land in the wrong bucket.
+  const TIME_TOKEN = /(?:\d{1,2}(?::\d{2})?[ap]m?|noon|midnight)/i;
+  const TIME_RANGE = new RegExp(`${TIME_TOKEN.source}\\s*[-–—]\\s*${TIME_TOKEN.source}`, 'i');
+  if (TIME_RANGE.test(trimmed)) {
     return { status: 'working', raw: trimmed, display: prettifyTime(trimmed) };
   }
 

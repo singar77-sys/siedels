@@ -124,7 +124,7 @@ export function GalleryPanel() {
           {gallery.map((item, idx) => (
             <button
               type="button"
-              key={idx}
+              key={item.src}
               onClick={() => setLightbox(idx)}
               className="gallery-tile relative overflow-hidden bg-surface-raised cursor-pointer"
               style={{ ['--i' as string]: idx }}

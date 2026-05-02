@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect, useLayoutEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SQUARE_BOOKING_URL, PHONE, PHONE_HREF, MAPS_URL, ADDRESS, CITY_STATE_ZIP, team, type TeamMember, type Service } from '@/data/shop';
+import { SQUARE_BOOKING_URL, PHONE, PHONE_HREF, MAPS_URL, ADDRESS, CITY_STATE_ZIP, type TeamMember, type Service } from '@/data/shop';
 import { slugFromName } from '@/lib/utils';
 import { Modal } from './Modal';
 import { ThemeToggle } from './ThemeToggle';
@@ -211,8 +211,7 @@ export function HomeClient({
 
         <div
           ref={scrollRef}
-          className="flex h-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory overscroll-x-contain touch-pan-x"
-          style={{ scrollbarWidth: 'none' }}
+          className="no-scrollbar flex h-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory overscroll-x-contain touch-pan-x"
         >
           <HeroPanel
             onScrollNext={() => scrollToPanel(1)}
@@ -304,7 +303,6 @@ export function HomeClient({
           <div className="p-5 md:p-6">
             <TeamCardFlip
               member={selectedMember}
-              idx={Math.max(0, team.findIndex((m) => m.name === selectedMember.name))}
               shift={todayShifts[slugFromName(selectedMember.name)] ?? null}
               weekShifts={weekShifts[slugFromName(selectedMember.name)] ?? {}}
               scheduleIsCurrent={scheduleIsCurrent}

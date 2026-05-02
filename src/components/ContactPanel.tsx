@@ -93,7 +93,7 @@ export function ContactPanel() {
           {/* ══════════════════════════════════════════════
               MOBILE layout
               ══════════════════════════════════════════════ */}
-          <div className="md:hidden h-full overflow-y-auto flex flex-col gap-3 pb-2" style={{ scrollbarWidth: 'none' }}>
+          <div className="no-scrollbar md:hidden h-full overflow-y-auto flex flex-col gap-3 pb-2">
 
             {/* Badge card */}
             <div className="bg-surface border border-line-strong flex items-center gap-4 px-4 py-4">
@@ -110,7 +110,7 @@ export function ContactPanel() {
                 width={64}
                 height={64}
                 className="contact-badge-dark shrink-0"
-                style={{ filter: 'drop-shadow(0 0 12px rgba(227,27,35,0.5))' }}
+                style={{ filter: 'drop-shadow(0 0 12px color-mix(in srgb, var(--red) 50%, transparent))' }}
               />
               <div className="min-w-0">
                 <p className="font-headline text-base font-black uppercase tracking-tight text-text leading-tight">
@@ -286,7 +286,7 @@ export function ContactPanel() {
                     width={180}
                     height={180}
                     className="contact-badge-dark"
-                    style={{ filter: 'drop-shadow(0 0 32px rgba(227,27,35,0.45))' }}
+                    style={{ filter: 'drop-shadow(0 0 32px color-mix(in srgb, var(--red) 45%, transparent))' }}
                   />
                 </div>
 
@@ -418,7 +418,7 @@ export function ContactPanel() {
                   bypassing the flex-1/grid-track chain that some browsers don't treat
                   as definite enough to trigger overflow-y: auto. */}
               <div className="flex-1 min-h-0 relative">
-                <div className="absolute inset-0 overflow-y-auto flex flex-col gap-5" style={{ scrollbarWidth: 'none' }}>
+                <div className="no-scrollbar absolute inset-0 overflow-y-auto flex flex-col gap-5">
                   {REVIEW_POOL.map((t, i) => (
                     <blockquote
                       key={t.name}

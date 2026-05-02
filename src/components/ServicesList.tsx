@@ -37,7 +37,7 @@ const SECTIONS: { label: string; names: string[] }[] = [
   },
   {
     label: 'DETAILS',
-    names: ['Beard Trim', 'Eyebrow / Lip / Chin', 'Shampoo + Style'],
+    names: ['Beard Trim'],
   },
   {
     label: 'GROUP',

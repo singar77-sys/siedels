@@ -65,13 +65,12 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
         </div>
 
         {/* ── CARD GRID — scrolls within the pinned frame ── */}
-        <div className="flex-1 min-h-0 overflow-y-auto pb-4" style={{ scrollbarWidth: 'none' }}>
+        <div className="no-scrollbar flex-1 min-h-0 overflow-y-auto pb-4">
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-3">
-            {team.map((member, idx) => (
+            {team.map((member) => (
               <BaseballCard
                 key={member.name}
                 member={member}
-                idx={idx}
                 shift={getMemberShift(member.name)}
                 onSelect={onSelectMember}
               />

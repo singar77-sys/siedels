@@ -147,7 +147,7 @@ export function ServicesPanel({ onSelectService }: ServicesPanelProps) {
           <div className="flex-1 min-h-0 relative">
             <div className="md:hidden absolute bottom-0 left-0 right-0 h-10 pointer-events-none z-10"
               style={{ background: 'linear-gradient(to top, var(--surface) 0%, transparent 100%)' }} />
-            <div className="h-full flex flex-col md:flex-row md:divide-x md:divide-line-strong overflow-y-auto md:overflow-hidden" style={{ scrollbarWidth: 'none' }}>
+            <div className="no-scrollbar h-full flex flex-col md:flex-row md:divide-x md:divide-line-strong overflow-y-auto md:overflow-hidden">
               {[services.filter((_, i) => i % 2 === 0), services.filter((_, i) => i % 2 !== 0)].map(
                 (col, ci) => (
                   <div key={ci} className="md:flex-1 md:flex md:flex-col md:divide-y md:divide-line-strong md:overflow-hidden divide-y divide-line-strong">

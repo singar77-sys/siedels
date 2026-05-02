@@ -17,14 +17,13 @@ import type { Shift } from '@/lib/schedule';
 
 interface Props {
   member: TeamMember;
-  idx: number;
   shift: Shift | null;
   onSelect?: (member: TeamMember) => void;
   /** false inside the flip modal — no click handler, no hover lift */
   interactive?: boolean;
 }
 
-export function BaseballCard({ member, idx: _idx, shift, onSelect, interactive = true }: Props) {
+export function BaseballCard({ member, shift, onSelect, interactive = true }: Props) {
   const role = member.role;
   const years = getYears(member);
   const isWorking = shift?.status === 'working';

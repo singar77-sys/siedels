@@ -260,6 +260,8 @@ body {
 /* ── Selection & Scrollbar ────────────────────────────── */
 ::selection { background: var(--selection-bg); color: var(--selection-text); }
 ::-webkit-scrollbar { width: 0; height: 0; }
+/* Utility: hide scrollbar in Firefox (WebKit already covered above) */
+.no-scrollbar { scrollbar-width: none; }
 
 /* ── Animations ───────────────────────────────────────── */
 @keyframes ken-burns {

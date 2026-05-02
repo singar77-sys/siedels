@@ -4,6 +4,12 @@ import { createContext, useContext, useState, useEffect, useCallback, type React
 
 export type Theme = 'dark' | 'light';
 
+declare global {
+  interface Document {
+    startViewTransition?(callback: () => void): { ready: Promise<void>; finished: Promise<void> };
+  }
+}
+
 interface ThemeContextValue {
   theme: Theme;
   setTheme: (theme: Theme) => void;
@@ -50,7 +56,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         document.documentElement.style.setProperty('--toggle-x', `${x}px`);
         document.documentElement.style.setProperty('--toggle-y', `${y}px`);
       }
-      (document as any).startViewTransition(() => setTheme(next));
+      document.startViewTransition(() => setTheme(next));
     } else {
       setTheme(next);
     }

@@ -66,7 +66,7 @@ const jsonLd = {
   description: `${TEAM_COUNT_WORD} barbers in Medina, Ohio. Haircuts, fades, beard work, straight razor shaves. Cash only. ATM on site.`,
   url: BASE_URL,
   telephone: '+13309520777',
-  priceRange: '$23–$96',
+  priceRange: '$31–$90',
   sameAs: [
     'https://share.google/n7DB5686mE05Db6tK',
     'https://www.facebook.com/siedelsbarbershop',
