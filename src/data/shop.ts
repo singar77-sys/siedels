@@ -98,7 +98,7 @@ export const team: TeamMember[] = [
     role: 'Master Barber',
     startedYear: 1995,
     image: '/images/jim-lamarca-master-barber-siedels-medina.webp',
-    booking: sq('wx9txuouu9ti8w'),
+    booking: sq('wx9txuouu91i8w'),
     bio: "Behind the chair since 1995. Cappo of Siedel's and the face you'll see when you walk in. Bass player of Chimaira. Yes, that Chimaira. Specializes in bald fades and kids' cuts. Cleveland sports diehard and family man. Probably cracking jokes before the cape's even on.",
     specialties: ['Bald Fades', "Kids' Cuts", 'Hot Towel Shaves', 'Classic Cuts'],
   },
