@@ -24,12 +24,11 @@ const DAY_ABBREVS = [
 interface Props {
   member: TeamMember;
   shift: Shift | null;
-  /** { [dayName]: Shift } for the current week. Empty object when schedule not available. */
+  /** { [dayName]: Shift } for the week in the sheet. Empty object when sheet unavailable. */
   weekShifts: Record<string, Shift>;
-  scheduleIsCurrent: boolean;
 }
 
-export function TeamCardFlip({ member, shift, weekShifts, scheduleIsCurrent }: Props) {
+export function TeamCardFlip({ member, shift, weekShifts }: Props) {
   const [flipped, setFlipped] = useState(false);
   const [todayName, setTodayName] = useState('');
 
@@ -100,7 +99,7 @@ export function TeamCardFlip({ member, shift, weekShifts, scheduleIsCurrent }: P
             </div>
 
             {/* Week schedule — only shown when the sheet covers this week */}
-            {scheduleIsCurrent && Object.keys(weekShifts).length > 0 && (
+            {Object.keys(weekShifts).length > 0 && (
               <div className="card-back-schedule">
                 <p className="card-back-section-label">SCHEDULE THIS WEEK</p>
                 <div className="card-back-schedule-grid">

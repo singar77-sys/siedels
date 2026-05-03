@@ -362,7 +362,6 @@ export function getWeekShiftsRecord(
   week: WeekSchedule
 ): Record<string, Record<string, Shift>> {
   const out: Record<string, Record<string, Shift>> = {};
-  if (!week.isCurrent) return out;
   for (const day of week.days) {
     day.shifts.forEach((shift, firstName) => {
       if (!out[firstName]) out[firstName] = {};

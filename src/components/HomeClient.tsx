@@ -301,7 +301,6 @@ export function HomeClient({
               member={selectedMember}
               shift={todayShifts[slugFromName(selectedMember.name)] ?? null}
               weekShifts={weekShifts[slugFromName(selectedMember.name)] ?? {}}
-              scheduleIsCurrent={scheduleIsCurrent}
             />
             <p className="font-label text-[10px] tracking-[0.25em] text-text-subtle text-center mt-4">
               TAP CARD TO FLIP
