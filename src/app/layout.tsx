@@ -152,6 +152,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <TeamModeEasterEgg forcedMode={sportsMode} />
         <PatriotEasterEgg />
         </ThemeProvider>
+        <Script
+          src="https://square.site/appointments/buyer/widget/2mimwacjkgqdyj/LFC0T5CC7MY0S.js"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );

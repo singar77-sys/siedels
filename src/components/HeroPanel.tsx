@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { SQUARE_BOOKING_URL, RATING, REVIEW_COUNT, IMAGE_ALTS, testimonials } from '@/data/shop';
 import { Icon } from './Icon';
@@ -9,43 +8,16 @@ import { ShopStatus } from './ShopStatus';
 const HERO_DARK = '/images/siedels-barbershop-medina-ohio.webp';
 const HERO_LIGHT = '/images/siedels-barbershop-golden-hour-medina-ohio.webp';
 
-const PROMO_KEY = 'siedels-promo-dismissed-fathersday26';
-
-function isPromoSeason(): boolean {
-  const d = new Date();
-  const m = d.getMonth();
-  const day = d.getDate();
-  return (m === 3 && day >= 26) || m === 4 || (m === 5 && day <= 21);
-}
-
 interface HeroPanelProps {
   onScrollNext: () => void;
   onExploreServices: () => void;
-  onGiftNavigate?: () => void; // re-enable when gift card panel is restored
   shopHours: string | null;
   isClosed: boolean;
   scheduleKnown: boolean;
   dayName: string;
 }
 
-export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate, shopHours, isClosed, scheduleKnown, dayName }: HeroPanelProps) {
-  const [promoMounted, setPromoMounted] = useState(false);
-  const [promoAnimate, setPromoAnimate] = useState(false);
-
-  useEffect(() => {
-    if (!isPromoSeason() || sessionStorage.getItem(PROMO_KEY)) return;
-    const t = setTimeout(() => {
-      setPromoMounted(true);
-      requestAnimationFrame(() => requestAnimationFrame(() => setPromoAnimate(true)));
-    }, 3000);
-    return () => clearTimeout(t);
-  }, []);
-
-  const dismissPromo = () => {
-    setPromoAnimate(false);
-    setTimeout(() => setPromoMounted(false), 500);
-    sessionStorage.setItem(PROMO_KEY, '1');
-  };
+export function HeroPanel({ onScrollNext, onExploreServices, shopHours, isClosed, scheduleKnown, dayName }: HeroPanelProps) {
   return (
     <section className="w-full flex-none h-full snap-start relative flex items-end overflow-hidden">
       {/* Background image — both themes render, CSS hides the inactive one */}
@@ -129,46 +101,6 @@ export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate, sho
           </div>
         </div>
       </div>
-      {/* Father's Day promo — right-side negative space, desktop only */}
-      {promoMounted && (
-        <div
-          className={`hidden md:block absolute top-[38%] -translate-y-1/2 right-[3%] xl:right-[5%] 2xl:right-[8%] z-10 max-w-[210px] transition-all duration-700 ease-out ${
-            promoAnimate ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
-          }`}
-        >
-          <div className="border-l-2 border-red pl-5 py-1 relative">
-            <button
-              onClick={dismissPromo}
-              className="absolute -top-2 -right-2 text-text-subtle hover:text-red transition-colors"
-              aria-label="Dismiss promotion"
-            >
-              <Icon name="close" className="w-3 h-3" />
-            </button>
-            <p className="font-label text-[9px] tracking-[0.3em] text-red mb-2">THIS FATHER&apos;S DAY</p>
-            <p
-              className="font-headline text-lg uppercase tracking-tight leading-[0.9] mb-2"
-              style={{ color: 'var(--hero-h1)' }}
-            >
-              Give Dad the Gift of a Great Cut.
-            </p>
-            <p
-              className="font-body text-xs leading-relaxed mb-3"
-              style={{ color: 'var(--hero-tagline)' }}
-            >
-              Gift cards from $25. Good for any service, any barber.
-            </p>
-            <a
-              href={SQUARE_BOOKING_URL}
-              onClick={dismissPromo}
-              className="font-label text-[10px] tracking-[0.2em] uppercase transition-colors hover:text-red"
-              style={{ color: 'var(--hero-eyebrow)' }}
-            >
-              GET A GIFT CARD &rarr;
-            </a>
-          </div>
-        </div>
-      )}
-
       {/* Featured testimonial — bottom right, desktop only */}
       <aside className="hidden lg:block absolute bottom-10 right-[3%] xl:right-[5%] 2xl:right-[8%] z-10 max-w-sm hero-stagger-5">
         <div className="border-l-2 border-red pl-5 py-2">

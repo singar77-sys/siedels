@@ -1,7 +1,7 @@
 const LOCATION = 'LFC0T5CC7MY0S';
 const sq = (id: string) => `https://book.squareup.com/appointments/${id}/location/${LOCATION}/services`;
 
-export const SQUARE_BOOKING_URL = sq('xcru7izyf4zhv6');
+export const SQUARE_BOOKING_URL = sq('2mimwacjkgqdyj');
 export const PHONE = '(330) 952-0777';
 export const PHONE_HREF = 'tel:+13309520777';
 export const ADDRESS = '982 N Court Street';
@@ -78,8 +78,6 @@ export interface TeamMember {
   image: string;
   booking: string;
   bio?: string;
-  /** Specialties — rendered on the baseball-card back */
-  specialties?: string[];
 }
 
 /** Years of experience, computed from the current year. */
@@ -100,7 +98,6 @@ export const team: TeamMember[] = [
     image: '/images/jim-lamarca-master-barber-siedels-medina.webp',
     booking: sq('wx9txuouu91i8w'),
     bio: "Behind the chair since 1995. Cappo of Siedel's and the face you'll see when you walk in. Bass player of Chimaira. Yes, that Chimaira. Specializes in bald fades and kids' cuts. Cleveland sports diehard and family man. Probably cracking jokes before the cape's even on.",
-    specialties: ['Bald Fades', "Kids' Cuts", 'Hot Towel Shaves', 'Classic Cuts'],
   },
   {
     name: 'Billy Rodriguez',
@@ -109,7 +106,6 @@ export const team: TeamMember[] = [
     image: '/images/billy-rodriguez-barber-siedels-medina.webp',
     booking: sq('e957m1qmqqdevp'),
     bio: "Sixteen years of experience specializing in clean, sharp cuts — from classic short styles to modern fades, flattops, and tapers. Coaches his kids' sports teams. Die-hard Cleveland sports fan.",
-    specialties: ['Clean Cuts', 'Fades', 'Flattops', 'Tapers'],
   },
   {
     name: 'Patrick Muranko',
@@ -118,7 +114,6 @@ export const team: TeamMember[] = [
     image: '/images/patrick-muranko-barber-siedels-medina.webp',
     booking: sq('x9bbe05slxw75e'),
     bio: "Akron Barber College graduate. Originally from Parma, now in Medina. Veteran, husband, father of two daughters. When he's not here, he's at gymnastics meets, playing retro video games, or arguing about 90s wrestling.",
-    specialties: ['Fades', 'Classic Cuts', 'Beard Trims'],
   },
   {
     name: 'Matt Hayes',
@@ -127,7 +122,6 @@ export const team: TeamMember[] = [
     image: '/images/matt-hayes-barber-siedels-medina.webp',
     booking: sq('ub0ju8v1q1926j'),
     bio: "Trained at LaBarberia in Mayfield. Specializes in clean fades, simple cuts, and hot towel face shaves. Big fan of horror and comedy movies, loves dropping '80s and '90s references, and passionate about music. Here to keep you looking sharp.",
-    specialties: ['Clean Fades', 'Simple Cuts', 'Hot Towel Face Shaves'],
   },
   {
     name: 'Sam Sickle',
@@ -136,7 +130,6 @@ export const team: TeamMember[] = [
     image: '/images/sam-sickle-barber-siedels-medina.webp',
     booking: sq('qj4tfubyvaebvj'),
     bio: "Grew up in Litchfield, Ohio. Three of her cutting years are at Siedel's. Strongest with men's clipper cuts and longer styles that need real shear work. Proud owner of two dogs (Preston and Scout), two cats, and nine hens. Yeah, nine.",
-    specialties: ['Clipper Cuts', 'Longer Styles', 'Shear Work'],
   },
   {
     name: 'Krista Foecking',
@@ -145,7 +138,6 @@ export const team: TeamMember[] = [
     image: '/images/krista-foecking-stylist-siedels-medina.webp',
     booking: sq('h3ib29fkvqykvx'),
     bio: "Polaris Career Center graduate. Specializes in men's fades and kids' cuts — keeping both still and happy is its own skill. Wife and mother of two. Cheer coach for her daughter. When the weather's right, she's in the garden or checking on the bees.",
-    specialties: ["Men's Fades", "Kids' Cuts", 'Color Work'],
   },
   {
     name: 'Pierre Wright',
@@ -154,7 +146,6 @@ export const team: TeamMember[] = [
     image: '/images/pierre-wright-master-barber-siedels-medina.webp',
     booking: sq('mbwa7epvxqp3ya'),
     bio: "Barber school graduate, class of 2003. Man of faith. Specializes in fades, designs, and classic cuts.",
-    specialties: ['Fades', 'Designs', 'Classic Cuts'],
   },
   {
     name: 'Will Dillon',
@@ -163,7 +154,6 @@ export const team: TeamMember[] = [
     image: '/images/will-dillon-barber-siedels-medina.webp',
     booking: sq('licxdz52l4jryx'),
     bio: "Originally from Wheeling, WV. Moved to Medina at 7, came up through Medina City Schools. Hope Valley Barber College graduate. Clipper cuts, designs, tight fades, tapers, beard shaping, razor lineups, hot towel shaves — that's the wheelhouse. Father of three boys. Pittsburgh sports diehard, especially the Steelers. Off the clock: fishing, coaching basketball, and keeping up with three kids.",
-    specialties: ['Tight Fades', 'Designs', 'Razor Lineups', 'Hot Towel Shaves'],
   },
   {
     name: 'Chris Hodge',
@@ -172,7 +162,6 @@ export const team: TeamMember[] = [
     image: '/images/chris-hodge-barber-siedels-medina.webp',
     booking: sq('taz4mvu6g9k73n'),
     bio: "Strongest with taper fades — that's the wheelhouse. Off the clock: fishing, riding his motorcycle, hiking, and driving semi-trucks.",
-    specialties: ['Taper Fades', 'Clipper Cuts', 'Beard Trims'],
   },
   {
     name: 'Ticia Husak',
@@ -181,7 +170,6 @@ export const team: TeamMember[] = [
     image: '/images/ticia-husak-stylist-siedels-medina.webp',
     booking: sq('xa1g2bceso9izn'),
     bio: "Specializes in clipper, scissor, and foil cuts — keeping everything clean, sharp, and on point. Takes pride in her work and making sure every client leaves smiling. Wife, mom of two boys, and a registered nurse. When she's not at work, she's in the gym or spending time with her family.",
-    specialties: ['Clipper Cuts', 'Scissor Cuts', 'Foil Cuts', 'Color Work'],
   },
   {
     name: 'Shannon Hadick',
@@ -190,7 +178,6 @@ export const team: TeamMember[] = [
     image: '/images/shannon-hadick-barber-siedels-medina.webp',
     booking: sq('0lh9o00vt6or3u'),
     bio: "Specializes in men's and women's cuts. Three years in the area, almost two at Siedel's. Managed a shop before coming here. Looks forward to helping you look your very best.",
-    specialties: ["Men's Cuts", "Women's Cuts", 'Fades'],
   },
 ];
 

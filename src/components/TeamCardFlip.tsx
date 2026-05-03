@@ -73,7 +73,7 @@ export function TeamCardFlip({ member, shift, weekShifts, scheduleIsCurrent }: P
           />
         </div>
 
-        {/* BACK — stats, specialties, bio, book */}
+        {/* BACK — stats, schedule, bio, book */}
         <div className="card-flip-face card-flip-back">
           <div className="card-back">
             <div className="card-back-header">
@@ -123,20 +123,6 @@ export function TeamCardFlip({ member, shift, weekShifts, scheduleIsCurrent }: P
                     );
                   })}
                 </div>
-              </div>
-            )}
-
-            {member.specialties && member.specialties.length > 0 && (
-              <div className="card-back-specialties">
-                <p className="card-back-section-label">SPECIALTIES</p>
-                <ul className="card-back-spec-list">
-                  {member.specialties.map((spec) => (
-                    <li key={spec} className="card-back-spec-row">
-                      <span className="card-back-spec-dot" aria-hidden />
-                      <span className="card-back-spec-name">{spec}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             )}
 
