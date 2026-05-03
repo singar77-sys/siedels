@@ -125,8 +125,9 @@ export async function POST(req: NextRequest) {
     const barberName = ID_TO_NAME[teamMemberId] ?? teamMemberId;
     const svcPrice   = services.find(s => s.name === serviceName)?.price ?? '';
 
-    // Fire emails in parallel — don't block the response on them
-    void Promise.all([
+    // Send emails before responding — void/fire-and-forget is silently
+    // dropped by Vercel serverless after the handler returns.
+    await Promise.all([
       customerEmail
         ? sendBookingConfirmation({
             to:           customerEmail,
