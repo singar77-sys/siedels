@@ -128,7 +128,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const sportsMode = getSportsModeForDate(new Date());
 
   return (
-    <html lang="en" data-default-theme={defaultTheme}>
+    <html lang="en" data-default-theme={defaultTheme} data-team-mode={sportsMode ?? undefined}>
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
