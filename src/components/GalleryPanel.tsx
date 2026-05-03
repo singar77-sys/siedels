@@ -6,11 +6,37 @@ import { gallery, SQUARE_BOOKING_URL } from '@/data/shop';
 import { Icon } from './Icon';
 import { GalleryLightbox } from './GalleryLightbox';
 
+const PAGE_SIZE = 18;
+const ROTATION_MS = 5000;
+
 export function GalleryPanel() {
   const wallRef = useRef<HTMLDivElement>(null);
   const spotRef = useRef<HTMLDivElement>(null);
   const dimRef = useRef<HTMLDivElement>(null);
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const [page, setPage] = useState(0);
+  const [fading, setFading] = useState(false);
+
+  const totalPages = Math.ceil(gallery.length / PAGE_SIZE);
+
+  // Rotate pages every 5 s with a crossfade
+  useEffect(() => {
+    if (gallery.length <= PAGE_SIZE) return;
+    const id = setInterval(() => {
+      setFading(true);
+      setTimeout(() => {
+        setPage(p => (p + 1) % totalPages);
+        setFading(false);
+      }, 350);
+    }, ROTATION_MS);
+    return () => clearInterval(id);
+  }, [totalPages]);
+
+  // Always show exactly PAGE_SIZE tiles, wrapping around modulo gallery length
+  const visibleItems = Array.from({ length: Math.min(PAGE_SIZE, gallery.length) }, (_, i) => {
+    const idx = (page * PAGE_SIZE + i) % gallery.length;
+    return { item: gallery[idx], galleryIdx: idx };
+  });
 
   const closeLightbox = useCallback(() => setLightbox(null), []);
   const step = useCallback(
@@ -120,14 +146,17 @@ export function GalleryPanel() {
 
         {/* The Wall — fills the remaining frame both ways */}
         <div ref={wallRef} className="gallery-wall relative flex-1 min-h-0 overflow-hidden touch-pan-x">
-        <div className="gallery-grid">
-          {gallery.map((item, idx) => (
+        <div
+          className="gallery-grid"
+          style={{ opacity: fading ? 0 : 1, transition: 'opacity 0.35s ease' }}
+        >
+          {visibleItems.map(({ item, galleryIdx }, pos) => (
             <button
               type="button"
-              key={item.src}
-              onClick={() => setLightbox(idx)}
+              key={pos}
+              onClick={() => setLightbox(galleryIdx)}
               className="gallery-tile relative overflow-hidden bg-surface-raised cursor-pointer"
-              style={{ ['--i' as string]: idx }}
+              style={{ ['--i' as string]: pos }}
               aria-label={`Open photo: ${item.alt}`}
             >
               <Image
