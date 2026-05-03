@@ -259,7 +259,7 @@ export function ContactPanel() {
           <div className="hidden md:grid md:grid-cols-3 md:grid-rows-1 h-full gap-3">
 
             {/* Col 1 — Badge + contact */}
-            <div className="bg-surface-high border border-line-strong relative flex flex-col items-center justify-center gap-5 p-6 overflow-hidden min-h-0">
+            <div className="bg-surface border border-line-strong relative flex flex-col items-center justify-center gap-5 p-6 overflow-hidden min-h-0">
 
               {/* Carl Siedel — ghosted portrait behind the badge */}
               <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">

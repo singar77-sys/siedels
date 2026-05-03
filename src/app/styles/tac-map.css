@@ -50,7 +50,7 @@
     rgba(227, 27, 35, 0.6) 100%
   );
   mix-blend-mode: screen;
-  animation: tac-radar 8.75s linear infinite;
+  animation: tac-radar 17.5s linear infinite;
 }
 @keyframes tac-radar {
   from { transform: rotate(0deg); }
