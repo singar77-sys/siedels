@@ -118,10 +118,10 @@ function Recommender({ onSelectService }: { onSelectService: (s: Service) => voi
 }
 
 export function ServicesPanel({ onSelectService }: ServicesPanelProps) {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const [lit, setLit] = useState(false);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const el = sectionRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
