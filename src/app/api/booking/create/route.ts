@@ -82,25 +82,27 @@ export async function POST(req: NextRequest) {
     }
 
     // Create the booking
-    const bookRes = await squareFetch('/v2/bookings', {
-      method: 'POST',
-      body: JSON.stringify({
-        idempotency_key: uid(),
-        booking: {
-          start_at:      startAt,
-          location_id:   LOCATION_ID,
-          customer_id:   customerId,
-          ...(note ? { customer_note: note } : {}),
-          appointment_segments: [{
-            service_variation_id:      variationId,
-            service_variation_version: serviceVariationVersion,
-            team_member_id:            teamMemberId,
-            duration_minutes:          durationMinutes,
-          }],
-        },
-      }),
-    });
-    const bookData = await bookRes.json();
+    const bookPayload = {
+      idempotency_key: uid(),
+      booking: {
+        start_at:      startAt,
+        location_id:   LOCATION_ID,
+        customer_id:   customerId,
+        ...(note ? { customer_note: note } : {}),
+        appointment_segments: [{
+          service_variation_id:      variationId,
+          service_variation_version: serviceVariationVersion,
+          team_member_id:            teamMemberId,
+          duration_minutes:          durationMinutes,
+        }],
+      },
+    };
+    console.log('[booking/create] sending:', JSON.stringify(bookPayload).slice(0, 400));
+
+    const bookRes  = await squareFetch('/v2/bookings', { method: 'POST', body: JSON.stringify(bookPayload) });
+    const bookText = await bookRes.text();
+    console.log(`[booking/create] Square status=${bookRes.status} body=${bookText.slice(0, 600)}`);
+    const bookData = JSON.parse(bookText) as Record<string, unknown>;
 
     if (!bookRes.ok || bookData.errors) {
       const errs = bookData.errors ?? [];
