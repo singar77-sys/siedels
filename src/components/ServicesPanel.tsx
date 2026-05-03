@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { services, SQUARE_BOOKING_URL, type Service } from '@/data/shop';
 import { Icon } from './Icon';
 
@@ -118,9 +118,35 @@ function Recommender({ onSelectService }: { onSelectService: (s: Service) => voi
 }
 
 export function ServicesPanel({ onSelectService }: ServicesPanelProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [lit, setLit] = useState(false);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+    el.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+  }, []);
+
   return (
-    <section className="w-full flex-none h-full snap-start grid-bg overflow-hidden">
-      <div className="max-w-screen-2xl mx-auto h-full px-4 md:px-8 py-5 md:py-8 w-full flex flex-col">
+    <section
+      ref={sectionRef}
+      className="w-full flex-none h-full snap-start grid-bg overflow-hidden relative"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setLit(true)}
+      onMouseLeave={() => setLit(false)}
+    >
+      {/* Flashlight overlay — transparent at cursor, dark at edges */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none z-20 transition-opacity duration-300"
+        style={{
+          opacity: lit ? 1 : 0,
+          background: 'radial-gradient(520px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 0%, rgba(0,0,0,0.62) 100%)',
+        }}
+      />
+      <div className="max-w-screen-2xl mx-auto h-full px-4 md:px-8 py-5 md:py-8 w-full flex flex-col relative z-10">
 
         <div className="flex items-end justify-between gap-4 mb-4 md:mb-5 flex-none">
           <div className="border-l-4 border-red pl-4 md:pl-6">
@@ -143,7 +169,7 @@ export function ServicesPanel({ onSelectService }: ServicesPanelProps) {
           </div>
         </div>
 
-        <div className="flex-1 min-h-0 bg-surface border border-line-strong flex flex-col overflow-hidden">
+        <div className="flex-1 min-h-0 bg-surface border border-line-strong flex flex-col overflow-hidden opacity-[0.95]">
           <div className="flex-1 min-h-0 relative">
             <div className="md:hidden absolute bottom-0 left-0 right-0 h-10 pointer-events-none z-10"
               style={{ background: 'linear-gradient(to top, var(--surface) 0%, transparent 100%)' }} />
