@@ -116,8 +116,6 @@ export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate, sho
           <div className="flex flex-col sm:flex-row gap-4 hero-stagger-5">
             <a
               href={SQUARE_BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
               className="hero-cta-primary inline-flex items-center justify-center gap-2 font-headline font-bold uppercase tracking-tight px-8 py-4 transition-colors duration-200"
             >
               BOOK NOW
@@ -132,7 +130,7 @@ export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate, sho
         </div>
       </div>
       {/* Father's Day promo — right-side negative space, desktop only */}
-      {promoMounted && onGiftNavigate && (
+      {promoMounted && (
         <div
           className={`hidden md:block absolute top-[38%] -translate-y-1/2 right-[3%] xl:right-[5%] 2xl:right-[8%] z-10 max-w-[210px] transition-all duration-700 ease-out ${
             promoAnimate ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
@@ -159,13 +157,14 @@ export function HeroPanel({ onScrollNext, onExploreServices, onGiftNavigate, sho
             >
               Gift cards from $25. Good for any service, any barber.
             </p>
-            <button
-              onClick={() => { dismissPromo(); onGiftNavigate(); }}
+            <a
+              href={SQUARE_BOOKING_URL}
+              onClick={dismissPromo}
               className="font-label text-[10px] tracking-[0.2em] uppercase transition-colors hover:text-red"
               style={{ color: 'var(--hero-eyebrow)' }}
             >
               GET A GIFT CARD &rarr;
-            </button>
+            </a>
           </div>
         </div>
       )}
