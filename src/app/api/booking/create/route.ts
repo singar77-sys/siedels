@@ -95,19 +95,14 @@ export async function POST(req: NextRequest) {
         }],
       },
     };
-    console.log('[booking/create] sending:', JSON.stringify(bookPayload).slice(0, 400));
 
     const bookRes  = await squareFetch('/v2/bookings', { method: 'POST', body: JSON.stringify(bookPayload) });
     const bookText = await bookRes.text();
-    console.log(`[booking/create] Square status=${bookRes.status} body=${bookText.slice(0, 600)}`);
     const bookData = JSON.parse(bookText) as Record<string, unknown>;
 
     type SquareError = { category?: string; code?: string; detail?: string };
     const errs = Array.isArray(bookData.errors) ? (bookData.errors as SquareError[]) : [];
     if (!bookRes.ok || errs.length > 0) {
-      errs.forEach((e, i) => {
-        console.error(`[booking/create] err[${i}] cat=${e.category} code=${e.code} detail=${e.detail}`);
-      });
       const first = errs[0] ?? {};
       const msg   = first.detail ?? 'Booking failed';
       const code  = first.code  ?? 'UNKNOWN';
