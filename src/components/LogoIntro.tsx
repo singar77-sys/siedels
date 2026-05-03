@@ -23,7 +23,7 @@ const TEAM_BADGE: Record<string, { src: string; alt: string }> = {
 
 export function LogoIntro() {
   const [phase, setPhase] = useState<Phase>('done');
-  const [badge, setBadge] = useState({
+  const [badge, setBadge] = useState<{ src: string; alt: string }>({
     src: '/logos/siedels-barbershop-logo-dark-diamond.png',
     alt: IMAGE_ALTS.logos.darkDiamond,
   });
