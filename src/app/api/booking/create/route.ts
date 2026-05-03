@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { squareFetch, LOCATION_ID, SERVICE_VARIATION_IDS } from '@/lib/square';
+import { squareFetch, LOCATION_ID, SERVICE_VARIATION_IDS, ID_TO_NAME } from '@/lib/square';
+import { services } from '@/data/shop';
+import { sendBookingConfirmation, sendBookingAlert } from '@/lib/email';
 
 function normalizePhone(raw: string): string {
   const digits = raw.replace(/\D/g, '');
@@ -61,6 +63,16 @@ export async function POST(req: NextRequest) {
 
     if (searchData.customers?.length) {
       customerId = searchData.customers[0].id as string;
+      // Update name/email on the existing profile so stale data doesn't persist
+      await squareFetch(`/v2/customers/${customerId}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          given_name:   first,
+          family_name:  last,
+          phone_number: phone,
+          ...(customerEmail ? { email_address: customerEmail } : {}),
+        }),
+      });
     } else {
       const createRes  = await squareFetch('/v2/customers', {
         method: 'POST',
@@ -109,7 +121,35 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: msg, code, errors: errs }, { status: 422 });
     }
 
-    const booking = bookData.booking as { id: string; start_at: string };
+    const booking    = bookData.booking as { id: string; start_at: string };
+    const barberName = ID_TO_NAME[teamMemberId] ?? teamMemberId;
+    const svcPrice   = services.find(s => s.name === serviceName)?.price ?? '';
+
+    // Fire emails in parallel — don't block the response on them
+    void Promise.all([
+      customerEmail
+        ? sendBookingConfirmation({
+            to:           customerEmail,
+            customerName,
+            serviceName,
+            servicePrice: svcPrice,
+            barberName,
+            startAt:      booking.start_at,
+            bookingId:    booking.id,
+          })
+        : Promise.resolve(),
+      sendBookingAlert({
+        customerName,
+        customerPhone,
+        customerEmail,
+        serviceName,
+        barberName,
+        startAt:   booking.start_at,
+        bookingId: booking.id,
+        note,
+      }),
+    ]).catch(err => console.error('[booking/create] email error:', err));
+
     return NextResponse.json({
       bookingId: booking.id,
       startAt:   booking.start_at,

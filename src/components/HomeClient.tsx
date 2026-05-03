@@ -59,9 +59,11 @@ export function HomeClient({
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [bookingOpen, setBookingOpen] = useState(false);
   const [bookingService, setBookingService] = useState<Service | null>(null);
+  const [bookingBarber, setBookingBarber] = useState<TeamMember | null>(null);
 
-  function openBooking(svc?: Service | null) {
+  function openBooking(svc?: Service | null, member?: TeamMember | null) {
     setBookingService(svc ?? null);
+    setBookingBarber(member ?? null);
     setBookingOpen(true);
   }
 
@@ -310,6 +312,7 @@ export function HomeClient({
               member={selectedMember}
               shift={todayShifts[slugFromName(selectedMember.name)] ?? null}
               weekShifts={weekShifts[slugFromName(selectedMember.name)] ?? {}}
+              onBook={() => { setSelectedMember(null); openBooking(null, selectedMember); }}
             />
             <p className="font-label text-[10px] tracking-[0.25em] text-text-subtle text-center mt-4">
               TAP CARD TO FLIP
@@ -322,7 +325,8 @@ export function HomeClient({
       {bookingOpen && (
         <BookingModal
           initialService={bookingService}
-          onClose={() => { setBookingOpen(false); setBookingService(null); }}
+          initialBarber={bookingBarber}
+          onClose={() => { setBookingOpen(false); setBookingService(null); setBookingBarber(null); }}
         />
       )}
 

@@ -187,6 +187,139 @@ export async function sendBuyerReceiptEmail(params: {
   });
 }
 
+// ─── Booking confirmation (customer) ─────────────────────────────────────────
+
+export async function sendBookingConfirmation(params: {
+  to:           string;
+  customerName: string;
+  serviceName:  string;
+  servicePrice: string;
+  barberName:   string;
+  startAt:      string;
+  bookingId:    string;
+}) {
+  const resend  = getResend();
+  const dateStr = new Date(params.startAt).toLocaleString('en-US', {
+    timeZone: 'America/New_York',
+    weekday:  'long',
+    month:    'long',
+    day:      'numeric',
+    year:     'numeric',
+    hour:     'numeric',
+    minute:   '2-digit',
+    hour12:   true,
+  });
+
+  await resend.emails.send({
+    from:    process.env.RESEND_FROM_EMAIL!,
+    to:      params.to,
+    subject: `You're booked at Siedel's — ${params.serviceName}`,
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /></head>
+<body style="margin:0;padding:0;background:#0E0E0E;font-family:'Arial',sans-serif;">
+<div style="max-width:560px;margin:0 auto;padding:40px 20px;">
+<div style="background:#1A1A1A;border:1px solid #2A2A2A;padding:40px;">
+
+  <p style="font-size:11px;letter-spacing:0.3em;color:#888;text-transform:uppercase;margin:0 0 12px;">Appointment Confirmed</p>
+  <div style="font-size:28px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:-0.02em;line-height:1;">
+    SIEDEL'S <span style="color:#E31B23;">BARBERSHOP</span>
+  </div>
+  <hr style="border:none;border-top:1px solid #2A2A2A;margin:28px 0;" />
+
+  <p style="margin:0 0 14px;">
+    <span style="color:#E31B23;font-size:36px;font-weight:900;">${params.servicePrice}</span>
+    <span style="color:#fff;font-size:20px;font-weight:700;text-transform:uppercase;margin-left:10px;">${params.serviceName}</span>
+  </p>
+  <p style="margin:0 0 4px;color:#9ba3bf;font-size:14px;">${dateStr}</p>
+  <p style="margin:0 0 24px;color:#5c6480;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">With ${params.barberName}</p>
+
+  <div style="background:#E31B2318;border-left:3px solid #E31B23;padding:12px 16px;margin-bottom:24px;">
+    <p style="margin:0;color:#E31B23;font-size:11px;letter-spacing:0.2em;font-weight:bold;">CASH ONLY &nbsp;·&nbsp; ATM ON SITE</p>
+  </div>
+
+  <p style="font-size:11px;letter-spacing:0.3em;color:#666;text-transform:uppercase;margin:0 0 8px;">Location</p>
+  <p style="font-size:13px;color:#aaa;line-height:1.7;margin:0 0 20px;">
+    982 N Court Street, Medina, OH 44256<br />(330) 952-0777
+  </p>
+
+  <p style="font-size:11px;letter-spacing:0.3em;color:#666;text-transform:uppercase;margin:0 0 6px;">Booking ID</p>
+  <p style="font-size:11px;color:#444;font-family:'Courier New',monospace;margin:0;">${params.bookingId}</p>
+</div>
+
+<div style="font-size:11px;color:#444;text-align:center;margin-top:24px;line-height:1.8;">
+  <p>SIEDEL'S BARBERSHOP &nbsp;·&nbsp; 982 N COURT STREET &nbsp;·&nbsp; MEDINA, OH 44256</p>
+</div>
+</div>
+</body>
+</html>`,
+  });
+}
+
+// ─── New booking alert (shop / Jim) ──────────────────────────────────────────
+
+export async function sendBookingAlert(params: {
+  customerName:   string;
+  customerPhone:  string;
+  customerEmail?: string;
+  serviceName:    string;
+  barberName:     string;
+  startAt:        string;
+  bookingId:      string;
+  note?:          string;
+}) {
+  const shopEmail = process.env.SHOP_NOTIFICATION_EMAIL;
+  if (!shopEmail) return;
+
+  const resend  = getResend();
+  const dateStr = new Date(params.startAt).toLocaleString('en-US', {
+    timeZone: 'America/New_York',
+    weekday:  'long',
+    month:    'long',
+    day:      'numeric',
+    year:     'numeric',
+    hour:     'numeric',
+    minute:   '2-digit',
+    hour12:   true,
+  });
+
+  await resend.emails.send({
+    from:    process.env.RESEND_FROM_EMAIL!,
+    to:      shopEmail,
+    subject: `New booking: ${params.serviceName} — ${params.customerName}`,
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /></head>
+<body style="margin:0;padding:0;background:#0E0E0E;font-family:'Arial',sans-serif;">
+<div style="max-width:480px;margin:0 auto;padding:32px 20px;">
+<div style="background:#1A1A1A;border:1px solid #2A2A2A;padding:32px;">
+
+  <p style="font-size:11px;letter-spacing:0.3em;color:#888;text-transform:uppercase;margin:0 0 8px;">New Booking &nbsp;·&nbsp; Siedel's Barbershop</p>
+  <p style="font-size:26px;font-weight:900;color:#fff;text-transform:uppercase;margin:0 0 4px;">${params.serviceName}</p>
+  <p style="font-size:14px;color:#9ba3bf;margin:0 0 4px;">${dateStr}</p>
+  <p style="font-size:11px;color:#5c6480;letter-spacing:0.15em;text-transform:uppercase;margin:0 0 24px;">With ${params.barberName}</p>
+
+  <hr style="border:none;border-top:1px solid #2A2A2A;margin:0 0 20px;" />
+
+  <p style="font-size:11px;letter-spacing:0.3em;color:#666;text-transform:uppercase;margin:0 0 8px;">Client</p>
+  <p style="font-size:15px;color:#fff;font-weight:700;margin:0 0 4px;">${params.customerName}</p>
+  <p style="font-size:13px;color:#aaa;margin:0 0 4px;">${params.customerPhone}</p>
+  ${params.customerEmail ? `<p style="font-size:13px;color:#aaa;margin:0 0 4px;">${params.customerEmail}</p>` : ''}
+  ${params.note ? `
+  <p style="font-size:11px;letter-spacing:0.3em;color:#666;text-transform:uppercase;margin:16px 0 6px;">Note</p>
+  <p style="font-size:13px;color:#aaa;font-style:italic;margin:0;">${params.note}</p>` : ''}
+
+  <hr style="border:none;border-top:1px solid #2A2A2A;margin:20px 0 16px;" />
+  <p style="font-size:10px;color:#444;font-family:'Courier New',monospace;margin:0;">${params.bookingId}</p>
+</div>
+</div>
+</body>
+</html>`,
+  });
+}
+
+// ─── Gift card shop notification ──────────────────────────────────────────────
+
 export async function sendShopNotificationEmail(params: {
   faceValueCents: number;
   buyerName?: string;

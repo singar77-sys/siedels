@@ -26,9 +26,10 @@ interface Props {
   shift: Shift | null;
   /** { [dayName]: Shift } for the week in the sheet. Empty object when sheet unavailable. */
   weekShifts: Record<string, Shift>;
+  onBook?: () => void;
 }
 
-export function TeamCardFlip({ member, shift, weekShifts }: Props) {
+export function TeamCardFlip({ member, shift, weekShifts, onBook }: Props) {
   const [flipped, setFlipped] = useState(false);
   const [todayName, setTodayName] = useState('');
 
@@ -132,13 +133,12 @@ export function TeamCardFlip({ member, shift, weekShifts }: Props) {
               </div>
             )}
 
-            <a
-              href={member.booking}
+            <button
+              onClick={(e) => { e.stopPropagation(); onBook?.(); }}
               className="card-back-book"
-              onClick={(e) => e.stopPropagation()}
             >
               BOOK WITH {firstName}
-            </a>
+            </button>
 
             {/* Siedel's mark at the bottom, acts like a printer's seal
                 on the back of a baseball card */}

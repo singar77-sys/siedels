@@ -64,14 +64,15 @@ function fmtDateOnly(yyyymmdd: string) {
 const INPUT = 'w-full bg-surface border border-line-strong px-3 py-2.5 font-body text-sm text-text placeholder:text-text-faint focus:border-red focus:outline-none transition-colors';
 
 interface BookingModalProps {
-  onClose:         () => void;
-  initialService?: Service | null;
+  onClose:          () => void;
+  initialService?:  Service    | null;
+  initialBarber?:   TeamMember | null;
 }
 
-export function BookingModal({ onClose, initialService }: BookingModalProps) {
+export function BookingModal({ onClose, initialService, initialBarber }: BookingModalProps) {
   const [step,        setStep]        = useState<Step>(initialService ? 2 : 1);
   const [service,     setService]     = useState<Service | null>(initialService ?? null);
-  const [barber,      setBarber]      = useState<TeamMember | null>(null); // null = any
+  const [barber,      setBarber]      = useState<TeamMember | null>(initialBarber ?? null);
   const [date,        setDate]        = useState('');
   const [slots,       setSlots]       = useState<Slot[]>([]);
   const [loadSlots,   setLoadSlots]   = useState(false);
@@ -264,7 +265,7 @@ export function BookingModal({ onClose, initialService }: BookingModalProps) {
                 <p className="font-body text-xs text-text-muted font-mono break-all">{confirmed.bookingId}</p>
               </div>
               <p className="font-body text-sm text-text-muted leading-relaxed max-w-xs">
-                You&apos;ll receive a confirmation from Square. Cash only — ATM on site.
+                Screenshot this page — your booking ID is your receipt. Cash only, ATM on site.
               </p>
               <button
                 onClick={onClose}
@@ -283,7 +284,7 @@ export function BookingModal({ onClose, initialService }: BookingModalProps) {
                 {services.map(svc => (
                   <button
                     key={svc.name}
-                    onClick={() => { setService(svc); setStep(2); }}
+                    onClick={() => { setService(svc); setStep(initialBarber ? 3 : 2); }}
                     className={`text-left flex items-start gap-3 px-4 py-3 border transition-colors group ${
                       service?.name === svc.name
                         ? 'border-red bg-surface-raised'
@@ -552,7 +553,11 @@ export function BookingModal({ onClose, initialService }: BookingModalProps) {
         {!confirmed && (
           <div className="flex-none border-t border-line px-5 py-4 flex items-center justify-between">
             <button
-              onClick={() => step > 1 ? setStep(s => (s - 1) as Step) : onClose()}
+              onClick={() => {
+              if (step <= 1) return onClose();
+              const prev = (initialBarber && step === 3) ? 1 : step - 1;
+              setStep(prev as Step);
+            }}
               className="px-4 py-2 border border-line-strong font-label text-[10px] tracking-widest text-text-subtle hover:border-text hover:text-text transition-colors"
             >
               {step === 1 ? 'CANCEL' : '← BACK'}
