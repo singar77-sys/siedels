@@ -1103,6 +1103,15 @@ body {
 [data-theme="dark"] .contact-badge-light { display: none; }
 [data-theme="dark"] .contact-badge-dark  { display: block; }
 
+/* Team-mode overrides — hide default brand badge, show team variant */
+.contact-badge-team                       { display: none; }
+[data-team-mode] .contact-badge-light     { display: none; }
+[data-team-mode] .contact-badge-dark      { display: none; }
+[data-team-mode="cavs"]   .contact-badge-cavs   { display: block; }
+[data-team-mode="tribe"]  .contact-badge-tribe  { display: block; }
+[data-team-mode="browns"] .contact-badge-browns { display: block; }
+[data-team-mode="price"]  .contact-badge-price  { display: block; }
+
 /* ══════════════════════════════════════════════════════
    Contact panel — operating hours rows
    Staggered slide-in; today's row gets a live indicator.

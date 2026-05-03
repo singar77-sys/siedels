@@ -112,6 +112,10 @@ export function ContactPanel() {
                 className="contact-badge-dark shrink-0"
                 style={{ filter: 'drop-shadow(0 0 12px color-mix(in srgb, var(--red) 50%, transparent))' }}
               />
+              <Image src="/logos/siedels-barbershop-logo-cavs-dark-diamond.png"   alt={IMAGE_ALTS.logos.cavsDarkDiamond}   width={64} height={64} className="contact-badge-team contact-badge-cavs shrink-0"   />
+              <Image src="/logos/siedels-barbershop-logo-tribe-dark-diamond.png"  alt={IMAGE_ALTS.logos.tribeDarkDiamond}  width={64} height={64} className="contact-badge-team contact-badge-tribe shrink-0"  />
+              <Image src="/logos/siedels-barbershop-logo-browns-dark-diamond.png" alt={IMAGE_ALTS.logos.brownsDarkDiamond} width={64} height={64} className="contact-badge-team contact-badge-browns shrink-0" />
+              <Image src="/logos/siedels-barbershop-logo-price-dark-diamond.png"  alt={IMAGE_ALTS.logos.priceDarkDiamond}  width={64} height={64} className="contact-badge-team contact-badge-price shrink-0"  />
               <div className="min-w-0">
                 <p className="font-headline text-base font-black uppercase tracking-tight text-text leading-tight">
                   SIEDEL&apos;S<br />BARBERSHOP
@@ -271,7 +275,7 @@ export function ContactPanel() {
               {/* All visible content sits above the ghost */}
               <div className="relative z-10 flex flex-col items-center gap-5 w-full">
 
-                {/* Badge — light/dark swap */}
+                {/* Badge — light/dark swap + team-mode variants */}
                 <div className="shrink-0">
                   <Image
                     src="/logos/siedels-barbershop-logo-light-diamond.png"
@@ -288,6 +292,10 @@ export function ContactPanel() {
                     className="contact-badge-dark"
                     style={{ filter: 'drop-shadow(0 0 32px color-mix(in srgb, var(--red) 45%, transparent))' }}
                   />
+                  <Image src="/logos/siedels-barbershop-logo-cavs-dark-diamond.png"   alt={IMAGE_ALTS.logos.cavsDarkDiamond}   width={180} height={180} className="contact-badge-team contact-badge-cavs"   />
+                  <Image src="/logos/siedels-barbershop-logo-tribe-dark-diamond.png"  alt={IMAGE_ALTS.logos.tribeDarkDiamond}  width={180} height={180} className="contact-badge-team contact-badge-tribe"  />
+                  <Image src="/logos/siedels-barbershop-logo-browns-dark-diamond.png" alt={IMAGE_ALTS.logos.brownsDarkDiamond} width={180} height={180} className="contact-badge-team contact-badge-browns" />
+                  <Image src="/logos/siedels-barbershop-logo-price-dark-diamond.png"  alt={IMAGE_ALTS.logos.priceDarkDiamond}  width={180} height={180} className="contact-badge-team contact-badge-price"  />
                 </div>
 
                 <div className="text-center">
