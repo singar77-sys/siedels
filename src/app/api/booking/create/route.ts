@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { squareFetch, LOCATION_ID, SERVICE_VARIATION_IDS, SERVICE_DURATIONS } from '@/lib/square';
+import { squareFetch, LOCATION_ID, SERVICE_VARIATION_IDS } from '@/lib/square';
 
 function normalizePhone(raw: string): string {
   const digits = raw.replace(/\D/g, '');
@@ -36,8 +36,7 @@ export async function POST(req: NextRequest) {
     note?:                   string;
   };
 
-  const variationId      = SERVICE_VARIATION_IDS[serviceName];
-  const durationMinutes  = SERVICE_DURATIONS[serviceName];
+  const variationId = SERVICE_VARIATION_IDS[serviceName];
   if (!variationId)           return NextResponse.json({ error: 'Unknown service' },         { status: 400 });
   if (!startAt || !teamMemberId || !customerName || !customerPhone) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -93,7 +92,6 @@ export async function POST(req: NextRequest) {
           service_variation_id:      variationId,
           service_variation_version: serviceVariationVersion,
           team_member_id:            teamMemberId,
-          duration_minutes:          durationMinutes,
         }],
       },
     };
@@ -104,18 +102,15 @@ export async function POST(req: NextRequest) {
     console.log(`[booking/create] Square status=${bookRes.status} body=${bookText.slice(0, 600)}`);
     const bookData = JSON.parse(bookText) as Record<string, unknown>;
 
-    if (!bookRes.ok || bookData.errors) {
-      const errs = bookData.errors ?? [];
-      errs.forEach((e: { category?: string; code?: string; detail?: string }, i: number) => {
+    type SquareError = { category?: string; code?: string; detail?: string };
+    const errs = Array.isArray(bookData.errors) ? (bookData.errors as SquareError[]) : [];
+    if (!bookRes.ok || errs.length > 0) {
+      errs.forEach((e, i) => {
         console.error(`[booking/create] err[${i}] cat=${e.category} code=${e.code} detail=${e.detail}`);
       });
-      console.error('[booking/create] request body sent:', JSON.stringify({
-        start_at: startAt, location_id: LOCATION_ID, customer_id: '(hidden)',
-        segment: { variationId, serviceVariationVersion, teamMemberId, durationMinutes },
-      }));
       const first = errs[0] ?? {};
-      const msg   = (first.detail as string | undefined) ?? 'Booking failed';
-      const code  = (first.code  as string | undefined) ?? 'UNKNOWN';
+      const msg   = first.detail ?? 'Booking failed';
+      const code  = first.code  ?? 'UNKNOWN';
       return NextResponse.json({ error: msg, code, errors: errs }, { status: 422 });
     }
 
