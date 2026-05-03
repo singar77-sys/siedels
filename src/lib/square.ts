@@ -33,6 +33,20 @@ export const ID_TO_NAME = Object.fromEntries(
   Object.entries(TEAM_IDS).map(([name, id]) => [id, name])
 );
 
+// Service name (matches shop.ts) → duration in minutes
+export const SERVICE_DURATIONS: Record<string, number> = {
+  'Haircut':                         30,
+  'Razor / Foil Fade':               30,
+  'Haircut + Beard Trim':            50,
+  'Haircut + Face Shave':            55,
+  'Full Service Shave':              30,
+  'Head Shave':                      35,
+  'Beard Trim':                      20,
+  'Shoulder Length Cut + Rough Dry': 30,
+  'Duo Haircut':                     60,
+  'Trio Haircut':                    90,
+};
+
 // Service name (matches shop.ts) → Square catalog variation ID
 export const SERVICE_VARIATION_IDS: Record<string, string> = {
   'Haircut':                         'KRVP7PV2YVVVPPIMUB52D5YP',

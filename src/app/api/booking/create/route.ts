@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { squareFetch, LOCATION_ID, SERVICE_VARIATION_IDS } from '@/lib/square';
+import { squareFetch, LOCATION_ID, SERVICE_VARIATION_IDS, SERVICE_DURATIONS } from '@/lib/square';
 
 function normalizePhone(raw: string): string {
   const digits = raw.replace(/\D/g, '');
@@ -36,7 +36,8 @@ export async function POST(req: NextRequest) {
     note?:                   string;
   };
 
-  const variationId = SERVICE_VARIATION_IDS[serviceName];
+  const variationId      = SERVICE_VARIATION_IDS[serviceName];
+  const durationMinutes  = SERVICE_DURATIONS[serviceName];
   if (!variationId)           return NextResponse.json({ error: 'Unknown service' },         { status: 400 });
   if (!startAt || !teamMemberId || !customerName || !customerPhone) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -94,6 +95,7 @@ export async function POST(req: NextRequest) {
             service_variation_id:      variationId,
             service_variation_version: serviceVariationVersion,
             team_member_id:            teamMemberId,
+            duration_minutes:          durationMinutes,
           }],
         },
       }),
