@@ -136,7 +136,8 @@ export function BookingModal({ onClose, initialService }: BookingModalProps) {
       });
       const d = await res.json();
       if (!res.ok || d.error) {
-        setSubmitErr(d.error ?? 'Booking failed. Please try again or call us.');
+        const codeHint = d.code ? ` [${d.code}]` : '';
+        setSubmitErr((d.error ?? 'Booking failed. Please try again or call us.') + codeHint);
       } else {
         setConfirmed({
           bookingId:      d.bookingId,

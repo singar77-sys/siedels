@@ -103,9 +103,18 @@ export async function POST(req: NextRequest) {
     const bookData = await bookRes.json();
 
     if (!bookRes.ok || bookData.errors) {
-      const msg = (bookData.errors?.[0]?.detail as string | undefined) ?? 'Booking failed';
-      console.error('[booking/create] Square error:', bookData.errors);
-      return NextResponse.json({ error: msg }, { status: 422 });
+      const errs = bookData.errors ?? [];
+      errs.forEach((e: { category?: string; code?: string; detail?: string }, i: number) => {
+        console.error(`[booking/create] err[${i}] cat=${e.category} code=${e.code} detail=${e.detail}`);
+      });
+      console.error('[booking/create] request body sent:', JSON.stringify({
+        start_at: startAt, location_id: LOCATION_ID, customer_id: '(hidden)',
+        segment: { variationId, serviceVariationVersion, teamMemberId, durationMinutes },
+      }));
+      const first = errs[0] ?? {};
+      const msg   = (first.detail as string | undefined) ?? 'Booking failed';
+      const code  = (first.code  as string | undefined) ?? 'UNKNOWN';
+      return NextResponse.json({ error: msg, code, errors: errs }, { status: 422 });
     }
 
     return NextResponse.json({
