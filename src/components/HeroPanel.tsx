@@ -31,7 +31,7 @@ export function HeroPanel({ onScrollNext, onExploreServices, onOpenBooking, shop
             priority
             sizes="100vw"
             quality={85}
-            className="object-cover object-center animate-ken-burns"
+            className="object-cover object-[70%_50%] md:object-center animate-ken-burns"
             style={{ filter: 'brightness(0.32)' }}
           />
         </div>
@@ -42,7 +42,7 @@ export function HeroPanel({ onScrollNext, onExploreServices, onOpenBooking, shop
             fill
             sizes="100vw"
             quality={85}
-            className="object-cover object-center animate-ken-burns"
+            className="object-cover object-[70%_50%] md:object-center animate-ken-burns"
             style={{ filter: 'brightness(0.5) grayscale(1)' }}
           />
         </div>
@@ -54,7 +54,7 @@ export function HeroPanel({ onScrollNext, onExploreServices, onOpenBooking, shop
         style={{ background: 'var(--hero-overlay)' }}
       />
 
-      <div className="relative z-10 w-full px-6 md:px-12 lg:px-16 xl:px-24 pt-4 lg:pt-6 xl:pt-8 2xl:pt-20 pb-8 md:pb-10 lg:pb-8 xl:pb-6 2xl:pb-20">
+      <div className="relative z-10 w-full px-6 md:px-12 lg:px-16 xl:px-24 pt-4 lg:pt-6 xl:pt-8 2xl:pt-20 pb-20 md:pb-10 lg:pb-8 xl:pb-6 2xl:pb-20">
         <div className="border-l-4 border-red pl-6 md:pl-8 max-w-2xl">
           <p
             className="font-label text-[11px] tracking-[0.3em] mb-2 md:mb-3 lg:mb-4 2xl:mb-6 hero-stagger-1"
