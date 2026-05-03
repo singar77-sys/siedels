@@ -386,8 +386,8 @@
   text-transform: uppercase;
 }
 .card-back-bio-text {
-  font-size: 14px;
-  line-height: 1.55;
+  font-size: 16px;
+  line-height: 1.6;
   color: var(--text-muted);
 }
 .card-back-book {
@@ -425,14 +425,14 @@
   padding: 4px 2px;
 }
 .card-back-sched-label {
-  font-size: 7px;
+  font-size: 8px;
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--text-muted);
   text-transform: uppercase;
 }
 .card-back-sched-val {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--text);
   letter-spacing: 0.02em;
