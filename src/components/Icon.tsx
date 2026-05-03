@@ -12,8 +12,11 @@ type IconName =
   | 'arrow_forward'
   | 'calendar_month'
   | 'call'
+  | 'check_circle'
+  | 'chevron_left'
   | 'chevron_right'
   | 'close'
+  | 'shuffle'
   | 'star'
   | 'swipe_right'
   | 'light_mode'
@@ -70,10 +73,29 @@ export function Icon({ name, className = 'w-5 h-5' }: IconProps) {
           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.35 1.84.6 2.8.72A2 2 0 0 1 22 16.92z" />
         </svg>
       );
+    case 'check_circle':
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M8.5 12.5l2.5 2.5 4.5-5" />
+        </svg>
+      );
+    case 'chevron_left':
+      return (
+        <svg {...common}>
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      );
     case 'chevron_right':
       return (
         <svg {...common}>
           <path d="M9 6l6 6-6 6" />
+        </svg>
+      );
+    case 'shuffle':
+      return (
+        <svg {...common}>
+          <path d="M16 3h5v5M4 20l16-16M21 16v5h-5M15 15l6 6M4 4l5 5" />
         </svg>
       );
     case 'close':

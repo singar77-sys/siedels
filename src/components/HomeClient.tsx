@@ -3,7 +3,8 @@
 import { useRef, useState, useEffect, useLayoutEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SQUARE_BOOKING_URL, PHONE, PHONE_HREF, MAPS_URL, ADDRESS, CITY_STATE_ZIP, type TeamMember, type Service } from '@/data/shop';
+import { PHONE, PHONE_HREF, MAPS_URL, ADDRESS, CITY_STATE_ZIP, type TeamMember, type Service } from '@/data/shop';
+import { BookingModal } from './BookingModal';
 import { slugFromName } from '@/lib/utils';
 import { Modal } from './Modal';
 import { ThemeToggle } from './ThemeToggle';
@@ -56,6 +57,13 @@ export function HomeClient({
   const [active, setActive] = useState(0);
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [bookingOpen, setBookingOpen] = useState(false);
+  const [bookingService, setBookingService] = useState<Service | null>(null);
+
+  function openBooking(svc?: Service | null) {
+    setBookingService(svc ?? null);
+    setBookingOpen(true);
+  }
 
   const scrollToPanel = useCallback((index: number) => {
     const container = scrollRef.current;
@@ -171,12 +179,12 @@ export function HomeClient({
             ))}
           </div>
           <ThemeToggle />
-          <a
-            href={SQUARE_BOOKING_URL}
+          <button
+            onClick={() => openBooking()}
             className="bg-red text-white px-8 py-3 font-headline text-[15px] font-bold uppercase tracking-tight hover:bg-red-hover transition-colors"
           >
             BOOK NOW
-          </a>
+          </button>
         </nav>
         <div className="md:hidden flex items-center">
           <ThemeToggle />
@@ -215,6 +223,7 @@ export function HomeClient({
           <HeroPanel
             onScrollNext={() => scrollToPanel(1)}
             onExploreServices={() => scrollToPanel(2)}
+            onOpenBooking={() => openBooking()}
             shopHours={scheduleToday.shopHours}
             isClosed={scheduleToday.isClosed}
             scheduleKnown={scheduleToday.scheduleKnown}
@@ -278,12 +287,12 @@ export function HomeClient({
             </span>
           </button>
         ))}
-        <a
-          href={SQUARE_BOOKING_URL}
+        <button
+          onClick={() => openBooking()}
           className="flex-1 flex items-center justify-center bg-red text-white font-headline font-bold uppercase tracking-tight text-[10px] hover:bg-red-hover transition-colors"
         >
           BOOK
-        </a>
+        </button>
       </nav>
 
       {/* ══ Team Member Modal — baseball card that flips front→back ══ */}
@@ -307,6 +316,14 @@ export function HomeClient({
             </p>
           </div>
         </Modal>
+      )}
+
+      {/* ══ Booking Modal ════════════════════ */}
+      {bookingOpen && (
+        <BookingModal
+          initialService={bookingService}
+          onClose={() => { setBookingOpen(false); setBookingService(null); }}
+        />
       )}
 
       {/* ══ Service Modal ═════════════════════
@@ -353,12 +370,12 @@ export function HomeClient({
                 ))}
               </ul>
             </div>
-            <a
-              href={SQUARE_BOOKING_URL}
+            <button
+              onClick={() => { setSelectedService(null); openBooking(selectedService); }}
               className="block w-full py-4 bg-red text-white font-headline text-sm font-bold uppercase tracking-widest text-center hover:bg-red-hover transition-colors"
             >
               BOOK {selectedService.name.toUpperCase()}
-            </a>
+            </button>
           </div>
         </Modal>
       )}

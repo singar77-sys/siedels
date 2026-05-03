@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { SQUARE_BOOKING_URL, RATING, REVIEW_COUNT, IMAGE_ALTS, testimonials } from '@/data/shop';
+import { RATING, REVIEW_COUNT, IMAGE_ALTS, testimonials } from '@/data/shop';
 import { Icon } from './Icon';
 import { ShopStatus } from './ShopStatus';
 
@@ -9,15 +9,16 @@ const HERO_DARK = '/images/siedels-barbershop-medina-ohio.webp';
 const HERO_LIGHT = '/images/siedels-barbershop-golden-hour-medina-ohio.webp';
 
 interface HeroPanelProps {
-  onScrollNext: () => void;
+  onScrollNext:    () => void;
   onExploreServices: () => void;
-  shopHours: string | null;
-  isClosed: boolean;
-  scheduleKnown: boolean;
-  dayName: string;
+  onOpenBooking:   () => void;
+  shopHours:       string | null;
+  isClosed:        boolean;
+  scheduleKnown:   boolean;
+  dayName:         string;
 }
 
-export function HeroPanel({ onScrollNext, onExploreServices, shopHours, isClosed, scheduleKnown, dayName }: HeroPanelProps) {
+export function HeroPanel({ onScrollNext, onExploreServices, onOpenBooking, shopHours, isClosed, scheduleKnown, dayName }: HeroPanelProps) {
   return (
     <section className="w-full flex-none h-full snap-start relative flex items-end overflow-hidden">
       {/* Background image — both themes render, CSS hides the inactive one */}
@@ -86,12 +87,12 @@ export function HeroPanel({ onScrollNext, onExploreServices, shopHours, isClosed
             />
           </div>
           <div className="flex flex-col sm:flex-row gap-4 hero-stagger-5">
-            <a
-              href={SQUARE_BOOKING_URL}
+            <button
+              onClick={onOpenBooking}
               className="hero-cta-primary inline-flex items-center justify-center gap-2 font-headline font-bold uppercase tracking-tight px-8 py-4 transition-colors duration-200"
             >
               BOOK NOW
-            </a>
+            </button>
             <button
               onClick={onExploreServices}
               className="hero-cta-ghost inline-flex items-center justify-center gap-2 border font-headline font-bold uppercase tracking-tight px-8 py-4 transition-colors duration-300"
