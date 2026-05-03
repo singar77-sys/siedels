@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import {
   PHONE,
   PHONE_HREF,
-  SQUARE_BOOKING_URL,
   MAPS_URL,
   GOOGLE_BUSINESS_URL,
   ADDRESS,
@@ -34,7 +33,7 @@ function formatClock(d: Date) {
   return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
 }
 
-export function ContactPanel() {
+export function ContactPanel({ onOpenBooking }: { onOpenBooking?: () => void }) {
   const [cursor,   setCursor]   = useState(0);
   const [todayIdx, setTodayIdx] = useState<number | null>(null);
   const [clock,    setClock]    = useState('');
@@ -226,14 +225,13 @@ export function ContactPanel() {
 
             {/* CTAs */}
             <div className="grid grid-cols-2 gap-2">
-              <a
-                href={SQUARE_BOOKING_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={onOpenBooking}
                 className="inline-flex items-center justify-center gap-1.5 bg-red text-white font-headline text-xs font-bold uppercase tracking-tight px-4 py-3 hover:bg-red-hover transition-colors"
               >
                 BOOK ONLINE <Icon name="arrow_forward" className="w-3.5 h-3.5" />
-              </a>
+              </button>
               <a
                 href={MAPS_URL}
                 target="_blank"
@@ -319,14 +317,13 @@ export function ContactPanel() {
                 </p>
 
                 <div className="flex flex-col gap-2 w-full">
-                  <a
-                    href={SQUARE_BOOKING_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
+                    onClick={onOpenBooking}
                     className="inline-flex items-center justify-center gap-2 w-full bg-red text-white font-headline text-sm font-bold uppercase tracking-tight px-5 py-3 hover:bg-red-hover transition-colors"
                   >
                     BOOK ONLINE <Icon name="arrow_forward" className="w-4 h-4" />
-                  </a>
+                  </button>
                   <a
                     href={MAPS_URL}
                     target="_blank"

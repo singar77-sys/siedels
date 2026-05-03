@@ -240,7 +240,7 @@ export function HomeClient({
           <ServicesPanel onSelectService={setSelectedService} />
           <GalleryPanel />
           {/* <GiftPanel /> — disabled pending accountant review; restore import + PANELS entry to re-enable */}
-          <ContactPanel />
+          <ContactPanel onOpenBooking={() => openBooking()} />
         </div>
       </main>
 
