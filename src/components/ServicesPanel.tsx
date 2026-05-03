@@ -131,21 +131,8 @@ export function ServicesPanel({ onSelectService }: ServicesPanelProps) {
 
   return (
     <section
-      ref={sectionRef}
-      className="w-full flex-none h-full snap-start grid-bg overflow-hidden relative"
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setLit(true)}
-      onMouseLeave={() => setLit(false)}
+      className="w-full flex-none h-full snap-start grid-bg overflow-hidden"
     >
-      {/* Flashlight overlay — transparent at cursor, dark at edges */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none z-20 transition-opacity duration-300"
-        style={{
-          opacity: lit ? 1 : 0,
-          background: 'radial-gradient(325px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(227,27,35,0.18) 0%, transparent 70%)',
-        }}
-      />
       <div className="max-w-screen-2xl mx-auto h-full px-4 md:px-8 py-5 md:py-8 w-full flex flex-col relative z-10">
 
         <div className="flex items-end justify-between gap-4 mb-4 md:mb-5 flex-none">
@@ -169,7 +156,21 @@ export function ServicesPanel({ onSelectService }: ServicesPanelProps) {
           </div>
         </div>
 
-        <div className="flex-1 min-h-0 bg-surface border border-line-strong flex flex-col overflow-hidden opacity-[0.95]">
+        <div
+          ref={sectionRef}
+          className="flex-1 min-h-0 bg-surface border border-line-strong flex flex-col overflow-hidden opacity-[0.95] relative"
+          onMouseMove={handleMouseMove}
+          onMouseEnter={() => setLit(true)}
+          onMouseLeave={() => setLit(false)}
+        >
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 pointer-events-none z-20 transition-opacity duration-300"
+            style={{
+              opacity: lit ? 1 : 0,
+              background: 'radial-gradient(325px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(227,27,35,0.18) 0%, transparent 70%)',
+            }}
+          />
           <div className="flex-1 min-h-0 relative">
             <div className="md:hidden absolute bottom-0 left-0 right-0 h-10 pointer-events-none z-10"
               style={{ background: 'linear-gradient(to top, var(--surface) 0%, transparent 100%)' }} />
