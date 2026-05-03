@@ -602,9 +602,9 @@ body {
   --ink:           #041E42;
   --surface:       #0A2D5F;
   --surface-raised:#16407A;
-  --surface-high:  #860038;
-  --red:           #860038;
-  --red-hover:     #6A002D;
+  --surface-high:  #16407A;
+  --red:           #FDBB30;
+  --red-hover:     #E5A820;
   --text:          #FFFFFF;
   --text-muted:    rgba(255,255,255,0.78);
   --text-subtle:   rgba(255,255,255,0.55);
