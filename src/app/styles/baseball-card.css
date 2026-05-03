@@ -3,7 +3,7 @@
    All colors ride on CSS variables so team/italy modes carry
    through automatically. Aspect 5:7 matches real baseball cards. */
 .card-86 {
-  aspect-ratio: 5 / 7;
+  aspect-ratio: 1 / 1.618;
   background: var(--surface);
   border: 2px solid var(--text);
   display: flex;
@@ -149,6 +149,14 @@
 .card-86.scheme-red .card-86-badge       { background: var(--text); }
 .card-86.scheme-espresso .card-86-badge  { background: var(--red); }
 .card-86.scheme-khaki .card-86-badge     { background: var(--red); }
+
+/* ── At xl desktop, cards fill their grid cell for panel continuity ── */
+@media (min-width: 1280px) {
+  .card-86-grid .card-86 {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+}
 
 /* ── Flip animation: modal card turns from front to back ───── */
 .card-flip-stage {

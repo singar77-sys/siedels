@@ -64,9 +64,9 @@ export function TeamPanel({ onSelectMember, scheduleIsCurrent, scheduleToday, to
           )}
         </div>
 
-        {/* ── CARD GRID — scrolls within the pinned frame ── */}
-        <div className="no-scrollbar flex-1 min-h-0 overflow-y-auto pb-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-3">
+        {/* ── CARD GRID — scrolls on mobile, fills full height at xl ── */}
+        <div className="no-scrollbar flex-1 min-h-0 overflow-y-auto xl:overflow-hidden pb-4 xl:pb-0">
+          <div className="card-86-grid grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 xl:grid-rows-2 xl:h-full gap-2 md:gap-3">
             {team.map((member) => (
               <BaseballCard
                 key={member.name}
