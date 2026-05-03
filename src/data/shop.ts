@@ -332,29 +332,35 @@ export interface GalleryItem {
   alt: string;
   barber?: string;
   tag?: string;
+  /** CSS object-position value — controls focal point when image is cropped.
+   *  Omit to use the default (center). Use '50% 20%' to anchor toward the top
+   *  for portrait shots where the subject's head is in the upper portion. */
+  focalPoint?: string;
 }
 
 export const gallery: GalleryItem[] = [
   // Curated 18 — 6×3 wall, reordered so the candid sits next to CUT
   // and the three technique shots lead into the shop-interior closer.
+  // focalPoint shifts the crop anchor for portrait shots so heads stay in frame
+  // on small landscape cells (mobile/iPad). Shop/interior shots use default center.
   { src: '/images/siedels-barbershop-storefront-medina-ohio.webp', alt: 'Siedel\'s Barbershop storefront with sign at 982 N Court Street in Medina, Ohio', tag: 'SHOP' },
-  { src: '/images/cleveland-skyline-hair-design-siedels-medina.webp', alt: 'Cleveland skyline shaved into a hair design at Siedel\'s Barbershop', tag: 'DESIGN' },
-  { src: '/images/kids-haircut-happy-siedels-medina.webp', alt: 'Happy kid getting a haircut at Siedel\'s Barbershop in Medina, Ohio', tag: 'KIDS' },
-  { src: '/images/mohawk-fade-wave-design-siedels-medina.webp', alt: 'Mohawk fade with wave design at Siedel\'s Barbershop', tag: 'DESIGN' },
+  { src: '/images/cleveland-skyline-hair-design-siedels-medina.webp', alt: 'Cleveland skyline shaved into a hair design at Siedel\'s Barbershop', tag: 'DESIGN', focalPoint: '50% 15%' },
+  { src: '/images/kids-haircut-happy-siedels-medina.webp', alt: 'Happy kid getting a haircut at Siedel\'s Barbershop in Medina, Ohio', tag: 'KIDS', focalPoint: '50% 20%' },
+  { src: '/images/mohawk-fade-wave-design-siedels-medina.webp', alt: 'Mohawk fade with wave design at Siedel\'s Barbershop', tag: 'DESIGN', focalPoint: '50% 20%' },
   { src: '/images/siedels-storefront-summer-angle-medina-ohio.webp', alt: 'Angled summer shot of Siedel\'s Barbershop storefront in Medina, Ohio', tag: 'SHOP' },
   { src: '/images/manicure-nail-polish-siedels-medina.webp', alt: 'Manicure and nail polish service at Siedel\'s Barbershop', tag: 'NAILS' },
-  { src: '/images/boys-fade-top-view-siedels-medina.webp', alt: 'Top-view of a boy\'s fade finish at Siedel\'s Barbershop in Medina, Ohio', tag: 'KIDS' },
-  { src: '/images/kids-scissor-cut-mask-bw-siedels-medina.webp', alt: 'Black and white scissor cut on a young client at Siedel\'s Barbershop', tag: 'CANDID' },
-  { src: '/images/kids-haircut-siedels-medina-ohio.webp', alt: 'Kids haircut at Siedel\'s Barbershop in Medina, Ohio', tag: 'KIDS' },
-  { src: '/images/mens-haircut-scissors-siedels-medina.webp', alt: 'Precision men\'s haircut with scissors at Siedel\'s Barbershop', tag: 'CUT' },
-  { src: '/images/barber-client-laughing-bw-siedels-medina.webp', alt: 'Barber and client sharing a laugh at Siedel\'s Barbershop in Medina, Ohio', tag: 'CANDID' },
-  { src: '/images/beard-conditioning-brush-siedels-medina.webp', alt: 'Beard conditioning with brush at Siedel\'s Barbershop in Medina, Ohio', tag: 'BEARD' },
-  { src: '/images/shoulder-length-haircut-siedels-medina.webp', alt: 'Shoulder-length haircut at Siedel\'s Barbershop in Medina, Ohio', tag: 'LONG' },
-  { src: '/images/mens-fade-clipper-over-comb-siedels-medina.webp', alt: 'Clipper-over-comb fade technique at Siedel\'s Barbershop in Medina, Ohio', tag: 'FADE' },
+  { src: '/images/boys-fade-top-view-siedels-medina.webp', alt: 'Top-view of a boy\'s fade finish at Siedel\'s Barbershop in Medina, Ohio', tag: 'KIDS', focalPoint: '50% 10%' },
+  { src: '/images/kids-scissor-cut-mask-bw-siedels-medina.webp', alt: 'Black and white scissor cut on a young client at Siedel\'s Barbershop', tag: 'CANDID', focalPoint: '50% 20%' },
+  { src: '/images/kids-haircut-siedels-medina-ohio.webp', alt: 'Kids haircut at Siedel\'s Barbershop in Medina, Ohio', tag: 'KIDS', focalPoint: '50% 20%' },
+  { src: '/images/mens-haircut-scissors-siedels-medina.webp', alt: 'Precision men\'s haircut with scissors at Siedel\'s Barbershop', tag: 'CUT', focalPoint: '50% 20%' },
+  { src: '/images/barber-client-laughing-bw-siedels-medina.webp', alt: 'Barber and client sharing a laugh at Siedel\'s Barbershop in Medina, Ohio', tag: 'CANDID', focalPoint: '50% 25%' },
+  { src: '/images/beard-conditioning-brush-siedels-medina.webp', alt: 'Beard conditioning with brush at Siedel\'s Barbershop in Medina, Ohio', tag: 'BEARD', focalPoint: '50% 25%' },
+  { src: '/images/shoulder-length-haircut-siedels-medina.webp', alt: 'Shoulder-length haircut at Siedel\'s Barbershop in Medina, Ohio', tag: 'LONG', focalPoint: '50% 15%' },
+  { src: '/images/mens-fade-clipper-over-comb-siedels-medina.webp', alt: 'Clipper-over-comb fade technique at Siedel\'s Barbershop in Medina, Ohio', tag: 'FADE', focalPoint: '50% 20%' },
   { src: '/images/siedels-barber-stations-empty-medina.webp', alt: 'Empty barber stations at Siedel\'s Barbershop in Medina, Ohio', tag: 'SHOP' },
   { src: '/images/siedels-lounge-seating-medina.webp', alt: 'Lounge seating area at Siedel\'s Barbershop in Medina, Ohio', tag: 'LOUNGE' },
   { src: '/images/siedels-window-stay-sharp-medina.webp', alt: '"Stay Sharp" window decal at Siedel\'s Barbershop in Medina, Ohio', tag: 'SHOP' },
-  { src: '/images/siedels-family-archive-portrait.webp', alt: 'Archive portrait of the Siedel family — the shop\'s namesake', tag: 'HERITAGE' },
+  { src: '/images/siedels-family-archive-portrait.webp', alt: 'Archive portrait of the Siedel family — the shop\'s namesake', tag: 'HERITAGE', focalPoint: '50% 15%' },
 ];
 
 export const hours = [

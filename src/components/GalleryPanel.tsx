@@ -136,6 +136,7 @@ export function GalleryPanel() {
                 fill
                 sizes="(max-width: 768px) 25vw, 12vw"
                 className="object-cover theme-photo"
+                style={item.focalPoint ? { objectPosition: item.focalPoint } : undefined}
               />
               {item.tag && (
                 <span className="gallery-cap absolute bottom-1 left-1 right-1 font-label text-[8px] md:text-[9px] tracking-widest text-white/95 truncate">
