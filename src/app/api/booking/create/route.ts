@@ -114,9 +114,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: msg, code, errors: errs }, { status: 422 });
     }
 
+    const booking = bookData.booking as { id: string; start_at: string };
     return NextResponse.json({
-      bookingId: bookData.booking.id  as string,
-      startAt:   bookData.booking.start_at as string,
+      bookingId: booking.id,
+      startAt:   booking.start_at,
     });
   } catch (err) {
     console.error('[booking/create]', err);
