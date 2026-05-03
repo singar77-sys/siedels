@@ -143,7 +143,7 @@ export function ServicesPanel({ onSelectService }: ServicesPanelProps) {
         className="absolute inset-0 pointer-events-none z-20 transition-opacity duration-300"
         style={{
           opacity: lit ? 1 : 0,
-          background: 'radial-gradient(520px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 0%, rgba(0,0,0,0.62) 100%)',
+          background: 'radial-gradient(650px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(227,27,35,0.18) 0%, transparent 70%)',
         }}
       />
       <div className="max-w-screen-2xl mx-auto h-full px-4 md:px-8 py-5 md:py-8 w-full flex flex-col relative z-10">
