@@ -592,6 +592,74 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48' viewBox='0 0 28 48'%3E%3Cg fill='none' stroke='%23FF3C00' stroke-width='1'%3E%3Cpolygon points='14,0 27.856,8 27.856,24 14,32 0.144,24 0.144,8'/%3E%3Cline x1='14' y1='32' x2='14' y2='48'/%3E%3C/g%3E%3C/svg%3E");
 }
 
+/* ── Light-theme locks for inherently-dark team modes ───────
+   Cavs and Browns define a dark palette even in "day" mode. The
+   single-attribute [data-team-mode] selector (0,1,0) ties with
+   [data-theme="light"] (0,1,0). These combined rules (0,2,0)
+   guarantee the dark palette prevails regardless of cascade order. */
+
+[data-theme="light"][data-team-mode="cavs"] {
+  --ink:           #041E42;
+  --surface:       #0A2D5F;
+  --surface-raised:#16407A;
+  --surface-high:  #860038;
+  --red:           #860038;
+  --red-hover:     #6A002D;
+  --text:          #FFFFFF;
+  --text-muted:    rgba(255,255,255,0.78);
+  --text-subtle:   rgba(255,255,255,0.55);
+  --text-faint:    rgba(255,255,255,0.40);
+  --line:          rgba(253,187,48,0.12);
+  --line-strong:   rgba(253,187,48,0.28);
+  --stroke-color:  #FDBB30;
+  --selection-bg:  #FDBB30;
+  --selection-text:#041E42;
+  --texture-opacity: 0;
+  --scrim:         rgba(4,30,66,0.88);
+  --hero-overlay:  linear-gradient(to right, rgba(4,30,66,0.8), rgba(134,0,56,0.4), transparent);
+  --hero-eyebrow:  #FDBB30;
+  --hero-h1:       #FDBB30;
+  --hero-tagline:  rgba(255,255,255,0.85);
+  --hero-cta-bg:   #FDBB30;
+  --hero-cta-text: #041E42;
+  --hero-cta-hover:#860038;
+  --hero-cta-hover-text: #FFFFFF;
+  --hero-ghost-border: rgba(253,187,48,0.55);
+  --hero-ghost-text:   #FDBB30;
+  --team-logo-color:   #FDBB30;
+}
+
+[data-theme="light"][data-team-mode="browns"] {
+  --ink:           #311D00;
+  --surface:       #4A2C10;
+  --surface-raised:#5C3814;
+  --surface-high:  #FF3C00;
+  --red:           #FF3C00;
+  --red-hover:     #CC3000;
+  --text:          #FFFFFF;
+  --text-muted:    rgba(255,255,255,0.80);
+  --text-subtle:   rgba(255,255,255,0.58);
+  --text-faint:    rgba(255,255,255,0.42);
+  --line:          rgba(255,60,0,0.15);
+  --line-strong:   rgba(255,60,0,0.32);
+  --stroke-color:  #FF3C00;
+  --selection-bg:  #FF3C00;
+  --selection-text:#311D00;
+  --texture-opacity: 0;
+  --scrim:         rgba(49,29,0,0.85);
+  --hero-overlay:  linear-gradient(to right, rgba(49,29,0,0.78), rgba(255,60,0,0.15), transparent);
+  --hero-eyebrow:  #FF3C00;
+  --hero-h1:       #FF3C00;
+  --hero-tagline:  rgba(255,255,255,0.85);
+  --hero-cta-bg:   #FF3C00;
+  --hero-cta-text: #311D00;
+  --hero-cta-hover:#FFFFFF;
+  --hero-cta-hover-text: #311D00;
+  --hero-ghost-border: rgba(255,60,0,0.55);
+  --hero-ghost-text:   #FFFFFF;
+  --team-logo-color:   #FF3C00;
+}
+
 /* Banner animation for all team modes — drops from top, holds, fades */
 @keyframes team-banner-in {
   0%   { opacity: 0; transform: translateY(-120%); }

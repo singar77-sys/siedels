@@ -325,39 +325,6 @@ export const testimonials: Testimonial[] = [
     barber: 'Jim LaMarca',
     rating: 5,
   },
-  {
-    name: 'George B.',
-    text: "The booking went smoothly. My barber Will did a great job and he was very cordial and professional.",
-    barber: 'Will Dillon',
-    rating: 5,
-  },
-  {
-    name: 'Arthur D.',
-    text: "Sam was really wonderful! Took her time and made my grandson feel comfortable!",
-    barber: 'Sam Sickle',
-    rating: 5,
-  },
-  {
-    name: 'Scott K.',
-    text: "Easy to schedule, Billy always does a great job and very professional.",
-    barber: 'Billy Rodriguez',
-    rating: 5,
-  },
-  {
-    name: 'Frank K.',
-    text: "Great shop, all barbers there are great.",
-    rating: 5,
-  },
-  {
-    name: 'Madison M.',
-    text: "Great barber and the shop is a good environment also!",
-    rating: 5,
-  },
-  {
-    name: 'Jim M.',
-    text: "Very nice staff. Quality haircut.",
-    rating: 5,
-  },
 ];
 
 export interface GalleryItem {
