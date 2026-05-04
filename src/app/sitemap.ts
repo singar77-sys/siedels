@@ -12,9 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Sub-pages not in the nav but still publicly indexable
-  const extras: MetadataRoute.Sitemap = [
-    { url: `${BASE_URL}/gift/terms`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.3 },
-  ];
+  const extras: MetadataRoute.Sitemap = [];
 
   return [...routes, ...extras];
 }

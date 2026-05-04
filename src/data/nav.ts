@@ -21,7 +21,7 @@ export const ROUTES: NavRoute[] = [
   { label: 'GALLERY',  href: '/gallery',  sitemapPriority: 0.7, sitemapChangeFrequency: 'weekly' },
   { label: 'SERVICES', href: '/services', sitemapPriority: 0.9, sitemapChangeFrequency: 'weekly' },
   { label: 'CONTACT',  href: '/contact',  sitemapPriority: 0.8, sitemapChangeFrequency: 'monthly' },
-  { label: 'GIFT',     href: '/gift',     sitemapPriority: 0.7, sitemapChangeFrequency: 'monthly' },
+  // GIFT route disabled pending owner approval — see src/app/_disabled/gift/
 ];
 
 export const NAV_ROUTES = ROUTES.filter((r) => !r.hideInNav);

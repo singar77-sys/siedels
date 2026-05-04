@@ -57,8 +57,6 @@ Eleven barbers and stylists on staff. Each has their own online booking link.
 - Meet the Team: https://www.siedels.com/team
 - Gallery: https://www.siedels.com/gallery
 - Contact & Hours: https://www.siedels.com/contact
-- Gift Cards: https://www.siedels.com/gift
-- Gift Card Terms: https://www.siedels.com/gift/terms
 
 ## Social & Listings
 
