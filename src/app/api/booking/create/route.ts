@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { squareFetch, LOCATION_ID, SERVICE_VARIATION_IDS, ID_TO_NAME, BARBER_EMAILS } from '@/lib/square';
+import { squareFetch, LOCATION_ID, SERVICE_VARIATION_IDS, ID_TO_NAME, BARBER_EMAILS, BARBER_PHONES } from '@/lib/square';
 import { services } from '@/data/shop';
 import { sendBookingConfirmation, sendBookingAlert } from '@/lib/email';
+import { sendBookingAlertSMS } from '@/lib/sms';
 
 function normalizePhone(raw: string): string {
   const digits = raw.replace(/\D/g, '');
@@ -124,6 +125,7 @@ export async function POST(req: NextRequest) {
     const booking     = bookData.booking as { id: string; start_at: string };
     const barberName  = ID_TO_NAME[teamMemberId] ?? teamMemberId;
     const barberEmail = BARBER_EMAILS[teamMemberId];
+    const barberPhone = BARBER_PHONES[teamMemberId];
     const svcPrice    = services.find(s => s.name === serviceName)?.price ?? '';
 
     // Send emails before responding — void/fire-and-forget is silently
@@ -151,7 +153,17 @@ export async function POST(req: NextRequest) {
         note,
         barberEmail,
       }),
-    ]).catch(err => console.error('[booking/create] email error:', err));
+      barberPhone
+        ? sendBookingAlertSMS({
+            barberPhone,
+            barberName,
+            customerName,
+            customerPhone,
+            serviceName,
+            startAt: booking.start_at,
+          })
+        : Promise.resolve(),
+    ]).catch(err => console.error('[booking/create] notification error:', err));
 
     return NextResponse.json({
       bookingId: booking.id,
