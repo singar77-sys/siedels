@@ -339,7 +339,7 @@ export interface GalleryItem {
 }
 
 export const gallery: GalleryItem[] = [
-  // 65 photos — gallery rotates 18 at a time every 5 seconds.
+  // 94 photos — gallery rotates 18 at a time every 7 seconds.
   // focalPoint shifts the crop anchor for portrait shots so heads stay in frame
   // on small landscape cells (mobile/iPad). Shop/interior shots use default center.
   // Excluded: DSC* raw files, hero backgrounds, pure barber-portrait headshots.
@@ -448,6 +448,22 @@ export const gallery: GalleryItem[] = [
   { src: '/images/siedels-original-shop-detail-archive.webp', alt: 'Detail of original Siedel\'s shop fittings', tag: 'HERITAGE' },
   { src: '/images/siedels-community-dinner-1.webp', alt: 'Siedel\'s team and community at private dinner event', tag: 'COMMUNITY' },
   { src: '/images/siedels-community-dinner-2.webp', alt: 'Siedel\'s barbers and guests at community dinner', tag: 'COMMUNITY' },
+  // New additions from marketing-reservoir curation
+  { src: '/images/siedels-womens-star-undercut-design-medina.webp', alt: 'Intricate star pattern undercut design on women\'s hair at Siedel\'s, Medina Ohio', tag: 'DESIGN', focalPoint: '50% 35%' },
+  { src: '/images/siedels-womens-lotus-undercut-design-medina.webp', alt: 'Lotus flower undercut hair design on women\'s nape at Siedel\'s, Medina Ohio', tag: 'DESIGN', focalPoint: '50% 35%' },
+  { src: '/images/siedels-fade-beard-profile-medina.webp', alt: 'Clean fade and shaped beard profile at Siedel\'s Barbershop, Medina Ohio', tag: 'FADE', focalPoint: '50% 22%' },
+  { src: '/images/siedels-taper-fade-side-profile-medina.webp', alt: 'Taper fade side profile haircut at Siedel\'s Barbershop, Medina Ohio', tag: 'FADE', focalPoint: '50% 22%' },
+  { src: '/images/siedels-kid-happy-fresh-cut-medina.webp', alt: 'Happy kid with fresh cut and barber at Siedel\'s, Medina Ohio', tag: 'KIDS', focalPoint: '50% 28%' },
+  { src: '/images/siedels-curly-top-fade-shop-vibe-medina.webp', alt: 'Curly top fade haircut with live barbershop in background, Siedel\'s Medina Ohio', tag: 'FADE', focalPoint: '50% 22%' },
+  { src: '/images/siedels-station-row-we-the-people-medina.webp', alt: 'Siedel\'s barber stations with We the People flag art on the wall, Medina Ohio', tag: 'SHOP' },
+  { src: '/images/siedels-full-shop-barber-at-work-medina.webp', alt: 'Wide angle of full Siedel\'s Barbershop floor with barber at work and lounge in background', tag: 'SHOP', focalPoint: '50% 40%' },
+  { src: '/images/siedels-kids-design-fade-barber-pole-medina.webp', alt: 'Kid\'s fade with razor lines and barber pole visible through front window, Siedel\'s Medina Ohio', tag: 'KIDS', focalPoint: '50% 28%' },
+  { src: '/images/siedels-front-desk-reception-medina.webp', alt: 'Siedel\'s Barbershop stone front desk and reception area, Medina Ohio', tag: 'SHOP' },
+  { src: '/images/siedels-old-location-barber-pole-exterior.webp', alt: 'Barber pole and glass storefront at the original Siedel\'s Barbershop location', tag: 'HERITAGE', focalPoint: '75% 45%' },
+  { src: '/images/siedels-grand-opening-family-community.webp', alt: 'Siedel family at the grand opening of Siedel\'s Barbershop, Medina Ohio', tag: 'HERITAGE', focalPoint: '50% 30%' },
+  { src: '/images/siedels-early-days-lounge-crew.webp', alt: 'Group of friends in the Siedel\'s waiting lounge in the early days', tag: 'COMMUNITY', focalPoint: '50% 38%' },
+  { src: '/images/siedels-barber-portrait-staff-shirt-medina.webp', alt: 'Siedel\'s barber smiling at station wearing staff shirt, Medina Ohio', tag: 'TEAM', focalPoint: '50% 22%' },
+  { src: '/images/siedels-barber-pole-brick-exterior-classic.webp', alt: 'Classic barber pole on brick exterior at old Siedel\'s Barbershop location', tag: 'HERITAGE', focalPoint: '75% 45%' },
 ];
 
 export const hours = [

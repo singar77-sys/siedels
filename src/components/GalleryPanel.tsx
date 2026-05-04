@@ -7,7 +7,7 @@ import { Icon } from './Icon';
 import { GalleryLightbox } from './GalleryLightbox';
 
 const PAGE_SIZE = 18;
-const ROTATION_MS = 5000;
+const ROTATION_MS = 7000;
 
 export function GalleryPanel() {
   const wallRef = useRef<HTMLDivElement>(null);
@@ -163,6 +163,8 @@ export function GalleryPanel() {
                 src={item.src}
                 alt={item.alt}
                 fill
+                loading="eager"
+                quality={85}
                 sizes="(max-width: 768px) 25vw, 12vw"
                 className="object-cover theme-photo"
                 style={item.focalPoint ? { objectPosition: item.focalPoint } : undefined}
