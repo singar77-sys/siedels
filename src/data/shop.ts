@@ -220,6 +220,7 @@ export const services: Service[] = [
   {
     name: 'Haircut + Beard Trim',
     price: '$44',
+    walkInPrice: '$36',
     tagline: 'Full overhaul',
     description:
       "Our most popular combo. A complete haircut paired with a full beard shape-up — cheek and neck lines defined, length balanced, and the whole thing finished with beard oil. Walk out looking like a different man.",
@@ -274,6 +275,7 @@ export const services: Service[] = [
   {
     name: 'Shoulder Length Cut + Rough Dry',
     price: '$40',
+    walkInPrice: '$30',
     tagline: 'Longer styles, dialed in',
     description:
       "Longer men's styles need real shear work. Precision cut with scissors and a rough dry so you can see the shape before you walk out. Ideal for shoulder-length and flow cuts.",
