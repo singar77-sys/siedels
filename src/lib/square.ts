@@ -34,20 +34,20 @@ export const ID_TO_NAME = Object.fromEntries(
 );
 
 // Square team_member_id → barber notification email.
-// Populate each entry to enable per-barber booking alerts.
+// Each barber gets a copy of their own booking alerts.
 // IDs without an entry fall back to shop-only notification.
 export const BARBER_EMAILS: Partial<Record<string, string>> = {
-  // 'TMzccz3JgkqWYXul': 'billy@...',     // Billy Rodriguez
-  // 'TMDYoGsYchG9Zx2M': 'chris@...',    // Chris Hodge
-  // 'TMg6BhxTBejmD3Mu': 'jim@...',      // Jim LaMarca
-  // 'TMF0l_MTlXDBUne0': 'krista@...',   // Krista Foecking
-  // 'TMXIK3PV7gw6Nfn9': 'matt@...',     // Matt Hayes
-  // 'TMczLNf1lpChKTW1': 'patrick@...',  // Patrick Muranko
-  // 'TMcYCni9gMFp1phL': 'pierre@...',   // Pierre Wright
-  // 'TMjH8V1ibNbrThWU': 'sam@...',      // Sam Sickle
-  // 'TMxS3SdfJAhEasf2': 'shannon@...',  // Shannon Hadick
-  // 'TMY92J8fk1vopHLK': 'ticia@...',    // Ticia Husak
-  // 'TMjfrDpWo7xEYLjG': 'will@...',     // Will Dillon
+  'TMzccz3JgkqWYXul': 'billythebarber10@gmail.com',  // Billy Rodriguez
+  'TMDYoGsYchG9Zx2M': 'realtru619@gmail.com',        // Chris Hodge
+  'TMg6BhxTBejmD3Mu': 'genesim625@gmail.com',        // Jim LaMarca
+  'TMF0l_MTlXDBUne0': 'kristafoecking@yahoo.com',    // Krista Foecking
+  'TMXIK3PV7gw6Nfn9': 'hazematt69@gmail.com',        // Matt Hayes
+  'TMczLNf1lpChKTW1': 'pmuranko7@gmail.com',         // Patrick Muranko
+  'TMcYCni9gMFp1phL': 'prophetapw@gmail.com',        // Pierre Wright
+  'TMjH8V1ibNbrThWU': 'sammy.ss452@icloud.com',      // Sam Sickle
+  'TMxS3SdfJAhEasf2': 'shannonhadick@gmail.com',     // Shannon Hadick
+  'TMY92J8fk1vopHLK': 'laticia3@gmail.com',          // Ticia Rocco
+  'TMjfrDpWo7xEYLjG': 'barberdad1115@gmail.com',     // Will Dillon
 };
 
 // Service name (matches shop.ts) → Square catalog variation ID
