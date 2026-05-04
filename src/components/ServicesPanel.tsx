@@ -198,10 +198,21 @@ export function ServicesPanel({ onSelectService }: ServicesPanelProps) {
                 className="w-full grid grid-cols-[1fr_1px_2fr_1px_1fr] border-b border-line group hover:bg-surface-raised/40 transition-colors duration-150"
               >
                 {/* Walk-in price */}
-                <div className="px-3 md:px-5 py-3 md:py-3.5 flex items-center justify-center">
-                  <span className={`font-headline text-lg md:text-2xl font-bold leading-none ${service.walkInPrice ? 'text-text' : 'text-text-faint/40'}`}>
-                    {service.walkInPrice ?? '—'}
-                  </span>
+                <div className="px-3 md:px-5 py-3 md:py-3.5 flex flex-col items-center justify-center gap-1">
+                  {service.walkInPrice ? (
+                    <>
+                      <span className="font-headline text-lg md:text-2xl font-bold leading-none text-text">
+                        {service.walkInPrice}
+                      </span>
+                      <span className="font-label text-[7px] tracking-[0.18em] text-red bg-red/10 px-1.5 py-0.5 leading-none">
+                        SAVE ${parseInt(service.price.replace('$', '')) - parseInt(service.walkInPrice.replace('$', ''))}
+                      </span>
+                    </>
+                  ) : (
+                    <span className="font-label text-[6px] md:text-[7px] tracking-[0.2em] text-text-faint border border-line px-1.5 py-1 leading-tight text-center">
+                      ONLINE<br />ONLY
+                    </span>
+                  )}
                 </div>
 
                 <div className="bg-line-strong" />
