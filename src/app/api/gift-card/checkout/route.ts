@@ -11,7 +11,7 @@ const HANDLING_CENTS = 150; // $1.50 to platform
 const MIN_AMOUNT     = 25;
 const PRESET_AMOUNTS = new Set([25, 50, 100]);
 
-const baseUrl = () => process.env.NEXT_PUBLIC_BASE_URL ?? 'https://siedels.vercel.app';
+const baseUrl = () => process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.siedels.com';
 
 export async function POST(req: NextRequest) {
   const ip  = req.headers.get('x-forwarded-for')?.split(',')[0].trim() ?? 'unknown';

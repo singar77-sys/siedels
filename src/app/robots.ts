@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/redeem', '/admin'],
     },
-    sitemap: 'https://siedels.vercel.app/sitemap.xml',
+    sitemap: 'https://www.siedels.com/sitemap.xml',
   };
 }

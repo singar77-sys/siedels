@@ -52,13 +52,13 @@ Eleven barbers and stylists on staff. Each has their own online booking link.
 
 ## Key Pages
 
-- Homepage: https://siedels.vercel.app/
-- Services & Prices: https://siedels.vercel.app/services
-- Meet the Team: https://siedels.vercel.app/team
-- Gallery: https://siedels.vercel.app/gallery
-- Contact & Hours: https://siedels.vercel.app/contact
-- Gift Cards: https://siedels.vercel.app/gift
-- Gift Card Terms: https://siedels.vercel.app/gift/terms
+- Homepage: https://www.siedels.com/
+- Services & Prices: https://www.siedels.com/services
+- Meet the Team: https://www.siedels.com/team
+- Gallery: https://www.siedels.com/gallery
+- Contact & Hours: https://www.siedels.com/contact
+- Gift Cards: https://www.siedels.com/gift
+- Gift Card Terms: https://www.siedels.com/gift/terms
 
 ## Social & Listings
 

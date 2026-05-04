@@ -11,7 +11,7 @@ import { getSportsModeForDate } from '@/lib/sports-mode';
 import { RATING, REVIEW_COUNT, COORDS, TEAM_COUNT_WORD, IMAGE_ALTS, services } from '@/data/shop';
 import './globals.css';
 
-const BASE_URL = 'https://siedels.vercel.app';
+const BASE_URL = 'https://www.siedels.com';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -65,7 +65,7 @@ const jsonLd = {
   description: `${TEAM_COUNT_WORD} barbers in Medina, Ohio. Haircuts, fades, beard work, straight razor shaves. Cash only. ATM on site.`,
   url: BASE_URL,
   telephone: '+13309520777',
-  priceRange: '$31–$90',
+  priceRange: '$26–$90',
   sameAs: [
     'https://share.google/n7DB5686mE05Db6tK',
     'https://www.facebook.com/siedelsbarbershop',

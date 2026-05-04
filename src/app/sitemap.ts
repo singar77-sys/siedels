@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { ROUTES } from '@/data/nav';
 
-const BASE_URL = 'https://siedels.vercel.app';
+const BASE_URL = 'https://www.siedels.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ROUTES.map((r) => ({

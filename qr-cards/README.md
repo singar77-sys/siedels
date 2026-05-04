@@ -6,17 +6,17 @@
 
 | Barber | URL |
 |---|---|
-| Jim LaMarca | `https://siedels.vercel.app/thanks/jim` |
-| Pierre Wright | `https://siedels.vercel.app/thanks/pierre` |
-| Matt Hayes | `https://siedels.vercel.app/thanks/matt` |
-| Ticia Husak | `https://siedels.vercel.app/thanks/ticia` |
-| Krista Foecking | `https://siedels.vercel.app/thanks/krista` |
-| Patrick Muranko | `https://siedels.vercel.app/thanks/patrick` |
-| Will Dillon | `https://siedels.vercel.app/thanks/will` |
-| Shannon Hadick | `https://siedels.vercel.app/thanks/shannon` |
-| Chris Hodge | `https://siedels.vercel.app/thanks/chris` |
-| Billy Rodriguez | `https://siedels.vercel.app/thanks/billy` |
-| Sam Sickle | `https://siedels.vercel.app/thanks/sam` |
+| Jim LaMarca | `https://www.siedels.com/thanks/jim` |
+| Pierre Wright | `https://www.siedels.com/thanks/pierre` |
+| Matt Hayes | `https://www.siedels.com/thanks/matt` |
+| Ticia Husak | `https://www.siedels.com/thanks/ticia` |
+| Krista Foecking | `https://www.siedels.com/thanks/krista` |
+| Patrick Muranko | `https://www.siedels.com/thanks/patrick` |
+| Will Dillon | `https://www.siedels.com/thanks/will` |
+| Shannon Hadick | `https://www.siedels.com/thanks/shannon` |
+| Chris Hodge | `https://www.siedels.com/thanks/chris` |
+| Billy Rodriguez | `https://www.siedels.com/thanks/billy` |
+| Sam Sickle | `https://www.siedels.com/thanks/sam` |
 
 ## When the custom domain goes live
 
