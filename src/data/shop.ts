@@ -198,6 +198,7 @@ export const services: Service[] = [
   {
     name: 'Haircut',
     price: '$34',
+    walkInPrice: '$26',
     tagline: 'The Siedel\'s signature cut',
     description:
       "A precision men's haircut from a master barber. Consultation and a tailored cut using clippers, shears, or a combination — scissor-over-comb, tapers, fades, classic side parts, or whatever shape you need. Finished with a neck shave.",
@@ -208,6 +209,7 @@ export const services: Service[] = [
   {
     name: 'Razor / Foil Fade',
     price: '$40',
+    walkInPrice: '$32',
     tagline: 'Zero-gap precision',
     description:
       "Our sharpest fade work. Built with foil shavers and a straight razor for a crisp, skin-tight blend and a razor-defined lineup. Ideal for bald fades, skin fades, and anyone who wants the cleanest edge in Medina.",
@@ -228,6 +230,7 @@ export const services: Service[] = [
   {
     name: 'Haircut + Face Shave',
     price: '$65',
+    walkInPrice: '$55',
     tagline: 'The full treatment, head to jaw',
     description:
       "A complete haircut paired with a full straight razor face shave. Hot towels, lather, two passes, cold towel finish — the works. Walk out with a fresh cut and the smoothest shave in Medina.",
@@ -238,6 +241,7 @@ export const services: Service[] = [
   {
     name: 'Full Service Shave',
     price: '$46',
+    walkInPrice: '$38',
     tagline: 'The classic straight razor shave',
     description:
       "The full old-school treatment. Warm lather, hot towels, and a straight razor shave done the way barbers have done it for a century. Pre-shave oil, two passes, cold towel finish, and aftershave balm. Worth booking just for the ritual.",
@@ -248,6 +252,7 @@ export const services: Service[] = [
   {
     name: 'Head Shave',
     price: '$42',
+    walkInPrice: '$34',
     tagline: 'Skin-smooth, start to finish',
     description:
       "A full head shave with hot towels and a straight razor. Whether you're maintaining a bald look or going for it for the first time, you'll walk out smooth, conditioned, and comfortable. Includes scalp treatment.",
@@ -258,6 +263,7 @@ export const services: Service[] = [
   {
     name: 'Beard Trim',
     price: '$31',
+    walkInPrice: '$23',
     tagline: 'Shape, define, finish',
     description:
       "Beard shape-up with clean cheek and neck lines, length balancing, and detailing. Finished with beard oil. Book this on its own or add it to any haircut.",
