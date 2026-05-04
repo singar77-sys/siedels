@@ -171,45 +171,61 @@ export function ServicesPanel({ onSelectService }: ServicesPanelProps) {
               background: 'radial-gradient(325px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(227,27,35,0.18) 0%, transparent 70%)',
             }}
           />
-          <div className="flex-1 min-h-0 relative">
-            <div className="md:hidden absolute bottom-0 left-0 right-0 h-10 pointer-events-none z-10"
-              style={{ background: 'linear-gradient(to top, var(--surface) 0%, transparent 100%)' }} />
-            <div className="no-scrollbar h-full flex flex-col md:flex-row md:divide-x md:divide-line-strong overflow-y-auto md:overflow-hidden">
-              {[services.filter((_, i) => i % 2 === 0), services.filter((_, i) => i % 2 !== 0)].map(
-                (col, ci) => (
-                  <div key={ci} className="md:flex-1 md:flex md:flex-col md:divide-y md:divide-line-strong md:overflow-hidden divide-y divide-line-strong">
-                    {col.map((service) => (
-                      <button
-                        key={service.name}
-                        onClick={() => onSelectService(service)}
-                        className="w-full flex items-center gap-4 md:gap-6 px-4 md:px-6 py-3 md:py-0 md:flex-1 group text-left hover:bg-surface-raised/50 transition-colors duration-150"
-                      >
-                        <span className="font-headline text-xl md:text-2xl font-bold text-red whitespace-nowrap w-12 md:w-16 shrink-0 leading-none group-hover:text-red-hover transition-colors">
-                          {service.price}
-                        </span>
-                        <span className="flex-1 min-w-0">
-                          <span className="block font-headline text-sm md:text-[15px] font-bold uppercase tracking-tight text-text group-hover:text-red transition-colors duration-150 leading-snug">
-                            {service.name}
-                          </span>
-                          <span className="block font-body text-[11px] md:text-xs text-text-muted italic mt-0.5 leading-snug">
-                            {service.tagline}
-                          </span>
-                        </span>
-                        <span className="shrink-0 flex flex-col items-end gap-1.5">
-                          <span className="font-label text-[9px] md:text-[10px] tracking-widest text-text-subtle uppercase">
-                            {service.duration}
-                          </span>
-                          <Icon
-                            name="add"
-                            className="w-3.5 h-3.5 text-text-subtle group-hover:text-red group-hover:rotate-45 transition-all duration-200"
-                          />
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                ),
-              )}
+          {/* ── Matchup header ── */}
+          <div className="flex-none grid grid-cols-[1fr_1px_2fr_1px_1fr] border-b border-line-strong bg-surface-raised/40">
+            <div className="px-3 md:px-5 py-2 md:py-3 flex flex-col items-center justify-center gap-0.5">
+              <span className="font-label text-[7px] md:text-[8px] tracking-[0.4em] text-text-faint hidden sm:block">CASH · SHOW UP</span>
+              <span className="font-headline text-sm md:text-xl font-bold uppercase tracking-tight text-text">WALK IN</span>
             </div>
+            <div className="bg-line-strong" />
+            <div className="px-3 md:px-5 py-2 md:py-3 flex flex-col items-center justify-center gap-0.5">
+              <span className="font-label text-[7px] md:text-[8px] tracking-[0.4em] text-text-faint hidden sm:block">TAP ANY ROW FOR DETAILS</span>
+              <span className="font-headline text-sm md:text-xl font-bold uppercase tracking-tight text-text-muted">SERVICES</span>
+            </div>
+            <div className="bg-line-strong" />
+            <div className="px-3 md:px-5 py-2 md:py-3 flex flex-col items-center justify-center gap-0.5">
+              <span className="font-label text-[7px] md:text-[8px] tracking-[0.4em] text-red hidden sm:block">SQUARE · BOOK AHEAD</span>
+              <span className="font-headline text-sm md:text-xl font-bold uppercase tracking-tight text-red">BOOK ONLINE</span>
+            </div>
+          </div>
+
+          {/* ── Service rows ── */}
+          <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar">
+            {services.map((service) => (
+              <button
+                key={service.name}
+                onClick={() => onSelectService(service)}
+                className="w-full grid grid-cols-[1fr_1px_2fr_1px_1fr] border-b border-line group hover:bg-surface-raised/40 transition-colors duration-150"
+              >
+                {/* Walk-in price */}
+                <div className="px-3 md:px-5 py-3 md:py-3.5 flex items-center justify-center">
+                  <span className={`font-headline text-lg md:text-2xl font-bold leading-none ${service.walkInPrice ? 'text-text' : 'text-text-faint/40'}`}>
+                    {service.walkInPrice ?? '—'}
+                  </span>
+                </div>
+
+                <div className="bg-line-strong" />
+
+                {/* Service name */}
+                <div className="px-3 md:px-4 py-3 md:py-3.5 flex flex-col items-center justify-center text-center">
+                  <span className="font-headline text-[11px] md:text-[13px] font-bold uppercase tracking-tight text-text group-hover:text-red transition-colors duration-150 leading-snug">
+                    {service.name}
+                  </span>
+                  <span className="font-body text-[9px] md:text-[10px] text-text-muted italic mt-0.5 hidden sm:block leading-snug">
+                    {service.tagline}
+                  </span>
+                </div>
+
+                <div className="bg-line-strong" />
+
+                {/* Online booking price */}
+                <div className="px-3 md:px-5 py-3 md:py-3.5 flex items-center justify-center">
+                  <span className="font-headline text-lg md:text-2xl font-bold text-red group-hover:text-red-hover transition-colors leading-none">
+                    {service.price}
+                  </span>
+                </div>
+              </button>
+            ))}
           </div>
 
           <div className="flex-none border-t border-line">
@@ -217,7 +233,7 @@ export function ServicesPanel({ onSelectService }: ServicesPanelProps) {
               <Recommender onSelectService={onSelectService} />
             </div>
             <p className="font-label text-[10px] tracking-widest text-text-subtle text-center py-2.5">
-              TAP ANY SERVICE FOR DETAILS · CASH ONLY · ATM ON SITE
+              WALK IN = CASH ONLY · ATM ON SITE · ONLINE PRICES MAY VARY
             </p>
           </div>
         </div>

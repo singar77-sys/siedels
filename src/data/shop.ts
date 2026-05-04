@@ -183,7 +183,10 @@ export const team: TeamMember[] = [
 
 export interface Service {
   name: string;
+  /** Square / online booking price */
   price: string;
+  /** Walk-in (cash) price — leave undefined until confirmed */
+  walkInPrice?: string;
   tagline: string;
   description: string;
   includes: string[];
