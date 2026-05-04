@@ -7,7 +7,7 @@ import { Icon } from './Icon';
 import { GalleryLightbox } from './GalleryLightbox';
 
 const PAGE_SIZE = 18;
-const ROTATION_MS = 9000;
+const ROTATION_MS = 11000;
 
 export function GalleryPanel() {
   const wallRef = useRef<HTMLDivElement>(null);
