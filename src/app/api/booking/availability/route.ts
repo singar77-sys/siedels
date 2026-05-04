@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
   }
 
   // Cover the full shop day in Eastern time (EDT = -04:00, May–Nov)
-  const startAt = `${date}T08:00:00-04:00`;
+  const startAt = `${date}T09:00:00-04:00`;
   const endAt   = `${date}T20:30:00-04:00`;
 
   try {
