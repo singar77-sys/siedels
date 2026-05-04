@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { squareFetch, LOCATION_ID, SERVICE_VARIATION_IDS, ID_TO_NAME } from '@/lib/square';
+import { squareFetch, LOCATION_ID, SERVICE_VARIATION_IDS, ID_TO_NAME, BARBER_EMAILS } from '@/lib/square';
 import { services } from '@/data/shop';
 import { sendBookingConfirmation, sendBookingAlert } from '@/lib/email';
 
@@ -121,9 +121,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: msg, code, errors: errs }, { status: 422 });
     }
 
-    const booking    = bookData.booking as { id: string; start_at: string };
-    const barberName = ID_TO_NAME[teamMemberId] ?? teamMemberId;
-    const svcPrice   = services.find(s => s.name === serviceName)?.price ?? '';
+    const booking     = bookData.booking as { id: string; start_at: string };
+    const barberName  = ID_TO_NAME[teamMemberId] ?? teamMemberId;
+    const barberEmail = BARBER_EMAILS[teamMemberId];
+    const svcPrice    = services.find(s => s.name === serviceName)?.price ?? '';
 
     // Send emails before responding — void/fire-and-forget is silently
     // dropped by Vercel serverless after the handler returns.
@@ -145,9 +146,10 @@ export async function POST(req: NextRequest) {
         customerEmail,
         serviceName,
         barberName,
-        startAt:   booking.start_at,
-        bookingId: booking.id,
+        startAt:    booking.start_at,
+        bookingId:  booking.id,
         note,
+        barberEmail,
       }),
     ]).catch(err => console.error('[booking/create] email error:', err));
 

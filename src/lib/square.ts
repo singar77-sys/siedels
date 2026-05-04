@@ -33,6 +33,23 @@ export const ID_TO_NAME = Object.fromEntries(
   Object.entries(TEAM_IDS).map(([name, id]) => [id, name])
 );
 
+// Square team_member_id → barber notification email.
+// Populate each entry to enable per-barber booking alerts.
+// IDs without an entry fall back to shop-only notification.
+export const BARBER_EMAILS: Partial<Record<string, string>> = {
+  // 'TMzccz3JgkqWYXul': 'billy@...',     // Billy Rodriguez
+  // 'TMDYoGsYchG9Zx2M': 'chris@...',    // Chris Hodge
+  // 'TMg6BhxTBejmD3Mu': 'jim@...',      // Jim LaMarca
+  // 'TMF0l_MTlXDBUne0': 'krista@...',   // Krista Foecking
+  // 'TMXIK3PV7gw6Nfn9': 'matt@...',     // Matt Hayes
+  // 'TMczLNf1lpChKTW1': 'patrick@...',  // Patrick Muranko
+  // 'TMcYCni9gMFp1phL': 'pierre@...',   // Pierre Wright
+  // 'TMjH8V1ibNbrThWU': 'sam@...',      // Sam Sickle
+  // 'TMxS3SdfJAhEasf2': 'shannon@...',  // Shannon Hadick
+  // 'TMY92J8fk1vopHLK': 'ticia@...',    // Ticia Husak
+  // 'TMjfrDpWo7xEYLjG': 'will@...',     // Will Dillon
+};
+
 // Service name (matches shop.ts) → Square catalog variation ID
 export const SERVICE_VARIATION_IDS: Record<string, string> = {
   'Haircut':                         'KRVP7PV2YVVVPPIMUB52D5YP',

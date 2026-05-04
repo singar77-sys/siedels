@@ -267,9 +267,15 @@ export async function sendBookingAlert(params: {
   startAt:        string;
   bookingId:      string;
   note?:          string;
+  barberEmail?:   string;
 }) {
   const shopEmail = process.env.SHOP_NOTIFICATION_EMAIL;
   if (!shopEmail) return;
+
+  // Deduplicate: if barber email === shop email, only one copy goes out
+  const recipients = Array.from(
+    new Set([shopEmail, params.barberEmail].filter((e): e is string => !!e))
+  );
 
   const resend  = getResend();
   const dateStr = new Date(params.startAt).toLocaleString('en-US', {
@@ -285,7 +291,7 @@ export async function sendBookingAlert(params: {
 
   await resend.emails.send({
     from:    process.env.RESEND_FROM_EMAIL!,
-    to:      shopEmail,
+    to:      recipients,
     subject: `New booking: ${params.serviceName} — ${params.customerName}`,
     html: `<!DOCTYPE html>
 <html lang="en">
